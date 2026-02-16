@@ -158,6 +158,7 @@ export default function Home() {
             <span>📝</span> Recent Activity
           </h2>
           <div className="space-y-2 text-sm">
+            <ActivityItem time="Today" text="BTC bot working on Kraken exchange" />
             <ActivityItem time="Today" text="BTC trading bot scaffold complete" />
             <ActivityItem time="Today" text="Fan and PCIe adapter delivered" />
             <ActivityItem time="Today" text="Phase 1 revenue plan: eBay sales" />
