@@ -13,6 +13,9 @@ export default function TasksPage() {
     { id: 11, title: 'Test phi4 vs cloud API', priority: 'medium', status: 'pending' },
     { id: 12, title: 'Sell i5-6600K', priority: 'low', status: 'in-progress' },
     { id: 13, title: 'Configure xrdp remote desktop', priority: 'low', status: 'complete' },
+    { id: 14, title: 'Configure Tailscale', priority: 'medium', status: 'pending' },
+    { id: 15, title: 'Build a website', priority: 'medium', status: 'pending' },
+    { id: 16, title: 'Add Ollama LLM API', priority: 'medium', status: 'pending' },
   ]
 
   const getPriorityColor = (p: string) => {
