@@ -9,16 +9,54 @@ export default function Home() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
         {/* Hardware Status */}
-        <DashboardCard 
-          title="Hardware Deliveries"
-          icon="🖥️"
-          items={[
-            { label: 'Tesla P40 GPU', status: 'ordered', eta: 'This week' },
-            { label: 'WD Red 8TB (x2)', status: 'ordered', eta: 'Soon' },
-            { label: 'i7-7700K CPU', status: 'ordered', eta: 'Soon' },
-            { label: 'Noctua Fan + Riser', status: 'ordered', eta: 'Soon' },
-          ]}
-        />
+        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <span>🖥️</span> Hardware Deliveries
+          </h2>
+          <div className="space-y-4">
+            {/* P40 GPU with Tracking */}
+            <div className="border-l-4 border-green-500 pl-3 bg-slate-700/50 py-2 px-3 rounded-r-lg">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-green-400">Tesla P40 GPU</p>
+                  <p className="text-sm text-slate-400">Tracking: 9405508106245831259625</p>
+                </div>
+                <span className="text-sm font-medium text-green-400">shipped</span>
+              </div>
+              <a 
+                href="https://tools.usps.com/go/TrackConfirmAction?tLabels=9405508106245831259625"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                Track on USPS →
+              </a>
+            </div>
+            
+            {/* Other Items */}
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">WD Red 8TB (x2)</p>
+                <p className="text-sm text-slate-400">ETA: Soon</p>
+              </div>
+              <span className="text-sm font-medium text-yellow-400">ordered</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">i7-7700K CPU</p>
+                <p className="text-sm text-slate-400">ETA: Soon</p>
+              </div>
+              <span className="text-sm font-medium text-yellow-400">ordered</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Noctua Fan + Riser</p>
+                <p className="text-sm text-slate-400">ETA: Soon</p>
+              </div>
+              <span className="text-sm font-medium text-yellow-400">ordered</span>
+            </div>
+          </div>
+        </div>
 
         {/* Projects */}
         <DashboardCard 
@@ -51,6 +89,7 @@ export default function Home() {
             <span>📝</span> Recent Activity
           </h2>
           <div className="space-y-2 text-sm">
+            <ActivityItem time="Today" text="P40 GPU shipped! Tracking: 9405508106245831259625" />
             <ActivityItem time="Today" text="Created Mission Control dashboard" />
             <ActivityItem time="Today" text="Optimized context files (50% reduction)" />
             <ActivityItem time="Today" text="Ordered P40 GPU + accessories" />
