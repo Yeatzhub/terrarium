@@ -34,6 +34,15 @@ export default function Home() {
             </div>
             
             {/* Other Items */}
+            <div className="border-l-4 border-green-500 pl-3 bg-slate-700/50 py-2 px-3 rounded-r-lg">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium text-green-400">Noctua Fan + PCIe Riser</p>
+                  <p className="text-sm text-slate-400">Arrived: Feb 16</p>
+                </div>
+                <span className="text-sm font-medium text-green-400">delivered</span>
+              </div>
+            </div>
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">WD Red 8TB (x2)</p>
@@ -48,24 +57,28 @@ export default function Home() {
               </div>
               <span className="text-sm font-medium text-yellow-400">ordered</span>
             </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="font-medium">Noctua Fan + Riser</p>
-                <p className="text-sm text-slate-400">ETA: Soon</p>
-              </div>
-              <span className="text-sm font-medium text-yellow-400">ordered</span>
-            </div>
           </div>
         </div>
 
-        {/* Projects */}
+        {/* Revenue Projects */}
         <DashboardCard 
-          title="Active Projects"
+          title="Revenue Projects"
+          icon="💰"
+          items={[
+            { label: 'eBay Sales (Phase 1)', status: 'in-progress', detail: 'Quick cash - list items' },
+            { label: 'BTC Trading Bot', status: 'pending', detail: 'Phase 2 - $100-500 needed' },
+            { label: 'Android App', status: 'planning', detail: 'Phase 3 - 2-6 months' },
+          ]}
+        />
+
+        {/* Hardware Projects */}
+        <DashboardCard 
+          title="Hardware Projects"
           icon="🚀"
           items={[
             { label: 'OpenClaw Setup', status: 'complete', detail: 'Optimized' },
+            { label: 'Tesla P40 GPU Install', status: 'in-progress', detail: 'Fan & riser delivered' },
             { label: 'NAS Storage', status: 'pending', detail: 'Awaiting drives' },
-            { label: 'BTC Trading Bot', status: 'pending', detail: 'Needs deps' },
             { label: 'Mission Control', status: 'in-progress', detail: 'Building now' },
           ]}
         />
@@ -145,11 +158,12 @@ export default function Home() {
             <span>📝</span> Recent Activity
           </h2>
           <div className="space-y-2 text-sm">
+            <ActivityItem time="Today" text="Fan and PCIe adapter delivered" />
+            <ActivityItem time="Today" text="Phase 1 revenue plan: eBay sales" />
+            <ActivityItem time="Today" text="Phases 2-3: BTC bot & Android app" />
             <ActivityItem time="Today" text="P40 GPU shipped! Tracking: 9405508106245831259625" />
             <ActivityItem time="Today" text="Created Mission Control dashboard" />
             <ActivityItem time="Today" text="Optimized context files (50% reduction)" />
-            <ActivityItem time="Today" text="Ordered P40 GPU + accessories" />
-            <ActivityItem time="Today" text="Set up token efficiency automation" />
             <ActivityItem time="Feb 13" text="Paired Telegram bot @zorinclawbot" />
           </div>
         </div>
@@ -162,6 +176,12 @@ export default function Home() {
           <div className="space-y-2">
             <QuickAction href="/tasks" label="View Tasks" />
             <QuickAction href="/notes" label="Quick Notes" />
+            <a 
+              href="/tasks" 
+              className="block w-full text-left px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg transition-colors"
+            >
+              💰 Phase 1: eBay Tasks →
+            </a>
             <a 
               href="http://127.0.0.1:18789" 
               target="_blank" 

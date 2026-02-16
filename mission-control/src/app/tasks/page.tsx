@@ -6,22 +6,39 @@ export default function TasksPage() {
   const [showCompleted, setShowCompleted] = useState(true)
 
   const tasks = [
-    { id: 1, title: 'Setup cron for memory cleanup', priority: 'high', status: 'complete' },
-    { id: 2, title: 'Install Tesla P40 GPU', priority: 'high', status: 'waiting' },
-    { id: 3, title: 'Install Noctua fan on P40 shroud', priority: 'high', status: 'waiting' },
-    { id: 4, title: 'Setup PCIe riser cable', priority: 'high', status: 'waiting' },
-    { id: 5, title: 'Build/buy GPU test bench frame', priority: 'high', status: 'waiting' },
-    { id: 6, title: 'Install i7-7700K CPU', priority: 'medium', status: 'waiting' },
-    { id: 7, title: 'Setup NAS with WD Red drives', priority: 'medium', status: 'waiting' },
-    { id: 8, title: 'Install Docker', priority: 'medium', status: 'complete' },
-    { id: 9, title: 'Setup SearXNG', priority: 'low', status: 'complete' },
-    { id: 10, title: 'Install BTC bot dependencies (ccxt, pandas, numpy)', priority: 'medium', status: 'complete' },
-    { id: 11, title: 'Test phi4 vs cloud API', priority: 'medium', status: 'pending' },
-    { id: 12, title: 'Sell i5-6600K', priority: 'low', status: 'in-progress' },
-    { id: 13, title: 'Configure xrdp remote desktop', priority: 'low', status: 'complete' },
-    { id: 14, title: 'Configure Tailscale', priority: 'medium', status: 'complete' },
-    { id: 15, title: 'Build a website', priority: 'medium', status: 'pending' },
-    { id: 16, title: 'Add Ollama LLM API', priority: 'medium', status: 'pending' },
+    // Phase 1: Quick Cash (eBay)
+    { id: 1, title: 'Phase 1: Take photos of items for eBay', priority: 'high', status: 'pending' },
+    { id: 2, title: 'Phase 1: List 3-5 items on eBay', priority: 'high', status: 'pending' },
+    { id: 3, title: 'Phase 1: Research market prices for items', priority: 'medium', status: 'pending' },
+    
+    // Phase 2: BTC Trading Bot
+    { id: 4, title: 'Phase 2: Check Binance.US API access', priority: 'medium', status: 'pending' },
+    { id: 5, title: 'Phase 2: Design bot architecture on paper', priority: 'medium', status: 'pending' },
+    { id: 6, title: 'Phase 2: Scaffold Python trading bot project', priority: 'medium', status: 'pending' },
+    { id: 7, title: 'Phase 2: Paper trade bot for 2 weeks', priority: 'medium', status: 'pending' },
+    
+    // Phase 3: Android App
+    { id: 8, title: 'Phase 3: Validate app idea (problem to solve)', priority: 'low', status: 'pending' },
+    { id: 9, title: 'Phase 3: Create app wireframes', priority: 'low', status: 'pending' },
+    
+    // Hardware Tasks
+    { id: 10, title: 'Install Tesla P40 GPU', priority: 'high', status: 'waiting' },
+    { id: 11, title: 'Install Noctua fan on P40 shroud', priority: 'high', status: 'waiting' },
+    { id: 12, title: 'Setup PCIe riser cable', priority: 'high', status: 'waiting' },
+    { id: 13, title: 'Build/buy GPU test bench frame', priority: 'high', status: 'waiting' },
+    { id: 14, title: 'Install i7-7700K CPU', priority: 'medium', status: 'waiting' },
+    { id: 15, title: 'Setup NAS with WD Red drives', priority: 'medium', status: 'waiting' },
+    
+    // Completed Tasks
+    { id: 50, title: 'Setup cron for memory cleanup', priority: 'high', status: 'complete' },
+    { id: 51, title: 'Fan and PCIe adapter delivered', priority: 'high', status: 'complete' },
+    { id: 52, title: 'Phase 1 revenue plan established', priority: 'high', status: 'complete' },
+    { id: 53, title: 'Install Docker', priority: 'medium', status: 'complete' },
+    { id: 54, title: 'Setup SearXNG', priority: 'low', status: 'complete' },
+    { id: 55, title: 'Install BTC bot dependencies (ccxt, pandas, numpy)', priority: 'medium', status: 'complete' },
+    { id: 56, title: 'Configure xrdp remote desktop', priority: 'low', status: 'complete' },
+    { id: 57, title: 'Configure Tailscale', priority: 'medium', status: 'complete' },
+    { id: 58, title: 'Sell i5-6600K (moved to Phase 1)', priority: 'low', status: 'complete' },
   ]
 
   const activeTasks = tasks.filter(t => t.status !== 'complete')
