@@ -21,3 +21,26 @@ Daily files (memory/YYYY-MM-DD.md) are raw notes; this is your curated wisdom.
 
 ## Memory
 
+### Trading Operation (Feb 2026)
+- **Mission**: Make money via algorithmic trading
+- **Phase 1**: eBay sales for quick capital
+- **Phase 2**: BTC trading bot (Kraken exchange, EMA+RSI strategy, paper trading)
+- **Phase 3**: Android app (future)
+- **Hardware**: P40 GPU for local inference
+
+**Key Assets:**
+- `btc-trading-bot/`: RSI strategy bot, webhook server, Kraken integration
+- `polymarket_scanner.py`: Arbitrage detection for prediction markets
+- `mission-control/`: Next.js dashboard for tracking
+
+**Preferences:**
+- Paper trading default (live requires explicit "YES" confirmation)
+- Delegate tasks to sub-agents without permission loops
+- User manages overall direction, agents execute
+
+**Technical Notes:**
+- Kraken over Binance.US (geographic restrictions)
+- TradingView webhooks on port 8080
+- P40 GPU tracking: 9405508106245831259625
+- Tailscale IP: 100.125.198.70
+
