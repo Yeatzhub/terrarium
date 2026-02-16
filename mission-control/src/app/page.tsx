@@ -180,8 +180,8 @@ export default function Home() {
                 <span className="w-2 h-2 rounded-full bg-green-500"></span>
                 <span className="font-medium">SearXNG</span>
               </div>
-              <p className="text-sm text-slate-400 mb-2">Port 8080</p>
-              <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://localhost:8080</code>
+              <p className="text-sm text-slate-400 mb-2">Port 8082</p>
+              <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://localhost:8082</code>
             </div>
             
             {/* Trading Webhook */}
@@ -206,7 +206,7 @@ export default function Home() {
             </p>
             <code className="text-sm bg-slate-800 px-3 py-2 rounded block mb-2">
               http://100.125.198.70:3000<br/>
-              http://100.125.198.70:8080
+              http://100.125.198.70:8082 (SearXNG)
             </code>
             <p className="text-xs text-slate-400">
               This machine (ai-server) • Connected • 100.125.198.70
