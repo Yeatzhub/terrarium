@@ -1,4 +1,10 @@
+'use client'
+
+import { useState } from 'react'
+
 export default function TasksPage() {
+  const [showCompleted, setShowCompleted] = useState(true)
+
   const tasks = [
     { id: 1, title: 'Setup cron for memory cleanup', priority: 'high', status: 'complete' },
     { id: 2, title: 'Install Tesla P40 GPU', priority: 'high', status: 'waiting' },
@@ -17,6 +23,9 @@ export default function TasksPage() {
     { id: 15, title: 'Build a website', priority: 'medium', status: 'pending' },
     { id: 16, title: 'Add Ollama LLM API', priority: 'medium', status: 'pending' },
   ]
+
+  const activeTasks = tasks.filter(t => t.status !== 'complete')
+  const completedTasks = tasks.filter(t => t.status === 'complete')
 
   const getPriorityColor = (p: string) => {
     switch(p) {
@@ -40,37 +49,105 @@ export default function TasksPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-8">Task Manager</h1>
         
-        <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-          <div className="grid grid-cols-12 gap-4 p-4 bg-slate-700 font-semibold text-sm">
+        {/* Stats Summary */}
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="bg-slate-800 rounded-lg p-4 border border-slate-700 text-center">
+            <p className="text-3xl font-bold text-blue-400">{activeTasks.length}</p>
+            <p className="text-sm text-slate-400">Active Tasks</p>
+          </div>
+          <div className="bg-slate-800 rounded-lg p-4 border border-slate-700 text-center">
+            <p className="text-3xl font-bold text-green-400">{completedTasks.length}</p>
+            <p className="text-sm text-slate-400">Completed</p>
+          </div>
+          <div className="bg-slate-800 rounded-lg p-4 border border-slate-700 text-center">
+            <p className="text-3xl font-bold text-yellow-400">
+              {Math.round((completedTasks.length / tasks.length) * 100)}%
+            </p>
+            <p className="text-sm text-slate-400">Progress</p>
+          </div>
+        </div>
+
+        {/* Active Tasks */}
+        <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden mb-6">
+          <div className="p-4 bg-slate-700 border-b border-slate-600">
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <span>📋</span> Active Tasks ({activeTasks.length})
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-12 gap-4 p-4 bg-slate-700 font-semibold text-sm border-b border-slate-600">
             <div className="col-span-1">Status</div>
             <div className="col-span-6">Task</div>
             <div className="col-span-2">Priority</div>
             <div className="col-span-3">Actions</div>
           </div>
           
-          {tasks.map((task) => (
-            <div key={task.id} className="grid grid-cols-12 gap-4 p-4 border-t border-slate-700 hover:bg-slate-750 transition-colors items-center">
-              <div className="col-span-1 text-xl">{getStatusIcon(task.status)}</div>
-              <div className="col-span-6">
-                <p className={task.status === 'complete' ? 'line-through text-slate-500' : ''}>
-                  {task.title}
-                </p>
-              </div>
-              <div className="col-span-2">
-                <span className={`px-2 py-1 rounded text-xs font-medium ${getPriorityColor(task.priority)}`}>
-                  {task.priority}
-                </span>
-              </div>
-              <div className="col-span-3 flex gap-2">
-                <button className="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded text-sm transition-colors">
-                  Edit
-                </button>
-                <button className="px-3 py-1 bg-green-600 hover:bg-green-500 rounded text-sm transition-colors">
-                  Done
-                </button>
-              </div>
+          {activeTasks.length === 0 ? (
+            <div className="p-8 text-center text-slate-500">
+              No active tasks! 🎉
             </div>
-          ))}
+          ) : (
+            activeTasks.map((task) => (
+              <div key={task.id} className="grid grid-cols-12 gap-4 p-4 border-t border-slate-700 hover:bg-slate-750 transition-colors items-center">
+                <div className="col-span-1 text-xl">{getStatusIcon(task.status)}</div>
+                <div className="col-span-6">
+                  <p className="font-medium">{task.title}</p>
+                </div>
+                <div className="col-span-2">
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${getPriorityColor(task.priority)}`}>
+                    {task.priority}
+                  </span>
+                </div>
+                <div className="col-span-3 flex gap-2">
+                  <button className="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded text-sm transition-colors">
+                    Edit
+                  </button>
+                  <button className="px-3 py-1 bg-green-600 hover:bg-green-500 rounded text-sm transition-colors">
+                    Done
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Completed Tasks */}
+        <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+          <button 
+            onClick={() => setShowCompleted(!showCompleted)}
+            className="w-full p-4 bg-slate-700 border-b border-slate-600 flex items-center justify-between hover:bg-slate-650 transition-colors"
+          >
+            <h2 className="text-lg font-semibold flex items-center gap-2">
+              <span>✅</span> Completed Tasks ({completedTasks.length})
+            </h2>
+            <span className="text-slate-400">
+              {showCompleted ? '▼' : '▶'}
+            </span>
+          </button>
+          
+          {showCompleted && (
+            <>
+              <div className="grid grid-cols-12 gap-4 p-4 bg-slate-700/50 font-semibold text-sm border-b border-slate-600 text-slate-400">
+                <div className="col-span-1">Status</div>
+                <div className="col-span-9">Task</div>
+                <div className="col-span-2">Priority</div>
+              </div>
+              
+              {completedTasks.map((task) => (
+                <div key={task.id} className="grid grid-cols-12 gap-4 p-4 border-t border-slate-700 bg-slate-800/50">
+                  <div className="col-span-1 text-xl">{getStatusIcon(task.status)}</div>
+                  <div className="col-span-9">
+                    <p className="line-through text-slate-500">{task.title}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <span className={`px-2 py-1 rounded text-xs font-medium opacity-50 ${getPriorityColor(task.priority)}`}>
+                      {task.priority}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
         </div>
 
         <div className="mt-6 flex gap-4">
