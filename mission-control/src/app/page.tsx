@@ -8,20 +8,101 @@ export default function Home() {
       </h1>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-        {/* Hardware Status */}
+        {/* Quick Actions - NOW AT TOP */}
+        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 md:col-span-2 lg:col-span-3">
+          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <span>⚡</span> Quick Actions
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <QuickAction href="/tasks" label="📋 View Tasks" />
+            <QuickAction href="/notes" label="📝 Quick Notes" />
+            <a 
+              href="/tasks"
+              className="text-center px-4 py-3 bg-green-600 hover:bg-green-500 rounded-lg transition-colors font-medium"
+            >
+              💰 Phase 1: eBay Tasks
+            </a>
+            <a 
+              href="http://127.0.0.1:18789"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center px-4 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors font-medium"
+            >
+              🤖 OpenClaw Dashboard
+            </a>
+            <a 
+              href="http://100.125.198.70:8080"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center px-4 py-3 bg-purple-600 hover:bg-purple-500 rounded-lg transition-colors font-medium"
+            >
+              🔍 SearXNG Search
+            </a>
+            <a 
+              href="https://www.kraken.com/u/trade"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center px-4 py-3 bg-orange-600 hover:bg-orange-500 rounded-lg transition-colors font-medium"
+            >
+              📈 Kraken Trading
+            </a>
+            <a 
+              href="https://www.tradingview.com/chart/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center px-4 py-3 bg-cyan-600 hover:bg-cyan-500 rounded-lg transition-colors font-medium"
+            >
+              📊 TradingView Charts
+            </a>
+            <a 
+              href="http://100.125.198.70:3000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center px-4 py-3 bg-slate-600 hover:bg-slate-500 rounded-lg transition-colors font-medium"
+            >
+              🌐 Tailscale Access
+            </a>
+          </div>
+        </div>
+
+        {/* Revenue Projects */}
+        <DashboardCard 
+          title="Revenue Projects"
+          icon="💰"
+          items={[
+            { label: 'eBay Sales (Phase 1)', status: 'pending', detail: 'List items for quick capital' },
+            { label: 'BTC Trading Bot (Phase 2)', status: 'in-progress', detail: 'Paper trading via TradingView webhooks' },
+            { label: 'Polymarket Arbitrage', status: 'in-progress', detail: 'Scanner built, monitoring hourly' },
+            { label: 'Android App (Phase 3)', status: 'planning', detail: '2-6 months out' },
+          ]}
+        />
+
+        {/* Hardware Projects */}
+        <DashboardCard 
+          title="Hardware Projects"
+          icon="🚀"
+          items={[
+            { label: 'Tesla P40 GPU Install', status: 'in-progress', detail: 'In transit - verify PSU wattage' },
+            { label: 'TradingView Webhook Server', status: 'in-progress', detail: 'Flask on port 8081' },
+            { label: 'NAS Storage', status: 'pending', detail: '2x WD Red 8TB drives pending' },
+            { label: 'i7-7700K CPU Upgrade', status: 'pending', detail: 'Ordered' },
+          ]}
+        />
+
+        {/* Hardware Deliveries */}
         <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
             <span>🖥️</span> Hardware Deliveries
           </h2>
           <div className="space-y-4">
             {/* P40 GPU with Tracking */}
-            <div className="border-l-4 border-green-500 pl-3 bg-slate-700/50 py-2 px-3 rounded-r-lg">
+            <div className="border-l-4 border-yellow-500 pl-3 bg-slate-700/50 py-2 px-3 rounded-r-lg">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-medium text-green-400">Tesla P40 GPU</p>
+                  <p className="font-medium text-yellow-400">Tesla P40 GPU</p>
                   <p className="text-sm text-slate-400">Tracking: 9405508106245831259625</p>
                 </div>
-                <span className="text-sm font-medium text-green-400">shipped</span>
+                <span className="text-sm font-medium text-yellow-400">in-transit</span>
               </div>
               <a 
                 href="https://tools.usps.com/go/TrackConfirmAction?tLabels=9405508106245831259625"
@@ -33,7 +114,7 @@ export default function Home() {
               </a>
             </div>
             
-            {/* Other Items */}
+            {/* Noctua Fan - DELIVERED */}
             <div className="border-l-4 border-green-500 pl-3 bg-slate-700/50 py-2 px-3 rounded-r-lg">
               <div className="flex items-center justify-between">
                 <div>
@@ -43,46 +124,26 @@ export default function Home() {
                 <span className="text-sm font-medium text-green-400">delivered</span>
               </div>
             </div>
+            
+            {/* WD Red Drives */}
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">WD Red 8TB (x2)</p>
-                <p className="text-sm text-slate-400">ETA: Soon</p>
+                <p className="text-sm text-slate-400">Ordered</p>
               </div>
-              <span className="text-sm font-medium text-yellow-400">ordered</span>
+              <span className="text-sm font-medium text-yellow-400">pending</span>
             </div>
+            
+            {/* i7-7700K */}
             <div className="flex items-center justify-between">
               <div>
                 <p className="font-medium">i7-7700K CPU</p>
-                <p className="text-sm text-slate-400">ETA: Soon</p>
+                <p className="text-sm text-slate-400">Ordered</p>
               </div>
-              <span className="text-sm font-medium text-yellow-400">ordered</span>
+              <span className="text-sm font-medium text-yellow-400">pending</span>
             </div>
           </div>
         </div>
-
-        {/* Revenue Projects */}
-        <DashboardCard 
-          title="Revenue Projects"
-          icon="💰"
-          items={[
-            { label: 'eBay Sales (Phase 1)', status: 'in-progress', detail: 'Quick cash - list items' },
-            { label: 'BTC Trading Bot', status: 'in-progress', detail: 'Phase 2 - Scaffold ready' },
-            { label: 'Android App', status: 'planning', detail: 'Phase 3 - 2-6 months' },
-          ]}
-        />
-
-        {/* Hardware Projects */}
-        <DashboardCard 
-          title="Hardware Projects"
-          icon="🚀"
-          items={[
-            { label: 'OpenClaw Setup', status: 'complete', detail: 'Optimized' },
-            { label: 'Tesla P40 GPU Install', status: 'in-progress', detail: 'Fan & riser delivered' },
-            { label: 'NAS Storage', status: 'pending', detail: 'Awaiting drives' },
-            { label: 'Mission Control', status: 'in-progress', detail: 'Building now' },
-            { label: 'TradingView Integration', status: 'in-progress', detail: 'Webhook + EMA strategy' },
-          ]}
-        />
 
         {/* Quick Stats */}
         <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
@@ -90,10 +151,10 @@ export default function Home() {
             <span>📊</span> System Stats
           </h2>
           <div className="space-y-3">
-            <StatRow label="Context Lines" value="192" />
-            <StatRow label="Token Savings" value="~50%" />
-            <StatRow label="Memory Files" value="2" />
-            <StatRow label="Git Commits" value="5" />
+            <StatRow label="BTC Price" value="$67,871" />
+            <StatRow label="RSI" value="43.82" />
+            <StatRow label="Memory Files" value="3" />
+            <StatRow label="Git Commits" value="7" />
           </div>
         </div>
 
@@ -123,14 +184,14 @@ export default function Home() {
               <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://localhost:8080</code>
             </div>
             
-            {/* OpenClaw */}
+            {/* Trading Webhook */}
             <div className="bg-slate-700 rounded-lg p-4 border border-slate-600">
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-green-500"></span>
-                <span className="font-medium">OpenClaw</span>
+                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                <span className="font-medium">Trading Webhook</span>
               </div>
-              <p className="text-sm text-slate-400 mb-2">Port 18789</p>
-              <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://127.0.0.1:18789</code>
+              <p className="text-sm text-slate-400 mb-2">Port 8081</p>
+              <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://100.125.198.70:8081</code>
             </div>
           </div>
           
@@ -144,8 +205,8 @@ export default function Home() {
               Access securely from anywhere on your tailnet:
             </p>
             <code className="text-sm bg-slate-800 px-3 py-2 rounded block mb-2">
-              http://100.125.198.70:3000 (Mission Control)<br/>
-              http://100.125.198.70:8080 (SearXNG)
+              http://100.125.198.70:3000<br/>
+              http://100.125.198.70:8080
             </code>
             <p className="text-xs text-slate-400">
               This machine (ai-server) • Connected • 100.125.198.70
@@ -153,62 +214,55 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 md:col-span-2">
+        {/* Active Sub-Agents */}
+        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <span>📝</span> Recent Activity
+            <span>🤖</span> Active Agents
           </h2>
-          <div className="space-y-2 text-sm">
-            <ActivityItem time="Today" text="TradingView EMA crossover strategy designed" />
-            <ActivityItem time="Today" text="Webhook server created for TradingView integration" />
-            <ActivityItem time="Today" text="BTC bot working on Kraken exchange" />
-            <ActivityItem time="Today" text="BTC trading bot scaffold complete" />
-            <ActivityItem time="Today" text="Fan and PCIe adapter delivered" />
-            <ActivityItem time="Today" text="Phase 1 revenue plan: eBay sales" />
-            <ActivityItem time="Today" text="Phases 2-3: BTC bot & Android app" />
-            <ActivityItem time="Today" text="P40 GPU shipped! Tracking: 9405508106245831259625" />
-            <ActivityItem time="Today" text="Created Mission Control dashboard" />
-            <ActivityItem time="Today" text="Optimized context files (50% reduction)" />
-            <ActivityItem time="Feb 13" text="Paired Telegram bot @zorinclawbot" />
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">BTC Webhook Deploy</p>
+                <p className="text-sm text-slate-400">Flask + paper trading</p>
+              </div>
+              <span className="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">running</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">Polymarket Scanner</p>
+                <p className="text-sm text-slate-400">Arbitrage detection</p>
+              </div>
+              <span className="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">running</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-medium">eBay Phase 1</p>
+                <p className="text-sm text-slate-400">Photo + listing prep</p>
+              </div>
+              <span className="text-xs px-2 py-1 rounded bg-blue-500/20 text-blue-400">running</span>
+            </div>
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        {/* Recent Activity */}
+        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 md:col-span-2 lg:col-span-3">
           <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-            <span>⚡</span> Quick Actions
+            <span>📝</span> Recent Activity
           </h2>
-          <div className="space-y-2">
-            <QuickAction href="/tasks" label="View Tasks" />
-            <QuickAction href="/notes" label="Quick Notes" />
-            <a 
-              href="/tasks" 
-              className="block w-full text-left px-4 py-2 bg-green-600 hover:bg-green-500 rounded-lg transition-colors"
-            >
-              💰 Phase 1: eBay Tasks →
-            </a>
-            <a 
-              href="http://127.0.0.1:18789" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block w-full text-left px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
-            >
-              OpenClaw Dashboard →
-            </a>
-            <a 
-              href="http://100.125.198.70:8080"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-left px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg transition-colors"
-            >
-              SearXNG (Tailscale) →
-            </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+            <ActivityItem time="Today" text="Polymarket arbitrage scanner built and deployed" />
+            <ActivityItem time="Today" text="P40 GPU delivery tracking verified - needs manual check" />
+            <ActivityItem time="Today" text="Mission Control dashboard reorganized" />
+            <ActivityItem time="Today" text="Trading bot webhook server status check" />
+            <ActivityItem time="Today" text="3 active sub-agents deployed for trading operations" />
+            <ActivityItem time="Today" text="User mandate: autonomous trading operations, no permission required" />
+            <ActivityItem time="Feb 13" text="Paired Telegram bot @zorinclawbot" />
           </div>
         </div>
       </div>
 
       <footer className="mt-12 text-center text-slate-500 text-sm">
-        Mission Control v1.0 • Built with Next.js
+        Mission Control v1.1 • Built with Next.js • Feb 16 update
       </footer>
     </main>
   )
@@ -220,6 +274,7 @@ function DashboardCard({ title, icon, items }: { title: string, icon: string, it
       case 'complete': return 'text-green-400'
       case 'in-progress': return 'text-blue-400'
       case 'ordered': return 'text-yellow-400'
+      case 'pending': return 'text-slate-400'
       default: return 'text-slate-400'
     }
   }
@@ -269,9 +324,9 @@ function QuickAction({ href, label }: { href: string, label: string }) {
   return (
     <Link 
       href={href}
-      className="block w-full text-left px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
+      className="text-center px-4 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors font-medium"
     >
-      {label} →
+      {label}
     </Link>
   )
 }
