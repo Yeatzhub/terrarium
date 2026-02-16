@@ -25,19 +25,20 @@ logger = logging.getLogger(__name__)
 
 
 class TradingStrategy:
-    """RSI + SMA Crossover Strategy"""
+    """RSI + SMA Crossover Strategy - Optimized for lower timeframe"""
     
     def __init__(
         self,
-        rsi_period: int = 14,
-        rsi_overbought: float = 70,
-        rsi_oversold: float = 30,
-        sma_fast: int = 10,
-        sma_slow: int = 30
+        rsi_period: int = 7,
+        rsi_overbought: float = 65,
+        rsi_oversold: float = 35,
+        sma_fast: int = 5,
+        sma_slow: int = 15
     ):
         self.rsi_period = rsi_period
         self.rsi_overbought = rsi_overbought
         self.rsi_oversold = rsi_oversold
+        self.rma_fast = sma_fast
         self.sma_fast = sma_fast
         self.sma_slow = sma_slow
     
@@ -74,20 +75,22 @@ class TradingBot:
     def __init__(
         self,
         symbol: str = 'BTC/USDT',
-        timeframe: str = '1h',
-        initial_balance: float = 10000.0
+        timeframe: str = '15m',
+        initial_balance: float = 10000.0,
+        risk_per_trade: float = 0.15
     ):
         self.symbol = symbol
         self.timeframe = timeframe
         self.initial_balance = initial_balance
         self.balance = initial_balance
+        self.risk_per_trade = risk_per_trade
         self.strategy = TradingStrategy()
         self.trades: List[Dict] = []
         self.equity_curve: List[Dict] = []
         self.position = None
         
-        # Paper trading exchange
-        self.exchange = ccxt.binance({'enableRateLimit': True})
+        # Paper trading exchange (Coinbase - US friendly, better history)
+        self.exchange = ccxt.coinbase({'enableRateLimit': True})
         logger.info(f"Bot initialized: {symbol} | Balance: ${initial_balance:,.2f}")
     
     def fetch_data(self, days: int = 90) -> pd.DataFrame:
@@ -159,7 +162,7 @@ if __name__ == "__main__":
     print("="*50)
     print("BACKTESTING BTC TRADING STRATEGY")
     print("="*50)
-    results = bot.backtest(days=90)
+    results = bot.backtest(days=30)
     print(f"Total Return: {results['total_return']}")
     print(f"Win Rate: {results['win_rate']}")
     print(f"Total Trades: {results['trades']}")
