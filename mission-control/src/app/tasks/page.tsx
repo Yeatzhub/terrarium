@@ -13,8 +13,8 @@ export default function TasksPage() {
     
     // Phase 2: BTC Trading Bot
     { id: 4, title: 'Phase 2: Check Binance.US API access', priority: 'medium', status: 'pending' },
-    { id: 5, title: 'Phase 2: Design bot architecture on paper', priority: 'medium', status: 'pending' },
-    { id: 6, title: 'Phase 2: Scaffold Python trading bot project', priority: 'medium', status: 'pending' },
+    { id: 5, title: 'Phase 2: Design bot architecture on paper', priority: 'medium', status: 'complete' },
+    { id: 6, title: 'Phase 2: Scaffold Python trading bot project', priority: 'medium', status: 'complete' },
     { id: 7, title: 'Phase 2: Paper trade bot for 2 weeks', priority: 'medium', status: 'pending' },
     
     // Phase 3: Android App
@@ -32,6 +32,7 @@ export default function TasksPage() {
     // Completed Tasks
     { id: 50, title: 'Setup cron for memory cleanup', priority: 'high', status: 'complete' },
     { id: 51, title: 'Fan and PCIe adapter delivered', priority: 'high', status: 'complete' },
+    { id: 52, title: 'BTC bot scaffold with RSI strategy', priority: 'medium', status: 'complete' },
     { id: 52, title: 'Phase 1 revenue plan established', priority: 'high', status: 'complete' },
     { id: 53, title: 'Install Docker', priority: 'medium', status: 'complete' },
     { id: 54, title: 'Setup SearXNG', priority: 'low', status: 'complete' },

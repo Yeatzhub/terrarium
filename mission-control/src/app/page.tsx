@@ -66,7 +66,7 @@ export default function Home() {
           icon="💰"
           items={[
             { label: 'eBay Sales (Phase 1)', status: 'in-progress', detail: 'Quick cash - list items' },
-            { label: 'BTC Trading Bot', status: 'pending', detail: 'Phase 2 - $100-500 needed' },
+            { label: 'BTC Trading Bot', status: 'in-progress', detail: 'Phase 2 - Scaffold ready' },
             { label: 'Android App', status: 'planning', detail: 'Phase 3 - 2-6 months' },
           ]}
         />
@@ -158,6 +158,7 @@ export default function Home() {
             <span>📝</span> Recent Activity
           </h2>
           <div className="space-y-2 text-sm">
+            <ActivityItem time="Today" text="BTC trading bot scaffold complete" />
             <ActivityItem time="Today" text="Fan and PCIe adapter delivered" />
             <ActivityItem time="Today" text="Phase 1 revenue plan: eBay sales" />
             <ActivityItem time="Today" text="Phases 2-3: BTC bot & Android app" />
