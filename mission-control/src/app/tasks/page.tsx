@@ -16,7 +16,9 @@ export default function TasksPage() {
     { id: 5, title: 'Phase 2: Design bot architecture on paper', priority: 'medium', status: 'complete' },
     { id: 6, title: 'Phase 2: Scaffold Python trading bot project', priority: 'medium', status: 'complete' },
     { id: 49, title: 'Phase 2: Switch to Kraken exchange (Binance blocked)', priority: 'medium', status: 'complete' },
-    { id: 7, title: 'Phase 2: Paper trade bot for 2 weeks', priority: 'medium', status: 'pending' },
+    { id: 49, title: 'Phase 2: Design TradingView strategy (EMA+RSI)', priority: 'medium', status: 'complete' },
+    { id: 7, title: 'Phase 2: Deploy TradingView webhook server', priority: 'medium', status: 'pending' },
+    { id: 66, title: 'Phase 2: Paper trade bot for 2 weeks', priority: 'medium', status: 'pending' },
     
     // Phase 3: Android App
     { id: 8, title: 'Phase 3: Validate app idea (problem to solve)', priority: 'low', status: 'pending' },

@@ -80,6 +80,7 @@ export default function Home() {
             { label: 'Tesla P40 GPU Install', status: 'in-progress', detail: 'Fan & riser delivered' },
             { label: 'NAS Storage', status: 'pending', detail: 'Awaiting drives' },
             { label: 'Mission Control', status: 'in-progress', detail: 'Building now' },
+            { label: 'TradingView Integration', status: 'in-progress', detail: 'Webhook + EMA strategy' },
           ]}
         />
 
@@ -158,6 +159,8 @@ export default function Home() {
             <span>📝</span> Recent Activity
           </h2>
           <div className="space-y-2 text-sm">
+            <ActivityItem time="Today" text="TradingView EMA crossover strategy designed" />
+            <ActivityItem time="Today" text="Webhook server created for TradingView integration" />
             <ActivityItem time="Today" text="BTC bot working on Kraken exchange" />
             <ActivityItem time="Today" text="BTC trading bot scaffold complete" />
             <ActivityItem time="Today" text="Fan and PCIe adapter delivered" />
