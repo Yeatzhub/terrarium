@@ -79,7 +79,63 @@ export default function Home() {
             <StatRow label="Context Lines" value="192" />
             <StatRow label="Token Savings" value="~50%" />
             <StatRow label="Memory Files" value="2" />
-            <StatRow label="Git Commits" value="1" />
+            <StatRow label="Git Commits" value="5" />
+          </div>
+        </div>
+
+        {/* Running Services */}
+        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 md:col-span-2">
+          <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+            <span>🟢</span> Running Services
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Mission Control */}
+            <div className="bg-slate-700 rounded-lg p-4 border border-slate-600">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                <span className="font-medium">Mission Control</span>
+              </div>
+              <p className="text-sm text-slate-400 mb-2">Port 3000</p>
+              <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://localhost:3000</code>
+            </div>
+            
+            {/* SearXNG */}
+            <div className="bg-slate-700 rounded-lg p-4 border border-slate-600">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                <span className="font-medium">SearXNG</span>
+              </div>
+              <p className="text-sm text-slate-400 mb-2">Port 8080</p>
+              <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://localhost:8080</code>
+            </div>
+            
+            {/* OpenClaw */}
+            <div className="bg-slate-700 rounded-lg p-4 border border-slate-600">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-2 h-2 rounded-full bg-green-500"></span>
+                <span className="font-medium">OpenClaw</span>
+              </div>
+              <p className="text-sm text-slate-400 mb-2">Port 18789</p>
+              <code className="text-xs bg-slate-800 px-2 py-1 rounded">http://127.0.0.1:18789</code>
+            </div>
+          </div>
+          
+          {/* Tailscale Info */}
+          <div className="mt-4 p-4 bg-blue-900/30 border border-blue-700 rounded-lg">
+            <div className="flex items-center gap-2 mb-2">
+              <span>🔒</span>
+              <span className="font-semibold text-blue-300">Tailscale Access</span>
+            </div>
+            <p className="text-sm text-slate-300 mb-2">
+              Access securely from anywhere on your tailnet:
+            </p>
+            <code className="text-sm bg-slate-800 px-3 py-2 rounded block mb-2">
+              http://100.125.198.70:3000 (Mission Control)<br/>
+              http://100.125.198.70:8080 (SearXNG)
+            </code>
+            <p className="text-xs text-slate-400">
+              This machine (ai-server) • Connected • 100.125.198.70
+            </p>
           </div>
         </div>
 
@@ -113,6 +169,14 @@ export default function Home() {
               className="block w-full text-left px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
             >
               OpenClaw Dashboard →
+            </a>
+            <a 
+              href="http://100.125.198.70:8080"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-left px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg transition-colors"
+            >
+              SearXNG (Tailscale) →
             </a>
           </div>
         </div>
