@@ -2,12 +2,17 @@ export default function TasksPage() {
   const tasks = [
     { id: 1, title: 'Setup cron for memory cleanup', priority: 'high', status: 'pending' },
     { id: 2, title: 'Install Tesla P40 GPU', priority: 'high', status: 'waiting' },
-    { id: 3, title: 'Setup NAS with WD Red drives', priority: 'medium', status: 'waiting' },
-    { id: 4, title: 'Install i7-7700K CPU', priority: 'medium', status: 'waiting' },
-    { id: 5, title: 'Configure xrdp remote desktop', priority: 'low', status: 'complete' },
-    { id: 6, title: 'Sell i5-6600K', priority: 'low', status: 'in-progress' },
-    { id: 7, title: 'Test phi4 vs cloud API', priority: 'medium', status: 'pending' },
-    { id: 8, title: 'Setup SearXNG', priority: 'low', status: 'pending' },
+    { id: 3, title: 'Install Noctua fan on P40 shroud', priority: 'high', status: 'waiting' },
+    { id: 4, title: 'Setup PCIe riser cable', priority: 'high', status: 'waiting' },
+    { id: 5, title: 'Build/buy GPU test bench frame', priority: 'high', status: 'waiting' },
+    { id: 6, title: 'Install i7-7700K CPU', priority: 'medium', status: 'waiting' },
+    { id: 7, title: 'Setup NAS with WD Red drives', priority: 'medium', status: 'waiting' },
+    { id: 8, title: 'Install Docker', priority: 'medium', status: 'pending' },
+    { id: 9, title: 'Setup SearXNG', priority: 'low', status: 'pending' },
+    { id: 10, title: 'Install BTC bot dependencies (ccxt, pandas, numpy)', priority: 'medium', status: 'pending' },
+    { id: 11, title: 'Test phi4 vs cloud API', priority: 'medium', status: 'pending' },
+    { id: 12, title: 'Sell i5-6600K', priority: 'low', status: 'in-progress' },
+    { id: 13, title: 'Configure xrdp remote desktop', priority: 'low', status: 'complete' },
   ]
 
   const getPriorityColor = (p: string) => {
