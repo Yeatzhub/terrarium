@@ -1,12 +1,12 @@
 {
-  "balance_sol": 1.0,
+  "balance_sol": 1.0140787010487338,
   "initial_balance": 1.0,
-  "pnl_sol": 0,
-  "pnl_pct": 0,
-  "trades": 0,
+  "pnl_sol": 0.014078701048733766,
+  "pnl_pct": 1.4078701048733766,
+  "trades": 2,
   "strategy": "arbitrage",
   "mode": "paper",
   "status": "active",
-  "timestamp": 1739770560,
-  "message": "Bot running in SIMULATION mode (network unavailable)"
+  "timestamp": 1771303692.616672,
+  "message": null
 }
