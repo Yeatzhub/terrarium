@@ -86,6 +86,8 @@ export default function Sidebar() {
 
   // Auto-collapse on mobile
   useEffect(() => {
+    if (typeof window === 'undefined') return
+    
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setIsCollapsed(true)
@@ -110,7 +112,11 @@ export default function Sidebar() {
   }
 
   const isSubActive = (href: string) => {
-    return pathname === href.split('?')[0] || pathname + window?.location?.search === href
+    if (pathname === href.split('?')[0]) return true
+    if (typeof window !== 'undefined') {
+      return pathname + window.location.search === href
+    }
+    return false
   }
 
   return (

@@ -1,24 +1,24 @@
 {
-  "balance_sol": 1.0306316099561135,
+  "balance_sol": 1.0432328074703654,
   "initial_balance": 1.0,
-  "pnl_sol": 0.03063160995611347,
-  "pnl_pct": 3.063160995611347,
-  "trades": 5,
+  "pnl_sol": 0.0432328074703654,
+  "pnl_pct": 4.32328074703654,
+  "trades": 8,
   "strategy": "arbitrage",
   "mode": "paper",
   "status": "active",
-  "timestamp": 1771344760.587225,
+  "timestamp": 1771345150.877933,
   "message": null,
   "fees": {
-    "total_fees_sol": 0.00029390204388661875,
-    "total_gross_profit_sol": 0.030925512000000002,
-    "total_net_profit_sol": 0.03063160995611338,
-    "fee_efficiency_pct": 0.9504
+    "total_fees_sol": 0.00043426652963455685,
+    "total_gross_profit_sol": 0.043667074,
+    "total_net_profit_sol": 0.04323280747036544,
+    "fee_efficiency_pct": 0.9945
   },
   "performance": {
-    "wins": 5,
+    "wins": 8,
     "losses": 0,
     "win_rate_pct": 100.0,
-    "avg_profit_sol": 0.006126322
+    "avg_profit_sol": 0.005404101
   }
 }
