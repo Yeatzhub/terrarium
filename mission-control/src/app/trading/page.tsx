@@ -411,6 +411,26 @@ function JupiterView({ data, solPrice }: { data: JupiterState | null, solPrice: 
 
   return (
     <>
+      {/* Live SOL Price Banner */}
+      <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-xl p-4 border border-purple-500/30 mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <span className="text-3xl">◎</span>
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+            </div>
+            <div>
+              <p className="text-slate-400 text-sm">Live SOL Price</p>
+              <p className="text-2xl font-bold text-white">${solPrice.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-slate-400 text-sm">Portfolio Value</p>
+            <p className="text-xl font-bold text-green-400">${balanceUsd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+          </div>
+        </div>
+      </div>
+
       {/* Jupiter Account Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard 
