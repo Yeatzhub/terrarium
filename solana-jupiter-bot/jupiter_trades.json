@@ -1,0 +1,36 @@
+[
+  {
+    "timestamp": "2026-02-17T09:49:39.391881",
+    "trade_id": 1,
+    "route": "SOL -> USDC -> SOL",
+    "gross_profit_sol": 0.009214665,
+    "jupiter_fees_sol": 3.6858660000000004e-05,
+    "gas_fees_sol": 1.5e-05,
+    "slippage_sol": 3.9530661452386654e-05,
+    "total_fees_sol": 9.138932145238666e-05,
+    "net_profit_sol": 0.009123275678547614,
+    "balance_before_sol": 1.0,
+    "balance_after_sol": 1.0091232756785475,
+    "strategy": "arbitrage",
+    "mode": "paper",
+    "is_simulation": true,
+    "profit_pct": 1.8429330429456305
+  },
+  {
+    "timestamp": "2026-02-17T09:50:39.454204",
+    "trade_id": 2,
+    "route": "SOL -> BONK -> USDC -> SOL",
+    "gross_profit_sol": 0.002954557,
+    "jupiter_fees_sol": 1.1818228e-05,
+    "gas_fees_sol": 1.5e-05,
+    "slippage_sol": 3.1804467551881196e-06,
+    "total_fees_sol": 2.9998674755188118e-05,
+    "net_profit_sol": 0.002924558325244812,
+    "balance_before_sol": 1.0091232756785475,
+    "balance_after_sol": 1.0120478340037924,
+    "strategy": "arbitrage",
+    "mode": "paper",
+    "is_simulation": true,
+    "profit_pct": 0.5855692851230117
+  }
+]
