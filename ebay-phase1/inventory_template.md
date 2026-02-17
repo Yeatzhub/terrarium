@@ -17,7 +17,7 @@ Use this template to catalog items for sale. High-value categories listed below.
 | | | $ | ⬜ ⬜ ⬜ | ⬜ | |
 | | | $ | ⬜ ⬜ ⬜ | ⬜ | |
 
-**Quick wins:** Old phones, tablets, laptops, cameras, headphones, cables/adapters, chargers
+**Quick wins:** Old phones, tablets, laptops, cameras, headphones, cables/adapters, chargers, GPUs
 
 ---
 
@@ -29,6 +29,20 @@ Use this template to catalog items for sale. High-value categories listed below.
 | | | $ | ⬜ ⬜ ⬜ | ⬜ | |
 
 **Quick wins:** Consoles (even old ones), games (retro = $$$), controllers, accessories, amiibo/figurines
+
+---
+
+## 💻 PC Components
+
+| Item | Condition | Est Value | Photo Status | Listed? | Notes |
+|------|-----------|-----------|--------------|---------|-------|
+| **AMD RX 580 8GB GPU** | Working | $80-120 | ⬜ ⬜ ⬜ | ⬜ | Upgrade to P40, selling old card |
+| | | $ | ⬜ ⬜ ⬜ | ⬜ | |
+| | | $ | ⬜ ⬜ ⬜ | ⬜ | |
+
+**Quick wins:** GPUs (even older ones), RAM, coolers, motherboards, PSUs, SSDs/HDDs
+
+---
 
 ---
 

@@ -226,6 +226,59 @@ Accepted within 30 days. Buyer pays return shipping.
 
 ---
 
+## Template 6: PC Components (Graphics Card)
+
+**Title Formula:**
+```
+[Brand] [Model] [Memory Size] [GDDR Type] Graphics Card [Condition] - Tested
+```
+
+**Example Title:**
+```
+AMD Radeon RX 580 8GB GDDR5 Graphics Card Working - Pulled from Working PC
+```
+
+**Description:**
+```
+AMD Radeon RX 580 8GB GDDR5 Graphics Card
+
+Condition: Good working condition. Pulled from working gaming PC.
+Upgrading to P40, no longer needed.
+
+Specifications:
+- Memory: 8GB GDDR5
+- Interface: PCI Express 3.0 x16
+- Outputs: [List ports - e.g., HDMI, DisplayPort, DVI]
+- Power: Single 8-pin connector required
+
+Testing:
+- Fully functional, no artifacts
+- All display outputs working
+- Fans spin properly
+- Temperatures normal under load
+No mining history - used for light gaming only.
+
+What's Included:
+- RX 580 8GB GPU only
+- [Optional: Include original box if available]
+
+Shipping:
+Ships in anti-static bag with foam protection.
+USPS Priority Mail with tracking and insurance.
+
+Returns:
+30-day returns accepted if card is DOA or not as described.
+Buyer pays return shipping.
+
+Questions? Ask before buying!
+```
+
+**Pricing Strategy:**
+- RX 580 8GB: $80-120 depending on condition
+- Check recently sold listings for exact pricing
+
+---
+
 ## 🏷️ Title Optimization Tips
 
 **ALWAYS Include:**

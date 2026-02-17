@@ -16,6 +16,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <QuickAction href="/tasks" label="📋 View Tasks" />
             <QuickAction href="/notes" label="📝 Quick Notes" />
+            <QuickAction href="/trading" label="📈 Trading Dashboard" />
             <a 
               href="/tasks"
               className="text-center px-4 py-3 bg-green-600 hover:bg-green-500 rounded-lg transition-colors font-medium"

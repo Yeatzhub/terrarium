@@ -37,6 +37,7 @@ Quick cash project to fund Phase 2 trading operations.
 
 ### This Week
 - [ ] Walk through space, identify 20+ sellable items
+- [ ] **List AMD RX 580 GPU** (~$80-120, funds P40 install)
 - [ ] Complete inventory_template.md
 - [ ] Research prices on eBay (completed listings filter)
 - [ ] Set up photo station
@@ -60,6 +61,7 @@ Quick cash project to fund Phase 2 trading operations.
 3. Check quick-win categories:
    - Electronics (old phones, cables, chargers)
    - Gaming (consoles, games, controllers)
+   - PC Parts (RX 580 GPU, spare RAM, coolers)
    - Collectibles (cards, comics, coins)
 
 **Write them down → You're started.**
