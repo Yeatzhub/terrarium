@@ -1,0 +1,12 @@
+{
+  "initial_balance": 100,
+  "current_balance": 100.0,
+  "total_trades": 0,
+  "winning_trades": 0,
+  "losing_trades": 0,
+  "total_pnl": 0.0,
+  "consecutive_losses": 0,
+  "circuit_breaker_active": false,
+  "active_positions": [],
+  "trade_history": []
+}

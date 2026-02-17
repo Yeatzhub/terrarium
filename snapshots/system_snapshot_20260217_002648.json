@@ -1,0 +1,243 @@
+{
+  "timestamp": "2026-02-17T00:26:48.378736",
+  "cpu": {
+    "percent": 1.5,
+    "count": 4,
+    "counts": {
+      "physical": 4,
+      "logical": 4
+    },
+    "freq": {
+      "current": 0.8,
+      "min": 800.0,
+      "max": 3900.0
+    }
+  },
+  "memory": {
+    "virtual": {
+      "total": 33540067328,
+      "available": 30130618368,
+      "percent": 10.2,
+      "used": 2871152640,
+      "free": 27001143296
+    },
+    "swap": {
+      "total": 2147479552,
+      "used": 0,
+      "free": 2147479552,
+      "percent": 0.0
+    }
+  },
+  "disk": {
+    "partitions": [
+      {
+        "device": "/dev/nvme0n1p2",
+        "mountpoint": "/",
+        "fstype": "ext4",
+        "opts": "rw,relatime,errors=remount-ro",
+        "total": 250375106560,
+        "used": 152732602368,
+        "free": 84849614848,
+        "percent": 64.3
+      },
+      {
+        "device": "/dev/nvme0n1p1",
+        "mountpoint": "/boot/efi",
+        "fstype": "vfat",
+        "opts": "rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro",
+        "total": 535805952,
+        "used": 6381568,
+        "free": 529424384,
+        "percent": 1.2
+      },
+      {
+        "device": "/dev/md0",
+        "mountpoint": "/storage",
+        "fstype": "xfs",
+        "opts": "rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,sunit=1024,swidth=2048,noquota",
+        "total": 3998573772800,
+        "used": 27914641408,
+        "free": 3970659131392,
+        "percent": 0.7
+      }
+    ]
+  },
+  "services": [
+    {
+      "name": "accounts-daemon.service",
+      "status": "active"
+    },
+    {
+      "name": "acpid.service",
+      "status": "active"
+    },
+    {
+      "name": "avahi-daemon.service",
+      "status": "active"
+    },
+    {
+      "name": "bluetooth.service",
+      "status": "active"
+    },
+    {
+      "name": "colord.service",
+      "status": "active"
+    },
+    {
+      "name": "containerd.service",
+      "status": "active"
+    },
+    {
+      "name": "cron.service",
+      "status": "active"
+    },
+    {
+      "name": "cups-browsed.service",
+      "status": "active"
+    },
+    {
+      "name": "cups.service",
+      "status": "active"
+    },
+    {
+      "name": "dbus.service",
+      "status": "active"
+    },
+    {
+      "name": "docker.service",
+      "status": "active"
+    },
+    {
+      "name": "fwupd.service",
+      "status": "active"
+    },
+    {
+      "name": "gdm.service",
+      "status": "active"
+    },
+    {
+      "name": "irqbalance.service",
+      "status": "active"
+    },
+    {
+      "name": "kerneloops.service",
+      "status": "active"
+    },
+    {
+      "name": "ModemManager.service",
+      "status": "active"
+    },
+    {
+      "name": "networkd-dispatcher.service",
+      "status": "active"
+    },
+    {
+      "name": "NetworkManager.service",
+      "status": "active"
+    },
+    {
+      "name": "ollama.service",
+      "status": "active"
+    },
+    {
+      "name": "packagekit.service",
+      "status": "active"
+    },
+    {
+      "name": "polkit.service",
+      "status": "active"
+    },
+    {
+      "name": "power-profiles-daemon.service",
+      "status": "active"
+    },
+    {
+      "name": "rsyslog.service",
+      "status": "active"
+    },
+    {
+      "name": "rtkit-daemon.service",
+      "status": "active"
+    },
+    {
+      "name": "switcheroo-control.service",
+      "status": "active"
+    },
+    {
+      "name": "systemd-journald.service",
+      "status": "active"
+    },
+    {
+      "name": "systemd-logind.service",
+      "status": "active"
+    },
+    {
+      "name": "systemd-oomd.service",
+      "status": "active"
+    },
+    {
+      "name": "systemd-resolved.service",
+      "status": "active"
+    },
+    {
+      "name": "systemd-timesyncd.service",
+      "status": "active"
+    },
+    {
+      "name": "systemd-udevd.service",
+      "status": "active"
+    },
+    {
+      "name": "tailscaled.service",
+      "status": "active"
+    },
+    {
+      "name": "thermald.service",
+      "status": "active"
+    },
+    {
+      "name": "touchegg.service",
+      "status": "active"
+    },
+    {
+      "name": "udisks2.service",
+      "status": "active"
+    },
+    {
+      "name": "unattended-upgrades.service",
+      "status": "active"
+    },
+    {
+      "name": "upower.service",
+      "status": "active"
+    },
+    {
+      "name": "user@1000.service",
+      "status": "active"
+    },
+    {
+      "name": "user@127.service",
+      "status": "active"
+    },
+    {
+      "name": "wpa_supplicant.service",
+      "status": "active"
+    },
+    {
+      "name": "xrdp-sesman.service",
+      "status": "active"
+    },
+    {
+      "name": "xrdp.service",
+      "status": "active"
+    },
+    {
+      "name": "LOAD",
+      "status": "Reflects"
+    },
+    {
+      "name": "ACTIVE",
+      "status": "The"
+    }
+  ]
+}

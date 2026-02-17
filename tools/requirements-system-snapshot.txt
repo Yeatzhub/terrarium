@@ -1,0 +1,2 @@
+# Requirements for system_snapshot.py
+psutil>=5.9.0
