@@ -35,16 +35,35 @@ interface PaperState {
   timestamp: number
 }
 
+interface JupiterState {
+  balance_sol: number
+  initial_balance: number
+  pnl_sol: number
+  pnl_pct: number
+  trades: number
+  strategy: string
+  mode: string
+  status: string
+  timestamp: number
+  message?: string
+}
+
 export default function TradingPage() {
   const [krakenData, setKrakenData] = useState<PaperState | null>(null)
   const [toobitData, setToobitData] = useState<PaperState | null>(null)
+  const [jupiterData, setJupiterData] = useState<JupiterState | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'kraken' | 'toobit'>('kraken')
+  const [activeTab, setActiveTab] = useState<'kraken' | 'toobit' | 'jupiter'>('kraken')
+  const [solPrice, setSolPrice] = useState<number>(140)
 
   useEffect(() => {
     fetchTradingData()
-    const interval = setInterval(fetchTradingData, 30000) // Refresh every 30s
+    fetchSolPrice()
+    const interval = setInterval(() => {
+      fetchTradingData()
+      fetchSolPrice()
+    }, 30000) // Refresh every 30s
     return () => clearInterval(interval)
   }, [])
 
@@ -61,6 +80,12 @@ export default function TradingPage() {
       if (toobitRes.ok) {
         setToobitData(await toobitRes.json())
       }
+
+      // Fetch Jupiter data
+      const jupiterRes = await fetch('/api/jupiter-data')
+      if (jupiterRes.ok) {
+        setJupiterData(await jupiterRes.json())
+      }
     } catch (err) {
       setError('Failed to load trading data')
     } finally {
@@ -68,8 +93,25 @@ export default function TradingPage() {
     }
   }
 
-  const currentData = activeTab === 'kraken' ? krakenData : toobitData
-  const totalValue = currentData ? currentData.balance + Object.values(currentData.positions).reduce((sum, pos) => sum + (pos.size * pos.entry_price), 0) : 0
+  async function fetchSolPrice() {
+    try {
+      const res = await fetch('https://price.jup.ag/v4/price?ids=So11111111111111111111111111111111111111112')
+      if (res.ok) {
+        const data = await res.json()
+        const price = data?.data?.['So11111111111111111111111111111111111111112']?.price
+        if (price) setSolPrice(price)
+      }
+    } catch {
+      // Fallback to cached price
+    }
+  }
+
+  const currentData = activeTab === 'kraken' ? krakenData : activeTab === 'toobit' ? toobitData : null
+  const jupiterCurrent = activeTab === 'jupiter'
+
+  const totalValue = currentData 
+    ? currentData.balance + Object.values(currentData.positions).reduce((sum, pos) => sum + (pos.size * pos.entry_price), 0) 
+    : 0
   const totalReturn = currentData && currentData.initial_balance > 0 ? ((totalValue / currentData.initial_balance) - 1) * 100 : 0
 
   return (
@@ -81,7 +123,8 @@ export default function TradingPage() {
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
               Trading Dashboard
             </h1>
-            <p className="text-slate-400 mt-1">Paper trading positions & trade history</p>
+            <p className="text-slate-400 mt-1">CEX + DEX positions & trade history</p>
+            <p className="text-sm text-slate-500 mt-1">SOL Price: ${solPrice.toFixed(2)}</p>
           </div>
           <Link 
             href="/"
@@ -101,7 +144,7 @@ export default function TradingPage() {
                 : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
             }`}
           >
-            🐙 Kraken
+            🐙 Kraken (CEX)
           </button>
           <button
             onClick={() => setActiveTab('toobit')}
@@ -111,7 +154,17 @@ export default function TradingPage() {
                 : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
             }`}
           >
-            🔶 Toobit
+            🔶 Toobit (CEX)
+          </button>
+          <button
+            onClick={() => setActiveTab('jupiter')}
+            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+              activeTab === 'jupiter' 
+                ? 'bg-pink-600 text-white' 
+                : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+            }`}
+          >
+            🪐 Jupiter (DEX)
           </button>
         </div>
 
@@ -130,6 +183,9 @@ export default function TradingPage() {
               Retry
             </button>
           </div>
+        ) : jupiterCurrent ? (
+          // Jupiter DEX View
+          <JupiterView data={jupiterData} solPrice={solPrice} />
         ) : currentData ? (
           <>
             {/* Account Overview */}
@@ -309,18 +365,118 @@ export default function TradingPage() {
   )
 }
 
+function JupiterView({ data, solPrice }: { data: JupiterState | null, solPrice: number }) {
+  if (!data) {
+    return (
+      <div className="bg-slate-800 rounded-xl p-8 text-center border border-slate-700">
+        <p className="text-slate-400">Loading Jupiter data...</p>
+      </div>
+    )
+  }
+
+  const balanceUsd = data.balance_sol * solPrice
+  const initialUsd = data.initial_balance * solPrice
+  const pnlUsd = data.pnl_sol * solPrice
+
+  return (
+    <>
+      {/* Jupiter Account Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <StatCard 
+          label="SOL Balance" 
+          value={`${data.balance_sol.toFixed(4)} SOL`}
+          change={`≈ $${balanceUsd.toFixed(2)}`}
+          color="blue"
+        />
+        <StatCard 
+          label="Total Value" 
+          value={`$${(balanceUsd).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}
+          change={data.pnl_pct >= 0 ? `+${data.pnl_pct.toFixed(2)}%` : `${data.pnl_pct.toFixed(2)}%`}
+          color={data.pnl_pct >= 0 ? 'green' : 'red'}
+          positive={data.pnl_pct >= 0}
+        />
+        <StatCard 
+          label="P&L" 
+          value={`${data.pnl_sol >= 0 ? '+' : ''}${data.pnl_sol.toFixed(4)} SOL`}
+          change={`≈ ${pnlUsd >= 0 ? '+' : ''}$${Math.abs(pnlUsd).toFixed(2)}`}
+          color={data.pnl_sol >= 0 ? 'green' : 'red'}
+          positive={data.pnl_sol >= 0}
+        />
+        <StatCard 
+          label="Strategy" 
+          value={data.strategy.toUpperCase()}
+          change={data.mode === 'paper' ? 'Paper Trading' : 'LIVE'}
+          color="pink"
+        />
+      </div>
+
+      {/* Jupiter Status */}
+      <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+        <h2 className="text-xl font-semibold mb-4">🪐 Jupiter DEX Status</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-slate-700/50 rounded-lg p-4">
+            <p className="text-slate-400 text-sm">Status</p>
+            <p className={`text-lg font-medium ${data.status === 'active' ? 'text-green-400' : 'text-yellow-400'}`}>
+              {data.status === 'active' ? '🟢 Active' : '⚠️ Not Running'}
+            </p>
+          </div>
+          <div className="bg-slate-700/50 rounded-lg p-4">
+            <p className="text-slate-400 text-sm">Trades Executed</p>
+            <p className="text-2xl font-bold">{data.trades}</p>
+          </div>
+          <div className="bg-slate-700/50 rounded-lg p-4">
+            <p className="text-slate-400 text-sm">Mode</p>
+            <p className="text-lg font-medium">{data.mode.toUpperCase()}</p>
+          </div>
+        </div>
+        
+        {data.message && (
+          <div className="mt-4 p-4 bg-yellow-900/30 border border-yellow-700 rounded-lg">
+            <p className="text-yellow-400 text-sm">{data.message}</p>
+            <code className="block mt-2 text-xs bg-slate-800 p-2 rounded">
+              cd solana-jupiter-bot && python jupiter_bot.py --mode paper --capital 1.0
+            </code>
+          </div>
+        )}
+      </div>
+
+      {/* Goal Progress */}
+      <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <h2 className="text-xl font-semibold mb-4">🎯 Goal: Double 1 SOL → 2 SOL</h2>
+        <div className="w-full bg-slate-700 rounded-full h-4 mb-4">
+          <div 
+            className="bg-gradient-to-r from-pink-500 to-purple-500 h-4 rounded-full transition-all duration-500"
+            style={{ width: `${Math.min((data.balance_sol / 2) * 100, 100)}%` }}
+          ></div>
+        </div>
+        <div className="flex justify-between text-sm">
+          <span className="text-slate-400">Start: 1.0 SOL</span>
+          <span className="text-slate-400">Current: {data.balance_sol.toFixed(4)} SOL</span>
+          <span className="text-slate-400">Goal: 2.0 SOL</span>
+        </div>
+        <p className="mt-4 text-sm text-slate-500">
+          {data.balance_sol >= 2.0 
+            ? '🎉 GOAL ACHIEVED!' 
+            : `Need ${(2.0 - data.balance_sol).toFixed(4)} more SOL to reach goal`}
+        </p>
+      </div>
+    </>
+  )
+}
+
 function StatCard({ label, value, change, color, positive }: { 
   label: string
   value: string
   change: string | null
-  color: 'blue' | 'green' | 'red' | 'yellow'
+  color: 'blue' | 'green' | 'red' | 'yellow' | 'pink'
   positive?: boolean
 }) {
   const colors = {
     blue: 'border-blue-500/30 bg-blue-500/10',
     green: 'border-green-500/30 bg-green-500/10',
     red: 'border-red-500/30 bg-red-500/10',
-    yellow: 'border-yellow-500/30 bg-yellow-500/10'
+    yellow: 'border-yellow-500/30 bg-yellow-500/10',
+    pink: 'border-pink-500/30 bg-pink-500/10'
   }
 
   return (
@@ -328,7 +484,7 @@ function StatCard({ label, value, change, color, positive }: {
       <p className="text-slate-400 text-sm mb-1">{label}</p>
       <p className="text-2xl font-bold">{value}</p>
       {change && (
-        <p className={`text-sm mt-1 ${positive ? 'text-green-400' : 'text-red-400'}`}>
+        <p className={`text-sm mt-1 ${positive ? 'text-green-400' : color === 'pink' ? 'text-pink-400' : 'text-red-400'}`}>
           {change}
         </p>
       )}
