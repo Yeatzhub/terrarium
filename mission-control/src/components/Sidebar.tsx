@@ -20,6 +20,12 @@ const navItems: NavItem[] = [
     href: '/',
   },
   {
+    id: 'chat',
+    label: 'Chat',
+    icon: '🤖',
+    href: '/chat',
+  },
+  {
     id: 'trading',
     label: 'Trading',
     icon: '📈',

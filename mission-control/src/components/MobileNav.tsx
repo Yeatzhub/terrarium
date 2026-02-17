@@ -14,7 +14,7 @@ interface NavItem {
 const mobileNavItems: NavItem[] = [
   { label: 'Home', icon: '🏠', href: '/' },
   { label: 'Trading', icon: '📈', href: '/trading' },
-  { label: 'Notes', icon: '📝', href: '/notes' },
+  { label: 'Chat', icon: '🤖', href: '/chat' },
   { label: 'More', icon: '☰', href: '#' },
 ]
 
@@ -23,6 +23,7 @@ export default function MobileNav() {
   const [showMore, setShowMore] = useState(false)
 
   const moreItems = [
+    { label: 'Notes', icon: '📝', href: '/notes' },
     { label: 'Hardware', icon: '🖥️', href: '/hardware/deliveries' },
     { label: 'Tasks', icon: '⚙️', href: '/tasks' },
     { label: 'LLM Status', icon: '🧠', href: '/llm/status' },
