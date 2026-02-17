@@ -10,7 +10,7 @@ import logging
 from typing import Dict, Optional
 from datetime import datetime
 
-from jupiter_api import JupiterAPI, TOKENS
+from jupiter_api import JupiterAPI, TOKENS, ArbitrageScanner
 from strategies import DoublingPlan, RiskManager
 
 logging.basicConfig(
@@ -43,7 +43,10 @@ class JupiterTradingBot:
     ):
         self.mode = mode
         self.strategy = strategy
+        
+        # Initialize API first (scanner needs it)
         self.api = JupiterAPI()
+        self.scanner = ArbitrageScanner(self.api)
         self.risk = RiskManager(initial_capital_sol)
         
         # Paper trading state
@@ -71,7 +74,7 @@ class JupiterTradingBot:
                 # Scan for opportunities
                 quote_amount = int(self.paper_balance * 0.5 * 1e9)  # 50% of balance
                 
-                opportunities = self.api.find_triangular_arbitrage(
+                opportunities = self.scanner.find_triangular_arbitrage(
                     TOKENS['SOL'],
                     [TOKENS['USDC'], TOKENS['USDT'], TOKENS['JUP']],
                     quote_amount
@@ -116,8 +119,29 @@ class JupiterTradingBot:
             self.paper_balance += net_pnl
             self.trade_count += 1
             self.risk.record_trade(net_pnl)
+            self.save_state()
             
         return net_pnl
+    
+    def save_state(self):
+        """Save bot state to file"""
+        state = {
+            'balance_sol': self.paper_balance,
+            'initial_balance': self.risk.initial_balance,
+            'pnl_sol': self.paper_balance - self.risk.initial_balance,
+            'pnl_pct': ((self.paper_balance / self.risk.initial_balance) - 1) * 100,
+            'trades': self.trade_count,
+            'strategy': self.strategy,
+            'mode': self.mode,
+            'status': 'active',
+            'timestamp': datetime.now().timestamp(),
+            'message': None
+        }
+        try:
+            with open('jupiter_state.json', 'w') as f:
+                json.dump(state, f, indent=2)
+        except Exception as e:
+            logger.warning(f"Failed to save state: {e}")
     
     def run_momentum_strategy(self):
         """

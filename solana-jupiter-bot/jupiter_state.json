@@ -1,0 +1,12 @@
+{
+  "balance_sol": 1.0,
+  "initial_balance": 1.0,
+  "pnl_sol": 0,
+  "pnl_pct": 0,
+  "trades": 0,
+  "strategy": "arbitrage",
+  "mode": "paper",
+  "status": "active",
+  "timestamp": 1739770560,
+  "message": "Bot running - scanning for opportunities (network scanning active)"
+}
