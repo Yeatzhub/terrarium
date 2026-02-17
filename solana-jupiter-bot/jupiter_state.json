@@ -1,12 +1,12 @@
 {
-  "balance_sol": 1.3237126875531229,
+  "balance_sol": 2.459775577192531,
   "initial_balance": 1.0,
-  "pnl_sol": 0.3237126875531229,
-  "pnl_pct": 32.371268755312286,
-  "trades": 42,
+  "pnl_sol": 1.4597755771925311,
+  "pnl_pct": 145.97755771925313,
+  "trades": 141,
   "strategy": "arbitrage",
   "mode": "paper",
   "status": "active",
-  "timestamp": 1771314380.640193,
+  "timestamp": 1771341070.461515,
   "message": null
 }
