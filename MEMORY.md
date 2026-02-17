@@ -31,8 +31,13 @@ Daily files (memory/YYYY-MM-DD.md) are raw notes; this is your curated wisdom.
 **Key Assets:**
 - `btc-trading-bot/`: RSI strategy bot, webhook server, Kraken integration
 - `polymarket_scanner.py`: Arbitrage detection for prediction markets
+- `polymarket_paper_trader/`: **NEW** Automated paper trading bot for crypto Up/Down markets
+  - Mean-reversion strategy (buy <0.40, sell >0.60)
+  - $100 paper balance, $10 max per trade
+  - Circuit breaker after 3 consecutive losses
+  - Tracks P/L, win rate in portfolio.json
 - `solana-jupiter-bot/`: Jupiter DEX trading bot (triangular arbitrage, momentum strategies)
-- `mission-control/`: Next.js dashboard for tracking (CEX + DEX combined)
+- `mission-control/`: Next.js dashboard for tracking (CEX + DEX + Prediction Markets)
 
 **Preferences:**
 - Paper trading default (live requires explicit "YES" confirmation)
