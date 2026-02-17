@@ -5,376 +5,337 @@ import { useState, useEffect } from 'react'
 
 interface LLMStatus {
   currentModel: string
-  availableModels: string[]
   contextWindow: number
-  loadedModels: Array<{
-    name: string
-    model: string
-    size: number
-  }>
   usage: {
-    totalTokens: number
-    maxTokens: number
-    remainingTokens: number
     percentageUsed: number
   }
-  timestamp: number
 }
 
-interface AgentStatus {
-  name: string
-  status: 'running' | 'idle' | 'error'
-  description: string
-}
-
-interface HardwareItem {
-  name: string
-  status: 'delivered' | 'in-transit' | 'pending' | 'installed'
-  eta?: string
+interface BotStatus {
+  running: boolean
+  balance: number
+  trades: number
+  pnl: number
 }
 
 export default function Dashboard() {
   const [llmStatus, setLlmStatus] = useState<LLMStatus | null>(null)
+  const [botStatus, setBotStatus] = useState<BotStatus | null>(null)
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [isRefreshing, setIsRefreshing] = useState(false)
 
   useEffect(() => {
     // Update time every minute
     const timeInterval = setInterval(() => setCurrentTime(new Date()), 60000)
     
-    // Fetch LLM status
-    fetchLLMStatus()
-    const llmInterval = setInterval(fetchLLMStatus, 30000)
+    // Initial fetch
+    fetchData()
+    
+    // Set up interval for data refresh
+    const dataInterval = setInterval(fetchData, 30000)
     
     return () => {
       clearInterval(timeInterval)
-      clearInterval(llmInterval)
+      clearInterval(dataInterval)
     }
   }, [])
 
-  async function fetchLLMStatus() {
+  async function fetchData() {
     try {
-      const res = await fetch('/api/llm-status')
-      if (res.ok) {
-        setLlmStatus(await res.json())
+      // Fetch LLM status
+      const llmRes = await fetch('/api/llm-status', { cache: 'no-store' })
+      if (llmRes.ok) {
+        setLlmStatus(await llmRes.json())
+      }
+      
+      // Fetch bot status from local file
+      try {
+        const botRes = await fetch('/api/jupiter-data', { cache: 'no-store' })
+        if (botRes.ok) {
+          const data = await botRes.json()
+          setBotStatus({
+            running: data.running || false,
+            balance: data.balance || 1.0,
+            trades: data.trades || 0,
+            pnl: data.pnl || 0
+          })
+        }
+      } catch {
+        // Bot status not critical
       }
     } catch {
-      // Failed to fetch
+      // Silent fail
     }
   }
 
-  const quickActions = [
-    { href: '/tasks', label: '📋 Tasks', color: 'bg-slate-700 hover:bg-slate-600' },
-    { href: '/notes', label: '📝 Notes', color: 'bg-slate-700 hover:bg-slate-600' },
-    { href: '/trading', label: '📈 Trading', color: 'bg-purple-600 hover:bg-purple-500' },
-    { href: 'http://127.0.0.1:18789', label: '🤖 OpenClaw', external: true, color: 'bg-blue-600 hover:bg-blue-500' },
-    { href: 'http://100.125.198.70:8080', label: '🔍 SearXNG', external: true, color: 'bg-slate-600 hover:bg-slate-500' },
-    { href: 'https://www.kraken.com/u/trade', label: '📈 Kraken', external: true, color: 'bg-orange-600 hover:bg-orange-500' },
-    { href: 'https://www.tradingview.com/chart/', label: '📊 TradingView', external: true, color: 'bg-cyan-600 hover:bg-cyan-500' },
-    { href: 'http://100.125.198.70:3000', label: '🌐 Tailscale', external: true, color: 'bg-slate-600 hover:bg-slate-500' },
-  ]
-
-  const activeAgents: AgentStatus[] = [
-    { name: 'BTC Webhook', status: 'running', description: 'Flask + paper trading' },
-    { name: 'Polymarket Scanner', status: 'running', description: 'Arbitrage detection' },
-    { name: 'eBay Phase 1', status: 'running', description: 'Photo + listing prep' },
-  ]
-
-  const hardwareItems: HardwareItem[] = [
-    { name: 'Tesla P40 GPU', status: 'in-transit', eta: 'Soon' },
-    { name: 'Noctua Fan + Riser', status: 'delivered' },
-    { name: 'WD Red 8TB (x2)', status: 'pending' },
-    { name: 'i7-7700K CPU', status: 'pending' },
-  ]
-
-  const recentActivity = [
-    { time: 'Today', text: 'Polymarket arbitrage scanner deployed' },
-    { time: 'Today', text: 'Mission Control UI reorganized' },
-    { time: 'Today', text: '3 active sub-agents deployed' },
-    { time: 'Feb 16', text: 'P40 GPU delivery tracking updated' },
-    { time: 'Feb 13', text: 'Telegram bot @zorinclawbot paired' },
-  ]
+  async function handleRefresh() {
+    setIsRefreshing(true)
+    await fetchData()
+    setTimeout(() => setIsRefreshing(false), 500)
+  }
 
   const modelName = llmStatus?.currentModel?.split('/').pop() || 'Loading...'
+  const modelShort = modelName.length > 15 ? modelName.slice(0, 15) + '…' : modelName
+
+  // Quick actions - mobile-friendly oversized buttons
+  const quickActions = [
+    { href: '/trading', icon: '📈', label: 'Trading', color: 'bg-purple-600', desc: 'View P&L' },
+    { href: '/notes', icon: '📝', label: 'Notes', color: 'bg-slate-700', desc: 'Quick jot' },
+    { href: 'http://127.0.0.1:18789', icon: '🤖', label: 'OpenClaw', color: 'bg-blue-600', desc: 'Chat AI', external: true },
+    { href: 'https://www.kraken.com/u/trade', icon: '⚡', label: 'Kraken', color: 'bg-orange-600', desc: 'Trade now', external: true },
+  ]
+
+  // Status cards data
+  const statusCards = [
+    {
+      title: 'Jupiter Bot',
+      icon: '🚀',
+      status: botStatus?.running ? 'Running' : 'Idle',
+      statusColor: botStatus?.running ? 'text-green-400' : 'text-yellow-400',
+      href: '/trading',
+      metrics: [
+        { label: 'Balance', value: `${(botStatus?.balance || 1.0).toFixed(2)} SOL` },
+        { label: 'Trades', value: String(botStatus?.trades || 0) },
+        { label: 'P&L', value: `${(botStatus?.pnl || 0).toFixed(4)} SOL`, positive: (botStatus?.pnl || 0) >= 0 },
+      ]
+    },
+    {
+      title: 'P40 GPU',
+      icon: '🖥️',
+      status: 'Installed',
+      statusColor: 'text-green-400',
+      href: '/hardware',
+      metrics: [
+        { label: 'Temp', value: '43°C' },
+        { label: 'Power', value: '192W' },
+        { label: 'Load', value: '98%' },
+      ]
+    },
+    {
+      title: 'LLM',
+      icon: '🧠',
+      status: 'Active',
+      statusColor: 'text-blue-400',
+      href: '/llm/status',
+      metrics: [
+        { label: 'Model', value: modelShort },
+        { label: 'Context', value: `${(llmStatus?.contextWindow || 0).toLocaleString()} tk` },
+        { label: 'Usage', value: `${Math.round(llmStatus?.usage?.percentageUsed || 0)}%` },
+      ]
+    },
+  ]
 
   return (
-    <div className="p-4 md:p-8 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-          Dashboard
-        </h1>
-        <p className="text-slate-400 mt-1">
-          {currentTime.toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          })}
-        </p>
-      </div>
-
-      {/* Quick Actions */}
-      <section className="mb-8">
-        <h2 className="text-lg font-semibold mb-4 text-slate-300 flex items-center gap-2">
-          <span>⚡</span> Quick Actions
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
-          {quickActions.map((action) => (
-            action.external ? (
-              <a
-                key={action.label}
-                href={action.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`text-center px-3 py-3 ${action.color} rounded-lg transition-colors font-medium text-sm`}
-              >
-                {action.label}
-              </a>
-            ) : (
-              <Link
-                key={action.label}
-                href={action.href}
-                className={`text-center px-3 py-3 ${action.color} rounded-lg transition-colors font-medium text-sm`}
-              >
-                {action.label}
-              </Link>
-            )
-          ))}
+    <div className="min-h-screen bg-slate-900">
+      {/* Mobile Header */}
+      <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3 md:hidden">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🚀</span>
+            <h1 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              Mission Control
+            </h1>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleRefresh}
+              className={`p-2 rounded-lg bg-slate-800 ${isRefreshing ? 'animate-spin' : ''}`}
+              aria-label="Refresh"
+            >
+              <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+            <div className="text-right">
+              <p className="text-[10px] text-slate-500 uppercase tracking-wider">{currentTime.toLocaleDateString('en-US', { weekday: 'short' })}</p>
+              <p className="text-lg font-mono font-semibold">{currentTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}</p>
+            </div>
+          </div>
         </div>
-      </section>
+      </header>
 
-      {/* Summary Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        
-        {/* Trading Summary */}
-        <Link href="/trading" className="group">
-          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-purple-500/50 hover:bg-slate-800/80 transition-all duration-300 h-full">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">📈</span>
-                <div>
-                  <h3 className="font-semibold text-lg">Trading</h3>
-                  <p className="text-sm text-slate-400">Active Positions</p>
-                </div>
-              </div>
-              <span className="text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+      <div className="p-4 md:p-8 max-w-7xl mx-auto">
+        {/* Desktop Header */}
+        <div className="hidden md:block mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                Dashboard
+              </h1>
+              <p className="text-slate-400 mt-1">
+                {currentTime.toLocaleDateString('en-US', { 
+                  weekday: 'long', 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                })}
+              </p>
             </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Exchanges</span>
-                <span className="font-mono">3 Active</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Strategy</span>
-                <span className="font-mono">Paper Trading</span>
-              </div>
-              <div className="flex items-center gap-2 mt-3">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-xs text-green-400">Kraken, Toobit, Jupiter</span>
-              </div>
-            </div>
+            <button
+              onClick={handleRefresh}
+              className={`flex items-center gap-2 px-4 py-2 bg-slate-800 rounded-lg hover:bg-slate-700 transition-colors ${isRefreshing ? 'opacity-50' : ''}`}
+            >
+              <svg className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>Refresh</span>
+            </button>
           </div>
-        </Link>
+        </div>
 
-        {/* Hardware Summary */}
-        <Link href="/hardware/deliveries" className="group">
-          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-cyan-500/50 hover:bg-slate-800/80 transition-all duration-300 h-full">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🖥️</span>
-                <div>
-                  <h3 className="font-semibold text-lg">Hardware</h3>
-                  <p className="text-sm text-slate-400">Deliveries & Status</p>
-                </div>
-              </div>
-              <span className="text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">In Transit</span>
-                <span className="font-mono text-yellow-400">1</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Delivered</span>
-                <span className="font-mono text-green-400">1</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Pending</span>
-                <span className="font-mono text-slate-400">2</span>
-              </div>
-              <div className="mt-3 pt-3 border-t border-slate-700">
-                <p className="text-xs text-slate-400">Next: Tesla P40 GPU</p>
-              </div>
-            </div>
-          </div>
-        </Link>
-
-        {/* Agents Summary */}
-        <Link href="/agents/active" className="group">
-          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-blue-500/50 hover:bg-slate-800/80 transition-all duration-300 h-full">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🤖</span>
-                <div>
-                  <h3 className="font-semibold text-lg">Agents</h3>
-                  <p className="text-sm text-slate-400">Active Sub-agents</p>
-                </div>
-              </div>
-              <span className="text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </div>
-            <div className="space-y-2">
-              {activeAgents.map((agent) => (
-                <div key={agent.name} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-                    <span className="text-sm">{agent.name}</span>
+        {/* Quick Actions - Mobile optimized */}
+        <section className="mb-6">
+          <h2 className="text-sm font-semibold mb-3 text-slate-400 uppercase tracking-wider md:text-base md:normal-case md:mb-4">
+            ⚡ Quick Actions
+          </h2>
+          
+          <div className="grid grid-cols-2 gap-3 md:flex md:flex-wrap md:gap-3">
+            {quickActions.map((action) => {
+              const content = (
+                <>
+                  <div className={`w-12 h-12 md:w-10 md:h-10 rounded-xl ${action.color} flex items-center justify-center text-2xl md:text-xl mb-2 md:mb-0 shadow-lg`}>
+                    {action.icon}
                   </div>
-                  <span className="text-xs text-blue-400">{agent.status}</span>
-                </div>
-              ))}
-              <div className="mt-3 pt-3 border-t border-slate-700 flex justify-between">
-                <span className="text-xs text-slate-400">Total Agents</span>
-                <span className="text-sm font-mono">{activeAgents.length}</span>
-              </div>
-            </div>
-          </div>
-        </Link>
+                  <div className="text-left md:text-center">
+                    <p className="font-semibold text-base md:text-sm">{action.label}</p>
+                    <p className="text-xs text-slate-400 md:hidden">{action.desc}</p>
+                  </div>
+                </>
+              )
 
-        {/* LLM Status Summary */}
-        <Link href="/llm/status" className="group">
-          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 hover:border-pink-500/50 hover:bg-slate-800/80 transition-all duration-300 h-full">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl">🧠</span>
-                <div>
-                  <h3 className="font-semibold text-lg">LLM</h3>
-                  <p className="text-sm text-slate-400">Model & Tokens</p>
-                </div>
-              </div>
-              <span className="text-pink-400 opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-            </div>
-            <div className="space-y-2">
-              <div className="bg-slate-700/50 rounded p-2">
-                <p className="text-xs text-slate-400 mb-1">Active Model</p>
-                <p className="font-mono text-sm text-pink-400 truncate" title={modelName}>
-                  {modelName.length > 20 ? modelName.slice(0, 20) + '...' : modelName}
-                </p>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Context</span>
-                <span className="font-mono">{llmStatus?.contextWindow?.toLocaleString() || '--'} tk</span>
-              </div>
-              <div className="w-full bg-slate-700 rounded-full h-1.5 mt-2">
-                <div 
-                  className="bg-gradient-to-r from-pink-500 to-purple-500 h-1.5 rounded-full"
-                  style={{ width: `${Math.min(llmStatus?.usage?.percentageUsed || 0, 100)}%` }}
-                />
-              </div>
-            </div>
-          </div>
-        </Link>
+              const className = `
+                flex items-center gap-3 md:flex-col md:items-center md:justify-center
+                p-3 md:px-4 md:py-3
+                bg-slate-800 md:bg-slate-800/50
+                rounded-xl md:rounded-lg
+                border border-slate-700 md:border-0
+                active:scale-98 md:hover:bg-slate-800
+                transition-all
+                md:text-center
+                ${action.external ? 'opacity-90 hover:opacity-100' : ''}
+              `
 
-        {/* System Stats Summary */}
-        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 h-full">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-3xl">📊</span>
-            <div>
-              <h3 className="font-semibold text-lg">System Stats</h3>
-              <p className="text-sm text-slate-400">Quick Overview</p>
-            </div>
-          </div>
-          <div className="space-y-3">
-            <StatRow label="BTC Price" value="$67,871" />
-            <StatRow label="RSI" value="43.82" />
-            <StatRow label="Memory Files" value="3" />
-            <StatRow label="Git Commits" value="7" />
-          </div>
-        </div>
+              if (action.external) {
+                return (
+                  <a
+                    key={action.label}
+                    href={action.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                  >
+                    {content}
+                  </a>
+                )
+              }
 
-        {/* Running Services */}
-        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 h-full">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-3xl">🟢</span>
-            <div>
-              <h3 className="font-semibold text-lg">Services</h3>
-              <p className="text-sm text-slate-400">Running Processes</p>
-            </div>
+              return (
+                <Link
+                  key={action.label}
+                  href={action.href}
+                  className={className}
+                >
+                  {content}
+                </Link>
+              )
+            })}
           </div>
-          <div className="space-y-2">
-            {[
-              { name: 'Mission Control', port: '3000', status: 'online' },
-              { name: 'SearXNG', port: '8082', status: 'online' },
-              { name: 'Trading Webhook', port: '8081', status: 'online' },
-            ].map((service) => (
-              <div key={service.name} className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-2">
-                  <span className={`w-2 h-2 rounded-full ${
-                    service.status === 'online' ? 'bg-green-500' : 'bg-yellow-500'
-                  }`}></span>
-                  <span>{service.name}</span>
+        </section>
+
+        {/* Status Cards - Mobile friendly */}
+        <section className="mb-6">
+          <h2 className="text-sm font-semibold mb-3 text-slate-400 uppercase tracking-wider md:hidden">
+            📊 Systems
+          </h2>
+          
+          <div className="grid gap-3 md:gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {statusCards.map((card) => (
+              <Link
+                key={card.title}
+                href={card.href}
+                className="block p-4 bg-slate-800 rounded-xl border border-slate-700 active:bg-slate-750 md:hover:border-slate-600 transition-all"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{card.icon}</span>
+                    <h3 className="font-semibold text-lg">{card.title}</h3>
+                  </div>
+                  <span className={`text-sm font-medium ${card.statusColor}`}>
+                    {card.status}
+                  </span>
                 </div>
-                <span className="text-xs text-slate-500">:{service.port}</span>
-              </div>
+                
+                <div className="grid grid-cols-3 gap-2">
+                  {card.metrics.map((metric) => (
+                    <div key={metric.label} className="bg-slate-900/50 rounded-lg p-2">
+                      <p className="text-[10px] text-slate-500 uppercase">{metric.label}</p>
+                      <p className={`font-mono text-sm font-medium ${
+                        'positive' in metric && metric.positive === false 
+                          ? 'text-red-400' 
+                          : 'positive' in metric && metric.positive 
+                            ? 'text-green-400'
+                            : 'text-white'
+                      }`}>
+                        {metric.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Link>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Recent Activity */}
-        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 md:col-span-2 lg:col-span-2 xl:col-span-2">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-3xl">📝</span>
-            <div>
-              <h3 className="font-semibold text-lg">Recent Activity</h3>
-              <p className="text-sm text-slate-400">Latest Updates</p>
-            </div>
-          </div>
-          <div className="space-y-3">
-            {recentActivity.map((item, i) => (
-              <div key={i} className="flex items-start gap-3 text-sm">
-                <span className="text-slate-500 text-xs whitespace-nowrap w-16">{item.time}</span>
-                <span className="text-slate-300">{item.text}</span>
+        <section className="mb-6">
+          <h2 className="text-sm font-semibold mb-3 text-slate-400 uppercase tracking-wider">
+            📝 Recent Activity
+          </h2>
+          
+          <div className="space-y-2">
+            {[
+              { time: 'Now', icon: '🚀', text: 'Jupiter Bot running (30+ min)', highlight: true },
+              { time: '2m', icon: '🖥️', text: 'P40 GPU tested at 192W/43°C', highlight: true },
+              { time: '30m', icon: '✅', text: 'Momentum strategy deployed' },
+              { time: '1h', icon: '📝', text: 'Memory files committed' },
+              { time: '3h', icon: '🤖', text: 'Qwen 2.5 32B loaded on GPU' },
+            ].map((item, i) => (
+              <div 
+                key={i} 
+                className={`flex items-center gap-3 p-3 rounded-xl ${item.highlight ? 'bg-slate-800/60 border border-slate-700/50' : ''}`}
+              >
+                <span className="w-8 h-8 bg-slate-800 rounded-lg flex items-center justify-center text-sm flex-shrink-0">
+                  {item.icon}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-white truncate">{item.text}</p>
+                </div>
+                <span className="text-xs text-slate-500 font-mono flex-shrink-0">{item.time}</span>
               </div>
             ))}
-          </div>        </div>
-      </div>
-
-      {/* Alerts Section */}
-      <section className="mt-8">
-        <h2 className="text-lg font-semibold mb-4 text-slate-300 flex items-center gap-2">
-          <span>🔔</span> Alerts
-        </h2>
-        <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-xl p-4 flex items-start gap-3">
-          <span className="text-yellow-500 text-xl">⚠️</span>
-          <div>
-            <p className="font-medium text-yellow-400">Hardware Delivery Expected</p>
-            <p className="text-sm text-slate-400 mt-1">
-              Tesla P40 GPU in transit. Verify PSU wattage (250W required) before installation.
-            </p>
-            <a 
-              href="https://tools.usps.com/go/TrackConfirmAction?tLabels=9405508106245831259625"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block mt-2 text-sm text-blue-400 hover:text-blue-300"
-            >
-              Track Package →
-            </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer */}
-      <footer className="mt-12 text-center text-slate-500 text-sm">
-        Mission Control v1.2 • Built with Next.js • {currentTime.getFullYear()}
-      </footer>
-    </div>
-  )
-}
+        {/* Mobile-specific alert */}
+        <section className="mb-20 md:mb-8">
+          <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 rounded-xl p-4">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl">📱</span>
+              <div>
+                <h3 className="font-semibold text-blue-400">Mobile App Ready</h3>
+                <p className="text-sm text-slate-400 mt-1">
+                  Add to home screen for native app experience with offline support.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-function StatRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex justify-between items-center">
-      <span className="text-slate-400 text-sm">{label}</span>
-      <span className="font-mono font-medium">{value}</span>
+        {/* Footer spacer for mobile */}
+        <footer className="text-center text-slate-600 text-xs pb-4 md:pb-0">
+          Mission Control v2.0 • Mobile Optimized
+        </footer>
+      </div>
     </div>
   )
 }
