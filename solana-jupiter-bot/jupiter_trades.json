@@ -32,5 +32,22 @@
     "mode": "paper",
     "is_simulation": true,
     "profit_pct": 0.5855692851230117
+  },
+  {
+    "timestamp": "2026-02-17T09:51:09.485618",
+    "trade_id": 3,
+    "route": "SOL -> USDT -> SOL",
+    "gross_profit_sol": 0.007664745,
+    "jupiter_fees_sol": 3.065898e-05,
+    "gas_fees_sol": 1.5e-05,
+    "slippage_sol": 2.6165148664177513e-05,
+    "total_fees_sol": 7.18241286641775e-05,
+    "net_profit_sol": 0.0075929208713358225,
+    "balance_before_sol": 1.0120478340037924,
+    "balance_after_sol": 1.0196407548751283,
+    "strategy": "arbitrage",
+    "mode": "paper",
+    "is_simulation": true,
+    "profit_pct": 1.5147001752352283
   }
 ]

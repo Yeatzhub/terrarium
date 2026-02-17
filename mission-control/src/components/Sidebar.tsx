@@ -239,7 +239,7 @@ export default function Sidebar() {
                 </div>
 
                 {/* Sub-items */}
-                {!isCollapsed && hasSubItems && expanded && (
+                {!isCollapsed && hasSubItems && expanded && item.subItems && (
                   <div className="ml-4 mt-1 space-y-0.5 border-l-2 border-slate-800 pl-3">
                     {item.subItems.map((sub) => (
                       <Link
