@@ -15,14 +15,35 @@ export async function GET(request: NextRequest) {
       path.join('/home/yeatz/.openclaw/workspace', 'solana-jupiter-bot', 'jupiter_state.json'),
     ]
 
+    const possibleTradePaths = [
+      path.join(process.cwd(), '..', 'solana-jupiter-bot', 'jupiter_trades.json'),
+      path.join(process.cwd(), '..', '..', 'solana-jupiter-bot', 'jupiter_trades.json'),
+      path.join('/home/yeatz/.openclaw/workspace', 'solana-jupiter-bot', 'jupiter_trades.json'),
+    ]
+
     let fileContent = null
-    let foundPath = null
+    let tradeHistoryContent = null
 
     for (const filePath of possiblePaths) {
       if (existsSync(filePath)) {
         fileContent = await readFile(filePath, 'utf-8')
-        foundPath = filePath
         break
+      }
+    }
+
+    for (const filePath of possibleTradePaths) {
+      if (existsSync(filePath)) {
+        tradeHistoryContent = await readFile(filePath, 'utf-8')
+        break
+      }
+    }
+
+    let tradeHistory = []
+    if (tradeHistoryContent) {
+      try {
+        tradeHistory = JSON.parse(tradeHistoryContent)
+      } catch (e) {
+        console.error('Error parsing trade history:', e)
       }
     }
 
@@ -38,6 +59,7 @@ export async function GET(request: NextRequest) {
         strategy: 'arbitrage',
         mode: 'paper',
         timestamp: Date.now() / 1000,
+        trade_history: [],
         message: 'Jupiter bot not started - run: python jupiter_bot.py --mode paper --capital 1.0'
       })
     }
@@ -46,7 +68,8 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       ...data,
-      status: 'active'
+      status: 'active',
+      trade_history: tradeHistory
     })
 
   } catch (error) {
@@ -58,7 +81,8 @@ export async function GET(request: NextRequest) {
         balance_sol: 1.0,
         initial_balance: 1.0,
         pnl_sol: 0,
-        trades: 0
+        trades: 0,
+        trade_history: []
       },
       { status: 500 }
     )

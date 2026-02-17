@@ -46,6 +46,37 @@ interface JupiterState {
   status: string
   timestamp: number
   message?: string
+  fees?: {
+    total_fees_sol: number
+    total_gross_profit_sol: number
+    total_net_profit_sol: number
+    fee_efficiency_pct: number
+  }
+  performance?: {
+    wins: number
+    losses: number
+    win_rate_pct: number
+    avg_profit_sol: number
+  }
+  trade_history?: TradeHistory[]
+}
+
+interface TradeHistory {
+  timestamp: string
+  trade_id: number
+  route: string
+  gross_profit_sol: number
+  jupiter_fees_sol: number
+  gas_fees_sol: number
+  slippage_sol: number
+  total_fees_sol: number
+  net_profit_sol: number
+  balance_before_sol: number
+  balance_after_sol: number
+  strategy: string
+  mode: string
+  is_simulation: boolean
+  profit_pct: number
 }
 
 export default function TradingPage() {
@@ -430,6 +461,53 @@ function JupiterView({ data, solPrice }: { data: JupiterState | null, solPrice: 
           </div>
         </div>
         
+        {/* Fee Breakdown */}
+        {data.fees && (
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="bg-slate-700/30 rounded-lg p-3 text-center">
+              <p className="text-slate-500 text-xs mb-1">Total Gross</p>
+              <p className="text-green-400 font-mono">+{data.fees.total_gross_profit_sol.toFixed(6)} SOL</p>
+            </div>
+            <div className="bg-slate-700/30 rounded-lg p-3 text-center">
+              <p className="text-slate-500 text-xs mb-1">Total Fees</p>
+              <p className="text-yellow-400 font-mono">-{data.fees.total_fees_sol.toFixed(6)} SOL</p>
+            </div>
+            <div className="bg-slate-700/30 rounded-lg p-3 text-center">
+              <p className="text-slate-500 text-xs mb-1">Fee Efficiency</p>
+              <p className="text-pink-400 font-mono">{data.fees.fee_efficiency_pct.toFixed(2)}%</p>
+            </div>
+            <div className="bg-slate-700/30 rounded-lg p-3 text-center">
+              <p className="text-slate-500 text-xs mb-1">Net Profit</p>
+              <p className={`font-mono ${data.fees.total_net_profit_sol >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {data.fees.total_net_profit_sol >= 0 ? '+' : ''}{data.fees.total_net_profit_sol.toFixed(6)} SOL
+              </p>
+            </div>
+          </div>
+        )}
+        
+        {/* Performance Stats */}
+        {data.performance && (
+          <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="bg-slate-700/30 rounded-lg p-3 text-center">
+              <p className="text-slate-500 text-xs mb-1">Win Rate</p>
+              <p className="text-blue-400 font-bold">{data.performance.win_rate_pct.toFixed(1)}%</p>
+              <p className="text-slate-600 text-xs">{data.performance.wins}W / {data.performance.losses}L</p>
+            </div>
+            <div className="bg-slate-700/30 rounded-lg p-3 text-center">
+              <p className="text-slate-500 text-xs mb-1">Avg Profit/Trade</p>
+              <p className={`font-bold ${data.performance.avg_profit_sol >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {data.performance.avg_profit_sol >= 0 ? '+' : ''}{data.performance.avg_profit_sol.toFixed(6)} SOL
+              </p>
+            </div>
+            <div className="bg-slate-700/30 rounded-lg p-3 text-center">
+              <p className="text-slate-500 text-xs mb-1">Total Return</p>
+              <p className={`font-bold ${data.pnl_pct >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                {data.pnl_pct >= 0 ? '+' : ''}{data.pnl_pct.toFixed(2)}%
+              </p>
+            </div>
+          </div>
+        )}
+        
         {data.message && (
           <div className="mt-4 p-4 bg-yellow-900/30 border border-yellow-700 rounded-lg">
             <p className="text-yellow-400 text-sm">{data.message}</p>
@@ -439,6 +517,72 @@ function JupiterView({ data, solPrice }: { data: JupiterState | null, solPrice: 
           </div>
         )}
       </div>
+
+      {/* Trade History */}
+      {data.trade_history && data.trade_history.length > 0 && (
+        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold flex items-center gap-2">
+              <span>📜</span> Trade History
+            </h2>
+            <span className="text-sm text-slate-400">
+              {data.trade_history.length} trades
+            </span>
+          </div>
+          
+          <div className="space-y-3 max-h-[400px] overflow-y-auto">
+            {[...data.trade_history].reverse().slice(0, 20).map((trade, i) => {
+              const date = new Date(trade.timestamp)
+              const time = date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })
+              const emoji = trade.net_profit_sol > 0 ? '🟢' : trade.net_profit_sol < 0 ? '🔴' : '⚪'
+              const simTag = trade.is_simulation ? '[SIM]' : ''
+              
+              return (
+                <div key={i} className="bg-slate-700/40 rounded-lg p-4 border border-slate-600">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">{emoji}</span>
+                      <span className="text-sm text-slate-400">#{trade.trade_id.toString().padStart(4, '0')}</span>
+                      <span className="text-sm font-mono text-slate-500">{time}</span>
+                      {simTag && <span className="text-xs px-2 py-0.5 bg-purple-500/30 text-purple-400 rounded">{simTag}</span>}
+                    </div>
+                    <span className={`font-mono font-bold ${trade.net_profit_sol >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                      {trade.net_profit_sol >= 0 ? '+' : ''}{trade.net_profit_sol.toFixed(6)} SOL
+                    </span>
+                  </div>
+                  
+                  <div className="text-sm text-slate-400 mb-2">
+                    Route: <span className="text-slate-300">{trade.route}</span>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                    <div className="bg-slate-800/50 rounded p-2">
+                      <p className="text-slate-500">Gross</p>
+                      <p className="text-green-400 font-mono">+{trade.gross_profit_sol.toFixed(6)}</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded p-2">
+                      <p className="text-slate-500">Jupiter Fee</p>
+                      <p className="text-yellow-400 font-mono">-{trade.jupiter_fees_sol.toFixed(6)}</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded p-2">
+                      <p className="text-slate-500">Gas Fee</p>
+                      <p className="text-orange-400 font-mono">-{trade.gas_fees_sol.toFixed(6)}</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded p-2">
+                      <p className="text-slate-500">Slippage</p>
+                      <p className="text-red-400 font-mono">-{trade.slippage_sol.toFixed(6)}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-2 text-xs text-slate-500">
+                    Balance: {trade.balance_before_sol.toFixed(4)} → {trade.balance_after_sol.toFixed(4)} SOL
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Goal Progress */}
       <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
