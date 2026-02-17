@@ -50,3 +50,12 @@ Daily files (memory/YYYY-MM-DD.md) are raw notes; this is your curated wisdom.
 - P40 GPU tracking: 9405508106245831259625
 - Tailscale IP: 100.125.198.70
 
+### P40 GPU Installation Complete (Feb 17, 2026)
+- **Status**: Installed and operational
+- **Drivers**: NVIDIA 570.211.01 server drivers
+- **Cooling**: Noctua external fan, confirmed capable (42°C max under 192W load)
+- **BIOS**: Intel HD 530 primary display, Above 4G Decoding enabled
+- **Performance**: Qwen 2.5 32B runs at 98% GPU utilization, 21GB VRAM, 192W power peak
+- **Fan Verdict**: Cooling exceeds requirements for 250W TDP
+- **Models Available**: phi4 (9GB), Qwen 2.5 32B (19GB), Llama 3.1 70B downloading
+
