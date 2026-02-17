@@ -66,8 +66,24 @@ class JupiterTradingBot:
         """
         Strategy: Triangular arbitrage
         Safest aggressive strategy
+        Falls back to simulation mode if network fails
         """
         logger.info("Starting arbitrage scanner...")
+        
+        # Test network connectivity first
+        network_available = False
+        try:
+            import socket
+            socket.create_connection(("quote-api.jup.ag", 443), timeout=5)
+            network_available = True
+            logger.info("✅ Network connectivity confirmed")
+        except:
+            logger.warning("⚠️  Network unavailable - running in simulation mode")
+            logger.info("Simulated opportunities will appear every ~30 seconds")
+        
+        if not network_available:
+            self.run_simulation_mode()
+            return
         
         while True:
             try:
@@ -142,6 +158,54 @@ class JupiterTradingBot:
                 json.dump(state, f, indent=2)
         except Exception as e:
             logger.warning(f"Failed to save state: {e}")
+    
+    def run_simulation_mode(self):
+        """
+        Simulation mode for offline/demo environments
+        Generates fake arbitrage opportunities
+        """
+        logger.info("📊 SIMULATION MODE ACTIVE")
+        logger.info("Generating simulated opportunities...")
+        
+        import random
+        
+        while True:
+            try:
+                # Simulate occasional opportunity (10% chance per scan)
+                if random.random() < 0.1:
+                    # Create fake opportunity
+                    profit_pct = random.uniform(0.5, 2.0)
+                    gross_profit_lamports = int(self.paper_balance * 0.5 * 1e9 * (profit_pct / 100))
+                    
+                    opp = {
+                        'route': random.choice([
+                            'SOL -> USDC -> SOL',
+                            'SOL -> USDT -> SOL',
+                            'SOL -> JUP -> USDC -> SOL',
+                            'SOL -> BONK -> USDC -> SOL'
+                        ]),
+                        'profit_pct': profit_pct,
+                        'profit': gross_profit_lamports,
+                        'start_amount': int(self.paper_balance * 0.5 * 1e9),
+                        'end_amount': int(self.paper_balance * 0.5 * 1e9) + gross_profit_lamports
+                    }
+                    
+                    logger.info(f"🎯 [SIM] ARBITRAGE FOUND: {profit_pct:.2f}% profit")
+                    logger.info(f"    Route: {opp['route']}")
+                    
+                    # Simulate trade
+                    pnl = self.simulate_arbitrage(opp)
+                    logger.info(f"💰 [SIM] Paper trade P&L: +{pnl:.6f} SOL")
+                    logger.info(f"💼 New balance: {self.paper_balance:.4f} SOL")
+                    
+                else:
+                    logger.debug("Scanning for opportunities...")
+                    
+                time.sleep(30)  # Slower scan in simulation
+                
+            except Exception as e:
+                logger.error(f"Simulation error: {e}")
+                time.sleep(30)
     
     def run_momentum_strategy(self):
         """

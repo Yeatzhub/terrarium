@@ -8,5 +8,5 @@
   "mode": "paper",
   "status": "active",
   "timestamp": 1739770560,
-  "message": "Bot running - scanning for opportunities (network scanning active)"
+  "message": "Bot running in SIMULATION mode (network unavailable)"
 }
