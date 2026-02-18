@@ -23,31 +23,31 @@ export default function SimpleChat() {
     setError('')
     
     try {
+      const GATEWAY_TOKEN = "9a95fd94723eab4b6c332ada4ac919ba2b1082c8f69683cb"
       const ws = new WebSocket('ws://127.0.0.1:18789')
       wsRef.current = ws
       
       ws.onopen = () => {
         console.log('WS: Connected')
-        setConnected(true)
-        setConnecting(false)
         
-        // Send connect handshake
         ws.send(JSON.stringify({
           type: 'req',
-          id: 'client-' + Date.now(),
+          id: 'connect-' + Date.now(),
           method: 'connect',
           params: {
             minProtocol: 3,
             maxProtocol: 3,
             client: {
-              id: 'openclaw',
+              id: 'openclaw-control-ui',
               version: '2.0.0',
-              platform: 'web',
-              mode: 'operator'
+              platform: 'browser',
+              mode: 'ui'
             },
             locale: 'en-US',
             userAgent: navigator.userAgent,
-            role: 'operator'
+            auth: {
+              token: GATEWAY_TOKEN
+            },
           }
         }))
       }
@@ -56,18 +56,65 @@ export default function SimpleChat() {
         console.log('WS: Message received:', e.data)
         try {
           const msg = JSON.parse(e.data)
-          if (msg.ok && msg.payload?.sessionId) {
-            setConnected(true)
-            setMessages(prev => [...prev, { id: Date.now(), role: 'assistant', content: 'Connected to OpenClaw!' }])
+          
+          if (msg.type === 'res' && msg.id?.startsWith('connect-')) {
+            if (msg.ok) {
+              console.log('WS: Handshake successful!')
+              setConnected(true)
+              setConnecting(false)
+              setError('')
+              setMessages(prev => [...prev, { 
+                id: Date.now(), 
+                role: 'assistant', 
+                content: 'Connected to OpenClaw! Session: ' + (msg.payload?.sessionId || 'N/A')
+              }])
+            } else {
+              console.error('WS: Handshake failed:', msg.error)
+              setError('Handshake failed: ' + (msg.error?.message || 'Unknown error'))
+              setConnecting(false)
+            }
           }
+          
+          // Listen for ALL events and log them
+          if (msg.type === 'event') {
+            console.log('WS: Event received:', msg.event, msg.payload)
+            
+            if (msg.event === 'session.message' || msg.event === 'message') {
+              const content = msg.payload?.message?.content || msg.payload?.content || msg.payload?.text
+              const role = msg.payload?.message?.role || msg.payload?.role
+              if (content && role === 'assistant') {
+                setMessages(prev => [...prev, {
+                  id: Date.now(),
+                  role: 'assistant',
+                  content: content
+                }])
+              }
+            }
+            
+            if (msg.event === 'chat.message' || msg.event === 'agent.message') {
+              const content = msg.payload?.content || msg.payload?.text || msg.payload?.message
+              if (content) {
+                setMessages(prev => [...prev, {
+                  id: Date.now(),
+                  role: 'assistant',
+                  content: content
+                }])
+              }
+            }
+          }
+          
+          if (msg.type === 'event' && msg.event === 'connect.challenge') {
+            console.log('WS: Received challenge, waiting for response...')
+          }
+          
         } catch (err) {
-          console.log('Non-JSON message:', e.data)
+          console.error('WS: Failed to parse message:', err)
         }
       }
       
       ws.onerror = (e) => {
         console.error('WS Error:', e)
-        setError('Connection failed. Open console for details.')
+        setError('WebSocket error. Check console.')
         setConnecting(false)
       }
       
@@ -84,17 +131,18 @@ export default function SimpleChat() {
   }
 
   function sendMessage() {
-    if (!input.trim() || !wsRef.current) return
+    if (!input.trim() || !wsRef.current || !connected) return
     
     setMessages(prev => [...prev, { id: Date.now(), role: 'user', content: input }])
     
+    const GATEWAY_TOKEN = "9a95fd94723eab4b6c332ada4ac919ba2b1082c8f69683cb"
     wsRef.current.send(JSON.stringify({
       type: 'req',
-      id: 'msg_' + Date.now(),
+      id: 'msg-' + Date.now(),
       method: 'sessions_send',
       params: {
         sessionKey: 'main',
-        message: input
+        message: input,
       }
     }))
     
