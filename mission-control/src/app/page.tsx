@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { StatCard } from '../components/StatCard';
-import { StatusBadge } from '../components/StatusBadge';
-import { AgentStatus } from '../components/AgentStatus';
-import { BotStatus } from '../components/BotStatus';
-import { Sidebar } from '../components/Sidebar';
+import StatCard from '../components/StatCard';
+import StatusBadge from '../components/StatusBadge';
+import AgentStatus from '../components/AgentStatus';
+import BotStatus from '../components/BotStatus';
+import Sidebar from '../components/Sidebar';
 import { Menu, X, Wifi, WifiOff } from 'lucide-react';
 
 interface ActivityItem {
@@ -31,7 +31,6 @@ const mockActivities: ActivityItem[] = [
 
 export default function MissionControl() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isConnected, setIsConnected] = useState(true);
 
@@ -117,10 +116,10 @@ export default function MissionControl() {
       )}
 
       {/* Sidebar (Desktop) */}
-      <Sidebar collapsed={isSidebarCollapsed} onCollapse={setIsSidebarCollapsed} />
+      <Sidebar />
 
       {/* Main Content */}
-      <div className={`transition-all duration-300 ${isSidebarCollapsed ? 'lg:ml-16' : 'lg:ml-64'} lg:pt-0 pt-14`}>
+      <div className="lg:ml-64 lg:pt-0 pt-14">
         {/* Header */}
         <header className="h-16 bg-slate-900/80 backdrop-blur border-b border-slate-800 flex items-center justify-between px-6 sticky top-0 z-40">
           <div className="flex items-center gap-4">
@@ -157,26 +156,30 @@ export default function MissionControl() {
             <StatCard
               title="Portfolio Value"
               value="$124,567.89"
-              change={{ value: '+$3,456.78', isPositive: true, percentage: '+2.85%' }}
-              trend="up"
+              change="+$3,456.78 (+2.85%)"
+              changeUp={true}
+              icon={Wifi}
             />
             <StatCard
               title="24h P&L"
               value="+$1,234.56"
-              change={{ value: '+$456.78', isPositive: true, percentage: '+0.58%' }}
-              trend="up"
+              change="+$456.78 (+0.58%)"
+              changeUp={true}
+              icon={Wifi}
             />
             <StatCard
               title="Open Positions"
               value="12"
-              change={{ value: '+2 today', isPositive: true, percentage: '' }}
-              trend="neutral"
+              change="+2 today"
+              changeUp={true}
+              icon={Wifi}
             />
             <StatCard
               title="Win Rate"
               value="67.8%"
-              change={{ value: '+1.2%', isPositive: true, percentage: 'vs last week' }}
-              trend="up"
+              change="+1.2% vs last week"
+              changeUp={true}
+              icon={Wifi}
             />
           </div>
 
