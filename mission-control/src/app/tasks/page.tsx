@@ -15,10 +15,10 @@ interface Task {
 }
 
 const AGENTS = [
-  { id: 'pixel', name: 'Pixel 🎨', role: 'UI/UX Engineer', color: 'bg-pink-500' },
-  { id: 'ghost', name: 'Ghost 👻', role: 'Backend Engineer', color: 'bg-slate-500' },
-  { id: 'oracle', name: 'Oracle 🔮', role: 'Trading Analyst', color: 'bg-amber-500' },
-  { id: 'synthesis', name: 'Synthesis 🧠', role: 'Team Lead', color: 'bg-purple-500' },
+  { id: 'synthesis', name: 'Synthesis 🧠', role: 'Team Lead - Task Coordinator', color: 'bg-purple-500', accent: 'border-purple-500/50' },
+  { id: 'pixel', name: 'Pixel 🎨', role: 'UI/UX Engineer', color: 'bg-pink-500', accent: 'border-pink-500/50' },
+  { id: 'ghost', name: 'Ghost 👻', role: 'Backend Engineer', color: 'bg-slate-500', accent: 'border-slate-500/50' },
+  { id: 'oracle', name: 'Oracle 🔮', role: 'Trading Analyst', color: 'bg-amber-500', accent: 'border-amber-500/50' },
 ]
 
 const STATUS_COLORS = {
@@ -32,7 +32,7 @@ export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [loading, setLoading] = useState(true)
   const [newTask, setNewTask] = useState('')
-  const [selectedAgent, setSelectedAgent] = useState('pixel')
+  const [selectedAgent, setSelectedAgent] = useState('synthesis')
   const [showForm, setShowForm] = useState(false)
 
   useEffect(() => {
@@ -86,15 +86,17 @@ export default function TasksPage() {
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                Agent Task Queue
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                Assign Task to Synthesis
               </h1>
-              <p className="text-slate-400">Assign work to your team</p>
+              <p className="text-slate-400">
+                Tell Synthesis what you need — he'll delegate to the right specialist
+              </p>
             </div>
           </div>
           <button
             onClick={() => setShowForm(!showForm)}
-            className="flex items-center gap-2 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             New Task
@@ -104,23 +106,39 @@ export default function TasksPage() {
         {/* New Task Form */}
         {showForm && (
           <div className="bg-slate-900 rounded-xl border border-slate-800 p-6 mb-6">
-            <h2 className="text-lg font-semibold mb-4">Assign New Task</h2>
+            <div className="flex items-center gap-3 mb-4">
+            <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+              <span className="text-xl">🧠</span>
+            </div>
+            <div>
+              <h2 className="text-lg font-semibold">Assign New Task</h2>
+              <p className="text-sm text-slate-400">Synthesis will coordinate and delegate to specialists</p>
+            </div>
+          </div>
             <form onSubmit={createTask}>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm text-slate-400 mb-2">Select Agent</label>
+                  <div className="flex items-center justify-between mb-2">
+                    <label className="block text-sm text-slate-400">Select Agent</label>
+                    <span className="text-xs text-purple-400">Synthesis routes tasks to specialists</span>
+                  </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {AGENTS.map((agent) => (
                       <button
                         key={agent.id}
                         type="button"
                         onClick={() => setSelectedAgent(agent.id)}
-                        className={`p-3 rounded-lg border transition-colors text-left ${
+                        className={`p-3 rounded-lg border transition-all text-left relative ${
                           selectedAgent === agent.id
-                            ? `border-cyan-500 bg-cyan-500/10`
+                            ? `border-cyan-500 bg-cyan-500/10 ring-1 ring-cyan-500/50`
                             : 'border-slate-700 hover:border-slate-600'
-                        }`}
+                        } ${agent.id === 'synthesis' ? 'ring-1 ring-purple-500/30' : ''}`}
                       >
+                        {agent.id === 'synthesis' && (
+                          <span className="absolute -top-2 left-2 px-1.5 py-0.5 bg-purple-500 text-white text-[10px] rounded font-medium">
+                            RECOMMENDED
+                          </span>
+                        )}
                         <div className="flex items-center gap-2 mb-1">
                           <div className={`w-3 h-3 rounded-full ${agent.color}`} />
                           <span className="font-medium">{agent.name}</span>
@@ -129,6 +147,9 @@ export default function TasksPage() {
                       </button>
                     ))}
                   </div>
+                  <p className="text-xs text-slate-500 mt-2">
+                    Tip: Assign to Synthesis for general tasks — he'll delegate to the right specialist.
+                  </p>
                 </div>
 
                 <div>
@@ -238,27 +259,30 @@ export default function TasksPage() {
 
         {/* How It Works */}
         <div className="mt-8 bg-slate-900/50 rounded-xl border border-slate-800 p-6">
-          <h3 className="text-sm font-semibold text-slate-400 mb-4">HOW IT WORKS</h3>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-2xl">🧠</span>
+            <h3 className="text-sm font-semibold text-purple-400">HOW SYNTHESIS WORKS</h3>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-medium">1</div>
+              <div className="w-6 h-6 rounded bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs font-medium">1</div>
               <div>
-                <p className="text-slate-300">Create Task</p>
-                <p className="text-slate-500">Assign to Pixel, Ghost, Oracle, or Synthesis</p>
+                <p className="text-slate-300 font-medium">Talk to Synthesis</p>
+                <p className="text-slate-500">Describe what you need, he'll understand the intent</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-medium">2</div>
+              <div className="w-6 h-6 rounded bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs font-medium">2</div>
               <div>
-                <p className="text-slate-300">Agent Picks Up</p>
-                <p className="text-slate-500">Task moves to \"in-progress\" when claimed</p>
+                <p className="text-slate-300 font-medium">He Delegates</p>
+                <p className="text-slate-500">Routes to Pixel 🎨, Ghost 👻, or Oracle 🔮 as needed</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-medium">3</div>
+              <div className="w-6 h-6 rounded bg-purple-500/20 text-purple-400 flex items-center justify-center text-xs font-medium">3</div>
               <div>
-                <p className="text-slate-300">Complete or Fail</p>
-                <p className="text-slate-500">Result saved, you get notified</p>
+                <p className="text-slate-300 font-medium">You Get Results</p>
+                <p className="text-slate-500">Synthesis coordinates handoffs and reports completion</p>
               </div>
             </div>
           </div>
