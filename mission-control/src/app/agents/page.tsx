@@ -135,10 +135,10 @@ export default function AgentsPage() {
     }
   }, [])
 
-  // Initial fetch and polling
+  // Initial fetch and polling - 10s for near real-time updates
   useEffect(() => {
     fetchAgents()
-    const interval = setInterval(fetchAgents, 30000)
+    const interval = setInterval(fetchAgents, 10000)
     return () => clearInterval(interval)
   }, [fetchAgents])
 
