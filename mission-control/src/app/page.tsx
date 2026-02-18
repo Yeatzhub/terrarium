@@ -1,42 +1,92 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import StatCard from '../components/StatCard';
-import StatusBadge from '../components/StatusBadge';
-import AgentStatus from '../components/AgentStatus';
-import BotStatus from '../components/BotStatus';
-import { Wifi, WifiOff, TrendingUp, Activity, AlertCircle, Settings, XCircle, Wallet } from 'lucide-react';
+import Link from 'next/link';
+import { 
+  Wifi, 
+  WifiOff, 
+  Plus, 
+  Users, 
+  CheckCircle2, 
+  Clock, 
+  AlertCircle,
+  ChevronRight,
+  Terminal,
+  Zap,
+  TrendingUp,
+  Activity
+} from 'lucide-react';
 
-interface ActivityItem {
+interface Task {
   id: string;
-  timestamp: Date;
-  type: 'trade' | 'alert' | 'system' | 'error';
-  message: string;
-  details?: string;
+  agent: string;
+  status: 'pending' | 'in-progress' | 'completed' | 'failed';
+  description: string;
+  createdAt: string;
 }
 
-const mockActivities: ActivityItem[] = [
-  { id: '1', timestamp: new Date(Date.now() - 5 * 60000), type: 'trade', message: 'Long position opened', details: 'BTC-PERP @ $52,350' },
-  { id: '2', timestamp: new Date(Date.now() - 12 * 60000), type: 'alert', message: 'Stop loss triggered', details: 'ETH-PERP @ $3,125' },
-  { id: '3', timestamp: new Date(Date.now() - 28 * 60000), type: 'system', message: 'Agent reconnected', details: 'Trading agent active' },
-  { id: '4', timestamp: new Date(Date.now() - 45 * 60000), type: 'trade', message: 'Position closed', details: 'SOL-PERP +$234 P&L' },
-  { id: '5', timestamp: new Date(Date.now() - 62 * 60000), type: 'alert', message: 'Take profit hit', details: 'AVAX-PERP @ $28.50' },
-  { id: '6', timestamp: new Date(Date.now() - 78 * 60000), type: 'system', message: 'Portfolio rebalanced', details: 'Risk adjustment applied' },
-  { id: '7', timestamp: new Date(Date.now() - 95 * 60000), type: 'trade', message: 'Short position opened', details: 'ETH-PERP @ $3,200' },
-  { id: '8', timestamp: new Date(Date.now() - 110 * 60000), type: 'error', message: 'API rate limit hit', details: 'Retrying in 60s' },
-  { id: '9', timestamp: new Date(Date.now() - 135 * 60000), type: 'trade', message: 'Long position opened', details: 'LINK-PERP @ $15.75' },
-  { id: '10', timestamp: new Date(Date.now() - 150 * 60000), type: 'system', message: 'Daily report generated', details: 'P&L: +$1,234' },
+interface Agent {
+  id: string;
+  name: string;
+  emoji: string;
+  status: 'idle' | 'busy' | 'learning' | 'offline';
+  currentTask?: string;
+}
+
+const AGENTS = [
+  { id: 'synthesis', name: 'Synthesis', emoji: '🧠', color: 'bg-purple-500', role: 'Team Lead' },
+  { id: 'pixel', name: 'Pixel', emoji: '🎨', color: 'bg-pink-500', role: 'UI/UX' },
+  { id: 'ghost', name: 'Ghost', emoji: '👻', color: 'bg-slate-500', role: 'Backend' },
+  { id: 'oracle', name: 'Oracle', emoji: '🔮', color: 'bg-amber-500', role: 'Trading' },
 ];
 
 export default function MissionControl() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isConnected, setIsConnected] = useState(true);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [quickTask, setQuickTask] = useState('');
+  const [showQuickTask, setShowQuickTask] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    fetchTasks();
+    const interval = setInterval(fetchTasks, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const fetchTasks = async () => {
+    try {
+      const res = await fetch('/api/tasks');
+      const data = await res.json();
+      if (data.tasks) {
+        setTasks(data.tasks.slice(0, 5));
+      }
+    } catch (e) {
+      console.error('Failed to fetch tasks:', e);
+    }
+  };
+
+  const createQuickTask = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!quickTask.trim()) return;
+
+    try {
+      await fetch('/api/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agent: 'synthesis', description: quickTask }),
+      });
+      setQuickTask('');
+      setShowQuickTask(false);
+      fetchTasks();
+    } catch (e) {
+      console.error('Failed to create task:', e);
+    }
+  };
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
@@ -47,137 +97,245 @@ export default function MissionControl() {
     });
   };
 
-  const formatRelativeTime = (date: Date) => {
-    const diffMs = Date.now() - date.getTime();
-    const diffMins = Math.floor(diffMs / 60000);
-    if (diffMins < 1) return 'just now';
-    if (diffMins < 60) return `${diffMins}m ago`;
-    return `${Math.floor(diffMins / 60)}h ago`;
-  };
-
-  const getActivityIcon = (type: ActivityItem['type']) => {
-    switch (type) {
-      case 'trade': return <Wallet className="w-5 h-5" />;
-      case 'alert': return <AlertCircle className="w-5 h-5" />;
-      case 'system': return <Settings className="w-5 h-5" />;
-      case 'error': return <XCircle className="w-5 h-5" />;
-      default: return <Activity className="w-5 h-5" />;
-    }
-  };
-
-  const getActivityColor = (type: ActivityItem['type']) => {
-    switch (type) {
-      case 'trade': return 'text-emerald-400';
-      case 'alert': return 'text-amber-400';
-      case 'system': return 'text-cyan-400';
-      case 'error': return 'text-red-400';
-      default: return 'text-slate-400';
-    }
-  };
+  const pendingCount = tasks.filter(t => t.status === 'pending').length;
+  const activeCount = tasks.filter(t => t.status === 'in-progress').length;
+  const completedCount = tasks.filter(t => t.status === 'completed').length;
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
+      {/* Header */}
+      <header className="h-16 bg-slate-900/80 backdrop-blur border-b border-slate-800 flex items-center justify-between px-6 sticky top-0 z-40">
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            Mission Control
+          </h1>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-full">
+            {isConnected ? (
+              <>
+                <Wifi className="w-4 h-4 text-emerald-400" />
+                <span className="text-sm text-emerald-400">Connected</span>
+              </>
+            ) : (
+              <>
+                <WifiOff className="w-4 h-4 text-red-400" />
+                <span className="text-sm text-red-400">Disconnected</span>
+              </>
+            )}
+          </div>
+          <div className="text-sm text-slate-400 font-mono">
+            {formatTime(currentTime)}
+          </div>
+        </div>
+      </header>
+
       {/* Main Content */}
-      <div className="pt-0">
-        {/* Header */}
-        <header className="h-16 bg-slate-900/80 backdrop-blur border-b border-slate-800 flex items-center justify-between px-6 sticky top-0 z-40">
-          <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-              Mission Control
-            </h1>
-          </div>
-          <div className="flex items-center gap-4">
-            {/* Connection Status */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-full">
-              {isConnected ? (
-                <>
-                  <Wifi className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm text-emerald-400">Connected</span>
-                </>
-              ) : (
-                <>
-                  <WifiOff className="w-4 h-4 text-red-400" />
-                  <span className="text-sm text-red-400">Disconnected</span>
-                </>
-              )}
-            </div>
-            {/* Time */}
-            <div className="text-sm text-slate-400 font-mono">
-              {formatTime(currentTime)}
-            </div>
-          </div>
-        </header>
-
-        {/* Content */}
-        <main className="p-6 space-y-6">
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-            <StatCard
-              title="Portfolio Value"
-              value="$124,567.89"
-              change="+$3,456.78 (+2.85%)"
-              changeUp={true}
-              icon={Wifi}
-            />
-            <StatCard
-              title="24h P&L"
-              value="+$1,234.56"
-              change="+$456.78 (+0.58%)"
-              changeUp={true}
-              icon={Wifi}
-            />
-            <StatCard
-              title="Open Positions"
-              value="12"
-              change="+2 today"
-              changeUp={true}
-              icon={Wifi}
-            />
-            <StatCard
-              title="Win Rate"
-              value="67.8%"
-              change="+1.2% vs last week"
-              changeUp={true}
-              icon={Wifi}
-            />
+      <main className="p-6">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Welcome Section */}
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold mb-2">Welcome back</h2>
+            <p className="text-slate-400">
+              Your AI team is ready. Assign tasks to Synthesis and he'll delegate to the right specialist.
+            </p>
           </div>
 
-          {/* Status Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <BotStatus />
-            <AgentStatus />
-          </div>
-
-          {/* Activity Feed */}
-          <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
-            <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
-              <h2 className="text-lg font-semibold">Activity Feed</h2>
-              <span className="text-xs text-slate-500">Last 10 events</span>
-            </div>
-            <div className="divide-y divide-slate-800/50">
-              {mockActivities.map((activity) => (
-                <div
-                  key={activity.id}
-                  className="px-6 py-3 flex items-start gap-3 hover:bg-slate-800/30 transition-colors group"
-                >
-                  <span className={`mt-0.5 ${getActivityColor(activity.type)}`}>{getActivityIcon(activity.type)}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <p className={`text-sm font-medium ${getActivityColor(activity.type)}`}>
-                        {activity.message}
-                      </p>
-                      <span className="text-xs text-slate-500">{formatRelativeTime(activity.timestamp)}</span>
-                    </div>
-                    {activity.details && (
-                      <p className="text-xs text-slate-400 mt-0.5">{activity.details}</p>
-                    )}
+          {/* Quick Actions Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            {/* Quick Task */}
+            <div className="bg-slate-900 rounded-xl border border-slate-800 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                    <Plus className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Quick Task</h3>
+                    <p className="text-sm text-slate-400">Assign to Synthesis</p>
                   </div>
                 </div>
-              ))}
+                <button 
+                  onClick={() => setShowQuickTask(!showQuickTask)}
+                  className="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 rounded text-sm transition-colors"
+                >
+                  New
+                </button>
+              </div>
+              
+              {showQuickTask && (
+                <form onSubmit={createQuickTask} className="mt-4">
+                  <textarea
+                    value={quickTask}
+                    onChange={(e) => setQuickTask(e.target.value)}
+                    placeholder="What do you need?"
+                    className="w-full bg-slate-800 rounded-lg p-3 text-sm text-white placeholder-slate-500 h-20 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500 mb-2"
+                  />
+                  <div className="flex justify-end gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowQuickTask(false)}
+                      className="px-3 py-1 text-sm text-slate-400 hover:text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={!quickTask.trim()}
+                      className="px-3 py-1 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 rounded text-sm"
+                    >
+                      Assign
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+
+            {/* Task Stats */}
+            <div className="bg-slate-900 rounded-xl border border-slate-800 p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                  <Activity className="w-5 h-5 text-cyan-400" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Task Queue</h3>
+                  <p className="text-sm text-slate-400">Live status</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-amber-400">{pendingCount}</p>
+                  <p className="text-xs text-slate-500">Pending</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-cyan-400">{activeCount}</p>
+                  <p className="text-xs text-slate-500">Active</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl font-bold text-emerald-400">{completedCount}</p>
+                  <p className="text-xs text-slate-500">Done</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Agents Status */}
+            <Link href="/agents" className="block">
+              <div className="bg-slate-900 rounded-xl border border-slate-800 p-6 hover:border-slate-700 transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Your Team</h3>
+                    <p className="text-sm text-slate-400">4 agents ready</p>
+                  </div>
+                </div>
+                <div className="flex -space-x-2">
+                  {AGENTS.map((agent) => (
+                    <div 
+                      key={agent.id}
+                      className={`w-8 h-8 rounded-full ${agent.color} flex items-center justify-center text-sm ring-2 ring-slate-900`}
+                      title={agent.name}
+                    >
+                      {agent.emoji}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 flex items-center text-sm text-slate-400">
+                  <span>View Agents</span>
+                  <ChevronRight className="w-4 h-4 ml-1" />
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          {/* Recent Tasks */}
+          <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden mb-8">
+            <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Clock className="w-5 h-5 text-slate-400" />
+                <h2 className="text-lg font-semibold">Recent Tasks</h2>
+              </div>
+              <Link href="/agents" className="text-sm text-cyan-400 hover:text-cyan-300">
+                View All
+              </Link>
+            </div>
+            
+            {tasks.length === 0 ? (
+              <div className="p-8 text-center text-slate-500">
+                <p>No tasks yet. Use "Quick Task" to assign work.</p>
+              </div>
+            ) : (
+              <div className="divide-y divide-slate-800">
+                {tasks.map((task) => {
+                  const agent = AGENTS.find(a => a.id === task.agent) || AGENTS[0];
+                  return (
+                    <div key={task.id} className="px-6 py-3 flex items-center gap-4">
+                      <div className={`w-8 h-8 rounded-full ${agent.color} flex items-center justify-center text-sm`}>
+                        {agent.emoji}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium truncate">{task.description}</p>
+                      </div>
+                      <span className={`px-2 py-0.5 rounded text-xs ${
+                        task.status === 'completed' ? 'bg-emerald-500/10 text-emerald-400' :
+                        task.status === 'in-progress' ? 'bg-cyan-500/10 text-cyan-400' :
+                        task.status === 'failed' ? 'bg-red-500/10 text-red-400' :
+                        'bg-amber-500/10 text-amber-400'
+                      }`}>
+                        {task.status}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Quick Links Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Link href="/trading" className="block">
+              <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-slate-700 transition-colors">
+                <TrendingUp className="w-5 h-5 text-cyan-400 mb-2" />
+                <p className="font-medium">Trading</p>
+                <p className="text-xs text-slate-500">Bots & positions</p>
+              </div>
+            </Link>
+            <Link href="/hardware/gpu" className="block">
+              <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-slate-700 transition-colors">
+                <Zap className="w-5 h-5 text-cyan-400 mb-2" />
+                <p className="font-medium">GPU</p>
+                <p className="text-xs text-slate-500">P40 status</p>
+              </div>
+            </Link>
+            <Link href="/llm/status" className="block">
+              <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-slate-700 transition-colors">
+                <Terminal className="w-5 h-5 text-cyan-400 mb-2" />
+                <p className="font-medium">LLM</p>
+                <p className="text-xs text-slate-500">Models & usage</p>
+              </div>
+            </Link>
+            <Link href="/agents" className="block">
+              <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-4 hover:border-slate-700 transition-colors">
+                <CheckCircle2 className="w-5 h-5 text-cyan-400 mb-2" />
+                <p className="font-medium">Tasks</p>
+                <p className="text-xs text-slate-500">Assign & track</p>
+              </div>
+            </Link>
+          </div>
+
+          {/* Automation Status */}
+          <div className="mt-8 bg-slate-900/30 rounded-xl border border-slate-800 p-4">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <p className="text-sm text-slate-400">
+                <span className="text-slate-300 font-medium">Automation Active:</span> Agents auto-poll every 2-4 minutes
+              </p>
             </div>
           </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 }
