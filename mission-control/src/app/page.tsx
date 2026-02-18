@@ -5,8 +5,7 @@ import StatCard from '../components/StatCard';
 import StatusBadge from '../components/StatusBadge';
 import AgentStatus from '../components/AgentStatus';
 import BotStatus from '../components/BotStatus';
-import Sidebar from '../components/Sidebar';
-import { Menu, X, Wifi, WifiOff } from 'lucide-react';
+import { Wifi, WifiOff } from 'lucide-react';
 
 interface ActivityItem {
   id: string;
@@ -78,48 +77,8 @@ export default function MissionControl() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
-      {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-4 z-50">
-        <button
-          onClick={() => setIsMobileMenuOpen(true)}
-          className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
-        >
-          <Menu className="w-5 h-5" />
-        </button>
-        <span className="font-semibold">Mission Control</span>
-        <div className="w-9" />
-      </div>
-
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 bg-black/50 z-50" onClick={() => setIsMobileMenuOpen(false)}>
-          <div className="absolute top-0 left-0 bottom-0 w-64 bg-slate-900 border-r border-slate-800" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between p-4 border-b border-slate-800">
-              <span className="font-bold text-lg">Menu</span>
-              <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 hover:bg-slate-800 rounded-lg">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <nav className="p-4 space-y-1">
-              {['Dashboard', 'Agents', 'Bots', 'Trades', 'Settings'].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="block px-3 py-2 rounded-lg hover:bg-slate-800 transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
-
-      {/* Sidebar (Desktop) */}
-      <Sidebar />
-
       {/* Main Content */}
-      <div className="lg:ml-64 lg:pt-0 pt-14">
+      <div className="pt-0">
         {/* Header */}
         <header className="h-16 bg-slate-900/80 backdrop-blur border-b border-slate-800 flex items-center justify-between px-6 sticky top-0 z-40">
           <div className="flex items-center gap-4">
