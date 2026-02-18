@@ -77,41 +77,43 @@ export default function SimpleChat() {
           if (msg.type === 'event') {
             console.log('WS: Event received:', msg.event, msg.payload)
             
-            // Handle chat messages
-            if (msg.event === 'chat' && msg.payload) {
-              const content = typeof msg.payload === 'string' 
-                ? msg.payload 
-                : (msg.payload.message?.content || msg.payload.text || JSON.stringify(msg.payload))
+            // Handle agent response messages (this is how responses flow)
+            if (msg.event === 'agent' && msg.payload) {
+              const stream = msg.payload.stream
+              const data = msg.payload.data
               
-              if (content) {
-                setMessages(prev => [...prev, {
-                  id: Date.now(),
-                  role: 'assistant',
-                  content: content
-                }])
+              // Assistant response chunks
+              if (stream === 'assistant' && data?.text) {
+                // Append to last message if it's from assistant, otherwise create new
+                setMessages(prev => {
+                  const lastMsg = prev[prev.length - 1]
+                  const isDelta = data.delta && lastMsg?.role === 'assistant'
+                  
+                  if (isDelta && lastMsg) {
+                    // Append delta to existing message
+                    const updated = [...prev]
+                    updated[updated.length - 1] = {
+                      ...lastMsg,
+                      content: lastMsg.content + data.delta
+                    }
+                    return updated
+                  } else {
+                    // New assistant message
+                    return [...prev, {
+                      id: Date.now(),
+                      role: 'assistant',
+                      content: data.text
+                    }]
+                  }
+                })
               }
-            }
-            
-            // Handle agent messages
-            if (msg.event === 'agent.message' && msg.payload) {
-              const content = msg.payload.content || msg.payload.text || msg.payload.message
-              if (content) {
+              
+              // System/tool messages
+              if (stream === 'system' && data?.text) {
                 setMessages(prev => [...prev, {
                   id: Date.now(),
-                  role: 'assistant', 
-                  content: typeof content === 'string' ? content : JSON.stringify(content)
-                }])
-              }
-            }
-            
-            // Handle session messages
-            if (msg.event === 'session.message' && msg.payload?.message) {
-              const m = msg.payload.message
-              if (m.content && m.role === 'assistant') {
-                setMessages(prev => [...prev, {
-                  id: Date.now(),
-                  role: 'assistant',
-                  content: m.content
+                  role: 'system',
+                  content: data.text
                 }])
               }
             }
