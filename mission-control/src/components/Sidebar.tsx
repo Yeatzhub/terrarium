@@ -41,7 +41,7 @@ const navItems: NavItem[] = [
     id: 'hardware',
     label: 'Hardware',
     icon: '🖥️',
-    href: '#',
+    href: '/hardware/deliveries',
     subItems: [
       { label: 'GPU Status', href: '/hardware/gpu' },
       { label: 'NAS Storage', href: '/hardware/nas' },
@@ -52,18 +52,18 @@ const navItems: NavItem[] = [
     id: 'agents',
     label: 'Agents',
     icon: '🤖',
-    href: '#',
+    href: '/agents',
     subItems: [
-      { label: 'Active Agents', href: '/agents/active' },
-      { label: 'Sub-agents', href: '/agents/sub' },
-      { label: 'Logs', href: '/agents/logs' },
+      { label: 'Active Agents', href: '/agents' },
+      { label: 'Sub-agents', href: '/agents' },
+      { label: 'Logs', href: '/agents' },
     ],
   },
   {
     id: 'llm',
     label: 'LLM',
     icon: '🧠',
-    href: '#',
+    href: '/llm/status',
     subItems: [
       { label: 'Models', href: '/llm/models' },
       { label: 'Token Usage', href: '/llm/tokens' },
@@ -200,21 +200,31 @@ export default function Sidebar() {
                 {/* Main nav item */}
                 <div className="relative">
                   {hasSubItems ? (
-                    <button
-                      onClick={() => toggleItem(item.id)}
-                      className={`
-                        w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
-                        ${active 
-                          ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' 
-                          : 'text-slate-300 hover:bg-slate-800 hover:text-white'
-                        }
-                        ${isCollapsed ? 'justify-center' : ''}
-                      `}
-                    >
-                      <span className="text-xl flex-shrink-0">{item.icon}</span>
+                    <div className="flex items-center">
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMobileOpen(false)}
+                        className={`
+                          flex-1 flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
+                          ${active 
+                            ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' 
+                            : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                          }
+                          ${isCollapsed ? 'justify-center' : ''}
+                        `}
+                      >
+                        <span className="text-xl flex-shrink-0">{item.icon}</span>
+                        {!isCollapsed && (
+                          <>
+                            <span className="flex-1 text-left font-medium">{item.label}</span>
+                          </>
+                        )}
+                      </Link>
                       {!isCollapsed && (
-                        <>
-                          <span className="flex-1 text-left font-medium">{item.label}</span>
+                        <button
+                          onClick={() => toggleItem(item.id)}
+                          className="p-2 hover:bg-slate-800 rounded-lg transition-colors"
+                        >
                           <svg 
                             className={`w-4 h-4 text-slate-500 transition-transform ${expanded ? 'rotate-180' : ''}`}
                             fill="none" 
@@ -223,9 +233,9 @@ export default function Sidebar() {
                           >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
-                        </>
+                        </button>
                       )}
-                    </button>
+                    </div>
                   ) : (
                     <Link
                       href={item.href}
