@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { Server, Cloud, Cpu, Activity, CheckCircle2, XCircle2, ArrowLeft, RefreshCw, Clock, Zap } from 'lucide-react'
+import { Server, Cloud, Cpu, Activity, CheckCircle2, XCircle, ArrowLeft, RefreshCw, Clock, Zap } from 'lucide-react'
 
 interface ProviderStatus {
   id: string
@@ -87,7 +87,7 @@ export default function LlmStatusPage() {
     switch (status) {
       case 'online': return <CheckCircle2 className="w-5 h-5 text-emerald-400" />
       case 'degraded': return <Activity className="w-5 h-5 text-amber-400" />
-      default: return <XCircle2 className="w-5 h-5 text-red-400" />
+      default: return <XCircle className="w-5 h-5 text-red-400" />
     }
   }
 
