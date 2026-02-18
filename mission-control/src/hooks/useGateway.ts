@@ -47,29 +47,34 @@ export function useGateway(options: UseGatewayOptions) {
       wsRef.current = ws
 
       ws.onopen = () => {
-        console.log('[Gateway] Connected')
+        console.log('[Gateway] WebSocket opened, sending handshake...')
         
-        // Send connect handshake
+        // Send connect handshake - include auth token if provided
         const connectId = generateId()
+        const connectParams: any = {
+          minProtocol: 3,
+          maxProtocol: 3,
+          client: {
+            id: 'mission-control',
+            version: '2.0.0',
+            platform: 'web',
+            mode: 'app'
+          },
+          role: 'app',
+          locale: 'en-US',
+          userAgent: 'mission-control/2.0.0'
+        }
+        
+        // Add auth token if provided
+        if (options.token) {
+          connectParams.token = options.token
+        }
+        
         const connectReq = {
           type: 'req',
           id: connectId,
           method: 'connect',
-          params: {
-            minProtocol: 3,
-            maxProtocol: 3,
-            client: {
-              id: 'mission-control',
-              version: '2.0.0',
-              platform: 'web',
-              mode: 'operator'
-            },
-            role: 'operator',
-            scopes: ['operator.read', 'operator.write'],
-            locale: 'en-US',
-            userAgent: 'mission-control/2.0.0',
-            auth: options.token ? { token: options.token } : undefined
-          }
+          params: connectParams
         }
         
         pendingReqs.current.set(connectId, {
@@ -77,13 +82,16 @@ export function useGateway(options: UseGatewayOptions) {
             if (res.ok) {
               console.log('[Gateway] Handshake successful')
               setIsConnected(true)
+              setIsConnecting(false)
             } else {
-              setError('Authentication failed')
+              setError(res.error?.message || 'Authentication failed')
+              setIsConnecting(false)
               ws.close()
             }
           },
           reject: (err: any) => {
             setError(err?.message || 'Handshake failed')
+            setIsConnecting(false)
           }
         })
         
