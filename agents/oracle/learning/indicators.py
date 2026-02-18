@@ -16,16 +16,16 @@ def vwap(high: np.ndarray, low: np.ndarray, close: np.ndarray,
          volume: np.ndarray, period: int = 14, 
          num_std: float = 2.0) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """
-    Volume-Weighted Average Price with Standard Deviation Bands
+    Volume-Weighted Average Price with Standard Deviation Bands (Vectorized)
     
     Mathematical Formula:
     ---------------------
     Typical Price (TP) = (High + Low + Close) / 3
     
-    VWAP = Σ(TP × Volume) / Σ(Volume)
+    VWAP_i = RollingSum(TP × Volume, period)_i / RollingSum(Volume, period)_i
     
-    Variance = Σ[Volume × (TP - VWAP)²] / Σ(Volume)
-    Std Dev = √Variance
+    Variance_i = RollingSum(Volume × (TP - VWAP)², period)_i / RollingSum(Volume, period)_i
+    Std Dev_i = √Variance_i
     
     Upper Band = VWAP + (num_std × Std Dev)
     Lower Band = VWAP - (num_std × Std Dev)
@@ -50,29 +50,40 @@ def vwap(high: np.ndarray, low: np.ndarray, close: np.ndarray,
     --------
     Tuple of (vwap_line, upper_band, lower_band)
     """
-    n = len(close)
-    vwap_line = np.full(n, np.nan)
-    upper_band = np.full(n, np.nan)
-    lower_band = np.full(n, np.nan)
-    
     # Typical Price = (High + Low + Close) / 3
     typical_price = (high + low + close) / 3.0
     
-    for i in range(period - 1, n):
-        # Define window
+    # Cumulative sums using convolution for rolling window
+    tp_vol = typical_price * volume
+    
+    # Using cumsum with windowed approach
+    cumsum_tpvol = np.cumsum(tp_vol)
+    cumsum_vol = np.cumsum(volume)
+    
+    # Rolling sums: subtract shifted cumsum from current cumsum
+    tpvol_sum = np.empty_like(tp_vol)
+    tpvol_sum[:period] = cumsum_tpvol[:period]
+    tpvol_sum[period:] = cumsum_tpvol[period:] - cumsum_tpvol[:-period]
+    
+    vol_sum = np.empty_like(volume)
+    vol_sum[:period] = cumsum_vol[:period]
+    vol_sum[period:] = cumsum_vol[period:] - cumsum_vol[:-period]
+    
+    # VWAP calculation
+    vwap_line = np.full_like(close, np.nan)
+    vwap_line[period-1:] = tpvol_sum[period-1:] / vol_sum[period-1:]
+    
+    # Standard deviation bands using vectorized approach
+    upper_band = np.full_like(close, np.nan)
+    lower_band = np.full_like(close, np.nan)
+    
+    for i in range(period - 1, len(close)):
         tp_window = typical_price[i - period + 1:i + 1]
         vol_window = volume[i - period + 1:i + 1]
-        
-        # VWAP = Σ(TP × Volume) / Σ(Volume)
-        vol_sum = np.sum(vol_window)
-        if vol_sum > 0:
-            vwap_line[i] = np.sum(tp_window * vol_window) / vol_sum
-            
-            # Variance (volume-weighted)
-            variance = np.sum(vol_window * (tp_window - vwap_line[i]) ** 2) / vol_sum
-            std_dev = np.sqrt(variance)
-            
-            # Bands
+        vol_s = vol_sum[i]
+        if vol_s > 0:
+            variance = np.sum(vol_window * (tp_window - vwap_line[i]) ** 2) / vol_s
+            std_dev = np.sqrt(max(0, variance))
             upper_band[i] = vwap_line[i] + (num_std * std_dev)
             lower_band[i] = vwap_line[i] - (num_std * std_dev)
     
@@ -144,7 +155,7 @@ def vwap_cumulative(high: np.ndarray, low: np.ndarray, close: np.ndarray,
 def rvol(volume: np.ndarray, short_period: int = 5, 
          long_period: int = 20, min_bars: int = 5) -> np.ndarray:
     """
-    Relative Volume - Current volume vs Historical Average
+    Relative Volume - Current volume vs Historical Average (Vectorized)
     
     Mathematical Formula:
     ---------------------
@@ -174,22 +185,30 @@ def rvol(volume: np.ndarray, short_period: int = 5,
     np.ndarray - RVOL values (ratio format)
     """
     n = len(volume)
+    
+    # Calculate cumulative sums for efficient rolling mean
+    cumsum = np.cumsum(volume)
+    
+    # Short-term SMA using cumsum with window subtraction
+    # Rolling sum = cumsum[i] - cumsum[i-period]
+    short_sum = np.empty(n)
+    short_sum[:short_period] = cumsum[:short_period]
+    short_sum[short_period:] = cumsum[short_period:] - cumsum[:-short_period]
+    short_sma = short_sum / short_period
+    
+    # Long-term SMA
+    long_sum = np.empty(n)
+    long_sum[:long_period] = cumsum[:long_period]
+    long_sum[long_period:] = cumsum[long_period:] - cumsum[:-long_period]
+    long_sma = long_sum / long_period
+    
+    # RVOL calculation - vectorized
     rvol = np.full(n, np.nan)
+    valid_mask = long_sma > 0
+    rvol[valid_mask] = short_sma[valid_mask] / long_sma[valid_mask]
     
-    # Short-term average (current)
-    short_sma = np.full(n, np.nan)
-    for i in range(short_period - 1, n):
-        short_sma[i] = np.mean(volume[i - short_period + 1:i + 1])
-    
-    # Long-term average (historical baseline)
-    long_sma = np.full(n, np.nan)
-    for i in range(long_period - 1, n):
-        long_sma[i] = np.mean(volume[i - long_period + 1:i + 1])
-    
-    # RVOL calculation
-    for i in range(long_period - 1, n):
-        if long_sma[i] > 0:
-            rvol[i] = short_sma[i] / long_sma[i]
+    # Mask first (long_period - 1) values as NaN
+    rvol[:long_period-1] = np.nan
     
     return rvol
 
