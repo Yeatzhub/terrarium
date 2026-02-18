@@ -1,0 +1,195 @@
+'use client'
+
+import { useState, useEffect, useRef, useCallback } from 'react'
+
+interface GatewayMessage {
+  type: 'req' | 'res' | 'event'
+  id?: string
+  method?: string
+  params?: any
+  ok?: boolean
+  payload?: any
+  error?: any
+  event?: string
+}
+
+interface UseGatewayOptions {
+  url: string
+  token?: string
+  autoReconnect?: boolean
+  reconnectInterval?: number
+}
+
+export function useGateway(options: UseGatewayOptions) {
+  const [isConnected, setIsConnected] = useState(false)
+  const [isConnecting, setIsConnecting] = useState(false)
+  const [lastMessage, setLastMessage] = useState<GatewayMessage | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  
+  const wsRef = useRef<WebSocket | null>(null)
+  const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const reqIdCounter = useRef(0)
+  const pendingReqs = useRef<Map<string, { resolve: Function; reject: Function }>>(new Map())
+
+  const generateId = () => {
+    reqIdCounter.current += 1
+    return `req_${Date.now()}_${reqIdCounter.current}`
+  }
+
+  const connect = useCallback(() => {
+    if (wsRef.current?.readyState === WebSocket.OPEN || isConnecting) return
+    
+    setIsConnecting(true)
+    setError(null)
+
+    try {
+      const ws = new WebSocket(options.url)
+      wsRef.current = ws
+
+      ws.onopen = () => {
+        console.log('[Gateway] Connected')
+        
+        // Send connect handshake
+        const connectId = generateId()
+        const connectReq = {
+          type: 'req',
+          id: connectId,
+          method: 'connect',
+          params: {
+            minProtocol: 3,
+            maxProtocol: 3,
+            client: {
+              id: 'mission-control',
+              version: '2.0.0',
+              platform: 'web',
+              mode: 'operator'
+            },
+            role: 'operator',
+            scopes: ['operator.read', 'operator.write'],
+            locale: 'en-US',
+            userAgent: 'mission-control/2.0.0',
+            auth: options.token ? { token: options.token } : undefined
+          }
+        }
+        
+        pendingReqs.current.set(connectId, {
+          resolve: (res: any) => {
+            if (res.ok) {
+              console.log('[Gateway] Handshake successful')
+              setIsConnected(true)
+            } else {
+              setError('Authentication failed')
+              ws.close()
+            }
+          },
+          reject: (err: any) => {
+            setError(err?.message || 'Handshake failed')
+          }
+        })
+        
+        ws.send(JSON.stringify(connectReq))
+      }
+
+      ws.onmessage = (event) => {
+        try {
+          const msg: GatewayMessage = JSON.parse(event.data)
+          setLastMessage(msg)
+          
+          if (msg.type === 'res' && msg.id && pendingReqs.current.has(msg.id)) {
+            const { resolve, reject } = pendingReqs.current.get(msg.id)!
+            pendingReqs.current.delete(msg.id)
+            
+            if (msg.ok) {
+              resolve(msg)
+            } else {
+              reject(msg.error)
+            }
+          }
+        } catch (err) {
+          console.error('[Gateway] Failed to parse message:', err)
+        }
+      }
+
+      ws.onerror = (err) => {
+        console.error('[Gateway] WebSocket error:', err)
+        setError('Connection error')
+      }
+
+      ws.onclose = () => {
+        console.log('[Gateway] Disconnected')
+        setIsConnected(false)
+        setIsConnecting(false)
+        
+        // Clear pending requests
+        pendingReqs.current.forEach(({ reject }) => {
+          reject(new Error('Connection closed'))
+        })
+        pendingReqs.current.clear()
+        
+        // Auto-reconnect
+        if (options.autoReconnect !== false) {
+          const interval = options.reconnectInterval || 3000
+          reconnectTimeoutRef.current = setTimeout(() => {
+            console.log('[Gateway] Attempting reconnect...')
+            connect()
+          }, interval)
+        }
+      }
+    } catch (err) {
+      console.error('[Gateway] Failed to connect:', err)
+      setError('Failed to connect')
+      setIsConnecting(false)
+    }
+  }, [options.url, options.token, options.autoReconnect, options.reconnectInterval, isConnecting])
+
+  const disconnect = useCallback(() => {
+    if (reconnectTimeoutRef.current) {
+      clearTimeout(reconnectTimeoutRef.current)
+      reconnectTimeoutRef.current = null
+    }
+    if (wsRef.current) {
+      wsRef.current.close()
+      wsRef.current = null
+    }
+  }, [])
+
+  const send = useCallback((method: string, params?: any): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
+        reject(new Error('Not connected'))
+        return
+      }
+      
+      const id = generateId()
+      const req = { type: 'req', id, method, params }
+      
+      pendingReqs.current.set(id, { resolve, reject })
+      
+      // Timeout after 30 seconds
+      setTimeout(() => {
+        if (pendingReqs.current.has(id)) {
+          pendingReqs.current.delete(id)
+          reject(new Error('Request timeout'))
+        }
+      }, 30000)
+      
+      wsRef.current.send(JSON.stringify(req))
+    })
+  }, [])
+
+  // Connect on mount
+  useEffect(() => {
+    connect()
+    return () => disconnect()
+  }, [connect, disconnect])
+
+  return {
+    isConnected,
+    isConnecting,
+    lastMessage,
+    error,
+    connect,
+    disconnect,
+    send
+  }
+}
