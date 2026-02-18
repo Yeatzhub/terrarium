@@ -2,20 +2,65 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { Send, Bot, User, Trash2, Wifi, WifiOff, ArrowLeft, Settings } from 'lucide-react'
+import { Send, Bot, User, Trash2, Wifi, WifiOff, ArrowLeft, Settings, Download } from 'lucide-react'
 import { useGateway } from '@/hooks/useGateway'
 
 interface Message {
   id: string
   role: 'user' | 'assistant'
   content: string
-  timestamp: Date
+  timestamp: string
   isStreaming?: boolean
+}
+
+const STORAGE_KEY = 'openclaw_chat_history'
+const MAX_MESSAGES = 500 // Limit to prevent storage bloat
+
+function saveMessages(messages: Message[]) {
+  if (typeof window === 'undefined') return
+  try {
+    const trimmed = messages.slice(-MAX_MESSAGES)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed))
+  } catch (e) {
+    console.error('Failed to save chat history:', e)
+  }
+}
+
+function loadMessages(): Message[] {
+  if (typeof window === 'undefined') return []
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored) {
+      const parsed = JSON.parse(stored)
+      // Restore dates from strings
+      return parsed.map((m: Message) => ({
+        ...m,
+        timestamp: new Date(m.timestamp).toISOString()
+      }))
+    }
+  } catch (e) {
+    console.error('Failed to load chat history:', e)
+  }
+  return []
+}
+
+function exportChat(messages: Message[]) {
+  const data = JSON.stringify(messages, null, 2)
+  const blob = new Blob([data], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `openclaw-chat-${new Date().toISOString().split('T')[0]}.json`
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
 }
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
+  const [isLoadingHistory, setIsLoadingHistory] = useState(true)
   // Auto-detect gateway URL based on current host
   const getDefaultGatewayUrl = () => {
     if (typeof window === 'undefined') return 'ws://127.0.0.1:18789'
@@ -32,6 +77,20 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const streamingRef = useRef(false)
+
+  // Load message history on mount
+  useEffect(() => {
+    const loaded = loadMessages()
+    setMessages(loaded)
+    setIsLoadingHistory(false)
+  }, [])
+
+  // Save messages whenever they change
+  useEffect(() => {
+    if (!isLoadingHistory) {
+      saveMessages(messages)
+    }
+  }, [messages, isLoadingHistory])
 
   const { isConnected, isConnecting, lastMessage, error, send } = useGateway({
     url: gatewayUrl,
@@ -54,7 +113,7 @@ export default function ChatPage() {
           id: `agent_${Date.now()}`,
           role: 'assistant',
           content: '',
-          timestamp: new Date(),
+          timestamp: new Date().toISOString(),
           isStreaming: true
         }
         setMessages(prev => [...prev, newMessage])
@@ -104,7 +163,7 @@ export default function ChatPage() {
       id: `user_${Date.now()}`,
       role: 'user',
       content: input.trim(),
-      timestamp: new Date()
+      timestamp: new Date().toISOString()
     }
 
     setMessages(prev => [...prev, userMessage])
@@ -122,7 +181,7 @@ export default function ChatPage() {
         id: `error_${Date.now()}`,
         role: 'assistant',
         content: '❌ Failed to send. Please check connection.',
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       }])
     }
   }, [input, isConnected, send])
@@ -135,9 +194,16 @@ export default function ChatPage() {
   }
 
   const clearChat = () => {
-    if (confirm('Clear all messages?')) {
+    if (confirm('Clear all messages? This cannot be undone.')) {
       setMessages([])
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(STORAGE_KEY)
+      }
     }
+  }
+
+  const handleExport = () => {
+    exportChat(messages)
   }
 
   return (
@@ -177,6 +243,15 @@ export default function ChatPage() {
         </div>
 
         <div className="flex items-center gap-2">
+          {messages.length > 0 && (
+            <button
+              onClick={handleExport}
+              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+              title="Export chat history"
+            >
+              <Download className="w-5 h-5" />
+            </button>
+          )}
           <button
             onClick={() => setShowSettings(!showSettings)}
             className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
@@ -296,7 +371,7 @@ export default function ChatPage() {
                   message.role === 'user' ? 'text-blue-200' : 'text-slate-500'
                 }`}
               >
-                {message.timestamp.toLocaleTimeString('en-US', {
+                {new Date(message.timestamp).toLocaleTimeString('en-US', {
                   hour: '2-digit',
                   minute: '2-digit'
                 })}
