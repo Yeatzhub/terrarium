@@ -80,6 +80,7 @@ export default function Dashboard() {
   // Quick actions - mobile-friendly oversized buttons
   const quickActions = [
     { href: '/trading', icon: '📈', label: 'Trading', color: 'bg-purple-600', desc: 'View P&L' },
+    { href: '/agents', icon: '👥', label: 'Agents', color: 'bg-indigo-600', desc: 'Team Status' },
     { href: '/notes', icon: '📝', label: 'Notes', color: 'bg-slate-700', desc: 'Quick jot' },
     { href: 'http://127.0.0.1:18789', icon: '🤖', label: 'OpenClaw', color: 'bg-blue-600', desc: 'Chat AI', external: true },
     { href: 'https://www.kraken.com/u/trade', icon: '⚡', label: 'Kraken', color: 'bg-orange-600', desc: 'Trade now', external: true },
