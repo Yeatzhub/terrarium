@@ -28,7 +28,8 @@ import {
   Target,
   FileText,
   Plus,
-  ArrowLeft
+  ArrowLeft,
+  Inbox
 } from 'lucide-react'
 
 interface Agent {
@@ -67,6 +68,19 @@ interface Task {
   createdAt: string
   startedAt?: string
   completedAt?: string
+}
+
+interface ActionItem {
+  id: string
+  title: string
+  description: string
+  source: string
+  sourceFile: string
+  priority: 'high' | 'medium' | 'low'
+  category: string
+  createdAt: string
+  status: 'pending' | 'in-progress' | 'completed' | 'archived'
+  tags: string[]
 }
 
 // Agent metadata for display
@@ -168,6 +182,10 @@ export default function AgentsPage() {
   const [selectedAgent, setSelectedAgent] = useState('synthesis')
   const [showTaskForm, setShowTaskForm] = useState(false)
 
+  // Action items state
+  const [actionItems, setActionItems] = useState<ActionItem[]>([])
+  const [actionItemsLoading, setActionItemsLoading] = useState(true)
+
   const fetchAgents = useCallback(async () => {
     try {
       setIsLoading(true)
@@ -233,10 +251,23 @@ export default function AgentsPage() {
     }
   }, [])
 
+  const fetchActionItems = useCallback(async () => {
+    try {
+      const res = await fetch('/api/action-items')
+      const data = await res.json()
+      if (data.actionItems) {
+        setActionItems(data.actionItems.filter((i: ActionItem) => i.status === 'pending' || i.status === 'in-progress'))
+      }
+    } finally {
+      setActionItemsLoading(false)
+    }
+  }, [])
+
   useEffect(() => {
     fetchAgents()
     fetchTasks()
     fetchPendingApprovals()
+    fetchActionItems()
     
     const interval = setInterval(() => {
       fetchTasks()
@@ -244,7 +275,7 @@ export default function AgentsPage() {
     }, 5000)
     
     return () => clearInterval(interval)
-  }, [fetchAgents, fetchTasks, fetchPendingApprovals])
+  }, [fetchAgents, fetchTasks, fetchPendingApprovals, fetchActionItems])
 
   const handleApproval = async (approvalId: string, action: 'approve' | 'reject') => {
     setIsProcessingApproval(true)
@@ -622,6 +653,48 @@ export default function AgentsPage() {
                   </div>
                 )
               })}
+            </div>
+          )}
+        </div>
+
+        {/* Action Queue */}
+        <div className="mt-8 bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+          <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-lg">✅</span>
+              <h2 className="text-lg font-semibold">Action Queue</h2>
+              {actionItemsLoading && <RefreshCw className="w-4 h-4 animate-spin text-slate-400" />}
+            </div>
+            <span className="text-sm text-slate-500">{actionItems.length} pending</span>
+          </div>
+
+          {actionItems.length === 0 ? (
+            <div className="p-8 text-center text-slate-500">
+              <Inbox className="w-8 h-8 mx-auto mb-2 text-slate-600" />
+              <p>No action items. Agents will add suggestions here.</p>
+            </div>
+          ) : (
+            <div className="divide-y divide-slate-800">
+              {actionItems.slice(0, 5).map((item) => (
+                <div key={item.id} className="px-6 py-4 hover:bg-slate-800/50 transition-colors">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className={`px-2 py-0.5 rounded text-xs ${
+                          item.priority === 'high' ? 'bg-red-500/10 text-red-400 border border-red-500/30' :
+                          item.priority === 'medium' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30' :
+                          'bg-slate-700 text-slate-400'
+                        }`}>
+                          {item.priority}
+                        </span>
+                        <span className="text-xs text-slate-500 capitalize">{item.source}</span>
+                      </div>
+                      <h3 className="font-medium text-sm mb-1">{item.title}</h3>
+                      <p className="text-slate-400 text-sm truncate">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
