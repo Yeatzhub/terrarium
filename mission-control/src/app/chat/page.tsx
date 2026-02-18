@@ -16,7 +16,18 @@ interface Message {
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
-  const [gatewayUrl, setGatewayUrl] = useState('ws://127.0.0.1:18789')
+  // Auto-detect gateway URL based on current host
+  const getDefaultGatewayUrl = () => {
+    if (typeof window === 'undefined') return 'ws://127.0.0.1:18789'
+    const host = window.location.hostname
+    // If accessing via Tailscale, use the same host for gateway
+    if (host.includes('100.') || (host !== 'localhost' && host !== '127.0.0.1')) {
+      return `ws://${host}:18789`
+    }
+    return 'ws://127.0.0.1:18789'
+  }
+  const [gatewayUrl, setGatewayUrl] = useState(getDefaultGatewayUrl())
+  const [authToken, setAuthToken] = useState('')
   const [showSettings, setShowSettings] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -24,6 +35,7 @@ export default function ChatPage() {
 
   const { isConnected, isConnecting, lastMessage, error, send } = useGateway({
     url: gatewayUrl,
+    token: authToken || undefined,
     autoReconnect: true,
     reconnectInterval: 3000
   })
@@ -182,9 +194,9 @@ export default function ChatPage() {
 
       {/* Settings Panel */}
       {showSettings && (
-        <div className="px-4 py-3 border-b border-slate-800 bg-slate-800/50">
+        <div className="px-4 py-3 border-b border-slate-800 bg-slate-800/50 space-y-3">
           <div className="flex items-center gap-2">
-            <span className="text-sm text-slate-400">Gateway:</span>
+            <span className="text-sm text-slate-400 w-16">Gateway:</span>
             <input
               type="text"
               value={gatewayUrl}
@@ -193,8 +205,18 @@ export default function ChatPage() {
               placeholder="ws://127.0.0.1:18789"
             />
           </div>
-          <p className="text-xs text-slate-500 mt-2">
-            Change to your Gateway WebSocket URL. Default: ws://127.0.0.1:18789
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-slate-400 w-16">Token:</span>
+            <input
+              type="password"
+              value={authToken}
+              onChange={(e) => setAuthToken(e.target.value)}
+              className="flex-1 bg-slate-900 border border-slate-700 rounded px-2 py-1 text-sm text-white"
+              placeholder="Optional auth token"
+            />
+          </div>
+          <p className="text-xs text-slate-500">
+            Gateway URL auto-detected. Token required for external connections.
           </p>
         </div>
       )}
