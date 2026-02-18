@@ -170,7 +170,7 @@ export default function TradingPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">
               Trading Dashboard
             </h1>
             <p className="text-slate-400 mt-1">CEX and DEX trading bots overview</p>
@@ -203,7 +203,7 @@ export default function TradingPage() {
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+              <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mx-auto mb-4"></div>
               <p className="text-slate-400">Loading bot data...</p>
             </div>
           ) : (
@@ -345,7 +345,7 @@ function StatCard({ label, value, change, color, positive }: {
   positive?: boolean
 }) {
   const colors: Record<string, string> = {
-    blue: 'border-blue-500/30 bg-blue-500/10',
+    blue: 'border-cyan-500/30 bg-cyan-500/10',
     green: 'border-green-500/30 bg-green-500/10',
     red: 'border-red-500/30 bg-red-500/10',
     purple: 'border-purple-500/30 bg-purple-500/10',

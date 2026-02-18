@@ -127,7 +127,7 @@ export default function ActionItemsPage() {
     switch (priority) {
       case 'high': return 'text-red-400 bg-red-500/20 border-red-500/30'
       case 'medium': return 'text-amber-400 bg-amber-500/20 border-amber-500/30'
-      case 'low': return 'text-blue-400 bg-blue-500/20 border-blue-500/30'
+      case 'low': return 'text-cyan-400 bg-cyan-500/20 border-cyan-500/30'
       default: return 'text-slate-400 bg-slate-500/20 border-slate-500/30'
     }
   }
@@ -275,7 +275,7 @@ export default function ActionItemsPage() {
                             <Link 
                               href={`#`}
                               onClick={() => window.open(`/${item.sourceFile}`, '_blank')}
-                              className="px-2 py-0.5 bg-slate-800 text-blue-400 hover:text-blue-300 rounded text-xs flex items-center gap-1"
+                              className="px-2 py-0.5 bg-slate-800 text-cyan-400 hover:text-blue-300 rounded text-xs flex items-center gap-1"
                             >
                               📄 Source
                             </Link>

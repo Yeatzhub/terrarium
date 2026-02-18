@@ -129,7 +129,7 @@ export default function LlmStatusPage() {
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
                   {provider.type === 'local' ? (
-                    <Server className="w-6 h-6 text-blue-400" />
+                    <Server className="w-6 h-6 text-cyan-400" />
                   ) : (
                     <Cloud className="w-6 h-6 text-purple-400" />
                   )}

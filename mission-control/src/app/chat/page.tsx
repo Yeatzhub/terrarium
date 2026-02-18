@@ -214,7 +214,7 @@ export default function ChatPage() {
             <ArrowLeft className="w-5 h-5" />
           </Link>
           
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full flex items-center justify-center">
             <Bot className="w-6 h-6 text-white" />
           </div>
           
@@ -311,7 +311,7 @@ export default function ChatPage() {
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-medium"
+            className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg text-white font-medium"
           >
             Reconnect
           </button>
@@ -338,7 +338,7 @@ export default function ChatPage() {
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                 message.role === 'user'
-                  ? 'bg-blue-600'
+                  ? 'bg-cyan-600'
                   : 'bg-gradient-to-br from-purple-500 to-pink-500'
               }`}
             >
@@ -352,7 +352,7 @@ export default function ChatPage() {
             <div
               className={`max-w-[85%] md:max-w-[75%] rounded-2xl px-4 py-3 ${
                 message.role === 'user'
-                  ? 'bg-blue-600 text-white rounded-br-md'
+                  ? 'bg-cyan-600 text-white rounded-br-md'
                   : 'bg-slate-800 text-slate-100 rounded-bl-md border border-slate-700'
               }`}
             >
@@ -390,13 +390,13 @@ export default function ChatPage() {
             placeholder={isConnected ? "Message OpenClaw..." : "Waiting for connection..."}
             disabled={!isConnected || streamingRef.current}
             rows={1}
-            className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 pr-20 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 resize-none min-h-[48px] max-h-32 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 pr-20 text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 resize-none min-h-[48px] max-h-32 disabled:opacity-50 disabled:cursor-not-allowed"
           />
           
           <button
             onClick={handleSend}
             disabled={!input.trim() || !isConnected || streamingRef.current}
-            className="p-3 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:cursor-not-allowed rounded-xl transition-colors"
+            className="p-3 bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-700 disabled:cursor-not-allowed rounded-xl transition-colors"
           >
             <Send className="w-5 h-5 text-white" />
           </button>

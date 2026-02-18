@@ -88,9 +88,9 @@ export default function LlmModelsPage() {
         {/* Local Models */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <Server className="w-5 h-5 text-blue-400" />
+            <Server className="w-5 h-5 text-cyan-400" />
             <h2 className="text-xl font-semibold">P40 Local (Free)</h2>
-            <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 rounded text-xs">{localModels.filter(m => m.status === 'available').length} available</span>
+            <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-400 rounded text-xs">{localModels.filter(m => m.status === 'available').length} available</span>
           </div>
 
           <div className="grid gap-4">
@@ -98,8 +98,8 @@ export default function LlmModelsPage() {
               <div key={model.id} className="bg-slate-900 rounded-xl border border-slate-800 p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                      <Cpu className="w-5 h-5 text-blue-400" />
+                    <div className="w-10 h-10 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+                      <Cpu className="w-5 h-5 text-cyan-400" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-lg">{model.name}</h3>

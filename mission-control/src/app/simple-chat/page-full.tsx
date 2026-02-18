@@ -193,7 +193,7 @@ export default function SimpleChat() {
           )}
           <button 
             onClick={connect}
-            className="px-3 py-1 bg-blue-600 rounded text-sm hover:bg-blue-700"
+            className="px-3 py-1 bg-cyan-600 rounded text-sm hover:bg-cyan-700"
           >
             Reconnect
           </button>
@@ -219,7 +219,7 @@ export default function SimpleChat() {
             key={m.id}
             className={`p-3 rounded-lg max-w-[80%] ${
               m.role === 'user' 
-                ? 'bg-blue-600 ml-auto' 
+                ? 'bg-cyan-600 ml-auto' 
                 : m.role === 'system'
                 ? 'bg-yellow-600/50 mx-auto text-center text-sm'
                 : 'bg-slate-800 mr-auto'
@@ -238,12 +238,12 @@ export default function SimpleChat() {
           onChange={(e) => setInput(e.target.value)}
           placeholder={connected ? "Type a message..." : "Connecting..."}
           disabled={!connected || sending}
-          className="flex-1 px-4 py-2 bg-slate-800 rounded-lg border border-slate-700 focus:border-blue-500 focus:outline-none disabled:opacity-50"
+          className="flex-1 px-4 py-2 bg-slate-800 rounded-lg border border-slate-700 focus:border-cyan-500 focus:outline-none disabled:opacity-50"
         />
         <button
           type="submit"
           disabled={!connected || !input.trim() || sending}
-          className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-4 py-2 bg-cyan-600 rounded-lg hover:bg-cyan-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
           {sending ? 'Sending...' : <Send className="w-4 h-4" />}
         </button>

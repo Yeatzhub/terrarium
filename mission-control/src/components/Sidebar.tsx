@@ -166,7 +166,7 @@ export default function Sidebar() {
           {!isCollapsed && (
             <Link href="/" className="flex items-center gap-2 text-xl font-bold">
               <span>🚀</span>
-              <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 MC
               </span>
             </Link>
@@ -209,7 +209,7 @@ export default function Sidebar() {
                         className={`
                           flex-1 flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
                           ${active 
-                            ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' 
+                            ? 'bg-cyan-600/20 text-cyan-400 border border-cyan-500/30' 
                             : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                           }
                           ${isCollapsed ? 'justify-center' : ''}
@@ -245,7 +245,7 @@ export default function Sidebar() {
                       className={`
                         flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
                         ${active 
-                          ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' 
+                          ? 'bg-cyan-600/20 text-cyan-400 border border-cyan-500/30' 
                           : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                         }
                         ${isCollapsed ? 'justify-center' : ''}
@@ -258,7 +258,7 @@ export default function Sidebar() {
 
                   {/* Active indicator dot */}
                   {active && isCollapsed && (
-                    <span className="absolute right-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-blue-400 rounded-full" />
+                    <span className="absolute right-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-cyan-400 rounded-full" />
                   )}
                 </div>
 
@@ -273,7 +273,7 @@ export default function Sidebar() {
                         className={`
                           block px-3 py-2 rounded-lg text-sm transition-colors
                           ${isSubActive(sub.href)
-                            ? 'text-blue-400 bg-blue-500/10' 
+                            ? 'text-cyan-400 bg-cyan-500/10' 
                             : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
                           }
                         `}

@@ -52,7 +52,7 @@ export default function TasksPage() {
     switch(p) {
       case 'high': return 'text-red-400 bg-red-400/20'
       case 'medium': return 'text-yellow-400 bg-yellow-400/20'
-      default: return 'text-blue-400 bg-blue-400/20'
+      default: return 'text-cyan-400 bg-cyan-400/20'
     }
   }
 
@@ -73,7 +73,7 @@ export default function TasksPage() {
         {/* Stats Summary */}
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700 text-center">
-            <p className="text-3xl font-bold text-blue-400">{activeTasks.length}</p>
+            <p className="text-3xl font-bold text-cyan-400">{activeTasks.length}</p>
             <p className="text-sm text-slate-400">Active Tasks</p>
           </div>
           <div className="bg-slate-800 rounded-lg p-4 border border-slate-700 text-center">
@@ -120,7 +120,7 @@ export default function TasksPage() {
                   </span>
                 </div>
                 <div className="col-span-3 flex gap-2">
-                  <button className="px-3 py-1 bg-blue-600 hover:bg-blue-500 rounded text-sm transition-colors">
+                  <button className="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 rounded text-sm transition-colors">
                     Edit
                   </button>
                   <button className="px-3 py-1 bg-green-600 hover:bg-green-500 rounded text-sm transition-colors">
@@ -172,7 +172,7 @@ export default function TasksPage() {
         </div>
 
         <div className="mt-6 flex gap-4">
-          <button className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors">
+          <button className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg transition-colors">
             + New Task
           </button>
           <a 

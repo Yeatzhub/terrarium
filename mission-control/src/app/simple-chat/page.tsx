@@ -92,7 +92,7 @@ export default function ChatMonitor() {
         </div>
       </header>
       
-      <div className="bg-blue-500/10 border-b border-blue-500/20 p-3 text-sm text-blue-400 flex items-center gap-2">
+      <div className="bg-cyan-500/10 border-b border-cyan-500/20 p-3 text-sm text-cyan-400 flex items-center gap-2">
         <MessageCircle className="w-4 h-4" />
         <span>Send messages via Telegram. Responses appear here in real-time.</span>
       </div>

@@ -44,7 +44,7 @@ export default function LlmTokensPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
             <div className="flex items-center gap-3 mb-2">
-              <BarChart3 className="w-5 h-5 text-blue-400" />
+              <BarChart3 className="w-5 h-5 text-cyan-400" />
               <span className="text-slate-400">Total Tokens (7 days)</span>
             </div>
             <p className="text-3xl font-bold">{totalTokens.toLocaleString()}</p>
@@ -115,7 +115,7 @@ export default function LlmTokensPage() {
 
             <div className="text-center">
               <p className="text-slate-400 mb-1">Ollama Cloud</p>
-              <p className="text-2xl font-bold text-blue-400">~$15.00</p>
+              <p className="text-2xl font-bold text-cyan-400">~$15.00</p>
               <p className="text-sm text-slate-500">~500K tokens</p>
             </div>
 

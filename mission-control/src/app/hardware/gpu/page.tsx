@@ -73,7 +73,7 @@ export default function GpuStatusPage() {
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 GPU Status
               </h1>
               <p className="text-slate-400">P40 Monitoring & Ollama Models</p>
@@ -90,7 +90,7 @@ export default function GpuStatusPage() {
 
         {loading ? (
           <div className="flex items-center justify-center h-64">
-            <RefreshCw className="w-8 h-8 animate-spin text-blue-500" />
+            <RefreshCw className="w-8 h-8 animate-spin text-cyan-500" />
           </div>
         ) : (
           <>
@@ -98,7 +98,7 @@ export default function GpuStatusPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
                 <div className="flex items-center gap-3 mb-2">
-                  <Cpu className="w-5 h-5 text-blue-400" />
+                  <Cpu className="w-5 h-5 text-cyan-400" />
                   <span className="text-slate-400">GPU Name</span>
                 </div>
                 <p className="text-xl font-bold">{gpuStats?.name || 'Tesla P40'}</p>
@@ -196,7 +196,7 @@ export default function GpuStatusPage() {
               {/* System Info */}
               <div className="bg-slate-900 rounded-xl border border-slate-800 p-6">
                 <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                  <AlertCircle className="w-5 h-5 text-blue-400" />
+                  <AlertCircle className="w-5 h-5 text-cyan-400" />
                   System Info
                 </h2>
                 <div className="space-y-4">

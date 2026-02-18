@@ -5,7 +5,7 @@ import StatCard from '../components/StatCard';
 import StatusBadge from '../components/StatusBadge';
 import AgentStatus from '../components/AgentStatus';
 import BotStatus from '../components/BotStatus';
-import { Wifi, WifiOff } from 'lucide-react';
+import { Wifi, WifiOff, TrendingUp, Activity, AlertCircle, Settings, XCircle, Wallet } from 'lucide-react';
 
 interface ActivityItem {
   id: string;
@@ -57,11 +57,11 @@ export default function MissionControl() {
 
   const getActivityIcon = (type: ActivityItem['type']) => {
     switch (type) {
-      case 'trade': return '💰';
-      case 'alert': return '🔔';
-      case 'system': return '⚙️';
-      case 'error': return '❌';
-      default: return '📋';
+      case 'trade': return <Wallet className="w-5 h-5" />;
+      case 'alert': return <AlertCircle className="w-5 h-5" />;
+      case 'system': return <Settings className="w-5 h-5" />;
+      case 'error': return <XCircle className="w-5 h-5" />;
+      default: return <Activity className="w-5 h-5" />;
     }
   };
 
@@ -69,7 +69,7 @@ export default function MissionControl() {
     switch (type) {
       case 'trade': return 'text-emerald-400';
       case 'alert': return 'text-amber-400';
-      case 'system': return 'text-blue-400';
+      case 'system': return 'text-cyan-400';
       case 'error': return 'text-red-400';
       default: return 'text-slate-400';
     }
@@ -82,7 +82,7 @@ export default function MissionControl() {
         {/* Header */}
         <header className="h-16 bg-slate-900/80 backdrop-blur border-b border-slate-800 flex items-center justify-between px-6 sticky top-0 z-40">
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Mission Control
             </h1>
           </div>
@@ -160,7 +160,7 @@ export default function MissionControl() {
                   key={activity.id}
                   className="px-6 py-3 flex items-start gap-3 hover:bg-slate-800/30 transition-colors group"
                 >
-                  <span className="text-lg mt-0.5">{getActivityIcon(activity.type)}</span>
+                  <span className={`mt-0.5 ${getActivityColor(activity.type)}`}>{getActivityIcon(activity.type)}</span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <p className={`text-sm font-medium ${getActivityColor(activity.type)}`}>

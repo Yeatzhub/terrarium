@@ -116,7 +116,7 @@ export default function HardwareDeliveries() {
                     href={`https://tools.usps.com/go/TrackConfirmAction?tLabels=${item.tracking}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors text-sm font-medium"
+                    className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg transition-colors text-sm font-medium"
                   >
                     Track Package →
                   </a>

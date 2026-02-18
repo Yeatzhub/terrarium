@@ -48,7 +48,7 @@ export default function MobileNav() {
                   key={item.label}
                   onClick={() => setShowMore(!showMore)}
                   className={`flex flex-col items-center justify-center flex-1 h-full transition-colors ${
-                    showMore ? 'text-blue-400' : 'text-slate-400'
+                    showMore ? 'text-cyan-400' : 'text-slate-400'
                   }`}
                 >
                   <span className="text-xl mb-0.5">{item.icon}</span>
@@ -63,7 +63,7 @@ export default function MobileNav() {
                 href={item.href}
                 className={`flex flex-col items-center justify-center flex-1 h-full transition-colors ${
                   active 
-                    ? 'text-blue-400' 
+                    ? 'text-cyan-400' 
                     : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
@@ -77,7 +77,7 @@ export default function MobileNav() {
                 </span>
                 <span className="text-[10px] font-medium">{item.label}</span>
                 {active && (
-                  <span className="absolute bottom-0 w-12 h-0.5 bg-blue-400 rounded-t-full" />
+                  <span className="absolute bottom-0 w-12 h-0.5 bg-cyan-400 rounded-t-full" />
                 )}
               </Link>
             )
@@ -108,7 +108,7 @@ export default function MobileNav() {
                     onClick={() => setShowMore(false)}
                     className={`flex flex-col items-center p-4 rounded-xl transition-colors ${
                       isActive(item.href)
-                        ? 'bg-blue-600/20 text-blue-400'
+                        ? 'bg-cyan-600/20 text-cyan-400'
                         : 'hover:bg-slate-700 text-slate-300'
                     }`}
                   >

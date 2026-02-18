@@ -172,7 +172,7 @@ export default function AgentsPage() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'busy': return 'bg-amber-500'
-      case 'learning': return 'bg-blue-500'
+      case 'learning': return 'bg-cyan-500'
       case 'idle': return 'bg-emerald-500'
       case 'offline': return 'bg-slate-500'
       default: return 'bg-slate-500'
@@ -182,7 +182,7 @@ export default function AgentsPage() {
   const getStatusBg = (status: string) => {
     switch (status) {
       case 'busy': return 'bg-amber-500/10 border-amber-500/30'
-      case 'learning': return 'bg-blue-500/10 border-blue-500/30'
+      case 'learning': return 'bg-cyan-500/10 border-cyan-500/30'
       case 'idle': return 'bg-emerald-500/10 border-emerald-500/30'
       case 'offline': return 'bg-slate-500/10 border-slate-500/30'
       default: return 'bg-slate-500/10 border-slate-500/30'
@@ -193,7 +193,7 @@ export default function AgentsPage() {
     switch (priority) {
       case 'high': return 'text-red-400 bg-red-500/10 border-red-500/30'
       case 'medium': return 'text-amber-400 bg-amber-500/10 border-amber-500/30'
-      case 'low': return 'text-blue-400 bg-blue-500/10 border-blue-500/30'
+      case 'low': return 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30'
       default: return 'text-slate-400 bg-slate-500/10 border-slate-500/30'
     }
   }
@@ -233,7 +233,7 @@ export default function AgentsPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
             </Link>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
               Agent Control Center
             </h1>
           </div>
@@ -309,7 +309,7 @@ export default function AgentsPage() {
           {[
             { label: 'Active', value: agents.filter(a => a.status !== 'offline').length, icon: Zap, color: 'text-emerald-400' },
             { label: 'Busy', value: agents.filter(a => a.status === 'busy').length, icon: Activity, color: 'text-amber-400' },
-            { label: 'Learning', value: agents.filter(a => a.status === 'learning').length, icon: Brain, color: 'text-blue-400' },
+            { label: 'Learning', value: agents.filter(a => a.status === 'learning').length, icon: Brain, color: 'text-cyan-400' },
             { label: 'Idle', value: agents.filter(a => a.status === 'idle').length, icon: CheckCircle2, color: 'text-slate-400' },
           ].map((stat) => (
             <div key={stat.label} className="bg-slate-900 rounded-xl p-4 border border-slate-800">
@@ -331,7 +331,7 @@ export default function AgentsPage() {
               key={agent.id}
               className={`bg-slate-900 rounded-xl border transition-all cursor-pointer ${
                 activeAgent?.id === agent.id 
-                  ? 'border-blue-500 ring-1 ring-blue-500' 
+                  ? 'border-cyan-500 ring-1 ring-cyan-500' 
                   : `border-slate-800 hover:border-slate-700 ${getStatusBg(agent.status)}`
               }`}
               onClick={() => setActiveAgent(activeAgent?.id === agent.id ? null : agent)}
@@ -379,7 +379,7 @@ export default function AgentsPage() {
                 {agent.status === 'learning' && agent.learningProgress && agent.learningProgress > 0 && (
                   <div className="mb-4 p-3 bg-slate-800 rounded-lg">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2 text-blue-400">
+                      <div className="flex items-center gap-2 text-cyan-400">
                         <Brain className="w-4 h-4" />
                         <span className="text-sm font-medium">Learning Progress</span>
                       </div>
@@ -387,7 +387,7 @@ export default function AgentsPage() {
                     </div>
                     <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-blue-500 rounded-full transition-all"
+                        className="h-full bg-cyan-500 rounded-full transition-all"
                         style={{ width: `${Math.min(agent.learningProgress, 100)}%` }}
                       />
                     </div>
@@ -416,7 +416,7 @@ export default function AgentsPage() {
                         href={url}
                         target="_blank"
                         onClick={(e) => e.stopPropagation()}
-                        className="px-2 py-0.5 bg-slate-800 text-slate-300 hover:bg-blue-600/30 hover:text-blue-300 rounded text-xs flex items-center gap-1 transition-colors border border-slate-700 hover:border-blue-500/50"
+                        className="px-2 py-0.5 bg-slate-800 text-slate-300 hover:bg-cyan-600/30 hover:text-blue-300 rounded text-xs flex items-center gap-1 transition-colors border border-slate-700 hover:border-cyan-500/50"
                       >
                         {getSkillIcon(skill)}
                         {skill}
@@ -520,7 +520,7 @@ export default function AgentsPage() {
                     <div className="flex gap-3 pt-4 border-t border-slate-800">
                       <button 
                         onClick={(e) => openAssignModal(agent, e)}
-                        className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                        className="flex-1 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2"
                       >
                         <Target className="w-4 h-4" />
                         Assign Task
@@ -595,7 +595,7 @@ export default function AgentsPage() {
                 <input 
                   type="text" 
                   placeholder="e.g., Build Jupiter DEX bot"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
                 />
               </div>
               <div>
@@ -603,12 +603,12 @@ export default function AgentsPage() {
                 <textarea 
                   rows={3}
                   placeholder="Describe what needs to be done..."
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 resize-none"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500 resize-none"
                 />
               </div>
               <div>
                 <label className="block text-sm text-slate-400 mb-1">Priority</label>
-                <select className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-blue-500">
+                <select className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500">
                   <option value="low">Low</option>
                   <option value="medium">Medium</option>
                   <option value="high">High</option>
@@ -628,7 +628,7 @@ export default function AgentsPage() {
                   // TODO: Implement task assignment
                   setShowAssignModal(false)
                 }}
-                className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors"
+                className="flex-1 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg text-sm font-medium transition-colors"
               >
                 Assign Task
               </button>

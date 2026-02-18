@@ -197,7 +197,7 @@ export default function BotDetailPage() {
           <div className="flex items-center gap-4 mt-4">
             <span className="text-4xl">{config.icon}</span>
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 {config.name}
               </h1>
               <p className="text-slate-400 mt-1">{config.description}</p>
@@ -214,7 +214,7 @@ export default function BotDetailPage() {
 
         {loading ? (
           <div className="text-center py-20">
-            <div className="animate-spin w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full mx-auto mb-4"></div>
             <p className="text-slate-400">Loading bot data...</p>
           </div>
         ) : error ? (

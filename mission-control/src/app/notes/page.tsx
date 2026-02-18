@@ -36,12 +36,12 @@ export default function NotesPage() {
             value={newNote}
             onChange={(e) => setNewNote(e.target.value)}
             placeholder="Type a quick note..."
-            className="w-full bg-slate-700 rounded-lg p-3 text-white placeholder-slate-400 resize-none h-24 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-slate-700 rounded-lg p-3 text-white placeholder-slate-400 resize-none h-24 focus:outline-none focus:ring-2 focus:ring-cyan-500"
           />
           <div className="flex justify-end mt-3">
             <button 
               onClick={addNote}
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-colors"
+              className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 rounded-lg transition-colors"
             >
               Add Note
             </button>
