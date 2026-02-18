@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { 
   Activity, 
   Brain, 
@@ -14,7 +14,6 @@ import {
   Terminal,
   RefreshCw,
   Play,
-  Pause,
   X,
   Check,
   AlertTriangle,
@@ -24,7 +23,10 @@ import {
   Code,
   TrendingUp,
   Palette,
-  Link as LinkIcon
+  ExternalLink,
+  BookOpen,
+  Target,
+  FileText
 } from 'lucide-react'
 
 interface Agent {
@@ -55,6 +57,55 @@ interface PendingApproval {
   priority: 'high' | 'medium' | 'low'
 }
 
+// Skill to resource URL mapping
+const skillUrls: Record<string, string> = {
+  // Ghost - Coding skills
+  'Python': 'https://docs.python.org/3/',
+  'Async/await': 'https://docs.python.org/3/library/asyncio.html',
+  'WebSocket': 'https://websocket.readthedocs.io/',
+  'Trading APIs': 'https://docs.kraken.com/rest/',
+  'Database': 'https://www.sqlitetutorial.net/',
+  'Error Handling': 'https://docs.python.org/3/tutorial/errors.html',
+  'Circuit Breakers': 'https://martinfowler.com/bliki/CircuitBreaker.html',
+  'Rust': 'https://www.rust-lang.org/learn',
+  'Solana smart contracts': 'https://solana.com/developers',
+  'MEV protection': 'https://docs.jup.ag/',
+  'Jupiter SDK': 'https://docs.jup.ag/',
+  
+  // Oracle - Trading skills
+  'Technical Analysis': 'https://www.investopedia.com/technical-analysis-4689757',
+  'Backtesting': 'https://www.investopedia.com/terms/b/backtesting.asp',
+  'Risk Management': 'https://www.investopedia.com/risk-management-4689742',
+  'Indicators': 'https://www.tradingview.com/support/solutions/43000501889-technical-indicators/',
+  'Position Sizing': 'https://www.investopedia.com/terms/p/positionsizing.asp',
+  'Kelly Criterion': 'https://www.investopedia.com/articles/trading/04/091504.asp',
+  'On-chain analysis': 'https://www.glassnode.com/',
+  'Order flow': 'https://www.investopedia.com/terms/o/order-flow.asp',
+  'Machine learning for trading': 'https://scikit-learn.org/stable/',
+  'Market regimes': 'https://www.investopedia.com/market-regime-4689757',
+  
+  // Pixel - UI skills
+  'React': 'https://react.dev/',
+  'Tailwind CSS': 'https://tailwindcss.com/docs',
+  'Next.js': 'https://nextjs.org/docs',
+  'Component Design': 'https://www.componentdriven.org/',
+  'Responsive UI': 'https://web.dev/responsive-web-design-basics/',
+  'Data visualization': 'https://d3js.org/',
+  'Three.js': 'https://threejs.org/docs/',
+  'Motion design': 'https://www.framer.com/motion/',
+  'Real-time dashboards': 'https://socket.io/',
+  
+  // Synthesis - Management skills
+  'Architecture': 'https://martinfowler.com/architecture/',
+  'Coordination': 'https://en.wikipedia.org/wiki/Management',
+  'Documentation': 'https://www.writethedocs.org/',
+  'Project Management': 'https://www.pmi.org/pmbok-guide-standards',
+}
+
+function getSkillUrl(skill: string): string | null {
+  return skillUrls[skill] || null
+}
+
 export default function AgentsPage() {
   const [agents, setAgents] = useState<Agent[]>([])
   const [pendingApprovals, setPendingApprovals] = useState<PendingApproval[]>([])
@@ -62,9 +113,9 @@ export default function AgentsPage() {
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [selectedApproval, setSelectedApproval] = useState<PendingApproval | null>(null)
   const [isProcessingApproval, setIsProcessingApproval] = useState(false)
-  const router = useRouter()
+  const [showAssignModal, setShowAssignModal] = useState(false)
+  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null)
 
   // Fetch agent data
   const fetchAgents = useCallback(async () => {
@@ -87,7 +138,7 @@ export default function AgentsPage() {
   // Initial fetch and polling
   useEffect(() => {
     fetchAgents()
-    const interval = setInterval(fetchAgents, 30000) // Poll every 30s
+    const interval = setInterval(fetchAgents, 30000)
     return () => clearInterval(interval)
   }, [fetchAgents])
 
@@ -103,13 +154,19 @@ export default function AgentsPage() {
       
       if (response.ok) {
         setPendingApprovals(prev => prev.filter(a => a.id !== approvalId))
-        setSelectedApproval(null)
       }
     } catch (err) {
       console.error('Approval error:', err)
     } finally {
       setIsProcessingApproval(false)
     }
+  }
+
+  // Open assign task modal
+  const openAssignModal = (agent: Agent, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setSelectedAgent(agent)
+    setShowAssignModal(true)
   }
 
   const getStatusColor = (status: string) => {
@@ -129,16 +186,6 @@ export default function AgentsPage() {
       case 'idle': return 'bg-emerald-500/10 border-emerald-500/30'
       case 'offline': return 'bg-slate-500/10 border-slate-500/30'
       default: return 'bg-slate-500/10 border-slate-500/30'
-    }
-  }
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'busy': return <Activity className="w-4 h-4" />
-      case 'learning': return <Brain className="w-4 h-4" />
-      case 'idle': return <CheckCircle2 className="w-4 h-4" />
-      case 'offline': return <AlertCircle className="w-4 h-4" />
-      default: return <Activity className="w-4 h-4" />
     }
   }
 
@@ -178,14 +225,14 @@ export default function AgentsPage() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <button 
-              onClick={() => router.push('/')}
+            <Link 
+              href="/"
               className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-            </button>
+            </Link>
             <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               Agent Control Center
             </h1>
@@ -328,6 +375,7 @@ export default function AgentsPage() {
                   </div>
                 )}
 
+                {/* Learning Progress */}
                 {agent.status === 'learning' && agent.learningProgress && agent.learningProgress > 0 && (
                   <div className="mb-4 p-3 bg-slate-800 rounded-lg">
                     <div className="flex items-center justify-between mb-2">
@@ -358,17 +406,32 @@ export default function AgentsPage() {
                   </div>
                 </div>
 
-                {/* Quick Skills Preview */}
+                {/* Quick Skills Preview - Clickable */}
                 <div className="flex flex-wrap gap-1.5 mb-4">
-                  {agent.skills.slice(0, 4).map((skill) => (
-                    <span 
-                      key={skill}
-                      className="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-xs flex items-center gap-1"
-                    >
-                      {getSkillIcon(skill)}
-                      {skill}
-                    </span>
-                  ))}
+                  {agent.skills.slice(0, 4).map((skill) => {
+                    const url = getSkillUrl(skill)
+                    return url ? (
+                      <Link 
+                        key={skill}
+                        href={url}
+                        target="_blank"
+                        onClick={(e) => e.stopPropagation()}
+                        className="px-2 py-0.5 bg-slate-800 text-slate-300 hover:bg-blue-600/30 hover:text-blue-300 rounded text-xs flex items-center gap-1 transition-colors border border-slate-700 hover:border-blue-500/50"
+                      >
+                        {getSkillIcon(skill)}
+                        {skill}
+                        <ExternalLink className="w-2.5 h-2.5 opacity-50" />
+                      </Link>
+                    ) : (
+                      <span 
+                        key={skill}
+                        className="px-2 py-0.5 bg-slate-800 text-slate-300 rounded text-xs flex items-center gap-1"
+                      >
+                        {getSkillIcon(skill)}
+                        {skill}
+                      </span>
+                    )
+                  })}
                   {agent.skills.length > 4 && (
                     <span className="px-2 py-0.5 bg-slate-800 text-slate-500 rounded text-xs">
                       +{agent.skills.length - 4} more
@@ -381,53 +444,95 @@ export default function AgentsPage() {
                 {/* Expanded View */}
                 {activeAgent?.id === agent.id && (
                   <div className="border-t border-slate-800 pt-4 mt-4">
-                    {/* All Skills */}
+                    {/* All Skills - Clickable */}
                     <div className="mb-4">
                       <div className="flex items-center gap-2 text-emerald-400 mb-2">
                         <Terminal className="w-4 h-4" />
                         <span className="font-medium">All Skills ({agent.skills.length})</span>
+                        <span className="text-xs text-slate-500 ml-auto">Click to open docs</span>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {agent.skills.map((skill) => (
-                          <span 
-                            key={skill}
-                            className="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm flex items-center gap-1.5"
-                          >
-                            {getSkillIcon(skill)}
-                            {skill}
-                          </span>
-                        ))}
+                        {agent.skills.map((skill) => {
+                          const url = getSkillUrl(skill)
+                          return url ? (
+                            <Link
+                              key={skill}
+                              href={url}
+                              target="_blank"
+                              onClick={(e) => e.stopPropagation()}
+                              className="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 rounded-full text-sm flex items-center gap-1.5 transition-colors border border-emerald-500/30"
+                            >
+                              {getSkillIcon(skill)}
+                              {skill}
+                              <ExternalLink className="w-3 h-3 opacity-50" />
+                            </Link>
+                          ) : (
+                            <span 
+                              key={skill}
+                              className="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 rounded-full text-sm flex items-center gap-1.5"
+                            >
+                              {getSkillIcon(skill)}
+                              {skill}
+                            </span>
+                          )
+                        })}
                       </div>
                     </div>
 
-                    {/* Recommended Skills */}
+                    {/* Recommended Skills - Training suggestions */}
                     <div className="mb-4">
                       <div className="flex items-center gap-2 text-purple-400 mb-2">
                         <Sparkles className="w-4 h-4" />
                         <span className="font-medium">Recommended Skills</span>
+                        <span className="text-xs text-slate-500 ml-auto">Priority learning</span>
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        {agent.recommendedSkills.map((skill) => (
-                          <span 
-                            key={skill}
-                            className="px-3 py-1.5 bg-purple-500/20 text-purple-400 rounded-full text-sm flex items-center gap-1.5 border border-purple-500/30"
-                          >
-                            <Sparkles className="w-3 h-3" />
-                            {skill}
-                          </span>
-                        ))}
+                        {agent.recommendedSkills.map((skill) => {
+                          const url = getSkillUrl(skill)
+                          return (
+                            <div key={skill} className="group relative">
+                              {url ? (
+                                <Link
+                                  href={url}
+                                  target="_blank"
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="px-3 py-1.5 bg-purple-500/20 text-purple-400 hover:bg-purple-500/30 rounded-full text-sm flex items-center gap-1.5 border border-purple-500/30 transition-colors"
+                                >
+                                  <Sparkles className="w-3 h-3" />
+                                  {skill}
+                                  <ExternalLink className="w-3 h-3 opacity-50" />
+                                </Link>
+                              ) : (
+                                <span 
+                                  className="px-3 py-1.5 bg-purple-500/20 text-purple-400 rounded-full text-sm flex items-center gap-1.5 border border-purple-500/30"
+                                >
+                                  <Sparkles className="w-3 h-3" />
+                                  {skill}
+                                </span>
+                              )}
+                            </div>
+                          )
+                        })}
                       </div>
                     </div>
 
-                    {/* Actions */}
+                    {/* Action Buttons */}
                     <div className="flex gap-3 pt-4 border-t border-slate-800">
-                      <button className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2">
-                        <Play className="w-4 h-4" />
+                      <button 
+                        onClick={(e) => openAssignModal(agent, e)}
+                        className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2"
+                      >
+                        <Target className="w-4 h-4" />
                         Assign Task
                       </button>
-                      <button className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-medium transition-colors">
+                      <Link
+                        href={`/agents/${agent.id}/history`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-2 text-center"
+                      >
+                        <FileText className="w-4 h-4" />
                         View History
-                      </button>
+                      </Link>
                       <button 
                         onClick={(e) => {
                           e.stopPropagation()
@@ -465,6 +570,72 @@ export default function AgentsPage() {
           </button>
         </div>
       </div>
+
+      {/* Assign Task Modal */}
+      {showAssignModal && selectedAgent && (
+        <div 
+          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4"
+          onClick={() => setShowAssignModal(false)}
+        >
+          <div 
+            className="bg-slate-900 rounded-xl border border-slate-800 p-6 max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">{selectedAgent.emoji}</span>
+              <div>
+                <h3 className="text-xl font-bold">Assign Task to {selectedAgent.name}</h3>
+                <p className="text-slate-400 text-sm">{selectedAgent.role}</p>
+              </div>
+            </div>
+            
+            <div className="space-y-3 mb-6">
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Task Name</label>
+                <input 
+                  type="text" 
+                  placeholder="e.g., Build Jupiter DEX bot"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Description</label>
+                <textarea 
+                  rows={3}
+                  placeholder="Describe what needs to be done..."
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 resize-none"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-slate-400 mb-1">Priority</label>
+                <select className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-blue-500">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button 
+                onClick={() => setShowAssignModal(false)}
+                className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-medium transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={() => {
+                  // TODO: Implement task assignment
+                  setShowAssignModal(false)
+                }}
+                className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors"
+              >
+                Assign Task
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
