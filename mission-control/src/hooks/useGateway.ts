@@ -48,52 +48,63 @@ export function useGateway(options: UseGatewayOptions) {
 
       ws.onopen = () => {
         console.log('[Gateway] WebSocket opened, sending handshake...')
+        console.log('[Gateway] URL:', options.url)
         
         // Send connect handshake - include auth token if provided
         const connectId = generateId()
-        const connectParams: any = {
-          minProtocol: 3,
-          maxProtocol: 3,
-          client: {
-            id: 'mission-control',
-            version: '2.0.0',
-            platform: 'web',
-            mode: 'app'
-          },
-          role: 'app',
-          locale: 'en-US',
-          userAgent: 'mission-control/2.0.0'
-        }
-        
-        // Add auth token if provided
-        if (options.token) {
-          connectParams.token = options.token
-        }
-        
         const connectReq = {
           type: 'req',
           id: connectId,
           method: 'connect',
-          params: connectParams
+          params: {
+            minProtocol: 3,
+            maxProtocol: 3,
+            client: {
+              id: 'mission-control',
+              version: '2.0.0',
+              platform: 'web',
+              mode: 'app'
+            },
+            locale: 'en-US',
+            userAgent: 'mission-control/2.0.0',
+            token: options.token
+          }
         }
+        
+        console.log('[Gateway] Sending handshake:', JSON.stringify(connectReq))
         
         pendingReqs.current.set(connectId, {
           resolve: (res: any) => {
+            console.log('[Gateway] Handshake response:', res)
             if (res.ok) {
               console.log('[Gateway] Handshake successful')
               setIsConnected(true)
               setIsConnecting(false)
+              setError(null)
             } else {
+              console.error('[Gateway] Handshake failed:', res.error)
               setError(res.error?.message || 'Authentication failed')
               setIsConnecting(false)
               ws.close()
             }
           },
           reject: (err: any) => {
+            console.error('[Gateway] Handshake rejected:', err)
             setError(err?.message || 'Handshake failed')
             setIsConnecting(false)
           }
         })
+        
+        // Timeout handshake after 10 seconds
+        setTimeout(() => {
+          if (pendingReqs.current.has(connectId)) {
+            console.error('[Gateway] Handshake timeout')
+            pendingReqs.current.delete(connectId)
+            setError('Handshake timeout')
+            setIsConnecting(false)
+            ws.close()
+          }
+        }, 10000)
         
         ws.send(JSON.stringify(connectReq))
       }
@@ -120,11 +131,13 @@ export function useGateway(options: UseGatewayOptions) {
 
       ws.onerror = (err) => {
         console.error('[Gateway] WebSocket error:', err)
-        setError('Connection error')
+        console.error('[Gateway] Error type:', (err as any).type || 'unknown')
+        console.error('[Gateway] ReadyState at error:', ws.readyState)
+        setError('Connection error - check console for details')
       }
 
-      ws.onclose = () => {
-        console.log('[Gateway] Disconnected')
+      ws.onclose = (event) => {
+        console.log('[Gateway] Disconnected:', event.code, event.reason)
         setIsConnected(false)
         setIsConnecting(false)
         
