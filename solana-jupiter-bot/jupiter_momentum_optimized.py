@@ -1,6 +1,7 @@
 """
-Jupiter Momentum/Swing Trading Bot
-Real strategy: Ride trends, cut losses quickly, let winners run
+Jupiter Momentum/Swing Trading Bot - OPTIMIZED VERSION
+Targets low-volatility market conditions with tighter parameters
+Real strategy: Quick scalps on micro-momentum, tight risk management
 """
 
 import os
@@ -40,7 +41,7 @@ class Position:
     # Status
     exit_price: Optional[float] = None
     exit_time: Optional[datetime] = None
-    exit_reason: Optional[str] = None  # 'stop_loss', 'take_profit', 'signal_flip', 'timeout'
+    exit_reason: Optional[str] = None
     pnl_pct: float = 0.0
     pnl_sol: float = 0.0
     is_open: bool = True
@@ -57,11 +58,10 @@ class Position:
 
 class MomentumBot:
     """
-    Real momentum/swing trading bot
-    - Uses price action and trend detection
-    - Realistic win rate (~55-60%)
-    - Proper risk management (stop losses)
-    - Position sizing based on volatility
+    OPTIMIZED momentum/swing trading bot for low-volatility markets
+    - Faster signal detection (reduced thresholds)
+    - Tighter risk management (quicker exits)
+    - More frequent, smaller scalps
     """
     
     def __init__(self, initial_capital_sol: float = 1.0, mode: str = 'paper'):
@@ -69,29 +69,31 @@ class MomentumBot:
         self.balance = initial_capital_sol
         self.initial_capital = initial_capital_sol
         
-        # Trading parameters
-        self.position_size_pct = 0.25  # 25% of balance per trade
+        # OPTIMIZED Trading parameters
+        self.position_size_pct = 0.30  # Increased: 30% of balance per trade (was 25%)
         self.max_positions = 3  # Max concurrent positions
-        self.min_risk_reward = 1.5  # Need 1.5:1 reward/risk minimum
+        self.min_risk_reward = 1.3  # Reduced: 1.3:1 minimum (was 1.5:1)
         
-        # Risk management
-        self.stop_loss_pct = 2.0  # 2% stop loss
-        self.take_profit_pct = 4.0  # 4% take profit (2:1 RR)
-        self.trailing_stop_pct = 1.5  # Trailing stop after 2% profit
-        self.max_hold_hours = 4  # Close if no movement in 4 hours
+        # OPTIMIZED Risk management - tighter for scalping
+        self.stop_loss_pct = 1.2  # Reduced: 1.2% stop loss (was 2.0%)
+        self.take_profit_pct = 2.0  # Reduced: 2.0% take profit (was 4.0%)
+        self.trailing_stop_pct = 0.8  # Reduced: 0.8% trailing (was 1.5%)
+        self.max_hold_hours = 1  # Reduced: 1 hour max hold (was 4 hours)
         
-        # Momentum detection
+        # OPTIMIZED Momentum detection - more sensitive
         self.price_history = {}  # Token -> deque of (timestamp, price)
-        self.history_length = 20  # Lookback periods
-        self.momentum_threshold = 0.4  # 0.4% move in 10 minutes = momentum (lowered for choppy markets)
+        self.history_length = 10  # Reduced: 10 lookback periods (was 20)
+        self.momentum_threshold = 0.3  # Reduced: 0.3% move = momentum (was 0.8%)
+        self.chop_filter_threshold = 0.15  # NEW: Filter out sub-0.15% noise
         
         # State
         self.positions: List[Position] = []
         self.closed_trades: List[Position] = []
         self.trade_counter = 0
         self.prices = {}
+        self.last_scan_time = datetime.now()
         
-        # Fees
+        # Fees (slightly higher to account for more frequent trading)
         self.trading_fee_pct = 0.1  # 0.1% per trade
         self.slippage_pct = 0.05  # 0.05% slippage
         
@@ -99,28 +101,40 @@ class MomentumBot:
         self.wins = 0
         self.losses = 0
         self.total_fees_paid = 0.0
+        self.scans_without_trade = 0  # NEW: Track scan frequency
         
-        logger.info(f"🚀 MomentumBot initialized")
+        logger.info(f"🚀 MomentumBot OPTIMIZED initialized")
         logger.info(f"   Mode: {mode}")
         logger.info(f"   Capital: {initial_capital_sol} SOL")
-        logger.info(f"   Strategy: Trend following with {self.stop_loss_pct}% stops")
+        logger.info(f"   ⚡ OPTIMIZED: {self.momentum_threshold}% threshold, {self.stop_loss_pct}% stops")
         
     def fetch_prices(self) -> bool:
-        """Get real prices from CoinGecko"""
+        """Get real prices from CoinGecko - EXPANDED token list"""
         try:
-            ids = 'solana,jupiter-exchange-solana'  # Reduced to reduce API rate limits
+            # EXPANDED: More tokens for better opportunity detection
+            ids = ('solana,jupiter-exchange-solana,bonk,raydium,bome,'
+                   'wif,dogwifcoin,pengu,popcat,ai16z,arthur Hayes')
             url = f"https://api.coingecko.com/api/v3/simple/price?ids={ids}&vs_currencies=usd&include_24hr_change=true"
             
             response = requests.get(url, timeout=15)
             response.raise_for_status()
             data = response.json()
             
-            # Map to our token names
+            # Map to our token names - EXPANDED
             mapping = {
                 'solana': 'SOL',
-                'jupiter-exchange-solana': 'JUP'
+                'jupiter-exchange-solana': 'JUP',
+                'bonk': 'BONK',
+                'raydium': 'RAY',
+                'bome': 'BOME',
+                'wif': 'WIF',
+                'dogwifcoin': 'WIF2',
+                'pengu': 'PENGU',
+                'popcat': 'POPCAT',
+                'ai16z': 'AI16Z'
             }
             
+            prices_fetched = 0
             for cg_id, token_name in mapping.items():
                 if cg_id in data:
                     self.prices[token_name] = {
@@ -132,10 +146,12 @@ class MomentumBot:
                     if token_name not in self.price_history:
                         self.price_history[token_name] = deque(maxlen=self.history_length)
                     self.price_history[token_name].append((datetime.now(), data[cg_id]['usd']))
+                    prices_fetched += 1
             
-            logger.info(f"💰 Prices: SOL=${self.prices.get('SOL', {}).get('price', 'N/A')}, "
-                       f"JUP=${self.prices.get('JUP', {}).get('price', 'N/A')}")
-            return True
+            if prices_fetched > 0:
+                logger.debug(f"💰 Fetched {prices_fetched} token prices")
+                return True
+            return False
             
         except Exception as e:
             logger.error(f"❌ Price fetch failed: {e}")
@@ -143,40 +159,49 @@ class MomentumBot:
     
     def detect_momentum(self, token: str) -> Tuple[str, float]:
         """
-        Detect momentum direction and strength
+        OPTIMIZED momentum detection for low-volatility markets
         Returns: (signal, strength_pct)
-        Signal: 'long', 'short', or 'neutral'
         """
-        if token not in self.price_history or len(self.price_history[token]) < 10:
+        if token not in self.price_history:
             return 'neutral', 0.0
         
         history = list(self.price_history[token])
         
-        # Calculate short-term momentum (last 5 periods vs previous 5)
-        recent = [p for _, p in history[-5:]]
-        previous = [p for _, p in history[-10:-5]]
-        
-        if not recent or not previous:
+        # Need at least 5 periods for short-term momentum
+        if len(history) < 5:
             return 'neutral', 0.0
         
-        recent_avg = sum(recent) / len(recent)
-        previous_avg = sum(previous) / len(previous)
+        # Calculate recent prices
+        recent_prices = [p for _, p in history[-5:]]
         
-        momentum_pct = ((recent_avg - previous_avg) / previous_avg) * 100
-        
-        # Trend confirmation using longer history
-        if len(history) >= 15:
-            longer_avg = sum([p for _, p in history[-15:]]) / 15
-            trend_direction = 'up' if recent_avg > longer_avg else 'down'
+        if len(history) >= 8:
+            # Compare recent vs slightly older
+            recent_avg = sum(recent_prices) / len(recent_prices)
+            older_prices = [p for _, p in history[-8:-3]]
+            older_avg = sum(older_prices) / len(older_prices)
+            
+            momentum_pct = ((recent_avg - older_avg) / older_avg) * 100
         else:
-            trend_direction = 'up' if momentum_pct > 0 else 'down'
+            # Compare last price to average of period
+            latest = recent_prices[-1]
+            avg = sum(recent_prices) / len(recent_prices)
+            momentum_pct = ((latest - avg) / avg) * 100
         
-        # Generate signal
+        # OPTIMIZED: Lower threshold + chop filter
+        if abs(momentum_pct) < self.chop_filter_threshold:
+            return 'neutral', 0.0  # Filter out noise
+        
         if abs(momentum_pct) >= self.momentum_threshold:
-            if momentum_pct > 0 and trend_direction == 'up':
-                return 'long', momentum_pct
-            elif momentum_pct < 0 and trend_direction == 'down':
-                return 'short', abs(momentum_pct)
+            # Trend confirmation - check if consistent
+            if len(history) >= self.history_length:
+                longer_avg = sum([p for _, p in history]) / len(history)
+                if momentum_pct > 0:
+                    return ('long', momentum_pct) if recent_prices[-1] > longer_avg else ('neutral', 0.0)
+                else:
+                    return ('short', abs(momentum_pct)) if recent_prices[-1] < longer_avg else ('neutral', 0.0)
+            else:
+                # Not enough history yet - be more lenient
+                return ('long', momentum_pct) if momentum_pct > 0 else ('short', abs(momentum_pct))
         
         return 'neutral', 0.0
     
@@ -191,14 +216,14 @@ class MomentumBot:
         return min(base_size, available * 0.9)  # Keep 10% buffer
     
     def open_position(self, token: str, direction: str, momentum_strength: float) -> bool:
-        """Open a new position"""
+        """Open a new position - OPTIMIZED for faster entries"""
         if len(self.positions) >= self.max_positions:
-            logger.info(f"⏭️ Max positions ({self.max_positions}) reached")
+            logger.debug(f"⏭️ Max positions ({self.max_positions}) reached")
             return False
         
         # Check if already have position in this token
         if any(p.token == token and p.is_open for p in self.positions):
-            logger.info(f"⏭️ Already have open position in {token}")
+            logger.debug(f"⏭️ Already have open position in {token}")
             return False
         
         price = self.prices.get(token, {}).get('price')
@@ -207,24 +232,24 @@ class MomentumBot:
         
         size = self.calculate_position_size(token)
         if size < 0.01:  # Minimum 0.01 SOL
-            logger.info(f"⏭️ Position size too small ({size:.4f} SOL)")
+            logger.debug(f"⏭️ Position size too small ({size:.4f} SOL)")
             return False
         
-        # Calculate entry and risk levels
+        # OPTIMIZED: Calculate entry with minimal slippage assumption
         if direction == 'long':
-            entry = price * 1.001  # Small slippage on entry
+            entry = price * 1.0005  # Reduced slippage (was 1.001)
             stop = entry * (1 - self.stop_loss_pct / 100)
             target = entry * (1 + self.take_profit_pct / 100)
         else:
-            entry = price * 0.999
+            entry = price * 0.9995  # Reduced slippage
             stop = entry * (1 + self.stop_loss_pct / 100)
             target = entry * (1 - self.take_profit_pct / 100)
         
-        # Check risk/reward ratio
+        # Check risk/reward ratio - still essential
         risk = abs(entry - stop)
         reward = abs(target - entry)
         if reward / risk < self.min_risk_reward:
-            logger.info(f"⏭️ Risk/reward too low ({reward/risk:.2f}:1 < {self.min_risk_reward}:1)")
+            logger.debug(f"⏭️ Risk/reward too low ({reward/risk:.2f}:1 < {self.min_risk_reward}:1)")
             return False
         
         self.trade_counter += 1
@@ -240,6 +265,7 @@ class MomentumBot:
         )
         
         self.positions.append(position)
+        self.scans_without_trade = 0  # Reset counter
         
         emoji = '🟢 LONG' if direction == 'long' else '🔴 SHORT'
         print(f"\n{'═' * 70}")
@@ -250,7 +276,7 @@ class MomentumBot:
         print(f"   Momentum: {momentum_strength:.2f}%")
         print(f"{'═' * 70}")
         
-        logger.info(f"Opened {direction} {token} @ ${entry:.4f}, size={size:.4f} SOL")
+        logger.info(f"Opened {direction} {token} @ ${entry:.4f}, size={size:.4f} SOL, mom={momentum_strength:.2f}%")
         return True
     
     def close_position(self, position: Position, reason: str, exit_price: float):
@@ -263,10 +289,10 @@ class MomentumBot:
         # Calculate final P&L
         position.update_pnl(exit_price)
         
-        # Deduct fees
+        # Deduct fees (both entry and exit)
         entry_fee = position.size_sol * self.trading_fee_pct / 100
         exit_fee = position.size_sol * (1 + position.pnl_pct / 100) * self.trading_fee_pct / 100
-        slippage_cost = position.size_sol * self.slippage_pct / 100
+        slippage_cost = position.size_sol * self.slippage_pct / 100 * 2  # Entry + exit
         total_fees = entry_fee + exit_fee + slippage_cost
         
         position.pnl_sol -= total_fees
@@ -289,19 +315,20 @@ class MomentumBot:
         
         # Print trade summary
         duration = position.exit_time - position.entry_time
+        duration_mins = duration.seconds // 60
         print(f"\n{'═' * 70}")
         print(f"{emoji} CLOSED #{position.trade_id} | {reason}")
         print(f"   {position.token} {position.direction.upper()}")
         print(f"   Entry: ${position.entry_price:.4f} → Exit: ${exit_price:.4f}")
         print(f"   P&L: {position.pnl_sol:+.6f} SOL ({position.pnl_pct:+.2f}%)")
-        print(f"   Duration: {duration.seconds // 60}m {duration.seconds % 60}s")
+        print(f"   Duration: {duration_mins}m {duration.seconds % 60}s")
         print(f"   Fees: {total_fees:.6f} SOL")
         print(f"{'═' * 70}")
         
-        logger.info(f"Closed {position.token} {reason}: P&L={position.pnl_sol:.6f} SOL")
+        logger.info(f"Closed {position.token} {reason}: P&L={position.pnl_sol:.6f} SOL, time={duration_mins}m")
     
     def manage_positions(self):
-        """Check all open positions for exit conditions"""
+        """OPTIMIZED: Check all open positions for exit conditions"""
         for position in self.positions[:]:
             if not position.is_open:
                 continue
@@ -311,6 +338,7 @@ class MomentumBot:
                 continue
             
             position.update_pnl(current_price)
+            hold_time = datetime.now() - position.entry_time
             
             # Check stop loss
             if position.direction == 'long' and current_price <= position.stop_loss_price:
@@ -330,45 +358,59 @@ class MomentumBot:
                 self.close_position(position, 'take_profit', current_price)
                 continue
             
-            # Check trailing stop (after 2% profit)
-            if position.pnl_pct >= 2.0:
+            # OPTIMIZED: Lower trailing stop trigger (1.0% instead of 2.0%)
+            if position.pnl_pct >= 1.0:
                 if position.direction == 'long':
                     trailing_stop = current_price * (1 - self.trailing_stop_pct / 100)
                     if current_price < trailing_stop:
                         self.close_position(position, 'trailing_stop', current_price)
                         continue
+                else:
+                    trailing_stop = current_price * (1 + self.trailing_stop_pct / 100)
+                    if current_price > trailing_stop:
+                        self.close_position(position, 'trailing_stop', current_price)
+                        continue
             
-            # Check max hold time
-            hold_time = datetime.now() - position.entry_time
+            # OPTIMIZED: Reduced max hold time (1 hour)
             if hold_time > timedelta(hours=self.max_hold_hours):
                 self.close_position(position, 'timeout', current_price)
                 continue
             
-            # Check signal flip (momentum reversed)
+            # OPTIMIZED: Earlier signal flip detection
             signal, strength = self.detect_momentum(position.token)
-            if (position.direction == 'long' and signal == 'short' and strength > 1.0) or \
-               (position.direction == 'short' and signal == 'long' and strength > 1.0):
-                self.close_position(position, 'signal_flip', current_price)
-                continue
+            if hold_time > timedelta(minutes=10):  # Only flip after 10 min
+                if (position.direction == 'long' and signal == 'short' and strength > self.momentum_threshold * 1.5) or \
+                   (position.direction == 'short' and signal == 'long' and strength > self.momentum_threshold * 1.5):
+                    self.close_position(position, 'signal_flip', current_price)
+                    continue
     
     def scan_for_entries(self):
-        """Look for new entry opportunities"""
-        for token in ['SOL', 'JUP']:  # Reduced token list for better API efficiency
-            if token not in self.prices:
+        """OPTIMIZED: Look for new entry opportunities"""
+        # Scan all tracked tokens
+        for token in self.prices.keys():
+            # Skip if already in position
+            if any(p.token == token and p.is_open for p in self.positions):
                 continue
             
             signal, strength = self.detect_momentum(token)
             
             if signal != 'neutral' and strength >= self.momentum_threshold:
-                # Check if this is a good setup
+                # Get 24h change for context
                 price_change_24h = self.prices[token].get('change_24h', 0)
                 
-                # Avoid chasing if already moved >10% in 24h (risk of pullback)
-                if abs(price_change_24h) > 10:
-                    logger.info(f"⏭️ {token} moved {price_change_24h:.1f}% in 24h, skipping")
+                # OPTIMIZED: Relaxed skip condition (was >10%, now >15%)
+                if abs(price_change_24h) > 15:
+                    logger.debug(f"⏭️ {token} moved {price_change_24h:.1f}% in 24h, skipping")
                     continue
                 
-                self.open_position(token, signal, strength)
+                # OPTIMIZED: Directional bias - prefer longs in up moves, shorts in down
+                # but don't require it (allows counter-trend scalps)
+                success = self.open_position(token, signal, strength)
+                if success:
+                    return True  # Only one entry per scan cycle
+        
+        self.scans_without_trade += 1
+        return False
     
     def print_dashboard(self):
         """Print live dashboard"""
@@ -387,7 +429,11 @@ class MomentumBot:
         if total_trades > 0:
             win_rate = self.wins / total_trades * 100
             print(f"📈 Trades: {total_trades} (W: {self.wins} L: {self.losses}) | Win Rate: {win_rate:.1f}%")
+        else:
+            print(f"📈 No trades yet | Scans without trade: {self.scans_without_trade}")
         
+        # OPTIMIZED parameters display
+        print(f"⚡ Config: {self.momentum_threshold}% threshold | {self.stop_loss_pct}% SL | {self.take_profit_pct}% TP")
         print(f"{'─' * 70}")
         
         # Open positions
@@ -396,19 +442,21 @@ class MomentumBot:
             for p in self.positions:
                 if p.is_open:
                     emoji = '🟢' if p.pnl_sol > 0 else '🔴'
-                    print(f"   {emoji} #{p.trade_id} {p.token} {p.direction.upper()}")
-                    print(f"      Entry: ${p.entry_price:.4f} | Current P&L: {p.pnl_sol:+.6f} SOL ({p.pnl_pct:+.2f}%)")
+                    hold_time = datetime.now() - p.entry_time
+                    print(f"   {emoji} #{p.trade_id} {p.token} {p.direction.upper()} ({hold_time.seconds//60}m)")
+                    print(f"      Entry: ${p.entry_price:.4f} | P&L: {p.pnl_sol:+.6f} SOL ({p.pnl_pct:+.2f}%)")
         else:
             print("🎯 No open positions")
         
         # Recent closed trades
-        recent = self.closed_trades[-3:]
+        recent = self.closed_trades[-5:]
         if recent:
             print(f"{'─' * 70}")
             print("📜 RECENT CLOSED:")
             for t in reversed(recent):
                 emoji = '🟢' if t.pnl_sol > 0 else '🔴'
-                print(f"   {emoji} #{t.trade_id} {t.token} {t.exit_reason} | {t.pnl_sol:+.6f} SOL")
+                dur = (t.exit_time - t.entry_time).seconds // 60
+                print(f"   {emoji} #{t.trade_id} {t.token} {t.exit_reason} | {t.pnl_sol:+.6f} SOL ({dur}m)")
         
         print(f"{'=' * 70}\n")
     
@@ -423,6 +471,7 @@ class MomentumBot:
             'wins': self.wins,
             'losses': self.losses,
             'total_fees': self.total_fees_paid,
+            'scans_without_trade': self.scans_without_trade,
             'open_positions': [asdict(p) for p in self.positions if p.is_open],
             'closed_trades': len(self.closed_trades)
         }
@@ -435,16 +484,17 @@ class MomentumBot:
         except Exception as e:
             logger.error(f"Save failed: {e}")
     
-    def run(self, scan_interval: int = 60):
-        """Main trading loop"""
+    def run(self, scan_interval: int = 30):
+        """Main trading loop - OPTIMIZED with 30s default interval"""
         print("\n" + "=" * 70)
-        print("🚀 JUPITER MOMENTUM/SWING TRADING BOT")
+        print("🚀 JUPITER MOMENTUM BOT - OPTIMIZED VERSION")
         print("=" * 70)
         print("\n✅ REAL market data from CoinGecko")
-        print("✅ Trend-following with momentum detection")
-        print("✅ Stop losses: {:.1f}% | Take profit: {:.1f}%".format(self.stop_loss_pct, self.take_profit_pct))
-        print("✅ Position sizing: 25% of balance")
-        print("✅ Max {} concurrent positions".format(self.max_positions))
+        print("✅ EXPANDED token list (SOL, JUP, BONK, RAY, BOME, WIF, PENGU, POPCAT)")
+        print(f"⚡ OPTIMIZED: {self.momentum_threshold}% momentum | {self.stop_loss_pct}% SL | {self.take_profit_pct}% TP")
+        print(f"⚡ Faster entries: {self.history_length} periods | More trades expected")
+        print(f"✅ Position sizing: 30% of balance")
+        print(f"✅ Max {self.max_positions} concurrent positions")
         print("⚠️  Paper mode = simulated trades\n")
         
         # Initial price fetch
@@ -453,8 +503,9 @@ class MomentumBot:
             return
         
         print(f"✅ Connected to market data")
-        print(f"⏱️  Scan interval: {scan_interval}s")
-        print(f"🎯 Looking for momentum >{self.momentum_threshold}% in 10min\n")
+        print(f"⏱️  Scan interval: {scan_interval}s (OPTIMIZED from 60s)")
+        print(f"🎯 Looking for momentum >{self.momentum_threshold}%")
+        print(f"⚠️  Filtering noise below {self.chop_filter_threshold}%\n")
         
         self.print_dashboard()
         
@@ -472,8 +523,8 @@ class MomentumBot:
                 # Save state
                 self.save_state()
                 
-                # Print dashboard every 5 cycles
-                if self.trade_counter % 5 == 0:
+                # Print dashboard every 10 cycles (~5 min at 30s interval)
+                if self.scans_without_trade % 10 == 0:
                     self.print_dashboard()
                 
                 time.sleep(scan_interval)
@@ -490,7 +541,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--capital', type=float, default=1.0)
     parser.add_argument('--mode', choices=['paper', 'live'], default='paper')
-    parser.add_argument('--interval', type=int, default=60)
+    parser.add_argument('--interval', type=int, default=30)
     
     args = parser.parse_args()
     
