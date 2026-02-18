@@ -2,18 +2,20 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { Send, Wifi, WifiOff, ArrowLeft } from 'lucide-react'
+import { Send, Wifi, WifiOff, ArrowLeft, MessageCircle } from 'lucide-react'
 
 export default function SimpleChat() {
   const [connected, setConnected] = useState(false)
   const [connecting, setConnecting] = useState(false)
   const [error, setError] = useState('')
   const [messages, setMessages] = useState<{id: number, role: string, content: string}[]>([])
-  const [input, setInput] = useState('')
   const wsRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
     connect()
+    return () => {
+      wsRef.current?.close()
+    }
   }, [])
 
   function connect() {
@@ -30,6 +32,7 @@ export default function SimpleChat() {
       ws.onopen = () => {
         console.log('WS: Connected')
         
+        // Use webchat client (can receive, not send)
         ws.send(JSON.stringify({
           type: 'req',
           id: 'connect-' + Date.now(),
@@ -38,16 +41,16 @@ export default function SimpleChat() {
             minProtocol: 3,
             maxProtocol: 3,
             client: {
-              id: 'openclaw-control-ui',
-              version: '2.0.0',
+              id: 'webchat',
+              version: '1.0.0',
               platform: 'browser',
-              mode: 'ui'
+              mode: 'webchat'
             },
             locale: 'en-US',
-            userAgent: navigator.userAgent,
+            userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'webchat',
             auth: {
               token: GATEWAY_TOKEN
-            },
+            }
           }
         }))
       }
@@ -63,11 +66,6 @@ export default function SimpleChat() {
               setConnected(true)
               setConnecting(false)
               setError('')
-              setMessages(prev => [...prev, { 
-                id: Date.now(), 
-                role: 'assistant', 
-                content: 'Connected to OpenClaw! Session: ' + (msg.payload?.sessionId || 'N/A')
-              }])
             } else {
               console.error('WS: Handshake failed:', msg.error)
               setError('Handshake failed: ' + (msg.error?.message || 'Unknown error'))
@@ -75,24 +73,16 @@ export default function SimpleChat() {
             }
           }
           
-          // Listen for ALL events and log them
+          // Receive messages from Gateway
           if (msg.type === 'event') {
             console.log('WS: Event received:', msg.event, msg.payload)
             
-            if (msg.event === 'session.message' || msg.event === 'message') {
-              const content = msg.payload?.message?.content || msg.payload?.content || msg.payload?.text
-              const role = msg.payload?.message?.role || msg.payload?.role
-              if (content && role === 'assistant') {
-                setMessages(prev => [...prev, {
-                  id: Date.now(),
-                  role: 'assistant',
-                  content: content
-                }])
-              }
-            }
-            
-            if (msg.event === 'chat.message' || msg.event === 'agent.message') {
-              const content = msg.payload?.content || msg.payload?.text || msg.payload?.message
+            // Handle chat messages
+            if (msg.event === 'chat' && msg.payload) {
+              const content = typeof msg.payload === 'string' 
+                ? msg.payload 
+                : (msg.payload.message?.content || msg.payload.text || JSON.stringify(msg.payload))
+              
               if (content) {
                 setMessages(prev => [...prev, {
                   id: Date.now(),
@@ -101,10 +91,30 @@ export default function SimpleChat() {
                 }])
               }
             }
-          }
-          
-          if (msg.type === 'event' && msg.event === 'connect.challenge') {
-            console.log('WS: Received challenge, waiting for response...')
+            
+            // Handle agent messages
+            if (msg.event === 'agent.message' && msg.payload) {
+              const content = msg.payload.content || msg.payload.text || msg.payload.message
+              if (content) {
+                setMessages(prev => [...prev, {
+                  id: Date.now(),
+                  role: 'assistant', 
+                  content: typeof content === 'string' ? content : JSON.stringify(content)
+                }])
+              }
+            }
+            
+            // Handle session messages
+            if (msg.event === 'session.message' && msg.payload?.message) {
+              const m = msg.payload.message
+              if (m.content && m.role === 'assistant') {
+                setMessages(prev => [...prev, {
+                  id: Date.now(),
+                  role: 'assistant',
+                  content: m.content
+                }])
+              }
+            }
           }
           
         } catch (err) {
@@ -114,7 +124,7 @@ export default function SimpleChat() {
       
       ws.onerror = (e) => {
         console.error('WS Error:', e)
-        setError('WebSocket error. Check console.')
+        setError('WebSocket error')
         setConnecting(false)
       }
       
@@ -130,25 +140,6 @@ export default function SimpleChat() {
     }
   }
 
-  function sendMessage() {
-    if (!input.trim() || !wsRef.current || !connected) return
-    
-    setMessages(prev => [...prev, { id: Date.now(), role: 'user', content: input }])
-    
-    const GATEWAY_TOKEN = "9a95fd94723eab4b6c332ada4ac919ba2b1082c8f69683cb"
-    wsRef.current.send(JSON.stringify({
-      type: 'req',
-      id: 'msg-' + Date.now(),
-      method: 'sessions_send',
-      params: {
-        sessionKey: 'main',
-        message: input,
-      }
-    }))
-    
-    setInput('')
-  }
-
   return (
     <div className="flex flex-col h-screen bg-slate-900 text-white">
       <header className="flex items-center justify-between p-4 border-b border-slate-800">
@@ -156,7 +147,7 @@ export default function SimpleChat() {
           <Link href="/" className="p-2 hover:bg-slate-800 rounded">
             <ArrowLeft className="w-5 h-5" />
           </Link>
-          <h1 className="font-bold">Simple Chat</h1>
+          <h1 className="font-bold">OpenClaw Chat</h1>
         </div>
         <div className="flex items-center gap-2">
           {connected ? (
@@ -185,10 +176,25 @@ export default function SimpleChat() {
         </div>
       )}
       
+      {/* Info banner */}
+      <div className="p-3 bg-blue-500/10 border-b border-blue-500/20 text-sm text-blue-400 flex items-center gap-2">
+        <MessageCircle className="w-4 h-4" />
+        <span>
+          Read-only mode - Send messages via Telegram, view responses here
+        </span>
+      </div>
+      
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
           <div className="text-center text-slate-500 mt-8">
-            {connected ? 'Type a message to chat with OpenClaw' : 'Connecting to OpenClaw...'}
+            {connected ? (
+              <>
+                <p>Connected to OpenClaw!</p>
+                <p className="text-sm mt-2">Send messages via Telegram to see responses here</p>
+              </>
+            ) : (
+              'Connecting to OpenClaw...'
+            )}
           </div>
         )}
         {messages.map(m => (
@@ -200,23 +206,8 @@ export default function SimpleChat() {
         ))}
       </div>
       
-      <div className="p-4 border-t border-slate-800">
-        <div className="flex gap-2">
-          <input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && sendMessage()}
-            placeholder="Type message..."
-            className="flex-1 bg-slate-800 border border-slate-700 rounded px-4 py-2"
-          />
-          <button 
-            onClick={sendMessage}
-            disabled={!connected}
-            className="px-4 py-2 bg-blue-600 rounded disabled:bg-slate-700"
-          >
-            <Send className="w-5 h-5" />
-          </button>
-        </div>
+      <div className="p-4 border-t border-slate-800 text-center text-slate-500 text-sm">
+        Send messages via Telegram - responses appear here automatically
       </div>
     </div>
   )
