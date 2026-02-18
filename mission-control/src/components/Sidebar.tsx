@@ -35,7 +35,7 @@ const navItems: NavItem[] = [
       { label: 'Kraken', href: '/trading/bot/kraken' },
       { label: 'Toobit', href: '/trading/bot/toobit' },
       { label: 'Jupiter', href: '/trading/bot/jupiter' },
-      { label: 'Polymarket', href: '/trading?tab=polymarket' },
+      { label: 'Polymarket', href: '/trading/bot/polymarket' },
     ],
   },
   {
@@ -54,11 +54,6 @@ const navItems: NavItem[] = [
     label: 'Agents',
     icon: '🤖',
     href: '/agents',
-    subItems: [
-      { label: 'Active Agents', href: '/agents' },
-      { label: 'Sub-agents', href: '/agents' },
-      { label: 'Logs', href: '/agents' },
-    ],
   },
   {
     id: 'llm',
