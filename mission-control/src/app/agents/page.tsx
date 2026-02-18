@@ -1,314 +1,311 @@
 'use client'
 
-import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { ArrowLeft, User, Bot, Brain, Code, Activity, Clock, CheckCircle, AlertCircle, Zap } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { 
+  Activity, 
+  Brain, 
+  Code2, 
+  Palette, 
+  Cpu, 
+  ChevronRight,
+  Clock,
+  CheckCircle2,
+  AlertCircle,
+  Zap,
+  Terminal,
+  RefreshCw
+} from 'lucide-react'
 
 interface Agent {
   id: string
   name: string
   emoji: string
   role: string
-  status: 'active' | 'idle' | 'busy' | 'offline'
   description: string
-  skills: string[]
-  lastActivity?: string
+  status: 'idle' | 'busy' | 'learning' | 'offline'
   currentTask?: string
-  color: string
+  lastActivity: string
+  model: string
+  skills: string[]
+  recommendedSkills: string[]
+  learningProgress?: number
 }
 
-const AGENTS: Agent[] = [
-  {
-    id: 'synthesis',
-    name: 'Synthesis',
-    emoji: '🔗',
-    role: 'Team Lead / Coordinator',
-    status: 'idle',
-    description: 'Coordinates between you and the specialist agents. Breaks down tasks and delegates to Ghost or Oracle.',
-    skills: ['Task Decomposition', 'Integration', 'Communication', 'Project Management'],
-    color: 'from-blue-500 to-cyan-500'
-  },
+const agents: Agent[] = [
   {
     id: 'ghost',
     name: 'Ghost',
     emoji: '👻',
-    role: 'Code Execution Engine',
-    status: 'idle',
-    description: 'Implements trading bots, scripts, and infrastructure. Writes clean, tested code with no technical debt.',
-    skills: ['Python', 'TypeScript', 'Rust', 'SQL', 'Trading Bot Architecture', 'APIs'],
-    color: 'from-emerald-500 to-teal-500'
+    role: 'Code Specialist',
+    description: 'Builds trading bots, infrastructure, and async systems',
+    status: 'busy',
+    currentTask: 'Building Jupiter DEX bot v1',
+    lastActivity: 'Just now',
+    model: 'default',
+    skills: ['Python', 'Async/await', 'WebSocket', 'Trading APIs', 'Database'],
+    recommendedSkills: ['Rust', 'Solana smart contracts', 'MEV protection'],
+    learningProgress: 85
   },
   {
     id: 'oracle',
     name: 'Oracle',
     emoji: '🔮',
     role: 'Trading Strategist',
+    description: 'Designs strategies, backtests, and risk management',
+    status: 'learning',
+    currentTask: 'Documenting market regimes',
+    lastActivity: '5 min ago',
+    model: 'ollama/kimi-k2.5:cloud',
+    skills: ['Technical Analysis', 'Backtesting', 'Risk Management', 'Indicators'],
+    recommendedSkills: ['On-chain analysis', 'Order flow', 'Machine learning for trading'],
+    learningProgress: 60
+  },
+  {
+    id: 'pixel',
+    name: 'Pixel',
+    emoji: '🎨',
+    role: 'UI/UX Engineer',
+    description: 'Designs interfaces and component systems',
     status: 'idle',
-    description: 'Designs and validates trading strategies. Uses data-driven analysis to find edges in the markets.',
-    skills: ['Technical Analysis', 'Backtesting', 'Risk Management', 'Quantitative Research'],
-    color: 'from-purple-500 to-pink-500'
+    currentTask: 'Maintaining Mission Control',
+    lastActivity: '1 hour ago',
+    model: 'default',
+    skills: ['React', 'Tailwind CSS', 'Next.js', 'Component Design'],
+    recommendedSkills: ['Data visualization', 'Three.js', 'Motion design'],
+    learningProgress: 40
+  },
+  {
+    id: 'synthesis',
+    name: 'Synthesis',
+    emoji: '🔗',
+    role: 'Team Lead',
+    description: 'Coordinates tasks and integrates solutions',
+    status: 'idle',
+    lastActivity: '2 hours ago',
+    model: 'default',
+    skills: ['Architecture', 'Coordination', 'Documentation', 'Project Management'],
+    recommendedSkills: ['Multi-agent coordination', 'Workflow optimization'],
+    learningProgress: 75
   }
 ]
 
-// Task history stored in localStorage
-interface Task {
-  id: string
-  agent: string
-  task: string
-  status: 'pending' | 'running' | 'completed' | 'failed'
-  startTime: string
-  endTime?: string
-  result?: string
-}
-
-const TASKS_STORAGE_KEY = 'openclaw_agent_tasks'
-
 export default function AgentsPage() {
-  const [activeAgents, setActiveAgents] = useState<Agent[]>(AGENTS)
-  const [tasks, setTasks] = useState<Task[]>([])
-  const [mounted, setMounted] = useState(false)
+  const [activeAgent, setActiveAgent] = useState<Agent | null>(null)
+  const [lastUpdate, setLastUpdate] = useState<Date>(new Date())
+  const router = useRouter()
 
   useEffect(() => {
-    setMounted(true)
-    // Load tasks from localStorage
-    try {
-      const stored = localStorage.getItem(TASKS_STORAGE_KEY)
-      if (stored) {
-        setTasks(JSON.parse(stored))
-      }
-    } catch {
-      // Ignore storage errors
-    }
-
-    // Simulate polling for agent status
     const interval = setInterval(() => {
-      // In real implementation, this would fetch from API
-      // For now, we'll infer from tasks
-      updateAgentStatusFromTasks()
-    }, 5000)
-
+      setLastUpdate(new Date())
+    }, 60000)
     return () => clearInterval(interval)
   }, [])
 
-  const updateAgentStatusFromTasks = () => {
-    setActiveAgents(prev => prev.map(agent => {
-      const agentTasks = tasks.filter(t => t.agent === agent.id && t.status === 'running')
-      if (agentTasks.length > 0) {
-        return { ...agent, status: 'busy', currentTask: agentTasks[0].task }
-      }
-      return { ...agent, status: 'idle', currentTask: undefined }
-    }))
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'busy': return 'bg-amber-500'
+      case 'learning': return 'bg-blue-500'
+      case 'idle': return 'bg-emerald-500'
+      case 'offline': return 'bg-slate-500'
+      default: return 'bg-slate-500'
+    }
   }
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'active':
-      case 'busy':
-        return <Activity className="w-4 h-4 text-yellow-400 animate-pulse" />
-      case 'idle':
-        return <CheckCircle className="w-4 h-4 text-green-400" />
-      case 'offline':
-        return <AlertCircle className="w-4 h-4 text-slate-500" />
-      default:
-        return null
+      case 'busy': return <Activity className="w-4 h-4" />
+      case 'learning': return <Brain className="w-4 h-4" />
+      case 'idle': return <CheckCircle2 className="w-4 h-4" />
+      case 'offline': return <AlertCircle className="w-4 h-4" />
+      default: return <Activity className="w-4 h-4" />
     }
   }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'active':
-      case 'busy':
-        return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30'
-      case 'idle':
-        return 'bg-green-500/20 text-green-400 border-green-500/30'
-      case 'offline':
-        return 'bg-slate-700/50 text-slate-500 border-slate-600'
-      default:
-        return 'bg-slate-700/50'
-    }
-  }
-
-  const recentTasks = tasks.slice(-10).reverse()
-
-  if (!mounted) return null
 
   return (
-    <div className="min-h-screen bg-slate-900">
-      {/* Mobile Header */}
-      <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link 
-              href="/" 
-              className="p-2 -ml-2 rounded-lg hover:bg-slate-800 transition-colors"
+    <div className="min-h-screen bg-slate-950 text-white p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center gap-4 mb-4">
+            <button 
+              onClick={() => router.push('/')}
+              className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-slate-400" />
-            </Link>
-            <div>
-              <h1 className="text-lg font-bold text-white">Agent Team</h1>
-              <p className="text-xs text-slate-500">Specialist AI Agents</p>
-            </div>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+            </button>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+              Agent Control Center
+            </h1>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">👥</span>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-4xl mx-auto px-4 py-6 space-y-6">
-        {/* Team Overview */}
-        <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-          <h2 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-3">
-            Active Agents
-          </h2>
-          <div className="grid grid-cols-3 gap-3">
-            {activeAgents.map(agent => (
-              <div 
-                key={agent.id}
-                className={`bg-slate-800 rounded-lg p-3 border border-slate-700 ${
-                  agent.status === 'busy' ? 'ring-1 ring-yellow-500/50' : ''
-                }`}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl">{agent.emoji}</span>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-white text-sm truncate">{agent.name}</h3>
-                    <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium border ${getStatusColor(agent.status)}`}>
-                      {getStatusIcon(agent.status)}
-                      <span className="capitalize">{agent.status}</span>
-                    </span>
-                  </div>
-                </div>
-                {agent.currentTask && (
-                  <p className="text-xs text-yellow-400 truncate">
-                    {agent.currentTask}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
+          <p className="text-slate-400">Manage and monitor your specialist AI team</p>
         </div>
 
-        {/* Agent Details */}
-        <div className="space-y-4">
-          <h2 className="text-sm font-medium text-slate-400 uppercase tracking-wider">
-            Agent Profiles
-          </h2>
-          
-          {activeAgents.map(agent => (
-            <div 
-              key={agent.id}
-              className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden"
-            >
-              {/* Header */}
-              <div className={`bg-gradient-to-r ${agent.color} p-4`}>
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center text-3xl">
-                    {agent.emoji}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-bold text-white">{agent.name}</h3>
-                    <p className="text-sm text-white/80">{agent.role}</p>
-                  </div>
-                  <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border border-white/30 ${getStatusColor(agent.status)}`}>
-                    {getStatusIcon(agent.status)}
-                    <span className="capitalize">{agent.status}</span>
-                  </span>
-                </div>
-              </div>
-
-              {/* Body */}
-              <div className="p-4 space-y-3">
-                <p className="text-slate-300 text-sm">{agent.description}</p>
-                
+        {/* Status Overview */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          {[
+            { label: 'Active', value: agents.filter(a => a.status !== 'offline').length, icon: Zap, color: 'text-emerald-400' },
+            { label: 'Busy', value: agents.filter(a => a.status === 'busy').length, icon: Activity, color: 'text-amber-400' },
+            { label: 'Learning', value: agents.filter(a => a.status === 'learning').length, icon: Brain, color: 'text-blue-400' },
+            { label: 'Idle', value: agents.filter(a => a.status === 'idle').length, icon: CheckCircle2, color: 'text-slate-400' },
+          ].map((stat) => (
+            <div key={stat.label} className="bg-slate-900 rounded-xl p-4 border border-slate-800">
+              <div className="flex items-center gap-3">
+                <stat.icon className={`w-5 h-5 ${stat.color}`} />
                 <div>
-                  <h4 className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
-                    Skills
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {agent.skills.map((skill, idx) => (
-                      <span 
-                        key={idx}
-                        className="px-2 py-1 bg-slate-700 text-slate-300 rounded text-xs"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-2xl font-bold">{stat.value}</p>
+                  <p className="text-sm text-slate-500">{stat.label}</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-medium text-slate-400 uppercase tracking-wider">
-              Recent Activity
-            </h2>
-            {recentTasks.length === 0 && (
-              <span className="text-xs text-slate-500">No recent tasks</span>
-            )}
-          </div>
-          
-          {recentTasks.length > 0 ? (
-            <div className="space-y-2">
-              {recentTasks.map(task => (
-                <div 
-                  key={task.id}
-                  className="flex items-center gap-3 p-3 bg-slate-800 rounded-lg border border-slate-700"
-                >
-                  <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
-                    {task.agent === 'synthesis' && <Brain className="w-4 h-4 text-blue-400" />}
-                    {task.agent === 'ghost' && <Code className="w-4 h-4 text-emerald-400" />}
-                    {task.agent === 'oracle' && <Zap className="w-4 h-4 text-purple-400" />}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-slate-200 truncate">{task.task}</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className={`text-[10px] px-1.5 py-0.5 rounded ${
-                        task.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                        task.status === 'running' ? 'bg-yellow-500/20 text-yellow-400' :
-                        task.status === 'failed' ? 'bg-red-500/20 text-red-400' :
-                        'bg-slate-600 text-slate-400'
-                      }`}>
-                        {task.status}
-                      </span>
-                      <span className="text-[10px] text-slate-500">
-                        {new Date(task.startTime).toLocaleTimeString()}
-                      </span>
+        {/* Agents Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {agents.map((agent) => (
+            <div 
+              key={agent.id}
+              className={`bg-slate-900 rounded-xl border transition-all cursor-pointer ${
+                activeAgent?.id === agent.id 
+                  ? 'border-blue-500 ring-1 ring-blue-500' 
+                  : 'border-slate-800 hover:border-slate-700'
+              }`}
+              onClick={() => setActiveAgent(activeAgent?.id === agent.id ? null : agent)}
+            >
+              {/* Card Header */}
+              <div className="p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center gap-4">
+                    <div className="text-4xl bg-slate-800 w-16 h-16 rounded-xl flex items-center justify-center">
+                      {agent.emoji}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">{agent.name}</h3>
+                      <p className="text-slate-400 text-sm">{agent.role}</p>
                     </div>
                   </div>
+                  <div className="flex items-center gap-2">
+                    <div className={`w-3 h-3 rounded-full ${getStatusColor(agent.status)}`} />
+                    <span className="text-sm capitalize text-slate-400">{agent.status}</span>
+                  </div>
                 </div>
-              ))}
+
+                {/* Status Info */}
+                {agent.currentTask && (
+                  <div className="mb-4 p-3 bg-slate-800 rounded-lg">
+                    <div className="flex items-center gap-2 text-amber-400 mb-1">
+                      <Activity className="w-4 h-4" />
+                      <span className="text-sm font-medium">Current Task</span>
+                    </div>
+                    <p className="text-slate-300">{agent.currentTask}</p>
+                  </div>
+                )}
+
+                {agent.status === 'learning' && (
+                  <div className="mb-4 p-3 bg-slate-800 rounded-lg">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2 text-blue-400">
+                        <Brain className="w-4 h-4" />
+                        <span className="text-sm font-medium">Learning Progress</span>
+                      </div>
+                      <span className="text-sm text-slate-400">{agent.learningProgress}%</span>
+                    </div>
+                    <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-blue-500 rounded-full transition-all"
+                        style={{ width: `${agent.learningProgress}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Model & Last Activity */}
+                <div className="flex items-center justify-between text-sm text-slate-500 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Cpu className="w-4 h-4" />
+                    <span>{agent.model}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>{agent.lastActivity}</span>
+                  </div>
+                </div>
+
+                <p className="text-slate-400 mb-4">{agent.description}</p>
+
+                {/* Expanded View */}
+                {activeAgent?.id === agent.id && (
+                  <div className="border-t border-slate-800 pt-4 mt-4">
+                    {/* Skills */}
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 text-emerald-400 mb-2">
+                        <Terminal className="w-4 h-4" />
+                        <span className="font-medium">Skills</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {agent.skills.map((skill) => (
+                          <span 
+                            key={skill}
+                            className="px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Recommended Skills */}
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 text-purple-400 mb-2">
+                        <Zap className="w-4 h-4" />
+                        <span className="font-medium">Recommended Skills</span>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {agent.recommendedSkills.map((skill) => (
+                          <span 
+                            key={skill}
+                            className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex gap-3 pt-4 border-t border-slate-800">
+                      <button className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition-colors">
+                        Assign Task
+                      </button>
+                      <button className="flex-1 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-medium transition-colors">
+                        View History
+                      </button>
+                      <button className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors">
+                        <RefreshCw className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Click to expand hint */}
+                {activeAgent?.id !== agent.id && (
+                  <div className="flex items-center justify-center text-slate-600 text-sm">
+                    <span>Click to expand</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </div>
+                )}
+              </div>
             </div>
-          ) : (
-            <div className="text-center py-8 text-slate-500">
-              <Bot className="w-12 h-12 mx-auto mb-3 opacity-50" />
-              <p>Agents are ready and waiting for tasks</p>
-              <p className="text-sm mt-2">
-                Assign work via Synthesis in the Chat
-              </p>
-            </div>
-          )}
+          ))}
         </div>
 
-        {/* Task Assignment CTA */}
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl p-4 text-center">
-          <h3 className="font-semibold text-white mb-2">Need something done?</h3>
-          <p className="text-sm text-indigo-200 mb-3">
-            Synthesis will route your request to the right specialist
-          </p>
-          <Link 
-            href="/chat"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white font-medium transition-colors"
-          >
-            <Bot className="w-4 h-4" />
-            Open Chat
-          </Link>
+        <div className="mt-8 text-center text-slate-600 text-sm">
+          Last updated: {lastUpdate.toLocaleTimeString()}
         </div>
-      </main>
+      </div>
     </div>
   )
 }
