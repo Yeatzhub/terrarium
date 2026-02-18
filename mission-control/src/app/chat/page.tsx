@@ -63,12 +63,8 @@ export default function ChatPage() {
   const [isLoadingHistory, setIsLoadingHistory] = useState(true)
   // Auto-detect gateway URL based on current host
   const getDefaultGatewayUrl = () => {
-    if (typeof window === 'undefined') return 'ws://127.0.0.1:18789'
-    const host = window.location.hostname
-    // If accessing via Tailscale, use the same host for gateway
-    if (host.includes('100.') || (host !== 'localhost' && host !== '127.0.0.1')) {
-      return `ws://${host}:18789`
-    }
+    // Always use localhost for direct access from the machine
+    // Access settings to change this if connecting remotely via Tailscale
     return 'ws://127.0.0.1:18789'
   }
   const [gatewayUrl, setGatewayUrl] = useState(getDefaultGatewayUrl())
