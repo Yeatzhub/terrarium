@@ -1,0 +1,68 @@
+{
+  "providers": {
+    "priority": [
+      "ollama-local",
+      "ollama-cloud",
+      "nvidia"
+    ],
+    "ollama-local": {
+      "baseUrl": "http://localhost:11434",
+      "models": {
+        "default": "qwen2.5:32b",
+        "fast": "phi4:latest",
+        "cheap": "phi4:latest"
+      },
+      "rateLimit": "unlimited",
+      "costPer1kTokens": 0
+    },
+    "ollama-cloud": {
+      "baseUrl": "https://api.ollama.com",
+      "models": {
+        "default": "kimi-k2.5:cloud",
+        "reasoning": "kimi-k2.5:cloud"
+      },
+      "rateLimit": "high",
+      "costPer1kTokens": 0.02,
+      "notes": "Pro subscription active"
+    },
+    "nvidia": {
+      "baseUrl": "https://integrate.api.nvidia.com/v1",
+      "apiKey": "${NVIDIA_API_KEY}",
+      "models": {
+        "fast": "mistralai/mistral-nemo-12b-instruct",
+        "reasoning": "mistralai/mistral-large-2-instruct",
+        "cheap": "mistralai/mistral-nemo-12b-instruct"
+      },
+      "rateLimit": "10000/month",
+      "costPer1kTokens": 0.003,
+      "monthlyBudget": "10K requests"
+    }
+  },
+  "routing": {
+    "strategy": "max-throughput",
+    "parallel": true,
+    "rules": {
+      "subagent-coding": ["ollama-local/qwen2.5:32b", "nvidia/mistral-large", "ollama-cloud"],
+      "subagent-analysis": ["ollama-local/qwen2.5:32b", "ollama-cloud", "nvidia/mistral-large"],
+      "coordination": ["ollama-cloud", "ollama-local/qwen2.5:32b", "nvidia/mistral-large"],
+      "ui-tasks": ["ollama-local/phi4", "nvidia/nemo-12b", "ollama-cloud"],
+      "heartbeats": ["ollama-local/phi4"],
+      "overflow": ["nvidia/nemo-12b", "cpu-phi4"]
+    },
+    "rateLimitTracking": {
+      "nvidia": {
+        "budget": 10000,
+        "period": "monthly",
+        "warningAt": 8000,
+        "switchTo": "ollama-local"
+      }
+    }
+  },
+  "models": {
+    "workhorse": "ollama/qwen2.5:32b",
+    "brain": "ollama/kimi-k2.5:cloud",
+    "cheap-cloud": "nvidia/mistral-nemo-12b-instruct",
+    "reasoning-cloud": "nvidia/mistral-large-2-instruct",
+    "fast-local": "ollama/phi4"
+  }
+}
