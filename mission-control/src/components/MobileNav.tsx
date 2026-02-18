@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface NavItem {
   label: string
@@ -21,6 +21,17 @@ const mobileNavItems: NavItem[] = [
 export default function MobileNav() {
   const pathname = usePathname()
   const [showMore, setShowMore] = useState(false)
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (showMore && !(e.target as Element).closest('.more-menu')) {
+        setShowMore(false)
+      }
+    }
+    document.addEventListener('click', handleClick)
+    return () => document.removeEventListener('click', handleClick)
+  }, [showMore])
 
   const moreItems = [
     { label: 'Notes', icon: '📝', href: '/notes' },

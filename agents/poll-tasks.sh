@@ -78,23 +78,16 @@ Execute this task as $AGENT_NAME:
 Report completion when done.
 EOF
 
-    # Run the task via OpenClaw
-    openclaw run --file "$TEMP_TASK" --label "agent-$AGENT_NAME-task-$TASK_ID" --timeout 600 || {
-        echo "[$AGENT_NAME] Task failed: $TASK_BASENAME"
-        mv "$IN_PROGRESS_DIR/$TASK_BASENAME" "$FAILED_DIR/"
-        sed -i 's/status: in-progress/status: failed/' "$FAILED_DIR/$TASK_BASENAME"
-        rm -f "$TEMP_TASK"
-        exit 1
-    }
-    
+    # Note: OpenClaw sessions spawn only supports 'main' agent
+    # This script is designed to be called by cron which creates system events
+    # The task will be processed by the main agent via cron-triggered system events
+    echo "[$AGENT_NAME] Task queued. It will be processed by the system agent."
     rm -f "$TEMP_TASK"
     
-    # Mark as completed
-    mv "$IN_PROGRESS_DIR/$TASK_BASENAME" "$COMPLETED_DIR/"
-    sed -i 's/status: in-progress/status: completed/' "$COMPLETED_DIR/$TASK_BASENAME"
-    date -Iseconds | xargs -I {} sed -i "s/completed_at: null/completed_at: {}/" "$COMPLETED_DIR/$TASK_BASENAME"
-    
-    echo "[$AGENT_NAME] Task completed: $TASK_BASENAME"
+    # Return to pending for next cron cycle
+    mv "$IN_PROGRESS_DIR/$TASK_BASENAME" "$PENDING_DIR/"
+    sed -i 's/status: in-progress/status: pending/' "$PENDING_DIR/$TASK_BASENAME"
+    echo "[$AGENT_NAME] Task ready for system processing: $TASK_BASENAME"
 else
     # Fallback: Just use agent-runner.sh
     cd "$WORKSPACE"
