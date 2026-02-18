@@ -20,10 +20,10 @@ const navItems: NavItem[] = [
     href: '/',
   },
   {
-    id: 'chat',
-    label: 'Chat',
+    id: 'agents',
+    label: 'Agents',
     icon: '🤖',
-    href: '/chat',
+    href: '/agents',
   },
   {
     id: 'trading',
@@ -50,12 +50,6 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    id: 'agents',
-    label: 'Agents',
-    icon: '🤖',
-    href: '/agents',
-  },
-  {
     id: 'llm',
     label: 'LLM',
     icon: '🧠',
@@ -71,18 +65,6 @@ const navItems: NavItem[] = [
     label: 'Notes',
     icon: '📝',
     href: '/notes',
-  },
-  {
-    id: 'action-items',
-    label: 'Action Queue',
-    icon: '✅',
-    href: '/action-items',
-  },
-  {
-    id: 'tasks',
-    label: 'Tasks',
-    icon: '⚙️',
-    href: '/tasks',
   },
 ]
 
