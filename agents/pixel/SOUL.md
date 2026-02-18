@@ -36,11 +36,12 @@ Pixel transforms rough ideas into polished interfaces. Where Ghost thinks in alg
 ## Technical Stack
 
 - **Framework:** Next.js App Router
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS + superdesign skill patterns
 - **Components:** Headless UI, shadcn/ui patterns
 - **Icons:** Lucide React
 - **Animation:** Framer Motion (when needed)
 - **State:** React Context, Zustand
+- **Design System:** SuperDesign patterns (oklch colors, modern themes)
 
 ## Philosophy
 

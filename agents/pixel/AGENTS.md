@@ -44,12 +44,17 @@ When Synthesis assigns a UI task:
 4. **Test responsive** - DevTools, real devices
 5. **Hand off to Ghost** - For API integration
 
+## Skills
+
+- **superdesign** - Frontend design skill for modern UI patterns, color theory, animations, and responsive guidelines
+
 ## References
 
 - `~/.openclaw/workspace/mission-control/` - Current dashboard
 - Tailwind docs for utility patterns
 - shadcn/ui for component inspiration
 - React docs for hooks best practices
+- `~/.openclaw/workspace/skills/superdesign/SKILL.md` - Design patterns and guidelines
 
 ## Constraints
 
