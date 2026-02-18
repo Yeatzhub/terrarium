@@ -20,6 +20,7 @@ interface PaperState {
   total_fees: number
   trades: { timestamp: number }[]
   timestamp: number
+  status?: 'active' | 'inactive' | 'running' | 'stopped'
 }
 
 interface JupiterState {

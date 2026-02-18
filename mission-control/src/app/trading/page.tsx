@@ -34,8 +34,7 @@ interface PaperState {
   positions: Record<string, Position>
   trades: Trade[]
   timestamp: number
-  exchange: string
-  status: string
+  status?: 'active' | 'inactive' | 'running' | 'stopped'
 }
 
 interface JupiterState {
@@ -279,10 +278,10 @@ function SummaryStats({ krakenData, toobitData, jupiterData, solPrice }: {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <StatCard label="Total Balance" value={`$${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`} color="blue" />
+      <StatCard label="Total Balance" value={`$${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`} change={null} color="blue" />
       <StatCard label="Total P&L" value={`$${totalPnl.toLocaleString('en-US', { minimumFractionDigits: 2 })}`} change={null} color={totalPnl >= 0 ? 'green' : 'red'} positive={totalPnl >= 0} />
-      <StatCard label="Total Trades" value={totalTrades.toString()} color="purple" />
-      <StatCard label="Active Bots" value={`${activeBots}/3`} color="cyan" />
+      <StatCard label="Total Trades" value={totalTrades.toString()} change={null} color="purple" />
+      <StatCard label="Active Bots" value={`${activeBots}/3`} change={null} color="cyan" />
     </div>
   )
 }

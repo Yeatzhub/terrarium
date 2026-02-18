@@ -78,6 +78,12 @@ const navItems: NavItem[] = [
     href: '/notes',
   },
   {
+    id: 'action-items',
+    label: 'Action Queue',
+    icon: '✅',
+    href: '/action-items',
+  },
+  {
     id: 'tasks',
     label: 'Tasks',
     icon: '⚙️',
