@@ -1,16 +1,31 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import { Send, Wifi, WifiOff, ArrowLeft, MessageCircle } from 'lucide-react'
+import { Send, Wifi, WifiOff, ArrowLeft } from 'lucide-react'
+
+interface Message {
+  id: number
+  role: 'user' | 'assistant' | 'system'
+  content: string
+}
 
 export default function SimpleChat() {
   const [connected, setConnected] = useState(false)
   const [connecting, setConnecting] = useState(false)
   const [error, setError] = useState('')
-  const [messages, setMessages] = useState<{id: number, role: string, content: string}[]>([])
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState('')
+  const [sending, setSending] = useState(false)
   const wsRef = useRef<WebSocket | null>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
+  // Auto-scroll to bottom
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  // Connect to WebSocket for receiving messages
   useEffect(() => {
     connect()
     return () => {
@@ -18,7 +33,7 @@ export default function SimpleChat() {
     }
   }, [])
 
-  function connect() {
+  const connect = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) return
     
     setConnecting(true)
@@ -32,7 +47,6 @@ export default function SimpleChat() {
       ws.onopen = () => {
         console.log('WS: Connected')
         
-        // Use webchat client (can receive, not send)
         ws.send(JSON.stringify({
           type: 'req',
           id: 'connect-' + Date.now(),
@@ -48,15 +62,12 @@ export default function SimpleChat() {
             },
             locale: 'en-US',
             userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'webchat',
-            auth: {
-              token: GATEWAY_TOKEN
-            }
+            auth: { token: GATEWAY_TOKEN }
           }
         }))
       }
       
       ws.onmessage = (e: MessageEvent) => {
-        console.log('WS: Message received:', e.data)
         try {
           const msg = JSON.parse(e.data)
           
@@ -65,73 +76,50 @@ export default function SimpleChat() {
               console.log('WS: Handshake successful!')
               setConnected(true)
               setConnecting(false)
-              setError('')
             } else {
-              console.error('WS: Handshake failed:', msg.error)
               setError('Handshake failed: ' + (msg.error?.message || 'Unknown error'))
               setConnecting(false)
             }
           }
           
-          // Receive messages from Gateway
-          if (msg.type === 'event') {
-            console.log('WS: Event received:', msg.event, msg.payload)
+          // Receive assistant responses
+          if (msg.type === 'event' && msg.event === 'agent' && msg.payload) {
+            const { stream, data } = msg.payload
             
-            // Handle agent response messages (this is how responses flow)
-            if (msg.event === 'agent' && msg.payload) {
-              const stream = msg.payload.stream
-              const data = msg.payload.data
-              
-              // Assistant response chunks
-              if (stream === 'assistant' && data?.text) {
-                // Append to last message if it's from assistant, otherwise create new
-                setMessages(prev => {
-                  const lastMsg = prev[prev.length - 1]
-                  const isDelta = data.delta && lastMsg?.role === 'assistant'
-                  
-                  if (isDelta && lastMsg) {
-                    // Append delta to existing message
-                    const updated = [...prev]
-                    updated[updated.length - 1] = {
-                      ...lastMsg,
-                      content: lastMsg.content + data.delta
-                    }
-                    return updated
-                  } else {
-                    // New assistant message
-                    return [...prev, {
-                      id: Date.now(),
-                      role: 'assistant',
-                      content: data.text
-                    }]
+            if (stream === 'assistant' && data?.text) {
+              setMessages(prev => {
+                const lastMsg = prev[prev.length - 1]
+                const isDelta = data.delta && lastMsg?.role === 'assistant'
+                
+                if (isDelta && lastMsg) {
+                  const updated = [...prev]
+                  updated[updated.length - 1] = {
+                    ...lastMsg,
+                    content: lastMsg.content + data.delta
                   }
-                })
-              }
-              
-              // System/tool messages
-              if (stream === 'system' && data?.text) {
-                setMessages(prev => [...prev, {
-                  id: Date.now(),
-                  role: 'system',
-                  content: data.text
-                }])
-              }
+                  return updated
+                } else {
+                  return [...prev, {
+                    id: Date.now(),
+                    role: 'assistant',
+                    content: data.text
+                  }]
+                }
+              })
             }
           }
           
         } catch (err) {
-          console.error('WS: Failed to parse message:', err)
+          console.error('WS message error:', err)
         }
       }
       
-      ws.onerror = (e) => {
-        console.error('WS Error:', e)
-        setError('WebSocket error')
+      ws.onerror = () => {
+        setError('Connection error')
         setConnecting(false)
       }
       
       ws.onclose = () => {
-        console.log('WS: Closed')
         setConnected(false)
         setConnecting(false)
       }
@@ -139,6 +127,45 @@ export default function SimpleChat() {
     } catch (err: any) {
       setError(err?.message || 'Connection failed')
       setConnecting(false)
+    }
+  }, [])
+
+  // Send message via API route
+  const sendMessage = async (e?: React.FormEvent) => {
+    e?.preventDefault()
+    if (!input.trim() || sending) return
+    
+    const messageText = input.trim()
+    setInput('')
+    setSending(true)
+    
+    // Add user message immediately
+    setMessages(prev => [...prev, {
+      id: Date.now(),
+      role: 'user',
+      content: messageText
+    }])
+    
+    try {
+      const res = await fetch('/api/chat/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: messageText })
+      })
+      
+      if (!res.ok) {
+        throw new Error('Failed to send')
+      }
+      
+    } catch (err) {
+      console.error('Send error:', err)
+      setMessages(prev => [...prev, {
+        id: Date.now(),
+        role: 'system',
+        content: '⚠️ Failed to send message. Please try again.'
+      }])
+    } finally {
+      setSending(false)
     }
   }
 
@@ -151,6 +178,7 @@ export default function SimpleChat() {
           </Link>
           <h1 className="font-bold">OpenClaw Chat</h1>
         </div>
+        
         <div className="flex items-center gap-2">
           {connected ? (
             <span className="flex items-center gap-1 text-green-400">
@@ -165,7 +193,7 @@ export default function SimpleChat() {
           )}
           <button 
             onClick={connect}
-            className="px-3 py-1 bg-blue-600 rounded text-sm"
+            className="px-3 py-1 bg-blue-600 rounded text-sm hover:bg-blue-700"
           >
             Reconnect
           </button>
@@ -178,39 +206,48 @@ export default function SimpleChat() {
         </div>
       )}
       
-      {/* Info banner */}
-      <div className="p-3 bg-blue-500/10 border-b border-blue-500/20 text-sm text-blue-400 flex items-center gap-2">
-        <MessageCircle className="w-4 h-4" />
-        <span>
-          Read-only mode - Send messages via Telegram, view responses here
-        </span>
-      </div>
-      
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.length === 0 && (
           <div className="text-center text-slate-500 mt-8">
-            {connected ? (
-              <>
-                <p>Connected to OpenClaw!</p>
-                <p className="text-sm mt-2">Send messages via Telegram to see responses here</p>
-              </>
-            ) : (
-              'Connecting to OpenClaw...'
-            )}
+            <p>Connected to OpenClaw! 🎉</p>
+            <p className="text-sm mt-2">Send a message to start chatting</p>
           </div>
         )}
+        
         {messages.map(m => (
-          <div key={m.id} className={`p-3 rounded ${
-            m.role === 'user' ? 'bg-blue-600 ml-12' : 'bg-slate-800 mr-12'
-          }`}>
+          <div
+            key={m.id}
+            className={`p-3 rounded-lg max-w-[80%] ${
+              m.role === 'user' 
+                ? 'bg-blue-600 ml-auto' 
+                : m.role === 'system'
+                ? 'bg-yellow-600/50 mx-auto text-center text-sm'
+                : 'bg-slate-800 mr-auto'
+            }`}
+          >
             {m.content}
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
       
-      <div className="p-4 border-t border-slate-800 text-center text-slate-500 text-sm">
-        Send messages via Telegram - responses appear here automatically
-      </div>
+      <form onSubmit={sendMessage} className="p-4 border-t border-slate-800 flex gap-2">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder={connected ? "Type a message..." : "Connecting..."}
+          disabled={!connected || sending}
+          className="flex-1 px-4 py-2 bg-slate-800 rounded-lg border border-slate-700 focus:border-blue-500 focus:outline-none disabled:opacity-50"
+        />
+        <button
+          type="submit"
+          disabled={!connected || !input.trim() || sending}
+          className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+        >
+          {sending ? 'Sending...' : <Send className="w-4 h-4" />}
+        </button>
+      </form>
     </div>
   )
 }
