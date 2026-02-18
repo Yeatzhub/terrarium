@@ -31,9 +31,10 @@ const navItems: NavItem[] = [
     icon: '📈',
     href: '/trading',
     subItems: [
-      { label: 'Kraken', href: '/trading?tab=kraken' },
-      { label: 'Toobit', href: '/trading?tab=toobit' },
-      { label: 'Jupiter', href: '/trading?tab=jupiter' },
+      { label: 'Overview', href: '/trading' },
+      { label: 'Kraken', href: '/trading/bot/kraken' },
+      { label: 'Toobit', href: '/trading/bot/toobit' },
+      { label: 'Jupiter', href: '/trading/bot/jupiter' },
       { label: 'Polymarket', href: '/trading?tab=polymarket' },
     ],
   },
