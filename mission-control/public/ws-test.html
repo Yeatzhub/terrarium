@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket Test</title>
+  <style>
+    body { font-family: monospace; padding: 20px; background: #1a1a2e; color: #eee; }
+    #log { background: #16213e; padding: 10px; border-radius: 5px; height: 400px; overflow-y: auto; }
+    .success { color: #4ecca3; }
+    .error { color: #e94560; }
+    .info { color: #0f3460; }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>WebSocket Connection Test</h2>
+  <div>
+    <button onclick="testLocalhost()">Test ws://127.0.0.1:18789</button>
+    <button onclick="testTailscale()">Test ws://100.125.198.70:18789</button>
+    <button onclick="clearLog()">Clear</button>
+  </div>
+  <div id="log"></div>
+
+  <script>
+    const log = document.getElementById('log');
+    
+    function addLog(msg, type = 'info') {
+      const div = document.createElement('div');
+      div.className = type;
+      div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      log.appendChild(div);
+      log.scrollTop = log.scrollHeight;
+    }
+    
+    function clearLog() {
+      log.innerHTML = '';
+    }
+    
+    function testConnection(url) {
+      addLog(`Connecting to ${url}...`, 'info');
+      
+      try {
+        const ws = new WebSocket(url);
+        
+        ws.onopen = () => {
+          addLog('✓ WebSocket OPENED', 'success');
+          addLog('Sending connect handshake...', 'info');
+          
+          ws.send(JSON.stringify({
+            type: 'req',
+            id: 'test_' + Date.now(),
+            method: 'connect',
+            params: {
+              minProtocol: 3,
+              maxProtocol: 3,
+              client: { id: 'test', version: '1.0.0', platform: 'web' },
+              locale: 'en-US',
+              userAgent: 'test/1.0.0'
+            }
+          }));
+        };
+        
+        ws.onmessage = (e) => {
+          addLog('✓ Received: ' + e.data.substring(0, 100) + '...', 'success');
+          const msg = JSON.parse(e.data);
+          if (msg.ok) {
+            addLog('✓✓✓ HANDSHAKE SUCCESSFUL!', 'success');
+          } else {
+            addLog('✗ Handshake failed: ' + JSON.stringify(msg.error), 'error');
+          }
+        };
+        
+        ws.onerror = (e) => {
+          addLog('✗ WebSocket ERROR: ' + JSON.stringify(e), 'error');
+          console.error('WebSocket error:', e);
+        };
+        
+        ws.onclose = (e) => {
+          addLog(`✗ WebSocket CLOSED: code=${e.code}, reason="${e.reason}", wasClean=${e.wasClean}`, 'error');
+        };
+        
+      } catch (err) {
+        addLog('✗ Exception: ' + err.message, 'error');
+      }
+    }
+    
+    function testLocalhost() {
+      testConnection('ws://127.0.0.1:18789');
+    }
+    
+    function testTailscale() {
+      testConnection('ws://100.125.198.70:18789');
+    }
+    
+    // Auto-test localhost on load
+    window.onload = () => {
+      addLog('Page loaded. Click button to test.', 'info');
+    };
+  </script>
+</body>
+</html>
