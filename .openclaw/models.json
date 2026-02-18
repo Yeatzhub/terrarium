@@ -1,0 +1,24 @@
+{
+  "providers": {
+    "ollama": {
+      "baseUrl": "http://localhost:11434",
+      "priority": 1
+    },
+    "nvidia": {
+      "baseUrl": "https://integrate.api.nvidia.com/v1",
+      "apiKey": "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",
+      "priority": 2
+    }
+  },
+  "models": {
+    "default": "ollama/kimi-k2.5:cloud",
+    "fallback": "nvidia/mistral-large-2-instruct",
+    "fast": "ollama/phi4",
+    "cheap": "nvidia/mistral-nemo-12b-instruct"
+  },
+  "routing": {
+    "primary": "ollama",
+    "overflow": "nvidia",
+    "heartbeats": "ollama"
+  }
+}
