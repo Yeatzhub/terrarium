@@ -52,21 +52,32 @@ $(cat "$TASK_FILE")
 Execute this task as $AGENT_NAME. Save your work to the workspace and report completion.
 EOF
 
-# Use OpenClaw to run the agent
+# Execute task - since we can't spawn sub-agents directly, 
+# we'll use the sessions_spawn tool through a temporary script
 cd "$WORKSPACE"
 
-# Option 1: Use openclaw CLI if available
-if command -v openclaw >/dev/null 2>&1; then
-    openclaw run --file "$TEMP_PROMPT" --label "agent-$AGENT_NAME-$(date +%s)"
-else
-    # Option 2: Direct API call to gateway
-    curl -s -X POST http://localhost:18789/api/v1/run \
-        -H "Content-Type: application/json" \
-        -d "{\"prompt\":$(cat "$TEMP_PROMPT" | jq -R -s .),\"label\":\"agent-$AGENT_NAME\",\"workspace\":\"$WORKSPACE\"}" 2>/dev/null || echo "API call failed"
-fi
+# Create execution marker file to indicate this task is being processed
+MARKER_FILE="/tmp/agent-$AGENT_NAME-$(basename $TASK_FILE).running"
+touch "$MARKER_FILE"
 
-# Cleanup
-rm -f "$TEMP_PROMPT"
+# Log the execution request
+echo "[$(date '+%H:%M:%S')] Agent $AGENT_NAME requested execution"
+echo "Task: $TASK_FILE"
+echo "Status: QUEUED_FOR_MANUAL_EXECUTION"
+
+# For now, tasks need manual execution or cron-based processing
+# This script prepares the task but doesn't auto-execute
 
 echo ""
-echo "Agent $AGENT_NAME completed task: $TASK_FILE"
+echo "═══════════════════════════════════════════"
+echo "🤖 AGENT: $AGENT_NAME"
+echo "📋 TASK: $(basename $TASK_FILE)"
+echo "⏳ STATUS: Ready for execution"
+echo "═══════════════════════════════════════════"
+echo ""
+echo "Task prepared. Execute via:"
+echo "  openclaw agent --message \"$(cat $TEMP_PROMPT | head -c 200)...\" --label agent-$AGENT_NAME"
+echo ""
+
+# Cleanup
+rm -f "$TEMP_PROMPT" "$MARKER_FILE"
