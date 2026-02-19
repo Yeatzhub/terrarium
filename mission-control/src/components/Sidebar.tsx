@@ -114,7 +114,7 @@ export default function Sidebar() {
       {/* Mobile hamburger button */}
       <button
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="fixed top-4 left-4 z-50 md:hidden p-2 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 transition-colors"
+        className="fixed top-4 left-4 z-50 md:hidden p-3 min-w-[44px] min-h-[44px] bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 transition-colors touch-manipulation"
         aria-label="Toggle menu"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -25,7 +25,9 @@ export default function MobileNav() {
   // Close menu when clicking outside
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      if (showMore && !(e.target as Element).closest('.more-menu')) {
+      const target = e.target as Element
+      // Don't close if clicking the More button or inside the menu
+      if (showMore && !target.closest('[data-more-menu]') && !target.closest('[data-more-button]')) {
         setShowMore(false)
       }
     }
@@ -57,6 +59,7 @@ export default function MobileNav() {
               return (
                 <button
                   key={item.label}
+                  data-more-button
                   onClick={() => setShowMore(!showMore)}
                   className={`flex flex-col items-center justify-center flex-1 h-full transition-colors ${
                     showMore ? 'text-cyan-400' : 'text-slate-400'
@@ -106,7 +109,10 @@ export default function MobileNav() {
             className="fixed inset-0 bg-black/60 z-40 md:hidden"
             onClick={() => setShowMore(false)}
           />
-          <div className="fixed bottom-20 left-4 right-4 bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl z-50 md:hidden safe-bottom">
+          <div 
+            data-more-menu
+            className="fixed bottom-20 left-4 right-4 bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl z-50 md:hidden safe-bottom"
+          >
             <div className="p-2">
               <div className="flex items-center justify-center py-2">
                 <div className="w-8 h-1 bg-slate-600 rounded-full" />
@@ -130,7 +136,7 @@ export default function MobileNav() {
               </div>
               <div className="mt-2 pt-2 border-t border-slate-700">
                 <Link
-                  href="http://127.0.0.1:18789"
+                  href="http://100.125.198.70:18789"
                   target="_blank"
                   className="flex items-center gap-3 p-3 text-slate-300 hover:bg-slate-700 rounded-lg transition-colors"
                 >
