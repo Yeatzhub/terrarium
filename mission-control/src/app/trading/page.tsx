@@ -35,6 +35,13 @@ interface PaperState {
   trades: Trade[]
   timestamp: number
   status?: 'active' | 'inactive' | 'running' | 'stopped'
+  stats?: {
+    total_trades: number
+    winning_trades: number
+    losing_trades: number
+    total_pnl: number
+    win_rate: number
+  }
 }
 
 interface JupiterState {
