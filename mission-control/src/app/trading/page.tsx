@@ -121,14 +121,23 @@ export default function TradingPage() {
   async function fetchAllData() {
     try {
       const [krakenRes, toobitRes, jupiterRes] = await Promise.all([
-        fetch('/api/trading-data?exchange=kraken'),
-        fetch('/api/trading-data?exchange=toobit'),
-        fetch('/api/jupiter-data'),
+        fetch('/api/trading-data?exchange=kraken').catch(() => null),
+        fetch('/api/trading-data?exchange=toobit').catch(() => null),
+        fetch('/api/jupiter-data').catch(() => null),
       ])
 
-      if (krakenRes.ok) setKrakenData(await krakenRes.json())
-      if (toobitRes.ok) setToobitData(await toobitRes.json())
-      if (jupiterRes.ok) setJupiterData(await jupiterRes.json())
+      if (krakenRes?.ok) {
+        const data = await krakenRes.json().catch(() => null)
+        if (data) setKrakenData(data)
+      }
+      if (toobitRes?.ok) {
+        const data = await toobitRes.json().catch(() => null)
+        if (data) setToobitData(data)
+      }
+      if (jupiterRes?.ok) {
+        const data = await jupiterRes.json().catch(() => null)
+        if (data) setJupiterData(data)
+      }
 
     } catch (err) {
       console.error('Failed to load trading data:', err)
