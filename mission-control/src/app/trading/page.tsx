@@ -89,8 +89,10 @@ export default function TradingPage() {
   const [toobitData, setToobitData] = useState<PaperState | null>(null)
   const [jupiterData, setJupiterData] = useState<JupiterState | null>(null)
   const [livePrices, setLivePrices] = useState<LivePrice[]>([])
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     fetchAllData()
     fetchLivePrices()
 
@@ -175,6 +177,12 @@ export default function TradingPage() {
 
   return (
     <main className="min-h-screen bg-slate-900 text-white p-4 md:p-8">
+      {!mounted && (
+        <div className="flex items-center justify-center min-h-[50vh]">
+          <div className="animate-spin w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full"></div>
+        </div>
+      )}
+      {mounted && (
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -236,6 +244,7 @@ export default function TradingPage() {
         {/* Quick Actions */}
         <QuickActions />
       </div>
+      )}
     </main>
   )
 }
