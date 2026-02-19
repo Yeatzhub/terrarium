@@ -169,10 +169,12 @@ export default function TradingPage() {
           trades: krakenData?.trades?.length || 0,
         }
       case 'toobit':
+        const toobitPnl = toobitData?.stats?.total_pnl || 0
+        const toobitTrades = toobitData?.stats?.total_trades || 0
         return {
           status: toobitData?.status === 'active' ? 'active' : 'inactive',
-          pnl: toobitData ? `$${toobitData.realized_pnl.toFixed(2)}` : '$0.00',
-          trades: toobitData?.trades?.length || 0,
+          pnl: toobitData ? `$${toobitPnl.toFixed(2)}` : '$0.00',
+          trades: toobitTrades,
         }
       case 'jupiter':
         const jupiterPnl = jupiterData?.pnl_sol || 0
@@ -183,9 +185,10 @@ export default function TradingPage() {
           trades: jupiterData?.trades || 0,
         }
       case 'pionex-xrp':
+        const pionexPnl = pionexData?.totalPnl || 0
         return {
           status: pionexData?.status === 'running' ? 'active' : 'inactive',
-          pnl: pionexData ? `${pionexData.totalPnl >= 0 ? '+' : ''}${pionexData.totalPnl.toFixed(4)} XRP` : '0.0000 XRP',
+          pnl: pionexData ? `${pionexPnl >= 0 ? '+' : ''}${pionexPnl.toFixed(4)} XRP` : '0.0000 XRP',
           trades: pionexData?.totalTrades || 0,
         }
       default:
