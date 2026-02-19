@@ -10,6 +10,9 @@ export async function GET(request: NextRequest) {
   try {
     // Check for Jupiter bot state file
     const possiblePaths = [
+      path.join(process.cwd(), '..', 'solana-jupiter-bot', 'state.json'),
+      path.join(process.cwd(), '..', '..', 'solana-jupiter-bot', 'state.json'),
+      path.join('/home/yeatz/.openclaw/workspace', 'solana-jupiter-bot', 'state.json'),
       path.join(process.cwd(), '..', 'solana-jupiter-bot', 'jupiter_state.json'),
       path.join(process.cwd(), '..', '..', 'solana-jupiter-bot', 'jupiter_state.json'),
       path.join('/home/yeatz/.openclaw/workspace', 'solana-jupiter-bot', 'jupiter_state.json'),

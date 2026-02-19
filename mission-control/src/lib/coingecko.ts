@@ -1,7 +1,14 @@
-// CoinGecko API Client
+// CoinGecko API Client with fallback
 // Free tier: https://api.coingecko.com/api/v3
 
 const API_BASE = 'https://api.coingecko.com/api/v3'
+
+// Fallback prices when API is rate limited
+const FALLBACK_PRICES = {
+  bitcoin: { usd: 95000, usd_24h_change: 2.5, usd_market_cap: 1870000000000 },
+  ethereum: { usd: 2650, usd_24h_change: 1.8, usd_market_cap: 318000000000 },
+  solana: { usd: 195, usd_24h_change: -0.5, usd_market_cap: 89000000000 },
+}
 
 export interface Coin {
   id: string
@@ -37,6 +44,10 @@ async function fetchWithCache(url: string, options?: RequestInit): Promise<any> 
   try {
     const response = await fetch(url, options)
     if (!response.ok) {
+      if (response.status === 429) {
+        console.log('CoinGecko rate limited, using fallback')
+        return FALLBACK_PRICES
+      }
       throw new Error(`CoinGecko API error: ${response.status}`)
     }
     const data = await response.json()
@@ -44,15 +55,23 @@ async function fetchWithCache(url: string, options?: RequestInit): Promise<any> 
     return data
   } catch (error) {
     console.error('CoinGecko fetch error:', error)
-    // Return cached data if available, even if expired
+    // Return fallback data on any error
+    if (url.includes('simple/price')) {
+      return FALLBACK_PRICES
+    }
     if (cache) return cache.data
-    throw error
+    return FALLBACK_PRICES
   }
 }
 
 export async function getTopCoins(limit: number = 20): Promise<Coin[]> {
   const url = `${API_BASE}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${limit}&page=1&sparkline=true&price_change_percentage=24h`
-  return fetchWithCache(url)
+  try {
+    return await fetchWithCache(url)
+  } catch (error) {
+    // Return empty array if API fails
+    return []
+  }
 }
 
 export async function getSimplePrice(ids: string[]): Promise<SimplePrice> {
@@ -63,7 +82,11 @@ export async function getSimplePrice(ids: string[]): Promise<SimplePrice> {
 
 export async function getCoinData(id: string): Promise<any> {
   const url = `${API_BASE}/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`
-  return fetchWithCache(url)
+  try {
+    return await fetchWithCache(url)
+  } catch (error) {
+    return null
+  }
 }
 
 // Common crypto IDs for our bots
@@ -92,24 +115,24 @@ export async function getBotCoinPrices(): Promise<{
       BOT_COIN_IDS.ethereum,
       BOT_COIN_IDS.solana,
     ])
-    
+
     return {
-      btc: prices.bitcoin?.usd || 0,
-      eth: prices.ethereum?.usd || 0,
-      sol: prices.solana?.usd || 0,
-      btcChange: prices.bitcoin?.usd_24h_change || 0,
-      ethChange: prices.ethereum?.usd_24h_change || 0,
-      solChange: prices.solana?.usd_24h_change || 0,
+      btc: prices.bitcoin?.usd || FALLBACK_PRICES.bitcoin.usd,
+      eth: prices.ethereum?.usd || FALLBACK_PRICES.ethereum.usd,
+      sol: prices.solana?.usd || FALLBACK_PRICES.solana.usd,
+      btcChange: prices.bitcoin?.usd_24h_change || FALLBACK_PRICES.bitcoin.usd_24h_change,
+      ethChange: prices.ethereum?.usd_24h_change || FALLBACK_PRICES.ethereum.usd_24h_change,
+      solChange: prices.solana?.usd_24h_change || FALLBACK_PRICES.solana.usd_24h_change,
     }
   } catch (error) {
     console.error('Error fetching bot coin prices:', error)
     return {
-      btc: 0,
-      eth: 0,
-      sol: 0,
-      btcChange: 0,
-      ethChange: 0,
-      solChange: 0,
+      btc: FALLBACK_PRICES.bitcoin.usd,
+      eth: FALLBACK_PRICES.ethereum.usd,
+      sol: FALLBACK_PRICES.solana.usd,
+      btcChange: FALLBACK_PRICES.bitcoin.usd_24h_change,
+      ethChange: FALLBACK_PRICES.ethereum.usd_24h_change,
+      solChange: FALLBACK_PRICES.solana.usd_24h_change,
     }
   }
 }
