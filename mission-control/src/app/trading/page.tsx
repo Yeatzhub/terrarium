@@ -81,6 +81,14 @@ const BOTS = [
     description: 'Solana DEX arbitrage',
     exchange: 'jupiter',
   },
+  {
+    id: 'pionex-xrp',
+    name: 'Pionex XRP',
+    icon: '⚡',
+    color: 'cyan',
+    description: 'XRP COIN-M PERP futures',
+    exchange: 'pionex',
+  },
 ]
 
 export default function TradingPage() {
@@ -88,6 +96,7 @@ export default function TradingPage() {
   const [krakenData, setKrakenData] = useState<PaperState | null>(null)
   const [toobitData, setToobitData] = useState<PaperState | null>(null)
   const [jupiterData, setJupiterData] = useState<JupiterState | null>(null)
+  const [pionexData, setPionexData] = useState<any>(null)
   const [livePrices, setLivePrices] = useState<LivePrice[]>([])
   const [mounted, setMounted] = useState(false)
 
@@ -122,10 +131,11 @@ export default function TradingPage() {
 
   async function fetchAllData() {
     try {
-      const [krakenRes, toobitRes, jupiterRes] = await Promise.all([
+      const [krakenRes, toobitRes, jupiterRes, pionexRes] = await Promise.all([
         fetch('/api/trading-data?exchange=kraken').catch(() => null),
         fetch('/api/trading-data?exchange=toobit').catch(() => null),
         fetch('/api/jupiter-data').catch(() => null),
+        fetch('/api/pionex-xrp').catch(() => null),
       ])
 
       if (krakenRes?.ok) {
@@ -139,6 +149,10 @@ export default function TradingPage() {
       if (jupiterRes?.ok) {
         const data = await jupiterRes.json().catch(() => null)
         if (data) setJupiterData(data)
+      }
+      if (pionexRes?.ok) {
+        const data = await pionexRes.json().catch(() => null)
+        if (data) setPionexData(data)
       }
 
     } catch (err) {
@@ -169,6 +183,12 @@ export default function TradingPage() {
           status: jupiterData?.status === 'active' ? 'active' : 'inactive',
           pnl: `${jupiterPnl >= 0 ? '+' : ''}${jupiterPnl.toFixed(4)} SOL (~$${(jupiterPnl * solPrice).toFixed(2)})`,
           trades: jupiterData?.trades || 0,
+        }
+      case 'pionex-xrp':
+        return {
+          status: pionexData?.status === 'running' ? 'active' : 'inactive',
+          pnl: pionexData ? `${pionexData.totalPnl >= 0 ? '+' : ''}${pionexData.totalPnl.toFixed(4)} XRP` : '0.0000 XRP',
+          trades: pionexData?.totalTrades || 0,
         }
       default:
         return { status: 'inactive', pnl: '$0.00', trades: 0 }
@@ -208,6 +228,7 @@ export default function TradingPage() {
           krakenData={krakenData}
           toobitData={toobitData}
           jupiterData={jupiterData}
+          pionexData={pionexData}
           solPrice={livePrices.find(p => p.symbol === 'SOL')?.price || 140}
         />
 
@@ -283,23 +304,24 @@ function LivePriceTicker({ prices }: { prices: LivePrice[] }) {
   )
 }
 
-function SummaryStats({ krakenData, toobitData, jupiterData, solPrice }: {
+function SummaryStats({ krakenData, toobitData, jupiterData, pionexData, solPrice }: {
   krakenData: PaperState | null
   toobitData: PaperState | null
   jupiterData: JupiterState | null
+  pionexData: any
   solPrice: number
 }) {
-  const totalBalance = (krakenData?.balance || 0) + (toobitData?.balance || 0) + ((jupiterData?.balance_sol || 0) * solPrice)
-  const totalPnl = (krakenData?.realized_pnl || 0) + (toobitData?.realized_pnl || 0) + ((jupiterData?.pnl_sol || 0) * solPrice)
-  const totalTrades = (krakenData?.trades?.length || 0) + (toobitData?.trades?.length || 0) + (jupiterData?.trades || 0)
-  const activeBots = [krakenData, toobitData, jupiterData].filter(d => d?.status === 'active').length
+  const totalBalance = (krakenData?.balance || 0) + (toobitData?.balance || 0) + ((jupiterData?.balance_sol || 0) * solPrice) + (pionexData?.balance || 0)
+  const totalPnl = (krakenData?.realized_pnl || 0) + (toobitData?.realized_pnl || 0) + ((jupiterData?.pnl_sol || 0) * solPrice) + (pionexData?.totalPnl || 0)
+  const totalTrades = (krakenData?.trades?.length || 0) + (toobitData?.trades?.length || 0) + (jupiterData?.trades || 0) + (pionexData?.totalTrades || 0)
+  const activeBots = [krakenData, toobitData, jupiterData].filter(d => d?.status === 'active').length + (pionexData?.status === 'running' ? 1 : 0)
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       <StatCard label="Total Balance" value={`$${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`} change={null} color="blue" />
       <StatCard label="Total P&L" value={`$${totalPnl.toLocaleString('en-US', { minimumFractionDigits: 2 })}`} change={null} color={totalPnl >= 0 ? 'green' : 'red'} positive={totalPnl >= 0} />
       <StatCard label="Total Trades" value={totalTrades.toString()} change={null} color="purple" />
-      <StatCard label="Active Bots" value={`${activeBots}/3`} change={null} color="cyan" />
+      <StatCard label="Active Bots" value={`${activeBots}/4`} change={null} color="cyan" />
     </div>
   )
 }
@@ -314,6 +336,7 @@ function BotCard({ bot, status, pnl, trades }: {
     purple: { bg: 'bg-purple-500/10', border: 'border-purple-500/30', text: 'text-purple-400', hover: 'hover:border-purple-500/60' },
     yellow: { bg: 'bg-yellow-500/10', border: 'border-yellow-500/30', text: 'text-yellow-400', hover: 'hover:border-yellow-500/60' },
     pink: { bg: 'bg-pink-500/10', border: 'border-pink-500/30', text: 'text-pink-400', hover: 'hover:border-pink-500/60' },
+    cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400', hover: 'hover:border-cyan-500/60' },
   }
 
   const colors = colorClasses[bot.color]
