@@ -35,6 +35,7 @@ const navItems: NavItem[] = [
       { label: 'Kraken', href: '/trading/bot/kraken' },
       { label: 'Toobit', href: '/trading/bot/toobit/live' },
       { label: 'Jupiter', href: '/trading/bot/jupiter' },
+      { label: 'Pionex XRP', href: '/trading/bot/pionex-xrp' },
       { label: 'Polymarket', href: '/trading/bot/polymarket' },
     ],
   },
