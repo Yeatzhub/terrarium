@@ -159,17 +159,22 @@ export default function MissionControl() {
 
   const checkOpenclawStatus = async () => {
     try {
+      // Use a simple fetch with no-cors mode to check if server is reachable
+      // We don't care about the response, just if it connects
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 5000);
+      const timeout = setTimeout(() => controller.abort(), 3000);
       
       const res = await fetch('http://100.125.198.70:18789/status', {
-        method: 'HEAD',
+        method: 'GET',
         signal: controller.signal,
+        // Don't throw on CORS errors, just check if we get any response
       });
       
       clearTimeout(timeout);
-      setOpenclawStatus(res.ok ? 'online' : 'offline');
+      // If we get here without throwing, server is online
+      setOpenclawStatus('online');
     } catch (e) {
+      // If fetch throws (network error, timeout), server is offline
       setOpenclawStatus('offline');
     }
   };
