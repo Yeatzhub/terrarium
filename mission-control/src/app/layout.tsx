@@ -7,14 +7,14 @@ import MobileNav from '@/components/MobileNav'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Mission Control',
+  title: 'The Hub',
   description: 'Productivity dashboard for trading, hardware, and agents',
   manifest: '/manifest.json',
   themeColor: '#0f172a',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'Mission Control',
+    title: 'The Hub',
   },
 }
 
