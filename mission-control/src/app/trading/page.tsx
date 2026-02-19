@@ -92,7 +92,7 @@ const BOTS = [
 ]
 
 export default function TradingPage() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)  // Changed from true to false
   const [krakenData, setKrakenData] = useState<PaperState | null>(null)
   const [toobitData, setToobitData] = useState<PaperState | null>(null)
   const [jupiterData, setJupiterData] = useState<JupiterState | null>(null)
