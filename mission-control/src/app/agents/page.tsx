@@ -89,6 +89,7 @@ const AGENT_META: Record<string, { emoji: string; color: string; role: string }>
   pixel: { emoji: '🎨', color: 'pink', role: 'UI/UX Engineer' },
   ghost: { emoji: '👻', color: 'slate', role: 'Backend Engineer' },
   oracle: { emoji: '🔮', color: 'amber', role: 'Trading Analyst' },
+  nexus: { emoji: '📱', color: 'cyan', role: 'Android Developer' },
 }
 
 function getColorClasses(color: string, type: 'bg' | 'text' | 'border' | 'ring') {
@@ -191,12 +192,32 @@ export default function AgentsPage() {
       setIsLoading(true)
       setError(null)
       
+      // Fetch tasks first to determine agent status
+      const tasksRes = await fetch('/api/tasks')
+      const tasksData = await tasksRes.json()
+      const allTasks = tasksData.tasks || []
+      
       // Scan the agents directory structure
-      const agentDirs = ['synthesis', 'ghost', 'oracle', 'pixel']
+      const agentDirs = ['synthesis', 'ghost', 'oracle', 'pixel', 'nexus']
       const agentDataResults = await Promise.all(agentDirs.map(async (dir) => {
         try {
           const basePath = `/agents/${dir}`
           const meta = AGENT_META[dir] || { emoji: '🤖', color: 'cyan', role: 'Agent' }
+          
+          // Get agent-specific tasks
+          const agentTasks = allTasks.filter((t: Task) => t.agent === dir)
+          const inProgressTask = agentTasks.find((t: Task) => t.status === 'in-progress')
+          const pendingTasks = agentTasks.filter((t: Task) => t.status === 'pending')
+          
+          // Determine status based on real tasks
+          let status: Agent['status'] = 'idle'
+          if (inProgressTask) {
+            status = 'busy'
+          } else if (pendingTasks.length > 0) {
+            status = 'busy'
+          } else if (dir === 'nexus') {
+            status = 'offline' // Nexus not fully active yet
+          }
           
           const agent: Agent = {
             id: dir,
@@ -204,12 +225,13 @@ export default function AgentsPage() {
             emoji: meta.emoji,
             role: meta.role,
             description: getAgentDescription(dir),
-            status: getAgentStatus(dir),
+            status: status,
             lastActivity: new Date(Date.now() - Math.random() * 3600000).toISOString(),
             model: 'ollama/kimi-k2.5:cloud',
             skills: getAgentSkills(dir),
             recommendedSkills: getAgentRecommendedSkills(dir),
-            currentTask: undefined
+            currentTask: inProgressTask?.description || (pendingTasks.length > 0 ? `${pendingTasks.length} pending tasks` : undefined),
+            tokensUsed: tasksData.tokensUsed
           }
           return agent
         } catch (e) {
@@ -741,6 +763,7 @@ function getAgentDescription(id: string): string {
     ghost: 'Backend engineer. Handles APIs, databases, and infrastructure.',
     oracle: 'Trading analyst. Strategies, backtesting, and market analysis.',
     pixel: 'UI/UX engineer. Dashboards, components, and visual polish.',
+    nexus: 'Android developer. Mission Control mobile app and Kotlin expertise.',
   }
   return descriptions[id] || 'AI agent ready to help.'
 }
@@ -757,6 +780,7 @@ function getAgentSkills(id: string): string[] {
     ghost: ['Python', 'Async/await', 'Database', 'WebSocket', 'Error Handling'],
     oracle: ['Technical Analysis', 'Backtesting', 'Risk Management', 'Indicators', 'Position Sizing'],
     pixel: ['React', 'Tailwind CSS', 'Next.js', 'Component Design', 'Responsive UI'],
+    nexus: ['Kotlin', 'Jetpack Compose', 'Android', 'Room', 'Retrofit'],
   }
   return skills[id] || ['General assistance']
 }
@@ -767,6 +791,7 @@ function getAgentRecommendedSkills(id: string): string[] {
     ghost: ['Circuit Breakers', 'Rust', 'Solana smart contracts', 'MEV protection', 'Jupiter SDK'],
     oracle: ['On-chain analysis', 'Order flow', 'Machine learning for trading', 'Market regimes', 'Kelly Criterion'],
     pixel: ['Data visualization', 'Three.js', 'Motion design', 'Real-time dashboards', 'D3'],
+    nexus: ['MVVM', 'Clean Architecture', 'Hilt DI', 'Material Design 3', 'Push Notifications'],
   }
   return skills[id] || []
 }
