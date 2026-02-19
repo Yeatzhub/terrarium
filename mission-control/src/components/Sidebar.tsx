@@ -103,9 +103,7 @@ export default function Sidebar() {
 
   const isSubActive = (href: string) => {
     if (pathname === href.split('?')[0]) return true
-    if (typeof window !== 'undefined') {
-      return pathname + window.location.search === href
-    }
+    // Avoid window usage during SSR
     return false
   }
 
