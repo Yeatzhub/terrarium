@@ -13,7 +13,7 @@ interface NavItem {
 
 const mobileNavItems: NavItem[] = [
   { label: 'Home', icon: '🏠', href: '/' },
-  { label: 'Agents', icon: '🧠', href: '/agents' },
+  { label: 'Agents', icon: '🤖', href: '/agents' },
   { label: 'Trading', icon: '📈', href: '/trading' },
   { label: 'More', icon: '☰', href: '#' },
 ]
@@ -36,9 +36,8 @@ export default function MobileNav() {
   const moreItems = [
     { label: 'Notes', icon: '📝', href: '/notes' },
     { label: 'Hardware', icon: '🖥️', href: '/hardware/deliveries' },
-    { label: 'Tasks', icon: '⚙️', href: '/tasks' },
-    { label: 'LLM Status', icon: '🧠', href: '/llm/status' },
-    { label: 'Chat', icon: '💬', href: '/chat' },
+    { label: 'Tasks', icon: '✅', href: '/tasks' },
+    { label: 'LLM', icon: '🧠', href: '/llm/status' },
   ]
 
   const isActive = (href: string) => {
