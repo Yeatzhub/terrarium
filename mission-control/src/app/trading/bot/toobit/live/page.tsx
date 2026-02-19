@@ -169,6 +169,59 @@ export default function ToobitLivePage() {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-6">
+        {/* Current Position Banner */}
+        {data?.position && (
+          <div className={`rounded-xl p-4 mb-6 border ${data.position.side === 'LONG' ? 'border-green-500/30 bg-green-500/5' : 'border-red-500/30 bg-red-500/5'} animate-pulse`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className={`p-3 rounded-full ${data.position.side === 'LONG' ? 'bg-green-500/20' : 'bg-red-500/20'}`}>
+                  {data.position.side === 'LONG' ? (
+                    <TrendingUp className={`w-8 h-8 ${data.position.side === 'LONG' ? 'text-green-400' : 'text-red-400'}`} />
+                  ) : (
+                    <TrendingDown className="w-8 h-8 text-red-400" />
+                  )}
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-2xl font-bold ${data.position.side === 'LONG' ? 'text-green-400' : 'text-red-400'}`}>
+                      {data.position.side} POSITION
+                    </span>
+                    <span className="px-2 py-0.5 bg-slate-800 rounded text-xs text-slate-400">
+                      ACTIVE
+                    </span>
+                  </div>
+                  <p className="text-slate-400 text-sm">
+                    {data.position.size.toFixed(4)} BTC @ ${data.position.entry_price.toLocaleString()} 
+                    • Leverage: 10x
+                  </p>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className={`text-3xl font-bold ${data.position.unrealized_pnl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                  {data.position.unrealized_pnl >= 0 ? '+' : ''}${data.position.unrealized_pnl.toFixed(2)}
+                </p>
+                <p className="text-xs text-slate-400">Unrealized P&L</p>
+              </div>
+            </div>
+            
+            {/* Target/Stop Bar */}
+            <div className="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
+              <div className="bg-slate-900/50 rounded-lg p-2">
+                <p className="text-slate-500 text-xs">Stop Loss</p>
+                <p className="text-red-400 font-medium">${data.position.stop_loss.toLocaleString()}</p>
+              </div>
+              <div className="bg-slate-900/50 rounded-lg p-2">
+                <p className="text-slate-500 text-xs">Entry</p>
+                <p className="text-slate-300 font-medium">${data.position.entry_price.toLocaleString()}</p>
+              </div>
+              <div className="bg-slate-900/50 rounded-lg p-2">
+                <p className="text-slate-500 text-xs">Take Profit</p>
+                <p className="text-green-400 font-medium">${data.position.take_profit.toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           {/* Account Balance */}
@@ -196,7 +249,7 @@ export default function ToobitLivePage() {
           {/* Active Position */}
           <div className="rounded-xl p-4 border border-slate-700 bg-slate-900/50">
             <div className="flex items-center gap-2 text-slate-400 mb-2">
-              <TrendingUp className="w-4 h-4" />
+              <Activity className="w-4 h-4" />
               <span className="text-sm font-medium">Active Position</span>
             </div>
             {data?.position ? (
@@ -213,7 +266,10 @@ export default function ToobitLivePage() {
                 </p>
               </>
             ) : (
-              <p className="text-slate-500">No active position</p>
+              <div className="flex flex-col items-center justify-center py-2">
+                <span className="text-2xl mb-1">⏳</span>
+                <p className="text-slate-500 text-sm">Waiting for signal...</p>
+              </div>
             )}
           </div>
 

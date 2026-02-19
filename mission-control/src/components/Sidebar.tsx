@@ -33,7 +33,7 @@ const navItems: NavItem[] = [
     subItems: [
       { label: 'Overview', href: '/trading' },
       { label: 'Kraken', href: '/trading/bot/kraken' },
-      { label: 'Toobit', href: '/trading/bot/toobit' },
+      { label: 'Toobit', href: '/trading/bot/toobit/live' },
       { label: 'Jupiter', href: '/trading/bot/jupiter' },
       { label: 'Polymarket', href: '/trading/bot/polymarket' },
     ],
