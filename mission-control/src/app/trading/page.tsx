@@ -96,6 +96,22 @@ const BOTS = [
     description: 'XRP COIN-M PERP futures',
     exchange: 'pionex',
   },
+  {
+    id: 'pionex-btc',
+    name: 'Pionex BTC',
+    icon: '₿',
+    color: 'orange',
+    description: 'BTC aggressive breakout strategy',
+    exchange: 'pionex',
+  },
+  {
+    id: 'pionex-dca',
+    name: 'Pionex DCA',
+    icon: '📊',
+    color: 'indigo',
+    description: 'Mean reversion with 3 safety levels',
+    exchange: 'pionex',
+  },
 ]
 
 export default function TradingPage() {
@@ -104,6 +120,8 @@ export default function TradingPage() {
   const [toobitData, setToobitData] = useState<PaperState | null>(null)
   const [jupiterData, setJupiterData] = useState<JupiterState | null>(null)
   const [pionexData, setPionexData] = useState<any>(null)
+  const [pionexBtcData, setPionexBtcData] = useState<any>(null)
+  const [pionexDcaData, setPionexDcaData] = useState<any>(null)
   const [livePrices, setLivePrices] = useState<LivePrice[]>([])
 
   useEffect(() => {
@@ -136,11 +154,13 @@ export default function TradingPage() {
 
   async function fetchAllData() {
     try {
-      const [krakenRes, toobitRes, jupiterRes, pionexRes] = await Promise.all([
+      const [krakenRes, toobitRes, jupiterRes, pionexRes, pionexBtcRes, pionexDcaRes] = await Promise.all([
         fetch('/api/trading-data?exchange=kraken').catch(() => null),
         fetch('/api/trading-data?exchange=toobit').catch(() => null),
         fetch('/api/jupiter-data').catch(() => null),
         fetch('/api/pionex-xrp').catch(() => null),
+        fetch('/api/pionex-btc').catch(() => null),
+        fetch('/api/pionex-dca').catch(() => null),
       ])
 
       if (krakenRes?.ok) {
@@ -158,6 +178,14 @@ export default function TradingPage() {
       if (pionexRes?.ok) {
         const data = await pionexRes.json().catch(() => null)
         if (data) setPionexData(data)
+      }
+      if (pionexBtcRes?.ok) {
+        const data = await pionexBtcRes.json().catch(() => null)
+        if (data) setPionexBtcData(data)
+      }
+      if (pionexDcaRes?.ok) {
+        const data = await pionexDcaRes.json().catch(() => null)
+        if (data) setPionexDcaData(data)
       }
 
     } catch (err) {
@@ -198,6 +226,20 @@ export default function TradingPage() {
           pnl: pionexData ? `${pionexPnl >= 0 ? '+' : ''}${pionexPnl.toFixed(4)} XRP` : '0.0000 XRP',
           trades: pionexData?.totalTrades || 0,
         }
+      case 'pionex-btc':
+        const pionexBtcPnl = pionexBtcData?.realized_pnl || 0
+        return {
+          status: pionexBtcData?.status === 'running' ? 'active' : 'inactive',
+          pnl: pionexBtcData ? `${pionexBtcPnl >= 0 ? '+' : ''}${pionexBtcPnl.toFixed(6)} BTC` : '0.000000 BTC',
+          trades: pionexBtcData?.trades?.length || 0,
+        }
+      case 'pionex-dca':
+        const pionexDcaPnl = pionexDcaData?.realized_pnl || 0
+        return {
+          status: pionexDcaData?.status === 'running' ? 'active' : 'inactive',
+          pnl: pionexDcaData ? `${pionexDcaPnl >= 0 ? '+' : ''}${pionexDcaPnl.toFixed(4)} XRP` : '0.0000 XRP',
+          trades: pionexDcaData?.total_trades || 0,
+        }
       default:
         return { status: 'inactive', pnl: '$0.00', trades: 0 }
     }
@@ -231,6 +273,8 @@ export default function TradingPage() {
           toobitData={toobitData}
           jupiterData={jupiterData}
           pionexData={pionexData}
+          pionexBtcData={pionexBtcData}
+          pionexDcaData={pionexDcaData}
           solPrice={livePrices.find(p => p.symbol === 'SOL')?.price || 140}
         />
 
@@ -247,7 +291,7 @@ export default function TradingPage() {
               <p className="text-slate-400">Loading bot data...</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {BOTS.map((bot) => {
                 const data = getBotData(bot.id)
                 return (
@@ -305,24 +349,27 @@ function LivePriceTicker({ prices }: { prices: LivePrice[] }) {
   )
 }
 
-function SummaryStats({ krakenData, toobitData, jupiterData, pionexData, solPrice }: {
+function SummaryStats({ krakenData, toobitData, jupiterData, pionexData, pionexBtcData, pionexDcaData, solPrice }: {
   krakenData: PaperState | null
   toobitData: PaperState | null
   jupiterData: JupiterState | null
   pionexData: any
+  pionexBtcData: any
+  pionexDcaData: any
   solPrice: number
 }) {
-  const totalBalance = (krakenData?.balance || 0) + (toobitData?.balance || 0) + ((jupiterData?.balance_sol || 0) * solPrice) + (pionexData?.balance || 0)
-  const totalPnl = (krakenData?.realized_pnl || 0) + (toobitData?.realized_pnl || 0) + ((jupiterData?.pnl_sol || 0) * solPrice) + (pionexData?.totalPnl || 0)
-  const totalTrades = (krakenData?.trades?.length || 0) + (toobitData?.trades?.length || 0) + (jupiterData?.trades || 0) + (pionexData?.totalTrades || 0)
-  const activeBots = [krakenData, toobitData, jupiterData].filter(d => d?.status === 'active').length + (pionexData?.status === 'running' ? 1 : 0)
+  const totalBalance = (krakenData?.balance || 0) + (toobitData?.balance || 0) + ((jupiterData?.balance_sol || 0) * solPrice) + (pionexData?.balance || 0) + (pionexBtcData?.balance || 0) + (pionexDcaData?.balance || 0)
+  const totalPnl = (krakenData?.realized_pnl || 0) + (toobitData?.realized_pnl || 0) + ((jupiterData?.pnl_sol || 0) * solPrice) + (pionexData?.realized_pnl || 0) + (pionexBtcData?.realized_pnl || 0) + (pionexDcaData?.realized_pnl || 0)
+  const totalTrades = (krakenData?.trades?.length || 0) + (toobitData?.trades?.length || 0) + (jupiterData?.trades || 0) + (pionexData?.trades?.length || 0) + (pionexBtcData?.trades?.length || 0) + (pionexDcaData?.total_trades || 0)
+  const activeBots = [krakenData, toobitData, jupiterData].filter(d => d?.status === 'active').length + 
+    [pionexData, pionexBtcData, pionexDcaData].filter(d => d?.status === 'running').length
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       <StatCard label="Total Balance" value={`$${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}`} change={null} color="blue" />
       <StatCard label="Total P&L" value={`$${totalPnl.toLocaleString('en-US', { minimumFractionDigits: 2 })}`} change={null} color={totalPnl >= 0 ? 'green' : 'red'} positive={totalPnl >= 0} />
       <StatCard label="Total Trades" value={totalTrades.toString()} change={null} color="purple" />
-      <StatCard label="Active Bots" value={`${activeBots}/4`} change={null} color="cyan" />
+      <StatCard label="Active Bots" value={`${activeBots}/6`} change={null} color="cyan" />
     </div>
   )
 }
@@ -338,6 +385,8 @@ function BotCard({ bot, status, pnl, trades }: {
     yellow: { bg: 'bg-yellow-500/10', border: 'border-yellow-500/30', text: 'text-yellow-400', hover: 'hover:border-yellow-500/60' },
     pink: { bg: 'bg-pink-500/10', border: 'border-pink-500/30', text: 'text-pink-400', hover: 'hover:border-pink-500/60' },
     cyan: { bg: 'bg-cyan-500/10', border: 'border-cyan-500/30', text: 'text-cyan-400', hover: 'hover:border-cyan-500/60' },
+    orange: { bg: 'bg-orange-500/10', border: 'border-orange-500/30', text: 'text-orange-400', hover: 'hover:border-orange-500/60' },
+    indigo: { bg: 'bg-indigo-500/10', border: 'border-indigo-500/30', text: 'text-indigo-400', hover: 'hover:border-indigo-500/60' },
   }
 
   const colors = colorClasses[bot.color]
