@@ -261,7 +261,7 @@ export default function TradingPage() {
             href="/"
             className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
           >
-            ← Back to Mission Control
+            ← Back to The Hub
           </Link>
         </div>
 

@@ -76,7 +76,7 @@ export default function ChatMonitor() {
           <Link href="/" className="p-2 hover:bg-slate-800 rounded">
             <ArrowLeft className="w-5 h-5" />
           </Link>
-          <h1 className="font-bold">Mission Control Monitor</h1>
+          <h1 className="font-bold">The Hub Monitor</h1>
         </div>
         
         <div className="flex items-center gap-2">

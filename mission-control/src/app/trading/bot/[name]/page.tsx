@@ -76,6 +76,27 @@ const BOT_CONFIG: Record<
     description: 'Solana DEX arbitrage and momentum trading',
     exchange: 'jupiter',
   },
+  'pionex-xrp': {
+    name: 'Pionex XRP',
+    icon: '⚡',
+    color: 'cyan',
+    description: 'XRP COIN-M PERP futures with trend strategy',
+    exchange: 'pionex',
+  },
+  'pionex-btc': {
+    name: 'Pionex BTC',
+    icon: '₿',
+    color: 'orange',
+    description: 'BTC aggressive breakout strategy',
+    exchange: 'pionex',
+  },
+  'pionex-dca': {
+    name: 'Pionex DCA',
+    icon: '📊',
+    color: 'indigo',
+    description: 'Mean reversion with 3 safety levels',
+    exchange: 'pionex',
+  },
 }
 
 export default function BotDetailPage() {
@@ -87,9 +108,11 @@ export default function BotDetailPage() {
   const [livePrices, setLivePrices] = useState({
     btc: 0,
     eth: 0,
+    xrp: 0,
     sol: 0,
     btcChange: 0,
     ethChange: 0,
+    xrpChange: 0,
     solChange: 0,
   })
   
@@ -97,9 +120,13 @@ export default function BotDetailPage() {
   const [krakenData, setKrakenData] = useState<PaperState | null>(null)
   const [toobitData, setToobitData] = useState<PaperState | null>(null)
   const [jupiterData, setJupiterData] = useState<JupiterState | null>(null)
+  const [pionexXrpData, setPionexXrpData] = useState<any>(null)
+  const [pionexBtcData, setPionexBtcData] = useState<any>(null)
+  const [pionexDcaData, setPionexDcaData] = useState<any>(null)
 
   const config = BOT_CONFIG[botName]
   const isJupiter = botName === 'jupiter'
+  const isPionex = botName.startsWith('pionex')
   
   // Get current data based on bot
   const currentData = botName === 'kraken' ? krakenData : botName === 'toobit' ? toobitData : null
@@ -126,9 +153,11 @@ export default function BotDetailPage() {
         setLivePrices({
           btc: data.btc || 0,
           eth: data.eth || 0,
+          xrp: data.xrp || 0,
           sol: data.sol || 0,
           btcChange: data.btcChange || 0,
           ethChange: data.ethChange || 0,
+          xrpChange: data.xrpChange || 0,
           solChange: data.solChange || 0,
         })
       }
@@ -141,10 +170,25 @@ export default function BotDetailPage() {
     setLoading(true)
     try {
       if (isJupiter) {
-        // Fetch Jupiter data
         const jupiterRes = await fetch('/api/jupiter-data')
         if (jupiterRes.ok) {
           setJupiterData(await jupiterRes.json())
+        }
+      } else if (isPionex) {
+        // Fetch Pionex data based on specific bot
+        const endpoint = botName === 'pionex-xrp' ? '/api/pionex-xrp' : 
+                        botName === 'pionex-btc' ? '/api/pionex-btc' : 
+                        '/api/pionex-dca'
+        const res = await fetch(endpoint)
+        if (res.ok) {
+          const data = await res.json()
+          if (botName === 'pionex-xrp') {
+            setPionexXrpData(data)
+          } else if (botName === 'pionex-btc') {
+            setPionexBtcData(data)
+          } else {
+            setPionexDcaData(data)
+          }
         }
       } else {
         // Fetch CEX data
@@ -206,9 +250,10 @@ export default function BotDetailPage() {
         </div>
 
         {/* Live Prices Banner */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-4 gap-4 mb-8">
           <PriceCard symbol="BTC" price={livePrices.btc} change={livePrices.btcChange} />
           <PriceCard symbol="ETH" price={livePrices.eth} change={livePrices.ethChange} />
+          <PriceCard symbol="XRP" price={livePrices.xrp} change={livePrices.xrpChange} />
           <PriceCard symbol="SOL" price={livePrices.sol} change={livePrices.solChange} />
         </div>
 
