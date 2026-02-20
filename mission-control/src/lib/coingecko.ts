@@ -3,11 +3,12 @@
 
 const API_BASE = 'https://api.coingecko.com/api/v3'
 
-// Fallback prices when API is rate limited
+// Fallback prices when API is rate limited (updated Feb 20, 2026)
 const FALLBACK_PRICES = {
-  bitcoin: { usd: 95000, usd_24h_change: 2.5, usd_market_cap: 1870000000000 },
-  ethereum: { usd: 2650, usd_24h_change: 1.8, usd_market_cap: 318000000000 },
-  solana: { usd: 195, usd_24h_change: -0.5, usd_market_cap: 89000000000 },
+  bitcoin: { usd: 67700, usd_24h_change: 1.2, usd_market_cap: 1340000000000 },
+  ethereum: { usd: 2450, usd_24h_change: 0.8, usd_market_cap: 295000000000 },
+  solana: { usd: 142, usd_24h_change: -1.5, usd_market_cap: 65000000000 },
+  ripple: { usd: 1.42, usd_24h_change: 0.5, usd_market_cap: 82000000000 },
 }
 
 export interface Coin {
@@ -94,6 +95,7 @@ export const BOT_COIN_IDS = {
   bitcoin: 'bitcoin',
   ethereum: 'ethereum',
   solana: 'solana',
+  ripple: 'ripple',  // XRP
   cardano: 'cardano',
   polkadot: 'polkadot',
   chainlink: 'chainlink',
@@ -105,24 +107,29 @@ export async function getBotCoinPrices(): Promise<{
   btc: number
   eth: number
   sol: number
+  xrp: number
   btcChange: number
   ethChange: number
   solChange: number
+  xrpChange: number
 }> {
   try {
     const prices = await getSimplePrice([
       BOT_COIN_IDS.bitcoin,
       BOT_COIN_IDS.ethereum,
       BOT_COIN_IDS.solana,
+      BOT_COIN_IDS.ripple,
     ])
 
     return {
       btc: prices.bitcoin?.usd || FALLBACK_PRICES.bitcoin.usd,
       eth: prices.ethereum?.usd || FALLBACK_PRICES.ethereum.usd,
       sol: prices.solana?.usd || FALLBACK_PRICES.solana.usd,
+      xrp: prices.ripple?.usd || FALLBACK_PRICES.ripple.usd,
       btcChange: prices.bitcoin?.usd_24h_change || FALLBACK_PRICES.bitcoin.usd_24h_change,
       ethChange: prices.ethereum?.usd_24h_change || FALLBACK_PRICES.ethereum.usd_24h_change,
       solChange: prices.solana?.usd_24h_change || FALLBACK_PRICES.solana.usd_24h_change,
+      xrpChange: prices.ripple?.usd_24h_change || FALLBACK_PRICES.ripple.usd_24h_change,
     }
   } catch (error) {
     console.error('Error fetching bot coin prices:', error)
@@ -130,9 +137,11 @@ export async function getBotCoinPrices(): Promise<{
       btc: FALLBACK_PRICES.bitcoin.usd,
       eth: FALLBACK_PRICES.ethereum.usd,
       sol: FALLBACK_PRICES.solana.usd,
+      xrp: FALLBACK_PRICES.ripple.usd,
       btcChange: FALLBACK_PRICES.bitcoin.usd_24h_change,
       ethChange: FALLBACK_PRICES.ethereum.usd_24h_change,
       solChange: FALLBACK_PRICES.solana.usd_24h_change,
+      xrpChange: FALLBACK_PRICES.ripple.usd_24h_change,
     }
   }
 }

@@ -144,6 +144,7 @@ export default function TradingPage() {
         setLivePrices([
           { symbol: 'BTC', name: 'Bitcoin', price: data.btc || 0, change24h: data.btcChange || 0 },
           { symbol: 'ETH', name: 'Ethereum', price: data.eth || 0, change24h: data.ethChange || 0 },
+          { symbol: 'XRP', name: 'XRP', price: data.xrp || 0, change24h: data.xrpChange || 0 },
           { symbol: 'SOL', name: 'Solana', price: data.sol || 0, change24h: data.solChange || 0 },
         ])
       }
