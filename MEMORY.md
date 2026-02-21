@@ -72,3 +72,14 @@ Daily files (memory/YYYY-MM-DD.md) are raw notes; this is your curated wisdom.
 - **Strategy Education**: Order blocks, FVGs, liquidity sweeps, VWAP, kill zones, ATR, multi-timeframe hierarchy
 
 **Location**: `agents/{ghost,oracle,pixel,synthesis}/learning/2026-02-20-*.md`
+
+### Agent Learning Batch — Feb 21, 2026
+Five new guides created overnight covering multi-agent coordination, Python patterns, Android architecture, trading risk, and UI design:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Synthesis | Multi-Agent Coordination Patterns | `2026-02-21-0420-multi-agent-coordination.md` |
+| Ghost | Frozen Dataclass + Validation | `2026-02-21-0423-dataclass-validation-pattern.md` |
+| Nexus | Real-Time Trading Architecture (Android) | `2026-02-21-0441-realtime-trading-arch.md` |
+| Oracle | Volatility Clustering (Risk/Sizing) | `2026-02-21-0453-volatility-clustering.md` |
+| Pixel | CSS Glassmorphism Pattern | `2026-02-21-0524-css-glassmorphism-card.md` |
