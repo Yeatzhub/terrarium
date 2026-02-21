@@ -60,13 +60,13 @@ export function useGateway(options: UseGatewayOptions) {
             minProtocol: 3,
             maxProtocol: 3,
             client: {
-              id: 'mission-control',
+              id: 'the-hub',
               version: '2.0.0',
               platform: 'web',
               mode: 'app'
             },
             locale: 'en-US',
-            userAgent: 'mission-control/2.0.0',
+            userAgent: 'the-hub/2.0.0',
             token: options.token
           }
         }

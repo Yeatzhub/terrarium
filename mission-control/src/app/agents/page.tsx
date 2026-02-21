@@ -763,7 +763,7 @@ function getAgentDescription(id: string): string {
     ghost: 'Backend engineer. Handles APIs, databases, and infrastructure.',
     oracle: 'Trading analyst. Strategies, backtesting, and market analysis.',
     pixel: 'UI/UX engineer. Dashboards, components, and visual polish.',
-    nexus: 'Android developer. Mission Control mobile app and Kotlin expertise.',
+    nexus: 'Android developer. The Hub mobile app and Kotlin expertise.',
   }
   return descriptions[id] || 'AI agent ready to help.'
 }
