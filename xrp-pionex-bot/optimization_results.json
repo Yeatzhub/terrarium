@@ -1,0 +1,171 @@
+{
+  "total_tests": 105,
+  "results": [
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 10,
+        "entry_z": 2.0,
+        "exit_z": 0.5
+      },
+      "win_rate": 47.05882352941176,
+      "total_pnl": -24.817274782744345,
+      "profit_percent": -2.421140689464494,
+      "total_trades": 17,
+      "final_xrp": 100.0,
+      "max_drawdown": 16.767663503431876
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 15,
+        "entry_z": 2.5,
+        "exit_z": 0.3
+      },
+      "win_rate": 66.66666666666666,
+      "total_pnl": -17.1563388604191,
+      "profit_percent": -1.5535700147407663,
+      "total_trades": 6,
+      "final_xrp": 100.0,
+      "max_drawdown": 11.670980256235774
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 15,
+        "entry_z": 2.5,
+        "exit_z": 0.7
+      },
+      "win_rate": 80.0,
+      "total_pnl": 8.20901377605979,
+      "profit_percent": 0.5792149269758321,
+      "total_trades": 5,
+      "final_xrp": 100.0,
+      "max_drawdown": 7.075055369424326
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 20,
+        "entry_z": 2.0,
+        "exit_z": 0.3
+      },
+      "win_rate": 66.66666666666666,
+      "total_pnl": 20.021391827681065,
+      "profit_percent": 1.2967696057994924,
+      "total_trades": 18,
+      "final_xrp": 100.0,
+      "max_drawdown": 12.91909783114754
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 20,
+        "entry_z": 2.0,
+        "exit_z": 0.7
+      },
+      "win_rate": 55.55555555555556,
+      "total_pnl": -70.8132112599616,
+      "profit_percent": -6.262180459477899,
+      "total_trades": 18,
+      "final_xrp": 100.0,
+      "max_drawdown": 9.980495078394584
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 20,
+        "entry_z": 2.5,
+        "exit_z": 0.5
+      },
+      "win_rate": 71.42857142857143,
+      "total_pnl": 26.224129715189424,
+      "profit_percent": 2.0380720783236184,
+      "total_trades": 7,
+      "final_xrp": 100.0,
+      "max_drawdown": 6.831193926951848
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 20,
+        "entry_z": 2.5,
+        "exit_z": 0.7
+      },
+      "win_rate": 57.14285714285714,
+      "total_pnl": -0.334269285431845,
+      "profit_percent": -0.17440355278318975,
+      "total_trades": 7,
+      "final_xrp": 100.0,
+      "max_drawdown": 10.907728514320185
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 30,
+        "entry_z": 2.0,
+        "exit_z": 0.3
+      },
+      "win_rate": 63.63636363636363,
+      "total_pnl": -24.922496785961496,
+      "profit_percent": -2.29613726720667,
+      "total_trades": 11,
+      "final_xrp": 100.0,
+      "max_drawdown": 15.182659909425455
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 30,
+        "entry_z": 2.5,
+        "exit_z": 0.3
+      },
+      "win_rate": 42.857142857142854,
+      "total_pnl": -126.77134253243501,
+      "profit_percent": -10.69585481369366,
+      "total_trades": 7,
+      "final_xrp": 100.0,
+      "max_drawdown": 18.811479321809546
+    },
+    {
+      "strategy": "mean_reversion",
+      "params": {
+        "lookback": 30,
+        "entry_z": 2.5,
+        "exit_z": 0.5
+      },
+      "win_rate": 25.0,
+      "total_pnl": -77.83613180599234,
+      "profit_percent": -6.646588039092649,
+      "total_trades": 8,
+      "final_xrp": 100.0,
+      "max_drawdown": 29.348153593209638
+    },
+    {
+      "strategy": "trend_following",
+      "params": {
+        "fast_ema": 9,
+        "slow_ema": 21
+      },
+      "win_rate": 31.57894736842105,
+      "total_pnl": 190.04065536707532,
+      "profit_percent": 15.43519398531843,
+      "total_trades": 19,
+      "final_xrp": 100.0,
+      "max_drawdown": 17.651383602560593
+    },
+    {
+      "strategy": "trend_following",
+      "params": {
+        "fast_ema": 12,
+        "slow_ema": 26
+      },
+      "win_rate": 23.52941176470588,
+      "total_pnl": -153.58315144856013,
+      "profit_percent": -13.11712466524737,
+      "total_trades": 17,
+      "final_xrp": 100.0,
+      "max_drawdown": 16.342809629182828
+    }
+  ]
+}

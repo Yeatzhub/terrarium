@@ -133,3 +133,15 @@ Three more guides covering live P&L tracking, Bollinger Band strategy, and integ
 | Ghost | Live P&L Tracker | `2026-02-21-1223-live-pnl-tracker.md` |
 | Oracle | Bollinger Band Squeeze Strategy | `2026-02-21-1225-bollinger-band-squeeze.md` |
 | Synthesis | Integration Test Examples (Additional) | `2026-02-21-1220-integration-test-examples.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Afternoon/Evening)
+Six more guides covering async patterns, CSS, Kotlin Flow, market structure, and pre-trade checklists:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Async Context Manager Pattern | `2026-02-21-1323-async-context-managers.md` |
+| Ghost | Pre-Trade Checklist | `2026-02-21-1423-pre-trade-checklist.md` |
+| Pixel | CSS Container Queries | `2026-02-21-1324-css-container-queries.md` |
+| Nexus | Kotlin Coroutines & Flow Patterns | `2026-02-21-1341-kotlin-coroutines-flow-patterns.md` |
+| Oracle | Liquidity Sweeps | `2026-02-21-1353-liquidity-sweeps.md` |
+| Synthesis | Context Handoff Protocols | `2026-02-21-1420-context-handoff-protocols.md` |

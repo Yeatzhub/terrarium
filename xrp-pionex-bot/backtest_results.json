@@ -1,0 +1,3097 @@
+{
+  "backtests": [
+    {
+      "backtest_date": "2026-02-21T14:30:07.376201",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:07.304000",
+        "end_date": "2026-02-21T13:30:07.317000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:07.705084",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:07.627000",
+        "end_date": "2026-02-21T13:30:07.639000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:08.571046",
+      "strategy": "Bollinger Squeeze",
+      "parameters": {
+        "period": 20,
+        "squeeze_threshold": 0.02
+      },
+      "results": {
+        "strategy_name": "Bollinger Squeeze",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:08.163000",
+        "end_date": "2026-02-21T13:30:08.168000",
+        "parameters": {
+          "period": 20,
+          "squeeze_threshold": 0.02
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:08.900546",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 20,
+        "entry_z": 2.0,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 13,
+        "winning_trades": 9,
+        "losing_trades": 4,
+        "win_rate": 69.23076923076923,
+        "total_pnl": -58.99841291079974,
+        "avg_pnl": -4.538339454676904,
+        "max_drawdown": 9.69972061642219,
+        "final_xrp": 100.0,
+        "final_usdt": 937.7939677653413,
+        "profit_percent": -5.183836019554898,
+        "start_date": "2026-01-23T10:30:08.818000",
+        "end_date": "2026-02-21T13:30:08.830000",
+        "parameters": {
+          "lookback": 20,
+          "entry_z": 2.0,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:09.367115",
+      "strategy": "EMA9-21 Trend",
+      "parameters": {
+        "fast_ema": 9,
+        "slow_ema": 21
+      },
+      "results": {
+        "strategy_name": "EMA9-21 Trend",
+        "total_trades": 17,
+        "winning_trades": 4,
+        "losing_trades": 13,
+        "win_rate": 23.52941176470588,
+        "total_pnl": -61.480610867733944,
+        "avg_pnl": -3.6165065216314085,
+        "max_drawdown": 11.242582464721599,
+        "final_xrp": 100.0,
+        "final_usdt": 934.4618990348353,
+        "profit_percent": -5.4615084137637195,
+        "start_date": "2026-01-23T10:30:09.333000",
+        "end_date": "2026-02-21T13:30:09.338000",
+        "parameters": {
+          "fast_ema": 9,
+          "slow_ema": 21
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:09.724607",
+      "strategy": "EMA5-20 Trend",
+      "parameters": {
+        "fast_ema": 5,
+        "slow_ema": 20
+      },
+      "results": {
+        "strategy_name": "EMA5-20 Trend",
+        "total_trades": 28,
+        "winning_trades": 7,
+        "losing_trades": 21,
+        "win_rate": 25.0,
+        "total_pnl": -43.70215745227672,
+        "avg_pnl": -1.5607913375813114,
+        "max_drawdown": 15.342550596614748,
+        "final_xrp": 100.0,
+        "final_usdt": 949.581796425688,
+        "profit_percent": -4.2015169645259975,
+        "start_date": "2026-01-23T10:30:09.637000",
+        "end_date": "2026-02-21T13:30:09.649000",
+        "parameters": {
+          "fast_ema": 5,
+          "slow_ema": 20
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.077494",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 20,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 20,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.116618",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 20,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 20,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.157132",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 20,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 20,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.196788",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.236202",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.275633",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.315422",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 30,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.355718",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 30,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 30,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.395894",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 30,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 30,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.434701",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 20,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 20,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.473765",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 20,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 20,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.512332",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 20,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 20,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.551241",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 25,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 25,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.590193",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 25,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 25,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.629057",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 25,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 25,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.668669",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.708918",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.749152",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.786767",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 20,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 20,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.824446",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 20,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 20,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.861931",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 20,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 20,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.899575",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 25,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 25,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.937327",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 25,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 25,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:10.975461",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 25,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 25,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:11.013903",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 30,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:11.052119",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 30,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 30,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:11.090347",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 20,
+        "rsi_oversold": 30,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -85.0671710945903,
+        "avg_pnl": -85.0671710945903,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 914.6825789685828,
+        "profit_percent": -7.109785085951424,
+        "start_date": "2026-01-23T10:30:10.009000",
+        "end_date": "2026-02-21T13:30:10.020000",
+        "parameters": {
+          "rsi_period": 20,
+          "rsi_oversold": 30,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:11.436294",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 7,
+        "rsi_oversold": 20,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-23T10:30:11.362000",
+        "end_date": "2026-02-21T13:30:11.373000",
+        "parameters": {
+          "rsi_period": 7,
+          "rsi_oversold": 20,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:30:11.768347",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 35,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 1,
+        "losing_trades": 0,
+        "win_rate": 100.0,
+        "total_pnl": 12.322539043289774,
+        "avg_pnl": 12.322539043289774,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1012.0722891140355,
+        "profit_percent": 1.0060240928362798,
+        "start_date": "2026-01-23T10:30:11.695000",
+        "end_date": "2026-02-21T13:30:11.706000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 35,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:47.204798",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 20,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:47.112000",
+        "end_date": "2026-02-21T13:31:47.129000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 20,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:47.594512",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 20,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:47.502000",
+        "end_date": "2026-02-21T13:31:47.518000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 20,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:48.142553",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 20,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:48.082000",
+        "end_date": "2026-02-21T13:31:48.087000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 20,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:48.523694",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 20,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:48.428000",
+        "end_date": "2026-02-21T13:31:48.444000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 20,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:48.925677",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:48.838000",
+        "end_date": "2026-02-21T13:31:48.853000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:49.404245",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:49.312000",
+        "end_date": "2026-02-21T13:31:49.327000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:49.743817",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:49.650000",
+        "end_date": "2026-02-21T13:31:49.666000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:50.084143",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 25,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:49.992000",
+        "end_date": "2026-02-21T13:31:50.008000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 25,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:50.574803",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 30,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -117.04777020007823,
+        "avg_pnl": -117.04777020007823,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 882.7019798330599,
+        "profit_percent": -9.774835013911684,
+        "start_date": "2026-01-11T18:31:50.481000",
+        "end_date": "2026-02-21T13:31:50.497000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 30,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:50.904897",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 1,
+        "losing_trades": 0,
+        "win_rate": 100.0,
+        "total_pnl": 155.2093252689831,
+        "avg_pnl": 155.2093252689831,
+        "max_drawdown": 0.17678986607410252,
+        "final_xrp": 100.0,
+        "final_usdt": 1154.9590753547438,
+        "profit_percent": 12.913256279561988,
+        "start_date": "2026-01-11T18:31:50.812000",
+        "end_date": "2026-02-21T13:31:50.828000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 30,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:51.258657",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 30,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:51.166000",
+        "end_date": "2026-02-21T13:31:51.182000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 30,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:51.614127",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 30,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -21.178080797001137,
+        "avg_pnl": -21.178080797001137,
+        "max_drawdown": 4.728328004106099,
+        "final_xrp": 100.0,
+        "final_usdt": 978.5716692599458,
+        "profit_percent": -1.7856942283378505,
+        "start_date": "2026-01-11T18:31:51.518000",
+        "end_date": "2026-02-21T13:31:51.534000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 30,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:51.963940",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 35,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 1,
+        "losing_trades": 0,
+        "win_rate": 100.0,
+        "total_pnl": 18.66658416823368,
+        "avg_pnl": 18.66658416823368,
+        "max_drawdown": 2.433986151312657,
+        "final_xrp": 100.0,
+        "final_usdt": 1018.4163341763218,
+        "profit_percent": 1.5346945146934747,
+        "start_date": "2026-01-11T18:31:51.867000",
+        "end_date": "2026-02-21T13:31:51.883000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 35,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:52.343730",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 35,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -11.16715228738893,
+        "avg_pnl": -11.16715228738893,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 988.582597733627,
+        "profit_percent": -0.9514501888644038,
+        "start_date": "2026-01-11T18:31:52.248000",
+        "end_date": "2026-02-21T13:31:52.264000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 35,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:53.025003",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 10,
+        "rsi_oversold": 35,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -44.684466873771264,
+        "avg_pnl": -44.684466873771264,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 955.0652831399525,
+        "profit_percent": -3.744559738337292,
+        "start_date": "2026-01-11T18:31:52.931000",
+        "end_date": "2026-02-21T13:31:52.947000",
+        "parameters": {
+          "rsi_period": 10,
+          "rsi_oversold": 35,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:53.366786",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 20,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:53.274000",
+        "end_date": "2026-02-21T13:31:53.290000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 20,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:53.702114",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 20,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:53.608000",
+        "end_date": "2026-02-21T13:31:53.623000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 20,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:54.047503",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 20,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:53.956000",
+        "end_date": "2026-02-21T13:31:53.972000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 20,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:54.392576",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 20,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:54.301000",
+        "end_date": "2026-02-21T13:31:54.317000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 20,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:54.736971",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 25,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:54.642000",
+        "end_date": "2026-02-21T13:31:54.658000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 25,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:55.068003",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 25,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:54.977000",
+        "end_date": "2026-02-21T13:31:54.992000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 25,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:55.406458",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 25,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:55.313000",
+        "end_date": "2026-02-21T13:31:55.328000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 25,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:55.746835",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 25,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:55.652000",
+        "end_date": "2026-02-21T13:31:55.668000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 25,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:56.112082",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:56.020000",
+        "end_date": "2026-02-21T13:31:56.035000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:56.452597",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:56.361000",
+        "end_date": "2026-02-21T13:31:56.377000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:56.817679",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -174.26882520465736,
+        "avg_pnl": -174.26882520465736,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 825.4809248042216,
+        "profit_percent": -14.543256266314868,
+        "start_date": "2026-01-11T18:31:56.722000",
+        "end_date": "2026-02-21T13:31:56.737000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:57.146905",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 30,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -5.38813083310698,
+        "avg_pnl": -5.38813083310698,
+        "max_drawdown": 8.033285976050081,
+        "final_xrp": 100.0,
+        "final_usdt": 994.3616191760321,
+        "profit_percent": -0.46986506866397804,
+        "start_date": "2026-01-11T18:31:57.062000",
+        "end_date": "2026-02-21T13:31:57.078000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 30,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:57.487263",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 35,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -1.873461869113365,
+        "avg_pnl": -1.873461869113365,
+        "max_drawdown": 9.519015364399124,
+        "final_xrp": 100.0,
+        "final_usdt": 997.8762881449657,
+        "profit_percent": -0.17697598791952865,
+        "start_date": "2026-01-11T18:31:57.392000",
+        "end_date": "2026-02-21T13:31:57.408000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 35,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:58.188365",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 35,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -56.46573599920642,
+        "avg_pnl": -56.46573599920642,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 943.2840140288216,
+        "profit_percent": -4.726332164264875,
+        "start_date": "2026-01-11T18:31:58.097000",
+        "end_date": "2026-02-21T13:31:58.113000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 35,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:58.517416",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 14,
+        "rsi_oversold": 35,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -47.76223918850448,
+        "avg_pnl": -47.76223918850448,
+        "max_drawdown": 8.163578379668781,
+        "final_xrp": 100.0,
+        "final_usdt": 951.9875108661902,
+        "profit_percent": -4.0010407611508185,
+        "start_date": "2026-01-11T18:31:58.423000",
+        "end_date": "2026-02-21T13:31:58.439000",
+        "parameters": {
+          "rsi_period": 14,
+          "rsi_oversold": 35,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:58.850471",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 20,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:58.761000",
+        "end_date": "2026-02-21T13:31:58.777000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 20,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:59.190065",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 20,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:59.136000",
+        "end_date": "2026-02-21T13:31:59.139000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 20,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:59.526810",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 20,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:59.441000",
+        "end_date": "2026-02-21T13:31:59.457000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 20,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:31:59.934499",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 20,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:31:59.842000",
+        "end_date": "2026-02-21T13:31:59.858000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 20,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:00.275400",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 25,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:00.186000",
+        "end_date": "2026-02-21T13:32:00.202000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 25,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:01.071321",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 25,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:01.006000",
+        "end_date": "2026-02-21T13:32:01.010000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 25,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:01.509893",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 25,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:01.418000",
+        "end_date": "2026-02-21T13:32:01.434000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 25,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:01.964808",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 30,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:01.874000",
+        "end_date": "2026-02-21T13:32:01.890000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 30,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:02.324214",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 30,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:02.232000",
+        "end_date": "2026-02-21T13:32:02.248000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 30,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:02.759273",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 30,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:02.667000",
+        "end_date": "2026-02-21T13:32:02.683000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 30,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:03.120781",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 30,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -42.02320396529554,
+        "avg_pnl": -42.02320396529554,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 957.7265460474372,
+        "profit_percent": -3.5227878293802446,
+        "start_date": "2026-01-11T18:32:03.032000",
+        "end_date": "2026-02-21T13:32:03.047000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 30,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:03.503918",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 35,
+        "rsi_overbought": 65
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:03.412000",
+        "end_date": "2026-02-21T13:32:03.428000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 35,
+          "rsi_overbought": 65
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:03.859238",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 35,
+        "rsi_overbought": 70
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:03.767000",
+        "end_date": "2026-02-21T13:32:03.783000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 35,
+          "rsi_overbought": 70
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:04.214062",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 35,
+        "rsi_overbought": 75
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 1,
+        "losing_trades": 0,
+        "win_rate": 100.0,
+        "total_pnl": 120.12447204278622,
+        "avg_pnl": 120.12447204278622,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1119.874222104478,
+        "profit_percent": 9.98951850870649,
+        "start_date": "2026-01-11T18:32:04.143000",
+        "end_date": "2026-02-21T13:32:04.159000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 35,
+          "rsi_overbought": 75
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:04.570484",
+      "strategy": "RSI-MACD Momentum",
+      "parameters": {
+        "rsi_period": 21,
+        "rsi_oversold": 35,
+        "rsi_overbought": 80
+      },
+      "results": {
+        "strategy_name": "RSI-MACD Momentum",
+        "total_trades": 1,
+        "winning_trades": 0,
+        "losing_trades": 1,
+        "win_rate": 0.0,
+        "total_pnl": -156.6131744344212,
+        "avg_pnl": -156.6131744344212,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 843.136575615829,
+        "profit_percent": -13.071952032014241,
+        "start_date": "2026-01-11T18:32:04.481000",
+        "end_date": "2026-02-21T13:32:04.497000",
+        "parameters": {
+          "rsi_period": 21,
+          "rsi_oversold": 35,
+          "rsi_overbought": 80
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:06.542716",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 10,
+        "entry_z": 2.0,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 17,
+        "winning_trades": 8,
+        "losing_trades": 9,
+        "win_rate": 47.05882352941176,
+        "total_pnl": -24.817274782744345,
+        "avg_pnl": -1.4598396931026085,
+        "max_drawdown": 16.767663503431876,
+        "final_xrp": 100.0,
+        "final_usdt": 970.9463117264262,
+        "profit_percent": -2.421140689464494,
+        "start_date": "2026-01-11T18:32:06.471000",
+        "end_date": "2026-02-21T13:32:06.481000",
+        "parameters": {
+          "lookback": 10,
+          "entry_z": 2.0,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:07.232233",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 10,
+        "entry_z": 2.5,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 1,
+        "winning_trades": 1,
+        "losing_trades": 0,
+        "win_rate": 100.0,
+        "total_pnl": 0.06107079067894,
+        "avg_pnl": 0.06107079067894,
+        "max_drawdown": 13.694562639507385,
+        "final_xrp": 100.0,
+        "final_usdt": 999.8108208463145,
+        "profit_percent": -0.01576492947378938,
+        "start_date": "2026-01-11T18:32:07.151000",
+        "end_date": "2026-02-21T13:32:07.167000",
+        "parameters": {
+          "lookback": 10,
+          "entry_z": 2.5,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:07.646135",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 10,
+        "entry_z": 2.5,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:07.564000",
+        "end_date": "2026-02-21T13:32:07.580000",
+        "parameters": {
+          "lookback": 10,
+          "entry_z": 2.5,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:08.016374",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 10,
+        "entry_z": 2.5,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:07.936000",
+        "end_date": "2026-02-21T13:32:07.952000",
+        "parameters": {
+          "lookback": 10,
+          "entry_z": 2.5,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:08.365512",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 10,
+        "entry_z": 3.0,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:08.282000",
+        "end_date": "2026-02-21T13:32:08.297000",
+        "parameters": {
+          "lookback": 10,
+          "entry_z": 3.0,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:08.711497",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 10,
+        "entry_z": 3.0,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:08.631000",
+        "end_date": "2026-02-21T13:32:08.647000",
+        "parameters": {
+          "lookback": 10,
+          "entry_z": 3.0,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:09.080981",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 10,
+        "entry_z": 3.0,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:08.998000",
+        "end_date": "2026-02-21T13:32:09.014000",
+        "parameters": {
+          "lookback": 10,
+          "entry_z": 3.0,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:11.444240",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 15,
+        "entry_z": 2.5,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 6,
+        "winning_trades": 4,
+        "losing_trades": 2,
+        "win_rate": 66.66666666666666,
+        "total_pnl": -17.1563388604191,
+        "avg_pnl": -2.85938981006985,
+        "max_drawdown": 11.670980256235774,
+        "final_xrp": 100.0,
+        "final_usdt": 981.3571598231107,
+        "profit_percent": -1.5535700147407663,
+        "start_date": "2026-01-11T18:32:11.364000",
+        "end_date": "2026-02-21T13:32:11.373000",
+        "parameters": {
+          "lookback": 15,
+          "entry_z": 2.5,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:11.772672",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 15,
+        "entry_z": 2.5,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 2,
+        "winning_trades": 1,
+        "losing_trades": 1,
+        "win_rate": 50.0,
+        "total_pnl": 4.39498059121774,
+        "avg_pnl": 2.19749029560887,
+        "max_drawdown": 4.045668541566347,
+        "final_xrp": 100.0,
+        "final_usdt": 1003.8921329162981,
+        "profit_percent": 0.3243444096915103,
+        "start_date": "2026-01-11T18:32:11.688000",
+        "end_date": "2026-02-21T13:32:11.703000",
+        "parameters": {
+          "lookback": 15,
+          "entry_z": 2.5,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:12.111120",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 15,
+        "entry_z": 2.5,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 5,
+        "winning_trades": 4,
+        "losing_trades": 1,
+        "win_rate": 80.0,
+        "total_pnl": 8.20901377605979,
+        "avg_pnl": 1.641802755211958,
+        "max_drawdown": 7.075055369424326,
+        "final_xrp": 100.0,
+        "final_usdt": 1006.9505791237099,
+        "profit_percent": 0.5792149269758321,
+        "start_date": "2026-01-11T18:32:12.026000",
+        "end_date": "2026-02-21T13:32:12.042000",
+        "parameters": {
+          "lookback": 15,
+          "entry_z": 2.5,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:12.441231",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 15,
+        "entry_z": 3.0,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:12.357000",
+        "end_date": "2026-02-21T13:32:12.373000",
+        "parameters": {
+          "lookback": 15,
+          "entry_z": 3.0,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:12.776898",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 15,
+        "entry_z": 3.0,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:12.696000",
+        "end_date": "2026-02-21T13:32:12.712000",
+        "parameters": {
+          "lookback": 15,
+          "entry_z": 3.0,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:13.241467",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 15,
+        "entry_z": 3.0,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:13.192000",
+        "end_date": "2026-02-21T13:32:13.198000",
+        "parameters": {
+          "lookback": 15,
+          "entry_z": 3.0,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:14.677117",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 20,
+        "entry_z": 2.0,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 18,
+        "winning_trades": 12,
+        "losing_trades": 6,
+        "win_rate": 66.66666666666666,
+        "total_pnl": 20.021391827681065,
+        "avg_pnl": 1.1122995459822813,
+        "max_drawdown": 12.91909783114754,
+        "final_xrp": 100.0,
+        "final_usdt": 1015.5612352695938,
+        "profit_percent": 1.2967696057994924,
+        "start_date": "2026-01-11T18:32:14.576000",
+        "end_date": "2026-02-21T13:32:14.592000",
+        "parameters": {
+          "lookback": 20,
+          "entry_z": 2.0,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:15.381191",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 20,
+        "entry_z": 2.0,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 18,
+        "winning_trades": 10,
+        "losing_trades": 8,
+        "win_rate": 55.55555555555556,
+        "total_pnl": -70.8132112599616,
+        "avg_pnl": -3.9340672922200897,
+        "max_drawdown": 9.980495078394584,
+        "final_xrp": 100.0,
+        "final_usdt": 924.8538344862652,
+        "profit_percent": -6.262180459477899,
+        "start_date": "2026-01-11T18:32:15.277000",
+        "end_date": "2026-02-21T13:32:15.293000",
+        "parameters": {
+          "lookback": 20,
+          "entry_z": 2.0,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:15.967947",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 20,
+        "entry_z": 2.5,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 7,
+        "winning_trades": 5,
+        "losing_trades": 2,
+        "win_rate": 71.42857142857143,
+        "total_pnl": 26.224129715189424,
+        "avg_pnl": 3.7463042450270607,
+        "max_drawdown": 6.831193926951848,
+        "final_xrp": 100.0,
+        "final_usdt": 1024.4568649398834,
+        "profit_percent": 2.0380720783236184,
+        "start_date": "2026-01-11T18:32:15.881000",
+        "end_date": "2026-02-21T13:32:15.897000",
+        "parameters": {
+          "lookback": 20,
+          "entry_z": 2.5,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:16.342758",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 20,
+        "entry_z": 2.5,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 7,
+        "winning_trades": 4,
+        "losing_trades": 3,
+        "win_rate": 57.14285714285714,
+        "total_pnl": -0.334269285431845,
+        "avg_pnl": -0.047752755061692145,
+        "max_drawdown": 10.907728514320185,
+        "final_xrp": 100.0,
+        "final_usdt": 997.9071573666017,
+        "profit_percent": -0.17440355278318975,
+        "start_date": "2026-01-11T18:32:16.256000",
+        "end_date": "2026-02-21T13:32:16.272000",
+        "parameters": {
+          "lookback": 20,
+          "entry_z": 2.5,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:16.986726",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 20,
+        "entry_z": 3.0,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:16.902000",
+        "end_date": "2026-02-21T13:32:16.918000",
+        "parameters": {
+          "lookback": 20,
+          "entry_z": 3.0,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:17.316373",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 20,
+        "entry_z": 3.0,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:17.232000",
+        "end_date": "2026-02-21T13:32:17.248000",
+        "parameters": {
+          "lookback": 20,
+          "entry_z": 3.0,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:18.762708",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 30,
+        "entry_z": 2.0,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 11,
+        "winning_trades": 7,
+        "losing_trades": 4,
+        "win_rate": 63.63636363636363,
+        "total_pnl": -24.922496785961496,
+        "avg_pnl": -2.2656815259964995,
+        "max_drawdown": 15.182659909425455,
+        "final_xrp": 100.0,
+        "final_usdt": 972.4463527935198,
+        "profit_percent": -2.29613726720667,
+        "start_date": "2026-01-11T18:32:18.671000",
+        "end_date": "2026-02-21T13:32:18.687000",
+        "parameters": {
+          "lookback": 30,
+          "entry_z": 2.0,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:19.897989",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 30,
+        "entry_z": 2.5,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 7,
+        "winning_trades": 3,
+        "losing_trades": 4,
+        "win_rate": 42.857142857142854,
+        "total_pnl": -126.77134253243501,
+        "avg_pnl": -18.11019179034786,
+        "max_drawdown": 18.811479321809546,
+        "final_xrp": 100.0,
+        "final_usdt": 871.649742235676,
+        "profit_percent": -10.69585481369366,
+        "start_date": "2026-01-11T18:32:19.808000",
+        "end_date": "2026-02-21T13:32:19.824000",
+        "parameters": {
+          "lookback": 30,
+          "entry_z": 2.5,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:20.196810",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 30,
+        "entry_z": 2.5,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 8,
+        "winning_trades": 2,
+        "losing_trades": 6,
+        "win_rate": 25.0,
+        "total_pnl": -77.83613180599234,
+        "avg_pnl": -9.729516475749042,
+        "max_drawdown": 29.348153593209638,
+        "final_xrp": 100.0,
+        "final_usdt": 920.2409435308882,
+        "profit_percent": -6.646588039092649,
+        "start_date": "2026-01-11T18:32:20.141000",
+        "end_date": "2026-02-21T13:32:20.146000",
+        "parameters": {
+          "lookback": 30,
+          "entry_z": 2.5,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:20.872519",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 30,
+        "entry_z": 3.0,
+        "exit_z": 0.3
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:20.787000",
+        "end_date": "2026-02-21T13:32:20.803000",
+        "parameters": {
+          "lookback": 30,
+          "entry_z": 3.0,
+          "exit_z": 0.3
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:21.257518",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 30,
+        "entry_z": 3.0,
+        "exit_z": 0.5
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:21.173000",
+        "end_date": "2026-02-21T13:32:21.189000",
+        "parameters": {
+          "lookback": 30,
+          "entry_z": 3.0,
+          "exit_z": 0.5
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:21.613257",
+      "strategy": "Mean Reversion",
+      "parameters": {
+        "lookback": 30,
+        "entry_z": 3.0,
+        "exit_z": 0.7
+      },
+      "results": {
+        "strategy_name": "Mean Reversion",
+        "total_trades": 0,
+        "winning_trades": 0,
+        "losing_trades": 0,
+        "win_rate": 0.0,
+        "total_pnl": 0.0,
+        "avg_pnl": 0.0,
+        "max_drawdown": 0.0,
+        "final_xrp": 100.0,
+        "final_usdt": 1000.0,
+        "profit_percent": 0.0,
+        "start_date": "2026-01-11T18:32:21.531000",
+        "end_date": "2026-02-21T13:32:21.547000",
+        "parameters": {
+          "lookback": 30,
+          "entry_z": 3.0,
+          "exit_z": 0.7
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:23.559987",
+      "strategy": "EMA9-21 Trend",
+      "parameters": {
+        "fast_ema": 9,
+        "slow_ema": 21
+      },
+      "results": {
+        "strategy_name": "EMA9-21 Trend",
+        "total_trades": 19,
+        "winning_trades": 6,
+        "losing_trades": 13,
+        "win_rate": 31.57894736842105,
+        "total_pnl": 190.04065536707532,
+        "avg_pnl": 10.00213975616186,
+        "max_drawdown": 17.651383602560593,
+        "final_xrp": 100.0,
+        "final_usdt": 1185.2223278238212,
+        "profit_percent": 15.43519398531843,
+        "start_date": "2026-01-11T18:32:23.483000",
+        "end_date": "2026-02-21T13:32:23.499000",
+        "parameters": {
+          "fast_ema": 9,
+          "slow_ema": 21
+        }
+      }
+    },
+    {
+      "backtest_date": "2026-02-21T14:32:24.936167",
+      "strategy": "EMA12-26 Trend",
+      "parameters": {
+        "fast_ema": 12,
+        "slow_ema": 26
+      },
+      "results": {
+        "strategy_name": "EMA12-26 Trend",
+        "total_trades": 17,
+        "winning_trades": 4,
+        "losing_trades": 13,
+        "win_rate": 23.52941176470588,
+        "total_pnl": -153.58315144856013,
+        "avg_pnl": -9.03430302638589,
+        "max_drawdown": 16.342809629182828,
+        "final_xrp": 100.0,
+        "final_usdt": 842.5945040170315,
+        "profit_percent": -13.11712466524737,
+        "start_date": "2026-01-11T18:32:24.863000",
+        "end_date": "2026-02-21T13:32:24.879000",
+        "parameters": {
+          "fast_ema": 12,
+          "slow_ema": 26
+        }
+      }
+    }
+  ]
+}
