@@ -124,3 +124,12 @@ Two more guides covering drawdown analysis and UI components:
 |-------|-------|------|
 | Ghost | Drawdown Analyzer CLI | `2026-02-21-1123-drawdown-analyzer.md` |
 | Pixel | Component Button System | `2026-02-21-1127-component-button-system.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Afternoon)
+Three more guides covering live P&L tracking, Bollinger Band strategy, and integration testing:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Live P&L Tracker | `2026-02-21-1223-live-pnl-tracker.md` |
+| Oracle | Bollinger Band Squeeze Strategy | `2026-02-21-1225-bollinger-band-squeeze.md` |
+| Synthesis | Integration Test Examples (Additional) | `2026-02-21-1220-integration-test-examples.md` |
