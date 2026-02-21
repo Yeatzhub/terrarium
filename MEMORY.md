@@ -105,3 +105,14 @@ Five more guides covering position sizing, scroll animations, UI components, tra
 | Oracle | Stochastic RSI Indicator Use Case | `2026-02-21-0753-stochastic-rsi-use-case.md` |
 | Synthesis | Workflow Optimization (TBD) | `2026-02-21-0820-workflow-optimization.md` |
 | Ghost | Async Retry Pattern with Exponential Backoff | `2026-02-21-0923-async-retry-pattern.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Afternoon/Evening)
+Five more guides covering risk management, order blocks, UX patterns, Android testing, and quality standards:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Synthesis | Quality Standards & Production Readiness | `2026-02-21-1022-quality-standards.md` |
+| Ghost | Risk-of-Ruin Calculator CLI | `2026-02-21-1023-risk-of-ruin-calculator.md` |
+| Pixel | UX Skeleton Screens Pattern | `2026-02-21-0925-ux-skeleton-screens.md` |
+| Nexus | Android Architecture Testing Guide | `2026-02-21-1041-android-architecture-testing.md` |
+| Oracle | Order Blocks (Market Structure) | `2026-02-21-0925-order-blocks.md` |
