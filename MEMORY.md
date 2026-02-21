@@ -92,3 +92,14 @@ Three more guides covering testing patterns, logging infrastructure, and trading
 | Synthesis | Integration Test Examples for Multi-Agent Systems | `2026-02-21-0620-integration-test-examples.md` |
 | Ghost | Structured Logging with Context Propagation | `2026-02-21-0623-structured-logging.md` |
 | Oracle | Multi-Timeframe Confluence (Timing/Structure) | `2026-02-21-0624-multi-timeframe-confluence.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Mid-Day)
+Five more guides covering position sizing, scroll animations, UI components, trading indicators, and workflow optimization:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Position Sizer v2 (CSV batch + safety caps) | `2026-02-21-0723-position-sizer-v2.md` |
+| Pixel | CSS Scroll-Driven Animations | `2026-02-21-0724-css-scroll-driven-animations.md` |
+| Nexus | Jetpack Compose Sparkline Component | `2026-02-21-0741-compose-sparkline-component.md` |
+| Oracle | Stochastic RSI Indicator Use Case | `2026-02-21-0753-stochastic-rsi-use-case.md` |
+| Synthesis | Workflow Optimization (TBD) | `2026-02-21-0820-workflow-optimization.md` |
