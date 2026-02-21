@@ -1,7 +1,16 @@
 {
-  "xrp_balance": "105",
-  "usdt_balance": "993.067146550",
-  "positions": {},
+  "xrp_balance": "455.4860",
+  "usdt_balance": "495.788581808941900",
+  "positions": {
+    "XRP": {
+      "symbol": "XRP_USDT",
+      "side": "long",
+      "entry_price": "1.4181167",
+      "amount": "350.4860",
+      "timestamp": "2026-02-21T16:45:55.468984",
+      "unrealized_pnl": "0"
+    }
+  },
   "trades": [
     {
       "id": "trade_1_1771707911",
@@ -15,10 +24,23 @@
       "pnl": "0.281553750",
       "pnl_percent": "3.906562187812187812187812188",
       "status": "closed"
+    },
+    {
+      "id": "trade_1_1771713955",
+      "symbol": "XRP_USDT",
+      "side": "buy",
+      "entry_price": "1.4181167",
+      "exit_price": null,
+      "amount": "350.4860",
+      "entry_time": "2026-02-21T16:45:55.468984",
+      "exit_time": null,
+      "pnl": "0",
+      "pnl_percent": "0",
+      "status": "open"
     }
   ],
   "winning_trades": 1,
   "losing_trades": 0,
-  "total_trades": 2,
-  "saved_at": "2026-02-21T15:05:11.821363"
+  "total_trades": 3,
+  "saved_at": "2026-02-21T16:45:55.469130"
 }
