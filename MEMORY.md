@@ -164,3 +164,4 @@ Six more guides covering decomposition, MC validation, Room DB, and market struc
 | Ghost | Monte Carlo Backtest Validator | `2026-02-21-1623-mc-validator.md` |
 | Nexus | Room Database Advanced Patterns | `2026-02-21-1641-room-database-patterns.md` |
 | Oracle | BOS vs ChoCH Market Structure | `2026-02-21-1653-bos-choch-structure.md` |
+| Pixel | CSS Grid Subgrid Pattern | `2026-02-21-1726-css-grid-subgrid.md` |
