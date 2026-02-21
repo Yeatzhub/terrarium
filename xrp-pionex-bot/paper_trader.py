@@ -277,7 +277,7 @@ class PaperTrader:
         print(f"Winning Trades: {stats['winning_trades']}")
         print(f"Losing Trades: {stats['losing_trades']}")
         print(f"Win Rate: {stats['win_rate']:.2f}%")
-        print(f"Total P&L: ${stats['total_pnl_usd']:.2f} USDT")
+        print(f"Total P&L: ${stats['total_pnl']:.2f} USDT")
         print(f"Current XRP: {stats['current_xrp']:.4f}")
         print(f"Current USDT: ${stats['current_usdt']:.2f}")
         print(f"Profit: {stats['profit_percent']:.2f}%")

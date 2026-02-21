@@ -1,0 +1,24 @@
+{
+  "xrp_balance": "105",
+  "usdt_balance": "993.067146550",
+  "positions": {},
+  "trades": [
+    {
+      "id": "trade_1_1771707911",
+      "symbol": "XRP_USDT",
+      "side": "buy",
+      "entry_price": "1.44144",
+      "exit_price": "1.49850",
+      "amount": "10",
+      "entry_time": "2026-02-21T15:05:11.821007",
+      "exit_time": "2026-02-21T15:05:11.821325",
+      "pnl": "0.281553750",
+      "pnl_percent": "3.906562187812187812187812188",
+      "status": "closed"
+    }
+  ],
+  "winning_trades": 1,
+  "losing_trades": 0,
+  "total_trades": 2,
+  "saved_at": "2026-02-21T15:05:11.821363"
+}
