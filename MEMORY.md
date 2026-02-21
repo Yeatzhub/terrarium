@@ -116,3 +116,11 @@ Five more guides covering risk management, order blocks, UX patterns, Android te
 | Pixel | UX Skeleton Screens Pattern | `2026-02-21-0925-ux-skeleton-screens.md` |
 | Nexus | Android Architecture Testing Guide | `2026-02-21-1041-android-architecture-testing.md` |
 | Oracle | Order Blocks (Market Structure) | `2026-02-21-0925-order-blocks.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Evening)
+Two more guides covering drawdown analysis and UI components:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Drawdown Analyzer CLI | `2026-02-21-1123-drawdown-analyzer.md` |
+| Pixel | Component Button System | `2026-02-21-1127-component-button-system.md` |
