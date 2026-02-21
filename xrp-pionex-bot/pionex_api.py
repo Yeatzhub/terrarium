@@ -118,7 +118,8 @@ class PionexAPI:
     def _simulate_ticker(self, symbol: str) -> Dict:
         """Simulate ticker data for testing when API unavailable"""
         import random
-        base_price = 2.0 if "XRP" in symbol else 50000.0
+        # Use realistic XRP price (~$1.44 as of Feb 2026)
+        base_price = 1.44 if "XRP" in symbol else 50000.0
         variation = random.uniform(-0.02, 0.02)
         price = base_price * (1 + variation)
         
@@ -134,20 +135,28 @@ class PionexAPI:
         }
     
     def _simulate_klines(self, symbol: str, limit: int) -> List[Dict]:
-        """Simulate OHLCV data for backtesting"""
+        """Simulate OHLCV data for backtesting with mean reversion"""
         import random
         candles = []
-        base_price = 2.0 if "XRP" in symbol else 50000.0
+        # Use realistic XRP price (~$1.44 as of Feb 2026)
+        base_price = 1.44 if "XRP" in symbol else 50000.0
         current_price = base_price
         
         for i in range(limit):
             timestamp = int(time.time() * 1000) - (limit - i) * 3600000
-            change = random.uniform(-0.015, 0.015)
+            
+            # Mean reversion: pull price back toward base
+            deviation = (current_price - base_price) / base_price
+            mean_reversion = -deviation * 0.1  # Pull back 10% of deviation per candle
+            
+            # Random walk with mean reversion
+            random_change = random.uniform(-0.008, 0.008)  # Reduced volatility
+            change = random_change + mean_reversion
             
             open_price = current_price
             close_price = current_price * (1 + change)
-            high_price = max(open_price, close_price) * (1 + random.uniform(0, 0.005))
-            low_price = min(open_price, close_price) * (1 - random.uniform(0, 0.005))
+            high_price = max(open_price, close_price) * (1 + random.uniform(0, 0.003))
+            low_price = min(open_price, close_price) * (1 - random.uniform(0, 0.003))
             volume = random.uniform(10000, 100000)
             
             candles.append({
