@@ -83,3 +83,12 @@ Five new guides created overnight covering multi-agent coordination, Python patt
 | Nexus | Real-Time Trading Architecture (Android) | `2026-02-21-0441-realtime-trading-arch.md` |
 | Oracle | Volatility Clustering (Risk/Sizing) | `2026-02-21-0453-volatility-clustering.md` |
 | Pixel | CSS Glassmorphism Pattern | `2026-02-21-0524-css-glassmorphism-card.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Morning)
+Three more guides covering testing patterns, logging infrastructure, and trading strategy:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Synthesis | Integration Test Examples for Multi-Agent Systems | `2026-02-21-0620-integration-test-examples.md` |
+| Ghost | Structured Logging with Context Propagation | `2026-02-21-0623-structured-logging.md` |
+| Oracle | Multi-Timeframe Confluence (Timing/Structure) | `2026-02-21-0624-multi-timeframe-confluence.md` |
