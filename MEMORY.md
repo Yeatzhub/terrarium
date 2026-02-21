@@ -104,3 +104,4 @@ Five more guides covering position sizing, scroll animations, UI components, tra
 | Nexus | Jetpack Compose Sparkline Component | `2026-02-21-0741-compose-sparkline-component.md` |
 | Oracle | Stochastic RSI Indicator Use Case | `2026-02-21-0753-stochastic-rsi-use-case.md` |
 | Synthesis | Workflow Optimization (TBD) | `2026-02-21-0820-workflow-optimization.md` |
+| Ghost | Async Retry Pattern with Exponential Backoff | `2026-02-21-0923-async-retry-pattern.md` |
