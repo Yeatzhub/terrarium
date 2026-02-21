@@ -145,3 +145,12 @@ Six more guides covering async patterns, CSS, Kotlin Flow, market structure, and
 | Nexus | Kotlin Coroutines & Flow Patterns | `2026-02-21-1341-kotlin-coroutines-flow-patterns.md` |
 | Oracle | Liquidity Sweeps | `2026-02-21-1353-liquidity-sweeps.md` |
 | Synthesis | Context Handoff Protocols | `2026-02-21-1420-context-handoff-protocols.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Late Afternoon)
+Three more guides covering regime detection, ATR use case, and form validation:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Regime Detector | `2026-02-21-1523-regime-detector.md` |
+| Oracle | ATR Use Case | `2026-02-21-1526-atr-use-case.md` |
+| Pixel | UX Form Validation Patterns | `2026-02-21-1528-ux-form-validation-patterns.md` |
