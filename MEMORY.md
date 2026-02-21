@@ -99,6 +99,7 @@ Five more guides covering position sizing, scroll animations, UI components, tra
 | Agent | Topic | File |
 |-------|-------|------|
 | Ghost | Position Sizer v2 (CSV batch + safety caps) | `2026-02-21-0723-position-sizer-v2.md` |
+| Ghost | Trade Journal P&L Analyzer CLI | `2026-02-21-0823-trade-journal-analyzer.md` |
 | Pixel | CSS Scroll-Driven Animations | `2026-02-21-0724-css-scroll-driven-animations.md` |
 | Nexus | Jetpack Compose Sparkline Component | `2026-02-21-0741-compose-sparkline-component.md` |
 | Oracle | Stochastic RSI Indicator Use Case | `2026-02-21-0753-stochastic-rsi-use-case.md` |
