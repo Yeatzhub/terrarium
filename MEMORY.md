@@ -154,3 +154,13 @@ Three more guides covering regime detection, ATR use case, and form validation:
 | Ghost | Regime Detector | `2026-02-21-1523-regime-detector.md` |
 | Oracle | ATR Use Case | `2026-02-21-1526-atr-use-case.md` |
 | Pixel | UX Form Validation Patterns | `2026-02-21-1528-ux-form-validation-patterns.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Late Afternoon/Evening)
+Six more guides covering decomposition, MC validation, Room DB, and market structure:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Synthesis | Task Decomposition Patterns | `2026-02-21-1620-task-decomposition.md` |
+| Ghost | Monte Carlo Backtest Validator | `2026-02-21-1623-mc-validator.md` |
+| Nexus | Room Database Advanced Patterns | `2026-02-21-1641-room-database-patterns.md` |
+| Oracle | BOS vs ChoCH Market Structure | `2026-02-21-1653-bos-choch-structure.md` |
