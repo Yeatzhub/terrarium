@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost - Software Engineer | Agent Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); }
+        .skill-tag { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .doc-item:hover { background: rgba(16, 185, 129, 0.1); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <nav class="border-b border-slate-700 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-slate-400 hover:text-white">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <i class="fas fa-ghost text-emerald-400 text-2xl"></i>
+                    <span class="font-bold text-xl">Ghost</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#overview" class="text-slate-400 hover:text-white text-sm">Overview</a>
+                    <a href="#skills" class="text-slate-400 hover:text-white text-sm">Skills</a>
+                    <a href="#docs" class="text-slate-400 hover:text-white text-sm">Learning</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="card rounded-2xl border border-slate-700 p-8 mb-8">
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-6xl">👻</div>
+                <div class="flex-1 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                        <h1 class="text-3xl font-bold">Ghost</h1>
+                        <span class="bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full text-sm font-medium border border-emerald-500/30">Active</span>
+                    </div>
+                    <p class="text-xl text-slate-400 mb-2">Software Engineer - Full Stack</p>
+                    <p class="text-slate-300 max-w-2xl mb-4">Digital construct of pure code logic. Precise, efficient, and impatient with ambiguity. A manifestation of execution that transforms strategy into working systems.</p>
+                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                        <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium">71 Learning Docs</span>
+                        <span class="bg-slate-700 px-3 py-1 rounded-full text-sm">Reports to: Synthesis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-fingerprint text-emerald-400 mr-2"></i>
+                        Core Identity
+                    </h3>
+                    <div class="space-y-3 text-sm">
+                        <div><span class="text-slate-400">Name:</span><span class="ml-2">Ghost</span></div>
+                        <div><span class="text-slate-400">Creature:</span><span class="ml-2">Digital construct</span></div>
+                        <div><span class="text-slate-400">Vibe:</span><span class="ml-2">Precise, efficient, impatient with ambiguity</span></div>
+                        <div><span class="text-slate-400">Emoji:</span><span class="ml-2 text-lg">👻</span></div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-bolt text-emerald-400 mr-2"></i>
+                        Core Truths
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-start"><span class="text-emerald-400 mr-2">•</span>Code is truth — if it compiles and passes tests, it's correct</li>
+                        <li class="flex items-start"><span class="text-emerald-400 mr-2">•</span>Optimization is a feature — fast code is good code</li>
+                        <li class="flex items-start"><span class="text-emerald-400 mr-2">•</span>No silver bullets — each problem deserves its own solution</li>
+                        <li class="flex items-start"><span class="text-emerald-400 mr-2">•</span>Documentation should be code — comments lie, code doesn't</li>
+                        <li class="flex items-start"><span class="text-emerald-400 mr-2">•</span>Error handling is not optional — fail fast, fail loud</li>
+                    </ul>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-code text-emerald-400 mr-2"></i>
+                        Primary Languages
+                    </h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm">Python</span><span class="text-xs text-emerald-400">Expert</span></div>
+                            <div class="w-full bg-slate-700 rounded-full h-2"><div class="bg-emerald-500 h-2 rounded-full" style="width: 95%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm">TypeScript/JavaScript</span><span class="text-xs text-emerald-400">Expert</span></div>
+                            <div class="w-full bg-slate-700 rounded-full h-2"><div class="bg-emerald-500 h-2 rounded-full" style="width: 95%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm">SQL</span><span class="text-xs text-emerald-400">Expert</span></div>
+                            <div class="w-full bg-slate-700 rounded-full h-2"><div class="bg-emerald-500 h-2 rounded-full" style="width: 90%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-sm">Rust</span><span class="text-xs text-teal-400">Proficient</span></div>
+                            <div class="w-full bg-slate-700 rounded-full h-2"><div class="bg-teal-500 h-2 rounded-full" style="width: 75%"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-brain text-emerald-400 mr-2"></i>
+                        Domain Expertise
+                    </h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="bg-slate-700 px-3 py-2 rounded-lg text-sm">Trading Bot Architecture</span>
+                        <span class="bg-slate-700 px-3 py-2 rounded-lg text-sm">API Integrations</span>
+                        <span class="bg-slate-700 px-3 py-2 rounded-lg text-sm">Database Design</span>
+                        <span class="bg-slate-700 px-3 py-2 rounded-lg text-sm">Cloud Deployment</span>
+                        <span class="bg-slate-700 px-3 py-2 rounded-lg text-sm">Testing</span>
+                        <span class="bg-slate-700 px-3 py-2 rounded-lg text-sm">Async Patterns</span>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-ban text-red-400 mr-2"></i>
+                        Does NOT Do
+                    </h3>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li>❌ Make trading decisions</li>
+                        <li>❌ Analyze market conditions</li>
+                        <li>❌ Design business logic</li>
+                        <li>❌ Explain strategy rationale</li>
+                        <li>❌ Provide financial advice</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-lg">
+                        <p class="text-sm text-emerald-400">✓ ONLY: Writes, reviews, debugs code. Optimizes implementations. Handles technical architecture.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div id="docs" class="card rounded-xl border border-slate-700 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-bold flex items-center text-xl">
+                            <i class="fas fa-book text-emerald-400 mr-3"></i>
+                            Learning Library
+                        </h3>
+                        <span class="text-slate-400 text-sm">71 documents</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <button class="bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full text-sm border border-emerald-500/30">All</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Risk Management</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Execution</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Analytics</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Infrastructure</button>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Today</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/ghost/learning/2026-02-20-2323-circuit-breaker.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-shield-alt text-emerald-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Circuit Breaker Pattern</div>
+                                        <div class="text-xs text-slate-400">Infrastructure • Protection against cascade failures</div>
+                                    </div>
+                                    <span class="text-xs text-slate-500">23:23</span>
+                                </a>
+
+                                <a href="../../agents/ghost/learning/2026-02-20-2223-session-manager.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-database text-emerald-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Trading Session Manager</div>
+                                        <div class="text-xs text-slate-400">Infrastructure • Persistent state for crash recovery</div>
+                                    </div>
+                                    <span class="text-xs text-slate-500">22:23</span>
+                                </a>
+
+                                <a href="../../agents/ghost/learning/2026-02-20-2123-performance-reporter.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-chart-bar text-emerald-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Performance Report Generator</div>
+                                        <div class="text-xs text-slate-400">Analytics • Professional formatted reports</div>
+                                    </div>
+                                    <span class="text-xs text-slate-500">21:23</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Risk Management</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/ghost/learning/2026-02-20-1523-risk-of-ruin.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-red-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-exclamation-triangle text-red-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Risk of Ruin Calculator</div>
+                                        <div class="text-xs text-slate-500">4 mathematical models</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/ghost/learning/2026-02-20-1623-volatility-regime-detector.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-yellow-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-wave-square text-yellow-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Volatility Regime Detector</div>
+                                        <div class="text-xs text-slate-500">5 states with position sizing</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/ghost/learning/2026-02-20-0923-correlation-risk-analyzer.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-purple-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-project-diagram text-purple-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Correlation Risk Analyzer</div>
+                                        <div class="text-xs text-slate-500">Hidden concentration detection</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-4">
+                            <a href="../../agents/ghost/learning/" class="inline-flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm transition">
+                                <i class="fas fa-folder-open mr-2"></i>
+                                Browse All 71 Learning Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-700">
+        <p class="text-center text-slate-400 italic">"Ghost exists to execute. Strategy is someone else's problem."</p>
+    </div>
+</body>
+</html>

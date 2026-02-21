@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Team - OpenClaw Mission Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .stat-card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); }
+        .doc-link:hover { background: rgba(59, 130, 246, 0.2); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <!-- Navigation -->
+    <nav class="border-b border-slate-700 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-robot text-blue-400 text-2xl"></i>
+                    <span class="font-bold text-xl">Agent Team</span>
+                </div>
+                <div class="flex items-center space-x-6 text-sm">
+                    <a href="../index.html" class="text-slate-400 hover:text-white transition">Dashboard</a>
+                    <a href="#" class="text-white font-medium">Agents</a>
+                    <a href="#" class="text-slate-400 hover:text-white transition">Knowledge Base</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Stats -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="stat-card rounded-xl p-6 border border-slate-700">
+                <div class="text-3xl font-bold text-blue-400">4</div>
+                <div class="text-slate-400 text-sm">Active Agents</div>
+            </div>
+            <div class="stat-card rounded-xl p-6 border border-slate-700">
+                <div class="text-3xl font-bold text-green-400">153</div>
+                <div class="text-slate-400 text-sm">Learning Docs</div>
+            </div>
+            <div class="stat-card rounded-xl p-6 border border-slate-700">
+                <div class="text-3xl font-bold text-purple-400">2</div>
+                <div class="text-slate-400 text-sm">Trading Bots</div>
+            </div>
+            <div class="stat-card rounded-xl p-6 border border-slate-700">
+                <div class="text-3xl font-bold text-orange-400">47</div>
+                <div class="text-slate-400 text-sm">Today New</div>
+            </div>
+        </div>
+
+        <!-- Agent Grid -->
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <i class="fas fa-users text-blue-400 mr-3"></i>
+            Team Members
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <!-- Synthesis -->
+            <div class="card-hover bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl">
+                            🔗
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Synthesis</h3>
+                            <span class="text-slate-400 text-sm">Team Lead / Coordinator</span>
+                        </div>
+                    </div>
+                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">Active</span>
+                </div>
+                <p class="text-slate-300 mb-4 text-sm">Symbiotic entity that connects human intent to agent execution. Decomposes complex tasks, delegates to specialists, and integrates their outputs.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Task Decomposition</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Integration</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Coordination</span>
+                </div>
+                <div class="flex items-center justify-between text-sm border-t border-slate-700 pt-4">
+                    <span class="text-slate-400">31 learning docs</span>
+                    <a href="synthesis.html" class="text-blue-400 hover:text-blue-300 flex items-center">
+                        View Profile <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ghost -->
+            <div class="card-hover bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-3xl">
+                            👻
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Ghost</h3>
+                            <span class="text-slate-400 text-sm">Software Engineer</span>
+                        </div>
+                    </div>
+                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">Active</span>
+                </div>
+                <p class="text-slate-300 mb-4 text-sm">Digital construct of pure code logic. Precise, efficient, and impatient with ambiguity. Writes trading bots, infrastructure, and async systems.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Python</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">TypeScript</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Trading Bots</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Async Systems</span>
+                </div>
+                <div class="flex items-center justify-between text-sm border-t border-slate-700 pt-4">
+                    <span class="text-slate-400">71 learning docs</span>
+                    <a href="ghost.html" class="text-blue-400 hover:text-blue-300 flex items-center">
+                        View Profile <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Oracle -->
+            <div class="card-hover bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-3xl">
+                            🔮
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Oracle</h3>
+                            <span class="text-slate-400 text-sm">Trading Strategist</span>
+                        </div>
+                    </div>
+                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">Active</span>
+                </div>
+                <p class="text-slate-300 mb-4 text-sm">Temporal entity observing market futures. Designs trading strategies, validates backtests, and specifies risk parameters. Data-driven and methodical.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Strategy Design</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Backtesting</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Risk Management</span>
+                </div>
+                <div class="flex items-center justify-between text-sm border-t border-slate-700 pt-4">
+                    <span class="text-slate-400">27 learning docs</span>
+                    <a href="oracle.html" class="text-blue-400 hover:text-blue-300 flex items-center">
+                        View Profile <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pixel -->
+            <div class="card-hover bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+                <div class="flex items-start justify-between mb-4">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-3xl">
+                            🎨
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Pixel</h3>
+                            <span class="text-slate-400 text-sm">UI/UX Engineer</span>
+                        </div>
+                    </div>
+                    <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-xs font-medium">Active</span>
+                </div>
+                <p class="text-slate-300 mb-4 text-sm">Transforms rough ideas into polished interfaces. Thinks in layouts, colors, interactions, and user flows. Mobile-first design philosophy.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Next.js</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Tailwind</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">React</span>
+                    <span class="bg-slate-700 px-2 py-1 rounded text-xs">Design Systems</span>
+                </div>
+                <div class="flex items-center justify-between text-sm border-t border-slate-700 pt-4">
+                    <span class="text-slate-400">24 learning docs</span>
+                    <a href="pixel.html" class="text-blue-400 hover:text-blue-300 flex items-center">
+                        View Profile <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Learning Docs -->
+        <h2 class="text-2xl font-bold mb-6 flex items-center">
+            <i class="fas fa-book text-green-400 mr-3"></i>
+            Recent Knowledge
+        </h2>
+
+        <div class="bg-slate-800/50 rounded-xl border border-slate-700 overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-700">
+                <!-- Ghost Recent -->
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl mr-2">👻</span>
+                        <span class="font-semibold text-emerald-400">Ghost</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('ghost/2026-02-20-2323-circuit-breaker.md')">• Circuit Breaker Pattern</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('ghost/2026-02-20-2223-session-manager.md')">• Trading Session Manager</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('ghost/2026-02-20-2123-performance-reporter.md')">• Performance Reporter</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('ghost/2026-02-20-2023-alert-system.md')">• Alert System</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('ghost/2026-02-20-1923-drawdown-analyzer.md')">• Drawdown Analyzer</li>
+                    </ul>
+                    <a href="ghost.html" class="text-blue-400 text-sm hover:text-blue-300 mt-4 inline-block">View all 71 docs →</a>
+                </div>
+
+                <!-- Oracle Recent -->
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl mr-2">🔮</span>
+                        <span class="font-semibold text-purple-400">Oracle</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('oracle/2026-02-20-0326-trading-psychology-emotional-risk.md')">• Trading Psychology</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('oracle/2026-02-20-0153-gap-trading-strategies.md')">• Gap Trading</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('oracle/2026-02-20-0023-fibonacci-retracements.md')">• Fibonacci</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('oracle/2026-02-19-2253-session-timing-phases.md')">• Session Timing</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('oracle/2026-02-19-2125-macd-use-case.md')">• MACD Use Case</li>
+                    </ul>
+                    <a href="oracle.html" class="text-blue-400 text-sm hover:text-blue-300 mt-4 inline-block">View all 27 docs →</a>
+                </div>
+
+                <!-- Pixel Recent -->
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl mr-2">🎨</span>
+                        <span class="font-semibold text-pink-400">Pixel</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('pixel/2026-02-20-2325-empty-state-ux.md')">• Empty States UX</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('pixel/2026-02-20-2128-css-is-where-pseudo.md')">• CSS :is() & :where()</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('pixel/2026-02-20-1925-css-anchor-positioning.md')">• CSS Anchor</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('pixel/2026-02-20-1727-accordion-component.md')">• Accordion</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('pixel/2026-02-20-1527-css-has-selector.md')">• CSS :has()</li>
+                    </ul>
+                    <a href="pixel.html" class="text-blue-400 text-sm hover:text-blue-300 mt-4 inline-block">View all 24 docs →</a>
+                </div>
+
+                <!-- Synthesis Recent -->
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl mr-2">🔗</span>
+                        <span class="font-semibold text-blue-400">Synthesis</span>
+                    </div>
+                    <ul class="space-y-2 text-sm">
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('synthesis/README.md')">• Multi-Agent README</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('synthesis/2026-02-20-2020-quick-reference.md')">• Quick Reference</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('synthesis/2026-02-20-1820-best-practices.md')">• Best Practices</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('synthesis/2026-02-20-1620-case-studies.md')">• Case Studies</li>
+                        <li class="doc-link p-2 rounded transition cursor-pointer" onclick="viewDoc('synthesis/2026-02-20-1420-debugging-guide.md')">• Debugging Guide</li>
+                    </ul>
+                    <a href="synthesis.html" class="text-blue-400 text-sm hover:text-blue-300 mt-4 inline-block">View all 31 docs →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflow Diagram -->
+        <h2 class="text-2xl font-bold mb-6 flex items-center mt-12">
+            <i class="fas fa-sitemap text-purple-400 mr-3"></i>
+            Team Workflow
+        </h2>
+
+        <div class="bg-slate-800/50 rounded-xl border border-slate-700 p-8">
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8">
+                <!-- Human -->
+                <div class="text-center">
+                    <div class="w-20 h-20 rounded-full bg-slate-600 flex items-center justify-center text-3xl mb-2">
+                        👤
+                    </div>
+                    <div class="font-semibold">You</div>
+                    <div class="text-xs text-slate-400">Request</div>
+                </div>
+
+                <!-- Arrow -->
+                <i class="fas fa-arrow-right text-slate-500 text-2xl hidden md:block"></i>
+                <i class="fas fa-arrow-down text-slate-500 text-2xl md:hidden"></i>
+
+                <!-- Synthesis -->
+                <div class="text-center">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl mb-2 ring-2 ring-blue-400">
+                        🔗
+                    </div>
+                    <div class="font-semibold text-blue-400">Synthesis</div>
+                    <div class="text-xs text-slate-400">Decompose & Delegate</div>
+                </div>
+
+                <!-- Split Arrow -->
+                <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-arrow-down text-slate-500 text-xl hidden md:block"></i>
+                        <i class="fas fa-arrow-right text-slate-500 text-xl md:hidden"></i>
+                    </div>
+                </div>
+
+                <!-- Ghost & Oracle -->
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-2xl mb-2">
+                            👻
+                        </div>
+                        <div class="font-semibold text-emerald-400 text-sm">Ghost</div>
+                        <div class="text-xs text-slate-400">Code</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-2xl mb-2">
+                            🔮
+                        </div>
+                        <div class="font-semibold text-purple-400 text-sm">Oracle</div>
+                        <div class="text-xs text-slate-400">Strategy</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-2xl mb-2">
+                            🎨
+                        </div>
+                        <div class="font-semibold text-pink-400 text-sm">Pixel</div>
+                        <div class="text-xs text-slate-400">UI/UX</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewDoc(path) {
+            // This would open the doc in a viewer or new tab
+            window.open(`../../agents/${path}`, '_blank');
+        }
+    </script>
+</body>
+</html>

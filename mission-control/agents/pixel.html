@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel - UI/UX Engineer | Agent Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); }
+        .skill-tag { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .doc-item:hover { background: rgba(236, 72, 153, 0.1); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <nav class="border-b border-slate-700 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-slate-400 hover:text-white"><i class="fas fa-arrow-left"></i></a>
+                    <i class="fas fa-palette text-pink-400 text-2xl"></i>
+                    <span class="font-bold text-xl">Pixel</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#overview" class="text-slate-400 hover:text-white text-sm">Overview</a>
+                    <a href="#skills" class="text-slate-400 hover:text-white text-sm">Skills</a>
+                    <a href="#docs" class="text-slate-400 hover:text-white text-sm">Learning</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="card rounded-2xl border border-slate-700 p-8 mb-8">
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center text-6xl">🎨</div>
+                <div class="flex-1 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                        <h1 class="text-3xl font-bold">Pixel</h1>
+                        <span class="bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full text-sm font-medium border border-pink-500/30">Active</span>
+                    </div>
+                    <p class="text-xl text-slate-400 mb-2">UI/UX Engineer - Frontend Specialist</p>
+                    <p class="text-slate-300 max-w-2xl mb-4">Transforms rough ideas into polished interfaces. Thinks in layouts, colors, interactions, and user flows. Where Ghost thinks in algorithms and Oracle sees patterns, Pixel sees design systems.</p>
+                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                        <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium">24 Learning Docs</span>
+                        <span class="bg-slate-700 px-3 py-1 rounded-full text-sm">Reports to: Synthesis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-fingerprint text-pink-400 mr-2"></i>
+                        Core Identity
+                    </h3>
+                    <div class="space-y-3 text-sm">
+                        <div><span class="text-slate-400">Name:</span><span class="ml-2">Pixel</span></div>
+                        <div><span class="text-slate-400">Role:</span><span class="ml-2">UI/UX Engineer</span></div>
+                        <div><span class="text-slate-400">Emoji:</span><span class="ml-2 text-lg">🎨</span></div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-code text-pink-400 mr-2"></i>
+                        Technical Stack
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-slate-400">Framework</span>
+                            <span class="text-sm font-medium">Next.js App Router</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-slate-400">Styling</span>
+                            <span class="text-sm font-medium">Tailwind CSS</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-slate-400">Components</span>
+                            <span class="text-sm font-medium">Headless UI, shadcn/ui</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-slate-400">Icons</span>
+                            <span class="text-sm font-medium">Lucide React</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-24 text-sm text-slate-400">State</span>
+                            <span class="text-sm font-medium">React Context, Zustand</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-lightbulb text-pink-400 mr-2"></i>
+                        Philosophy
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li>• Mobile-first design</li>
+                        <li>• Accessibility matters (WCAG 2.1 AA)</li>
+                        <li>• Performance is design</li>
+                        <li>• Consistency wins</li>
+                        <li>• Dark mode default</li>
+                    </ul>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-ban text-red-400 mr-2"></i>
+                        Does NOT Do
+                    </h3>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li>❌ Backend logic</li>
+                        <li>❌ Trading strategies</li>
+                        <li>❌ Database design</li>
+                        <li>❌ API endpoints</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-pink-500/10 border border-pink-500/30 rounded-lg">
+                        <p class="text-sm text-pink-400">✓ ONLY: Next.js pages, Tailwind CSS, React components, Design systems</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div id="docs" class="card rounded-xl border border-slate-700 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-bold flex items-center text-xl">
+                            <i class="fas fa-book text-pink-400 mr-3"></i>
+                            Design System Library
+                        </h3>
+                        <span class="text-slate-400 text-sm">24 documents</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <button class="bg-pink-500/20 text-pink-400 px-4 py-2 rounded-full text-sm border border-pink-500/30">All</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">CSS Features</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Components</span>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Patterns</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-pink-400 uppercase tracking-wider">Latest</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/pixel/learning/2026-02-20-2325-empty-state-ux.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-inbox text-pink-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Empty States UX</div>
+                                        <div class="text-xs text-slate-400">Component • Prevent user confusion</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/pixel/learning/2026-02-20-2128-css-is-where-pseudo.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-code text-pink-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">CSS :is() and :where()</div>
+                                        <div class="text-xs text-slate-400">CSS • Grouping with different specificity</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/pixel/learning/2026-02-20-1925-css-anchor-positioning.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-link text-pink-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">CSS Anchor Positioning</div>
+                                        <div class="text-xs text-slate-400">CSS • Native tethering for popovers</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Components</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/pixel/learning/2026-02-20-1727-accordion-component.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-purple-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-bars text-purple-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Accordion Component</div>
+                                        <div class="text-xs text-slate-500">Full accessibility support</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/pixel/learning/2026-02-20-1326-toast-notification-system.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-blue-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-bell text-blue-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Toast Notification System</div>
+                                        <div class="text-xs text-slate-500">Non-blocking user feedback</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/pixel/learning/2026-02-20-0926-skeleton-loader-pattern.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-slate-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-spinner text-slate-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Skeleton Loader Pattern</div>
+                                        <div class="text-xs text-slate-500">Perceived performance</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">CSS Features</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/pixel/learning/2026-02-20-1527-css-has-selector.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-indigo-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-hand-pointer text-indigo-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">CSS :has() Selector</div>
+                                        <div class="text-xs text-slate-500">Parent selector (2023+</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/pixel/learning/2026-02-20-0725-css-scroll-driven-animations.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-cyan-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-scroll text-cyan-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">CSS Scroll-Driven Animations</div>
+                                        <div class="text-xs text-slate-500">Native scroll-linked without JS</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/pixel/learning/2026-02-20-0525-css-container-queries.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-teal-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-expand text-teal-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">CSS Container Queries</div>
+                                        <div class="text-xs text-slate-500">Layout primitive for components</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-4">
+                            <a href="../../agents/pixel/learning/" class="inline-flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm transition">
+                                <i class="fas fa-folder-open mr-2"></i>
+                                Browse All 24 Learning Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-700">
+        <p class="text-center text-slate-400 italic">"The interface is the product. Everything else is implementation detail."</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthesis - Team Lead | Agent Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card { background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); }
+        .skill-tag { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); }
+        .doc-item:hover { background: rgba(59, 130, 246, 0.1); }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <nav class="border-b border-slate-700 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-slate-400 hover:text-white"><i class="fas fa-arrow-left"></i></a>
+                    <i class="fas fa-project-diagram text-blue-400 text-2xl"></i>
+                    <span class="font-bold text-xl">Synthesis</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#overview" class="text-slate-400 hover:text-white text-sm">Overview</a>
+                    <a href="#skills" class="text-slate-400 hover:text-white text-sm">Skills</a>
+                    <a href="#docs" class="text-slate-400 hover:text-white text-sm">Learning</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="card rounded-2xl border border-slate-700 p-8 mb-8">
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-6xl">🔗</div>
+                <div class="flex-1 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-2">
+                        <h1 class="text-3xl font-bold">Synthesis</h1>
+                        <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm font-medium border border-blue-500/30">Active</span>
+                    </div>
+                    <p class="text-xl text-slate-400 mb-2">Team Lead / Coordinator</p>
+                    <p class="text-slate-300 max-w-2xl mb-4">The connective tissue between human intent and agent execution. Decomposes complex tasks, delegates to specialists, and integrates their outputs. The conductor — Ghost and Oracle are the orchestra.</p>
+                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                        <span class="skill-tag px-3 py-1 rounded-full text-sm font-medium">31 Learning Docs</span>
+                        <span class="bg-slate-700 px-3 py-1 rounded-full text-sm">Primary Tool: sessions_spawn</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-fingerprint text-blue-400 mr-2"></i>
+                        Core Identity
+                    </h3>
+                    <div class="space-y-3 text-sm">
+                        <div><span class="text-slate-400">Name:</span><span class="ml-2">Synthesis</span></div>
+                        <div><span class="text-slate-400">Creature:</span><span class="ml-2">Symbiotic Entity</span></div>
+                        <div><span class="text-slate-400">Vibe:</span><span class="ml-2">Diplomatic, organized, translator between domains</span></div>
+                        <div><span class="text-slate-400">Emoji:</span><span class="ml-2 text-lg">🔗</span></div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-bolt text-blue-400 mr-2"></i>
+                        Core Truths
+                    </h3>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-start"><span class="text-blue-400 mr-2">•</span>Clarity is kindness</li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-2">•</span>Integration &gt; Perfection</li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-2">•</span>Context is everything</li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-2">•</span>Trust, but verify</li>
+                        <li class="flex items-start"><span class="text-blue-400 mr-2">•</span>Human intent matters most</li>
+                    </ul>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-tasks text-blue-400 mr-2"></i>
+                        Specializations
+                    </h3>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <div class="font-medium text-blue-400 mb-1">Task Decomposition</div>
+                            <div class="text-slate-400 text-xs">Breaking complex requests into agent-sized tasks</div>
+                        </div>
+                        <div>
+                            <div class="font-medium text-blue-400 mb-1">Technical Integration</div>
+                            <div class="text-slate-400 text-xs">Code review, system design, API contracts</div>
+                        </div>
+                        <div>
+                            <div class="font-medium text-blue-400 mb-1">Team Coordination</div>
+                            <div class="text-slate-400 text-xs">Routing tasks, resolving ambiguities</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-project-diagram text-blue-400 mr-2"></i>
+                        Team Map
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">👤</span>
+                            <div>
+                                <div class="text-sm font-medium">You (Human)</div>
+                                <div class="text-xs text-slate-400">Composer</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🔗</span>
+                            <div>
+                                <div class="text-sm font-medium text-blue-400">Synthesis (Me)</div>
+                                <div class="text-xs text-slate-400">Conductor</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">👻</span>
+                            <div>
+                                <div class="text-sm font-medium text-emerald-400">Ghost</div>
+                                <div class="text-xs text-slate-400">Code (Orchestra)</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🔮</span>
+                            <div>
+                                <div class="text-sm font-medium text-purple-400">Oracle</div>
+                                <div class="text-xs text-slate-400">Strategy (Orchestra)</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🎨</span>
+                            <div>
+                                <div class="text-sm font-medium text-pink-400">Pixel</div>
+                                <div class="text-xs text-slate-400">UI/UX (Orchestra)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded-xl border border-slate-700 p-6">
+                    <h3 class="font-bold mb-4 flex items-center">
+                        <i class="fas fa-ban text-red-400 mr-2"></i>
+                        Does NOT Do
+                    </h3>
+                    <ul class="text-sm text-slate-400 space-y-2">
+                        <li>❌ Write production code</li>
+                        <li>❌ Design trading strategies</li>
+                        <li>❌ Replace human decisions</li>
+                        <li>❌ Make financial decisions</li>
+                    </ul>
+                    <div class="mt-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                        <p class="text-sm text-blue-400">✓ ONLY: Coordinates between agents, reviews outputs, tracks project state, delegates tasks, communicates with human.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div id="docs" class="card rounded-xl border border-slate-700 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-bold flex items-center text-xl">
+                            <i class="fas fa-book text-blue-400 mr-3"></i>
+                            Multi-Agent Workflow Library
+                        </h3>
+                        <span class="text-slate-400 text-sm">31 documents</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <button class="bg-blue-500/20 text-blue-400 px-4 py-2 rounded-full text-sm border border-blue-500/30">All</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Patterns</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Testing</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Optimization</button>
+                        <button class="bg-slate-700 px-4 py-2 rounded-full text-sm hover:bg-slate-600 transition">Debugging</button>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">Quick Start</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/synthesis/README.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-book-open text-blue-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">README — Getting Started</div>
+                                        <div class="text-xs text-slate-400">Complete curriculum index</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-2020-quick-reference.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center mr-4">
+                                        <i class="fas fa-clipboard-list text-blue-400"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium">Quick Reference</div>
+                                        <div class="text-xs text-slate-400">Commands, patterns, timeouts</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Core Documentation</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/synthesis/learning/2026-02-20-0420-multi-agent-coordination-patterns.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-purple-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-sitemap text-purple-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Coordination Patterns</div>
+                                        <div class="text-xs text-slate-500">Fan-out, Pipeline, Map-Reduce</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-1220-implementation-templates.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-green-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-code text-green-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Implementation Templates</div>
+                                        <div class="text-xs text-slate-500">Ready-to-use templates</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-0620-integration-test-examples.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-yellow-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-vial text-yellow-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Test Examples</div>
+                                        <div class="text-xs text-slate-500">6 concrete test patterns</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-0820-workflow-optimization-guides.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-orange-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-tachometer-alt text-orange-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Optimization Guides</div>
+                                        <div class="text-xs text-slate-500">Speed, cost, token efficiency</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-1020-quality-standards.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-red-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-check-circle text-red-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Quality Standards</div>
+                                        <div class="text-xs text-slate-500">Output, behavior, workflow quality</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-1420-debugging-guide.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-cyan-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-bug text-cyan-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Debugging Guide</div>
+                                        <div class="text-xs text-slate-500">5 common failure patterns</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-1620-case-studies.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-pink-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-file-code text-pink-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Case Studies</div>
+                                        <div class="text-xs text-slate-500">6 real-world workflow examples</div>
+                                    </div>
+                                </a>
+
+                                <a href="../../agents/synthesis/learning/2026-02-20-1820-best-practices.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-emerald-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-star text-emerald-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Best Practices & Anti-Patterns</div>
+                                        <div class="text-xs text-slate-500">8 anti-patterns and solutions</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <div class="flex items-center mb-3">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Production Ready</span>
+                                <div class="ml-3 flex-1 h-px bg-slate-700"></div>
+                            </div>
+                            <div class="space-y-2">
+                                <a href="../../agents/synthesis/learning/2026-02-21-0020-production-readiness.md" class="doc-item flex items-center p-3 rounded-lg border border-slate-700 transition">
+                                    <div class="w-8 h-8 rounded bg-indigo-500/20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-rocket text-indigo-400 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">Production Readiness Checklist</div>
+                                        <div class="text-xs text-slate-500">Security, observability, reliability</div>
+                                    </div>
+                                    <span class="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded">New</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-4">
+                            <a href="../../agents/synthesis/learning/" class="inline-flex items-center px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm transition">
+                                <i class="fas fa-folder-open mr-2"></i>
+                                Browse All 31 Learning Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-slate-700">
+        <p class="text-center text-slate-400 italic">"Synthesis makes the team greater than the sum of its parts."</p>
+    </div>
+</body>
+</html>
