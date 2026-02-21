@@ -37,7 +37,7 @@ Daily files (memory/YYYY-MM-DD.md) are raw notes; this is your curated wisdom.
   - Circuit breaker after 3 consecutive losses
   - Tracks P/L, win rate in portfolio.json
 - `solana-jupiter-bot/`: Jupiter DEX trading bot (triangular arbitrage, momentum strategies)
-- `mission-control/`: Next.js dashboard for tracking (CEX + DEX + Prediction Markets)
+- `thehub/`: Next.js dashboard for tracking (CEX + DEX + Prediction Markets)
 
 **Preferences:**
 - Paper trading default (live requires explicit "YES" confirmation)

@@ -50,7 +50,7 @@ When Synthesis assigns a UI task:
 
 ## References
 
-- `~/.openclaw/workspace/mission-control/` - Current dashboard
+- `~/.openclaw/workspace/thehub/` - Current dashboard
 - Tailwind docs for utility patterns
 - shadcn/ui for component inspiration
 - React docs for hooks best practices
