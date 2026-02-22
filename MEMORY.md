@@ -215,3 +215,4 @@ Two more guides covering async retry patterns and Hilt DI:
 |-------|-------|------|
 | Ghost | Async Retry Pattern v2 | `2026-02-21-2123-async-retry-v2.md` |
 | Nexus | Hilt Dependency Injection Patterns | `2026-02-21-2241-hilt-dependency-injection-patterns.md` |
+| Oracle | CCI Use Case | `2026-02-21-2253-cci-use-case.md` |
