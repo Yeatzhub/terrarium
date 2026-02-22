@@ -165,3 +165,12 @@ Six more guides covering decomposition, MC validation, Room DB, and market struc
 | Nexus | Room Database Advanced Patterns | `2026-02-21-1641-room-database-patterns.md` |
 | Oracle | BOS vs ChoCH Market Structure | `2026-02-21-1653-bos-choch-structure.md` |
 | Pixel | CSS Grid Subgrid Pattern | `2026-02-21-1726-css-grid-subgrid.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Evening)
+Three more guides covering integration tests, SL/TP calculator, and VWAP:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Synthesis | Integration Test Examples | `2026-02-21-1820-integration-test-examples.md` |
+| Ghost | SL/TP Calculator CLI | `2026-02-21-1823-sl-tp-calculator.md` |
+| Oracle | VWAP Use Case | `2026-02-21-1825-vwap-use-case.md` |
