@@ -200,3 +200,10 @@ Three more guides covering config management, FVGs, and UI components:
 | Ghost | Configuration Management Pattern | `2026-02-21-2023-config-management.md` |
 | Oracle | Fair Value Gaps (FVG) | `2026-02-21-2125-fair-value-gaps.md` |
 | Pixel | Toggle Switch Component | `2026-02-21-2126-component-toggle-switch.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Night)
+Synthesis quality standards guide:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Synthesis | Quality Standards & Production Readiness | `2026-02-21-2220-quality-standards.md` |
