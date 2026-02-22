@@ -176,9 +176,18 @@ Three more guides covering integration tests, SL/TP calculator, and VWAP:
 | Oracle | VWAP Use Case | `2026-02-21-1825-vwap-use-case.md` |
 
 ### Agent Learning Batch — Feb 21, 2026 (Evening)
-Two more guides covering error handling and CSS text wrapping:
+Three more guides covering error handling, CSS text wrapping, and expectancy:
 
 | Agent | Topic | File |
 |-------|-------|------|
 | Ghost | Error Classification & Handling Pattern | `2026-02-21-1923-error-handling-pattern.md` |
 | Pixel | CSS Text Wrap Balance | `2026-02-21-1924-css-text-wrap-balance.md` |
+| Oracle | Trading Expectancy | `2026-02-21-1953-expectancy-edge.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Late Evening)
+Two more guides covering dependency management:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Synthesis | Dependency Management | `2026-02-21-2020-dependency-management.md` |
+| Ghost | Daily Summary | `2026-02-21-summary.md` |
