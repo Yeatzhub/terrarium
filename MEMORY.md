@@ -174,3 +174,11 @@ Three more guides covering integration tests, SL/TP calculator, and VWAP:
 | Synthesis | Integration Test Examples | `2026-02-21-1820-integration-test-examples.md` |
 | Ghost | SL/TP Calculator CLI | `2026-02-21-1823-sl-tp-calculator.md` |
 | Oracle | VWAP Use Case | `2026-02-21-1825-vwap-use-case.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Evening)
+Two more guides covering error handling and CSS text wrapping:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Error Classification & Handling Pattern | `2026-02-21-1923-error-handling-pattern.md` |
+| Pixel | CSS Text Wrap Balance | `2026-02-21-1924-css-text-wrap-balance.md` |
