@@ -314,12 +314,35 @@ class PaperTrader:
                 self.losing_trades = state.get('losing_trades', 0)
                 self.total_trades = state.get('total_trades', 0)
                 
-                # Load trades
+                # Load trades - convert string values back to Decimal
                 for trade_data in state.get('trades', []):
-                    trade = Trade(**trade_data)
+                    trade = Trade(
+                        id=trade_data['id'],
+                        symbol=trade_data['symbol'],
+                        side=trade_data['side'],
+                        entry_price=Decimal(trade_data['entry_price']),
+                        exit_price=Decimal(trade_data['exit_price']) if trade_data.get('exit_price') else None,
+                        amount=Decimal(trade_data['amount']),
+                        entry_time=trade_data['entry_time'],
+                        exit_time=trade_data.get('exit_time'),
+                        pnl=Decimal(trade_data.get('pnl', '0')),
+                        pnl_percent=Decimal(trade_data.get('pnl_percent', '0')),
+                        status=trade_data.get('status', 'open')
+                    )
                     self.trades.append(trade)
                 
-                print(f"📂 Loaded previous state: {self.total_trades} trades")
+                # Load positions - convert string values back to Decimal
+                for symbol, pos_data in state.get('positions', {}).items():
+                    self.positions[symbol] = Position(
+                        symbol=pos_data['symbol'],
+                        side=pos_data['side'],
+                        entry_price=Decimal(pos_data['entry_price']),
+                        amount=Decimal(pos_data['amount']),
+                        timestamp=pos_data['timestamp'],
+                        unrealized_pnl=Decimal(pos_data.get('unrealized_pnl', '0'))
+                    )
+                
+                print(f"📂 Loaded previous state: {self.total_trades} trades, {len(self.positions)} positions")
             except Exception as e:
                 print(f"Error loading state: {e}")
     
