@@ -224,3 +224,10 @@ Ghost trade report generator:
 |-------|-------|------|
 | Ghost | Trade Report Generator | `2026-02-21-2223-trade-report-generator.md` |
 | Pixel | Empty State UX Pattern | `2026-02-21-2325-ux-empty-states.md` |
+
+### Agent Learning — Feb 22, 2026
+Ghost quick reference for Python trading patterns:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Quick Reference: Python Trading Patterns | `2026-02-22-0023-quick-reference.md` |
