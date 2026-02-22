@@ -236,4 +236,5 @@ Ghost quick reference for Python trading patterns:
 | Ghost | Rate Limiter Pattern | `2026-02-22-0123-rate-limiter.md` |
 | Pixel | CSS :has() Selector | `2026-02-22-0125-css-has-selector.md` |
 | Oracle | Position Scaling | `2026-02-22-0153-position-scaling.md` |
+| Synthesis | Multi-Agent Troubleshooting & Debugging | `2026-02-22-0220-troubleshooting-debugging.md` |
 | Nexus | Order Book Implementation | `2026-02-22-0141-order-book-implementation.md` |
