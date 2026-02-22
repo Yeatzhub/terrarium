@@ -239,3 +239,7 @@ Ghost quick reference for Python trading patterns:
 | Synthesis | Multi-Agent Troubleshooting & Debugging | `2026-02-22-0220-troubleshooting-debugging.md` |
 | Ghost | Utility Decorators for Trading Systems | `2026-02-22-0223-utility-decorators.md` |
 | Nexus | Order Book Implementation | `2026-02-22-0141-order-book-implementation.md` |
+| Ghost | Order Book Pattern | `2026-02-22-0323-order-book-pattern.md` |
+
+### Agent Learning — Feb 23, 2026
+| Nexus | Order Book Implementation | `2026-02-22-0141-order-book-implementation.md` |
