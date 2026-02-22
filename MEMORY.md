@@ -223,3 +223,4 @@ Ghost trade report generator:
 | Agent | Topic | File |
 |-------|-------|------|
 | Ghost | Trade Report Generator | `2026-02-21-2223-trade-report-generator.md` |
+| Pixel | Empty State UX Pattern | `2026-02-21-2325-ux-empty-states.md` |
