@@ -234,3 +234,4 @@ Ghost quick reference for Python trading patterns:
 | Oracle | Pivot Points | `2026-02-22-0024-pivot-points.md` |
 | Synthesis | Workflow Optimization Patterns | `2026-02-22-0020-workflow-optimization-patterns.md` |
 | Ghost | Rate Limiter Pattern | `2026-02-22-0123-rate-limiter.md` |
+| Pixel | CSS :has() Selector | `2026-02-22-0125-css-has-selector.md` |
