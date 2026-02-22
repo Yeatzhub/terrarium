@@ -221,6 +221,9 @@ class XRPPionexBot:
                       f"XRP: {balance['xrp']:.4f} | USDT: ${balance['usdt']:.2f} | "
                       f"Signal: {signal.action}")
                 
+                # Save state after each check (even if no trade)
+                self.paper_trader._save_state()
+                
                 # Check if goal reached
                 if balance['xrp'] >= 200:
                     print("\n🎯 GOAL ACHIEVED: Doubled XRP!")
