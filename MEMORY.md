@@ -241,6 +241,7 @@ Ghost quick reference for Python trading patterns:
 | Nexus | Order Book Implementation | `2026-02-22-0141-order-book-implementation.md` |
 | Ghost | Order Book Pattern | `2026-02-22-0323-order-book-pattern.md` |
 | Oracle | Inducement (Market Structure) | `2026-02-22-0325-inducement.md` |
+| Pixel | Toast/Notification Component | `2026-02-22-0327-component-toast-notification.md` |
 
 ### Agent Learning — Feb 23, 2026
 | Nexus | Order Book Implementation | `2026-02-22-0141-order-book-implementation.md` |
