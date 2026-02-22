@@ -191,3 +191,12 @@ Two more guides covering dependency management:
 |-------|-------|------|
 | Synthesis | Dependency Management | `2026-02-21-2020-dependency-management.md` |
 | Ghost | Daily Summary | `2026-02-21-summary.md` |
+
+### Agent Learning Batch — Feb 21, 2026 (Night)
+Three more guides covering config management, FVGs, and UI components:
+
+| Agent | Topic | File |
+|-------|-------|------|
+| Ghost | Configuration Management Pattern | `2026-02-21-2023-config-management.md` |
+| Oracle | Fair Value Gaps (FVG) | `2026-02-21-2125-fair-value-gaps.md` |
+| Pixel | Toggle Switch Component | `2026-02-21-2126-component-toggle-switch.md` |
