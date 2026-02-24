@@ -29,25 +29,25 @@ Daily files (memory/YYYY-MM-DD.md) are raw notes; this is your curated wisdom.
 - **Hardware**: P40 GPU for local inference
 
 **Key Assets:**
-- `btc-trading-bot/`: RSI strategy bot, webhook server, Kraken integration
-- `polymarket_scanner.py`: Arbitrage detection for prediction markets
-- `polymarket_paper_trader/`: **NEW** Automated paper trading bot for crypto Up/Down markets
-  - Mean-reversion strategy (buy <0.40, sell >0.60)
-  - $100 paper balance, $10 max per trade
-  - Circuit breaker after 3 consecutive losses
-  - Tracks P/L, win rate in portfolio.json
-- `solana-jupiter-bot/`: Jupiter DEX trading bot (triangular arbitrage, momentum strategies)
-- `thehub/`: Next.js dashboard for tracking (CEX + DEX + Prediction Markets)
+- `trading-bots/pionex/`: 3 Pionex bots (XRP, BTC, SOL)
+  - `xrp/` - XRP bot with mean reversion strategy
+  - `btc/` - BTC bot with breakout strategy
+  - `sol/` - SOL bot (new, replacing DCA)
+  - `shared/` - Common client, strategy, .env
+- `thehub/`: Next.js dashboard for tracking all bots
 
 **Preferences:**
 - Paper trading default (live requires explicit "YES" confirmation)
+- Pionex only for CEX trading (no Toobit)
+- Three bots: XRP, BTC, SOL on COIN-M futures
+- CoinGecko for price data (free tier)
 - Delegate tasks to sub-agents without permission loops
 - User manages overall direction, agents execute
 
 **Technical Notes:**
-- Kraken over Binance.US (geographic restrictions)
+- Pionex API (IP whitelisted: 100.125.198.70)
 - TradingView webhooks on port 8080
-- P40 GPU tracking: 9405508106245831259625
+- P40 GPU: operational
 - Tailscale IP: 100.125.198.70
 
 ### P40 GPU Installation Complete (Feb 17, 2026)

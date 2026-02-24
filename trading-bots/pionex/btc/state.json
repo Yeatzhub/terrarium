@@ -1,0 +1,15 @@
+{
+  "balance": 0.01,
+  "initial_balance": 0.01,
+  "realized_pnl": 0,
+  "unrealized_pnl": 0,
+  "total_trades": 0,
+  "winning_trades": 0,
+  "losing_trades": 0,
+  "trades": [],
+  "positions": {},
+  "status": "running",
+  "consecutive_losses": 0,
+  "daily_pnl": 0,
+  "trades_today": 0
+}

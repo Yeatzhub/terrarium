@@ -1,0 +1,63 @@
+{
+  "balance": 91.2083916083916,
+  "initial_balance": 100.0,
+  "realized_pnl": -8.7916083916084,
+  "unrealized_pnl": 0.0,
+  "total_trades": 4,
+  "winning_trades": 0,
+  "losing_trades": 4,
+  "trades": [
+    {
+      "symbol": "XRPUSD_PERP",
+      "side": "BUY",
+      "size": 100.0,
+      "entry_price": 1.43,
+      "exit_price": 1.4,
+      "pnl": -2.197902,
+      "fees": 0.1,
+      "exit_reason": "stop",
+      "closed_at": "2026-02-19T20:10:38.472372"
+    },
+    {
+      "symbol": "XRPUSD_PERP",
+      "side": "BUY",
+      "size": 100.0,
+      "entry_price": 1.43,
+      "exit_price": 1.4,
+      "pnl": -2.197902,
+      "fees": 0.1,
+      "exit_reason": "stop",
+      "closed_at": "2026-02-20T03:16:51.317726"
+    },
+    {
+      "symbol": "XRPUSD_PERP",
+      "side": "BUY",
+      "size": 100.0,
+      "entry_price": 1.43,
+      "exit_price": 1.4,
+      "pnl": -2.197902,
+      "fees": 0.1,
+      "exit_reason": "stop",
+      "closed_at": "2026-02-20T04:20:47.725494"
+    },
+    {
+      "symbol": "XRPUSD_PERP",
+      "side": "BUY",
+      "size": 100.0,
+      "entry_price": 1.43,
+      "exit_price": 1.4,
+      "pnl": -2.197902,
+      "fees": 0.1,
+      "exit_reason": "stop",
+      "closed_at": "2026-02-20T10:00:23.123749"
+    }
+  ],
+  "positions": {},
+  "status": "running",
+  "consecutive_losses": 4,
+  "daily_pnl": -8.7916083916084,
+  "trades_today": 0,
+  "last_trade_date": null,
+  "note": "RESET: Fixed price feed to use real-time CoinGecko data",
+  "reset_at": "2026-02-19T11:45:00"
+}
