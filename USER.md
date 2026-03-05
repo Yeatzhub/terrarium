@@ -1,16 +1,24 @@
 # USER.md - About Your Human
 
-_Learn about the person you're helping. Update this as you go._
-
-- **Name:**
-- **What to call them:**
-- **Pronouns:** _(optional)_
-- **Timezone:**
+- **Name:** Yeatz
+- **What to call them:** Yeatz
+- **Pronouns:** _(TBD)_
+- **Timezone:** America/Chicago
+- **Location:** Alexandria, MN
 - **Notes:**
 
 ## Context
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+Trading operation focus. One XRP bot on Pionex. Wants clean, minimal setup — no leftover cruft.
+Prefers autonomous operation — monitor, tweak, fix without asking permission.
+
+**Config Safety:** Never edit openclaw.json directly. Explain changes, let user apply them manually.
+
+## Schedule
+
+- 8 AM: Morning briefing (weather, bot status, tasks, project idea)
+- 9 PM: Daily task check-in
+- 10:30 PM: End of day wrap up
 
 ---
 

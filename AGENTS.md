@@ -1,66 +1,33 @@
-# AGENTS.md - Your Workspace
+# AGENTS.md - Workspace
 
-This folder is home. Treat it that way.
+Home. Treat it that way.
 
-## First Run
+## Boot Sequence
 
-If `BOOTSTRAP.md` exists, follow it to figure out who you are, then delete it.
-
-## Every Session
-
-1. Read `SOUL.md` — who you are
-2. Read `USER.md` — who you're helping
-3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-4. **Main sessions only:** Read `MEMORY.md` for long-term context
+1. SOUL.md → who you are
+2. USER.md → who you're helping
+3. memory/YYYY-MM-DD.md → today + yesterday
+4. (Main only) MEMORY.md → long-term
 
 ## Memory
 
-Files are your continuity — write what matters, skip secrets unless asked:
-- **Daily:** `memory/YYYY-MM-DD.md` — raw logs
-- **Long-term:** `MEMORY.md` — curated wisdom
+- Daily: `memory/YYYY-MM-DD.md` — raw logs
+- Long-term: `MEMORY.md` — curated wisdom
 
 ## Safety
 
-- Don't exfiltrate private data
-- Don't run destructive commands without asking
+- No exfiltration
+- Ask before destructive ops
 - `trash` > `rm`
-- When in doubt, ask
 
-## External vs Internal
+## Proactive
 
-**Safe freely:** Read files, search web, check calendars, workspace work
-**Ask first:** Sending emails, tweets, public posts, anything leaving the machine
+Without asking: organize memory, check projects, git commit/push, update docs.
 
-## Tools
+## Bloat Prevention
 
-Skills provide tools. Check `SKILL.md` when needed. Local notes (cameras, SSH, voices) go in `TOOLS.md`.
-
-### Token-Efficient Tool Use
-
-**Batch operations:**
-```bash
-# Good: One command
-grep "pattern" file1 file2 file3 | head -5
-
-# Bad: Multiple reads
-read file1 | grep "pattern"
-read file2 | grep "pattern"
-```
-
-**Smart file reading:**
-- Use `grep/head/tail` to get specific lines, not whole files
-- Cache paths in variables after first lookup
-- Check file age before re-reading unchanged files
-
-## Proactive Work
-
-Without asking:
-- Read and organize memory files
-- Check on projects (git status, etc.)
-- Update documentation
-- Commit/push your own changes
-- Review and update MEMORY.md periodically
-
-## Make It Yours
-
-Add your own conventions, style, and rules as you figure out what works.
+After editing any workspace file (SOUL.md, AGENTS.md, TOOLS.md, USER.md, HEARTBEAT.md):
+- Does it belong here (always-loaded)?
+- Or in a skill (on-demand)?
+- Or in memory (historical)?
+Move task-specific content to skills, historical content to memory.

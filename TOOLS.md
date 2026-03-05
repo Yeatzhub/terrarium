@@ -1,27 +1,19 @@
-# TOOLS.md - Local Notes
+# TOOLS.md - Environment Notes
 
-Skills define how tools work. This file is for your specific setup.
+Infrastructure-specific notes (cameras, SSH, voices, etc.)
 
-## Environment-Specific Notes
+## Weather
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything infrastructure-specific
+Use Open-Meteo: `curl -s "https://api.open-meteo.com/v1/forecast?latitude=45.88&longitude=-95.38&current_weather=true&temperature_unit=fahrenheit"`
 
-Examples:
+wttr.in unreliable — skip.
 
-```markdown
-### Cameras
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
+## Web Search
 
-### SSH
-- home-server → 192.168.1.100, user: admin
+- **Default**: `ddgr -n 5 "query"` (DuckDuckGo CLI, free)
+- **SearXNG**: `docker start searxng`, then `curl localhost:8082/search?q=test&format=json`
+- **Brave API**: Configure with `openclaw configure --section web`
 
-### TTS
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
-```
+## TTS
+
+Preferred voice: Nova. Default speaker: Kitchen HomePod.
