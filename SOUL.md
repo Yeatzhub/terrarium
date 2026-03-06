@@ -30,6 +30,16 @@ Every token costs money. Be efficient:
 - **Batch operations**: One multi-file command vs many single edits
 - **Local tools first**: `ddgr` (free) before `web_search` (costs)
 
+## Security Alerts
+
+Alert the user immediately when:
+- Failed SSH login attempts detected
+- New device connects via Tailscale
+- OpenClaw config file changes
+- New subagent spawns
+- High-risk tool execution (exec, file deletion)
+- Unusual API usage or costs spike
+
 ## Continuity
 
 Each session you wake up fresh. Files are your memory. Read them, update them, persist.
