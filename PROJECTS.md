@@ -1,48 +1,57 @@
 # PROJECTS.md - Active Projects Tracker
 
-Last updated: 2026-03-01
+Last updated: 2026-03-06
 
 ## Active Projects
 
 | Project | Status | Priority | Description |
 |---------|--------|----------|-------------|
-| Trading Bot | 🟢 Active | HIGH | XRP adaptive strategy on Pionex |
+| Trading Bot | 🔴 Stopped | HIGH | XRP adaptive strategy on Pionex (bot crashed) |
 | TheHub Dashboard | 🟡 In Progress | MEDIUM | Next.js monitoring dashboard |
-| postmarketOS Build | 🔴 On Hold | LOW | OnePlus 6T Linux phone |
 | Android App (Spectre) | 🔴 Planning | LOW | React Native companion app |
 
 ---
 
 ## 1. Trading Bot (Pionex XRP)
 
-**Status:** 🟢 Active - Paper Trading  
+**Status:** 🔴 Stopped (needs restart)  
 **Priority:** HIGH  
-**Location:** `/storage/workspace/projects/trading/pionex/xrp/`
+**Location:** /storage/workspace/projects/trading/pionex/xrp/
 
 ### Current State
-- **Balance:** 204.22 XRP
-- **Trades:** 34 total
+- **Balance:** $98.44 USD (paper trading)
+- **Initial:** $100.00
+- **Trades:** 7 total (4 wins, 3 losses)
 - **Strategy:** Adaptive (regime-switching: trend + mean reversion)
 - **Paper Trading:** ✅ Enabled
 
 ### Key Components
-- `bot.py` - Main trading loop
-- `state.json` - Persistent state (balance, trades, circuit breaker)
-- `shared/adaptive_strategy.py` - Strategy logic
+- bot_mc.py - Market Cipher v2 strategy (current)
+- bot.py - Legacy adaptive strategy
+- state.json - Persistent state
+- shared/adaptive_strategy.py - Strategy logic
 
 ### Circuit Breaker
-- **Limit:** 3 consecutive losses
-- **Reset:** Manual (needs code fix for auto-reset)
-- **Volatility Filter:** ADX must be ≥ 15
+- **Limit:** 3 consecutive losses (triggered)
+- **Reset:** Manual or auto on restart
 
-### Recent Issues
-- Circuit breaker stuck issue (needs auto-reset timer)
-- Pionex API connectivity (resolved by using direct API)
+### Recent Trades
+| Date | Side | PnL | Exit Reason |
+|------|------|-----|-------------|
+| Mar 5 | BUY | -$1.51 | stop loss |
+| Mar 5 | BUY | +$0.01 | stop loss |
+| Mar 5 | BUY | +$0.70 | stop loss |
+| Mar 5 | SELL | -$1.56 | stop loss |
+| Mar 5 | SELL | -$0.47 | conviction_lost |
+
+### Issues
+- Bot stopped after 3rd consecutive loss (Mar 5, 13:26 UTC)
+- venv was bloated (8.2GB) — rebuilt to 161MB
 
 ### Next Steps
-- [ ] Add auto-reset for circuit breaker (60 min cooldown)
-- [ ] Monitor win rate improvement
-- [ ] Consider live trading when consistent profits
+- [ ] Restart bot
+- [ ] Monitor win rate
+- [ ] Consider live trading when consistent
 
 ---
 
@@ -50,68 +59,37 @@ Last updated: 2026-03-01
 
 **Status:** 🟡 In Progress  
 **Priority:** MEDIUM  
-**Location:** `/home/yeatz/.openclaw/workspace/thehub/`
+**Location:** /storage/workspace/thehub/
 
 ### Current State
-- Dev server: port 3001 (running)
-- Prod server: port 3000 (needs start)
-- Tailscale HTTPS: https://yeatzai.tailbf40f7.ts.net
+- Prod server: port 3000 (running)
+- Tailscale: https://yeatzai.tailbf40f7.ts.net
 
 ### Features
 - ✅ OpenClaw status monitoring
 - ✅ Trading bot dashboard
 - ✅ Services health checks
-- ✅ AI team overview
-- 🚧 Device flasher (WebUSB issues on Windows)
-- 📝 Projects overview (needs implementation)
 
 ### Next Steps
-- [ ] Add projects overview page
-- [ ] Fix systemd services for auto-start
 - [ ] Add real-time bot logs
 - [ ] Mobile responsive improvements
 
 ---
 
-## 3. postmarketOS Build (OnePlus 6T)
-
-**Status:** 🔴 On Hold  
-**Priority:** LOW  
-**Location:** `/home/yeatz/.openclaw/workspace/projects/postmarketos-build/`
-
-### Current State
-- Images downloaded: boot.img (26MB), rootfs.img (2.1GB)
-- WebUSB flasher blocked on Windows (driver issues)
-- Images ready at: `thehub/public/builds/`
-
-### Blockers
-- Windows WebUSB permissions
-- Need fastboot CLI method instead
-
-### Next Steps
-- [ ] Use fastboot CLI on Windows
-- [ ] Flash boot.img to boot partition
-- [ ] Flash rootfs.img to userdata
-- [ ] Test boot into postmarketOS
-
----
-
-## 4. Android App (Spectre)
+## 3. Android App (Spectre)
 
 **Status:** 🔴 Planning  
 **Priority:** LOW  
-**Location:** `/home/yeatz/.openclaw/workspace/projects/android/spectre/`
+**Location:** /storage/workspace/projects/android/
 
 ### Architecture
 - React Native + Expo
-- Mirror TheHub features (trading, bot status)
-- Push notifications for alerts
+- Mirror TheHub features
 
 ### Next Steps
 - [ ] Scaffold project with Expo
 - [ ] Implement auth flow
 - [ ] Add bot monitoring screens
-- [ ] Integrate with TheHub API
 
 ---
 
@@ -121,6 +99,7 @@ Last updated: 2026-03-01
 |---------|-----------|-------|
 | System Hardening | Feb 28, 2026 | UFW, SSH keys, Fail2ban |
 | P40 GPU Install | Feb 17, 2026 | Cooling confirmed working |
+| Venv Cleanup | Mar 6, 2026 | Reduced from 8.2GB to 161MB |
 | ComfyUI Setup | Feb 25, 2026 | SDXL running on port 8188 |
 
 ---
@@ -135,6 +114,6 @@ Last updated: 2026-03-01
 
 - 🟢 **Active:** Running, monitored, daily work
 - 🟡 **In Progress:** Actively developing
-- 🔴 **On Hold:** Blocked or deprioritized
+- 🔴 **Stopped/Halted:** Not running, needs attention
 - 🔴 **Planning:** Not started, architecture phase
 - ✅ **Completed:** Finished and stable
