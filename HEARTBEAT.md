@@ -10,6 +10,8 @@
 
 ## Proactive Checks (every 30 min - 2 hours)
 
+**Run these directly — do not spawn subagents (sandbox network issues).**
+
 ### Trading Bots
 - [ ] Check if XRP bot is running
 - [ ] Restart if crashed
