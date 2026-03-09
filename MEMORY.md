@@ -25,13 +25,9 @@
 | Network | Tailscale IP: 100.112.56.61 |
 | Services | OpenClaw (18789), TheHub (3000), ComfyUI (8188), SearXNG (8082) |
 
-## Recent Events
+## Events
 
-- **Mar 5**: Added 16GB swap on /storage/swapfile2 (fixes gateway OOM)
-- **Mar 5**: Installed qwen3-coder:30b, removed qwen2.5-coder:32b
-- **Mar 5**: Added Claude Code MCP for Ollama tools
-- **Mar 2**: Tavily plugin installed, Market Cipher v2 strategy
-- **Feb 28**: System hardening complete (UFW, fail2ban, SSH keys)
+See `memory/2026-03-events.md` for recent events.
 
 ## Agent Learning Archive
 

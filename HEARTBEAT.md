@@ -25,17 +25,6 @@
 - [ ] Clean old memory files (>7 days)
 - [ ] Check git status of workspace
 
-## Weekly Audit (Sundays)
-
-Run context bloat audit on: AGENTS.md, TOOLS.md, USER.md, MEMORY.md, HEARTBEAT.md, SOUL.md
-
-For each file:
-1. Move task-specific content → skills
-2. Move historical content → memory/
-3. Cut redundancy (one canonical location)
-4. Compress (tables > paragraphs, bullets > prose)
-5. Report before/after tokens
-
 ---
 If all checks pass, reply: HEARTBEAT_OK
 If issues found, alert the user.
