@@ -1,0 +1,48 @@
+# =====================================================
+# GitHub Backup: Agent State Only
+# Purpose: Backup agent memory, skills, config for recovery
+# Projects are backed up separately - not here
+# =====================================================
+
+# All projects - backed up elsewhere
+projects/
+
+# Downloads and builds - temporary/large
+downloads/
+thehub/
+
+# Python environments
+venv/
+venv.old/
+__pycache__/
+*.pyc
+
+# Node modules
+node_modules/
+
+# AI model files (stored on RAID)
+*.gguf
+*.safetensors
+*.pt
+*.bin
+*.img
+*.tar.xz
+*.zip
+
+# Logs and temp
+*.log
+*.tmp
+.DS_Store
+backup.log
+
+# Secrets - never backup
+.env
+*.pem
+*.key
+.secrets/
+
+# Research artifacts
+research/
+
+# Media files
+media/
