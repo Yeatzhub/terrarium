@@ -1,6 +1,6 @@
 {
-  "last_node_id": 8,
-  "last_link_id": 8,
+  "last_node_id": 9,
+  "last_link_id": 9,
   "nodes": [
     {
       "id": 1,
@@ -167,18 +167,44 @@
       "widgets_values": [1, "fixed", 20, 3.5, "simple", "normal", 1]
     },
     {
-      "id": 7,
-      "type": "VAEDecode",
-      "pos": [900, 380],
-      "size": [210, 46],
+      "id": 9,
+      "type": "VAELoader",
+      "pos": [900, 350],
+      "size": [315, 58],
       "flags": {},
       "order": 6,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [9],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": ["ae.safetensors"]
+    },
+    {
+      "id": 7,
+      "type": "VAEDecode",
+      "pos": [900, 450],
+      "size": [210, 46],
+      "flags": {},
+      "order": 7,
       "mode": 0,
       "inputs": [
         {
           "name": "samples",
           "type": "LATENT",
           "link": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 9
         }
       ],
       "outputs": [
@@ -199,7 +225,7 @@
       "pos": [1150, 50],
       "size": [315, 270],
       "flags": {},
-      "order": 7,
+      "order": 8,
       "mode": 0,
       "inputs": [
         {
@@ -222,7 +248,8 @@
     [5, 4, 0, 6, 2, "CONDITIONING", "CONDITIONING"],
     [6, 5, 0, 6, 3, "LATENT", "LATENT"],
     [7, 6, 0, 7, 0, "LATENT", "LATENT"],
-    [8, 7, 0, 8, 0, "IMAGE", "IMAGE"]
+    [8, 7, 0, 8, 0, "IMAGE", "IMAGE"],
+    [9, 9, 0, 7, 1, "VAE", "VAE"]
   ],
   "groups": [],
   "config": {},
