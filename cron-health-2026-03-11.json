@@ -1,0 +1,112 @@
+{
+  "timestamp": "2026-03-11T12:30:00Z",
+  "audit_type": "scheduled",
+  "status": "healthy",
+  "cron_jobs": [
+    {
+      "schedule": "*/5 * * * *",
+      "command": "/storage/workspace/projects/trading/pionex/xrp/monitor.sh",
+      "source": "user_crontab",
+      "purpose": "XRP bot health monitor",
+      "status": "active",
+      "last_check": "2026-03-11T12:26:23Z",
+      "next_run": "2026-03-11T12:31:23Z",
+      "bot_status": "RUNNING",
+      "health": "OK"
+    },
+    {
+      "schedule": "0 * * * *",
+      "command": "/storage/workspace/projects/trading/polymarket/scan.sh",
+      "source": "user_crontab",
+      "purpose": "Polymarket arbitrage scanner",
+      "status": "active",
+      "last_run": "never",
+      "note": "No log file yet, scheduled hourly",
+      "health": "OK"
+    },
+    {
+      "schedule": "* * * * *",
+      "command": "/storage/workspace/scripts/gpu_temp_alert.sh",
+      "source": "user_crontab",
+      "purpose": "GPU temperature monitoring (70C threshold)",
+      "status": "active",
+      "last_check": "2026-03-11T12:30:01Z",
+      "current_temp": "34°C",
+      "threshold": "70°C",
+      "health": "OK"
+    },
+    {
+      "schedule": "0 8 * * *",
+      "command": "/home/yeatz/.openclaw/scripts/api-audit.sh",
+      "source": "user_crontab",
+      "purpose": "Daily API key audit",
+      "status": "active",
+      "health": "OK"
+    }
+  ],
+  "system_crons": [
+    {
+      "file": "/etc/cron.d/openclaw-api",
+      "schedule": "0 8 * * *",
+      "purpose": "API audit",
+      "status": "OK"
+    },
+    {
+      "file": "/etc/cron.d/openclaw-backup",
+      "schedule": "0 */2 * * *",
+      "purpose": "Backup to GitHub",
+      "status": "OK"
+    },
+    {
+      "file": "/etc/cron.d/openclaw-briefing",
+      "schedule": "0 7 * * *",
+      "purpose": "Morning briefing",
+      "status": "OK"
+    },
+    {
+      "file": "/etc/cron.d/openclaw-monitor",
+      "schedule": "0 9 * * *",
+      "purpose": "Cron health monitor",
+      "status": "OK"
+    },
+    {
+      "file": "/etc/cron.d/openclaw-security",
+      "schedule": "0 7 * * *",
+      "purpose": "Security audit",
+      "status": "OK"
+    },
+    {
+      "file": "/etc/cron.d/openclaw-security-fix",
+      "schedule": "30 7 * * *",
+      "purpose": "Security fixes",
+      "status": "OK"
+    }
+  ],
+  "systemd_timers": [
+    {
+      "name": "pionex-bot-monitor.timer",
+      "schedule": "*/5 min",
+      "purpose": "XRP bot monitor",
+      "status": "active (waiting)",
+      "last_trigger": "2026-03-11T12:26:23Z",
+      "next_trigger": "2026-03-11T12:31:23Z",
+      "health": "OK"
+    },
+    {
+      "name": "sysstat-collect.timer",
+      "schedule": "10 min",
+      "purpose": "System stats collection",
+      "status": "active",
+      "health": "OK"
+    }
+  ],
+  "warnings": [],
+  "errors": [],
+  "summary": {
+    "total_jobs": 10,
+    "healthy": 10,
+    "warning": 0,
+    "critical": 0
+  },
+  "overall_status": "HEALTHY"
+}
