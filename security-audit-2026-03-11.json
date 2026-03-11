@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-03-11T11:00:00Z",
+  "hostname": "yeatzai",
+  "audit_type": "scheduled",
+  "findings": {
+    "open_ports": {
+      "status": "WARNING",
+      "ports": [
+        {"port": 22, "service": "ssh", "bind": "0.0.0.0", "risk": "low", "note": "Expected, key-only auth"},
+        {"port": 3000, "service": "thehub", "bind": "0.0.0.0", "risk": "medium", "note": "Next.js dashboard exposed"},
+        {"port": 8188, "service": "comfyui", "bind": "0.0.0.0", "risk": "medium", "note": "AI image generation exposed"},
+        {"port": 8082, "service": "searxng", "bind": "0.0.0.0", "risk": "low", "note": "Search engine, docker"},
+        {"port": 443, "service": "tailscale", "bind": "100.112.56.61", "risk": "low", "note": "Tailscale VPN"},
+        {"port": 49576, "service": "tailscale", "bind": "100.112.56.61", "risk": "low", "note": "Tailscale VPN"}
+      ],
+      "loopback_only": [
+        {"port": 18789, "service": "openclaw-gateway", "bind": "127.0.0.1", "risk": "none"},
+        {"port": 18791, "service": "openclaw-gateway", "bind": "127.0.0.1", "risk": "none"},
+        {"port": 18792, "service": "openclaw-gateway", "bind": "127.0.0.1", "risk": "none"},
+        {"port": 11434, "service": "ollama", "bind": "127.0.0.1", "risk": "none"}
+      ]
+    },
+    "gateway_auth": {
+      "status": "OK",
+      "bind": "loopback",
+      "auth_mode": "token",
+      "token_set": true,
+      "note": "Gateway properly secured with token auth and loopback binding"
+    },
+    "ssh_config": {
+      "status": "OK",
+      "permit_root_login": "no",
+      "password_authentication": "no",
+      "note": "SSH hardened - key-only authentication"
+    },
+    "firewall": {
+      "status": "WARNING",
+      "ufw": "not_available",
+      "iptables": "not_accessible_from_sandbox",
+      "note": "No firewall detected - consider enabling UFW"
+    },
+    "docker_services": {
+      "status": "OK",
+      "containers": [
+        {"name": "searxng", "ports": "0.0.0.0:8082->8080/tcp"},
+        {"name": "openclaw-sbx-*", "ports": "none (sandboxed)"}
+      ]
+    },
+    "login_history": {
+      "status": "OK",
+      "recent_logins": [
+        {"user": "yeatz", "source": "100.104.247.60", "date": "2026-03-10 06:54", "duration": "00:01"},
+        {"user": "spectre", "source": "100.65.35.x (web console)", "date": "2026-03-10 04:24", "duration": "02:30"}
+      ],
+      "note": "All recent logins via Tailscale, no suspicious activity"
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "medium",
+      "item": "Bind TheHub (port 3000) to loopback or Tailscale IP",
+      "action": "Update next.config.ts to set HOSTNAME=127.0.0.1 or use Tailscale IP"
+    },
+    {
+      "priority": "medium", 
+      "item": "Bind ComfyUI (port 8188) to loopback or Tailscale IP",
+      "action": "Update ComfyUI startup to --listen 127.0.0.1 or Tailscale IP"
+    },
+    {
+      "priority": "low",
+      "item": "Enable UFW firewall",
+      "action": "sudo ufw enable && sudo ufw allow 22 && sudo ufw allow from 100.0.0.0/8"
+    }
+  ],
+  "overall_status": "ACCEPTABLE",
+  "summary": "System is reasonably secured. SSH hardened with key-only auth. Gateway properly secured with token auth on loopback. Consider binding exposed services (TheHub, ComfyUI) to Tailscale IP instead of 0.0.0.0 for defense in depth."
+}
