@@ -1,0 +1,71 @@
+{
+  "timestamp": "2026-03-12T12:00:00Z",
+  "hostname": "yeatzai",
+  "keys": [
+    {
+      "name": "Tavily API Key",
+      "source": "env:TAVILY_API_KEY",
+      "service": "api.tavily.com",
+      "validation": "VALID",
+      "status_code": 200,
+      "usage": {
+        "used": 110,
+        "limit": 1000,
+        "percent": 11,
+        "plan": "Researcher"
+      },
+      "flag": false,
+      "details": "Search API working, 110/1000 calls used (11%)"
+    },
+    {
+      "name": "Ollama Cloud API Key",
+      "source": "openclaw.json:ollama-cloud.apiKey",
+      "service": "ollama.com/v1",
+      "validation": "VALID",
+      "models_available": 33,
+      "usage": {
+        "available": "unlimited with key",
+        "percent": null
+      },
+      "flag": false,
+      "details": "Key valid, 33 models accessible including glm-5, minimax-m2.5, devstral-2"
+    },
+    {
+      "name": "Telegram Bot Token",
+      "source": "openclaw.json:channels.telegram.botToken",
+      "service": "api.telegram.org",
+      "validation": "VALID",
+      "bot_info": {
+        "id": 8621394908,
+        "username": "AISpectre_bot",
+        "first_name": "Spectre"
+      },
+      "usage": {
+        "available": "unlimited",
+        "percent": null
+      },
+      "flag": false,
+      "details": "Bot token valid, @AISpectre_bot active"
+    },
+    {
+      "name": "OpenClaw Gateway Token",
+      "source": "openclaw.json:gateway.auth.token",
+      "service": "internal",
+      "validation": "LOCAL_ONLY",
+      "usage": {
+        "available": "internal auth",
+        "percent": null
+      },
+      "flag": false,
+      "details": "Internal loopback auth token, bound to 127.0.0.1"
+    }
+  ],
+  "summary": {
+    "total_keys": 4,
+    "valid": 4,
+    "invalid": 0,
+    "flagged": 0,
+    "high_usage": []
+  },
+  "recommendations": []
+}

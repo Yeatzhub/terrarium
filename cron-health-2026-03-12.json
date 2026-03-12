@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-03-12T12:30:00Z",
+  "hostname": "yeatzai",
+  "jobs": [
+    {
+      "schedule": "*/5 * * * *",
+      "command": "/storage/workspace/projects/trading/pionex/xrp/monitor.sh",
+      "name": "XRP Bot Monitor",
+      "status": "HEALTHY",
+      "last_run": "running",
+      "details": "Bot PIDs active (1404, 729535), monitor script running"
+    },
+    {
+      "schedule": "* * * * *",
+      "command": "/storage/workspace/scripts/gpu_temp_alert.sh",
+      "name": "GPU Temperature Alert",
+      "status": "HEALTHY",
+      "last_run": "running",
+      "details": "Script running (PID 729492)"
+    },
+    {
+      "schedule": "5 * * * *",
+      "command": "market_scanner.py",
+      "name": "Huginn Market Scanner",
+      "status": "HEALTHY",
+      "last_run": "2026-03-12T12:05:00Z",
+      "details": "Last scan saved 2/3 coins, XLM/XRP ok, SOL error"
+    },
+    {
+      "schedule": "10 * * * *",
+      "command": "balance_tracker.py",
+      "name": "Njord Balance Tracker",
+      "status": "HEALTHY",
+      "last_run": "2026-03-12T12:10:00Z",
+      "details": "Snapshot: $277.67 total USD"
+    },
+    {
+      "schedule": "0 * * * *",
+      "command": "/storage/workspace/projects/trading/polymarket/scan.sh",
+      "name": "Polymarket Scanner",
+      "status": "WARNING",
+      "last_run": "unknown",
+      "details": "Script exists but no recent log output"
+    },
+    {
+      "schedule": "0 8 * * *",
+      "command": "/home/yeatz/.openclaw/scripts/api-audit.sh",
+      "name": "API Audit",
+      "status": "CRITICAL",
+      "last_run": "never",
+      "details": "Script file MISSING"
+    },
+    {
+      "schedule": "0 */2 * * *",
+      "command": "/home/yeatz/.openclaw/scripts/backup-to-github.sh",
+      "name": "GitHub Backup",
+      "status": "CRITICAL",
+      "last_run": "never",
+      "details": "Script file MISSING"
+    }
+  ],
+  "systemd_timers": [
+    {
+      "name": "pionex-bot-monitor.timer",
+      "status": "ACTIVE",
+      "next_run": "2026-03-12T12:34:47Z"
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "healthy": 4,
+    "warning": 1,
+    "critical": 2
+  },
+  "overall_status": "WARNING"
+}
