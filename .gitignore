@@ -29,6 +29,11 @@ node_modules/
 *.tar.xz
 *.zip
 
+# AppImages and extracted binaries
+*.AppImage
+squashfs-root/
+ClawX.AppImage
+
 # Logs and temp
 *.log
 *.tmp
