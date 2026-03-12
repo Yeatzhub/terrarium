@@ -1,0 +1,83 @@
+{
+  "entries": [
+    {
+      "id": "1773278179841-kn3jif4p8",
+      "date": "2026-03-12",
+      "title": "Timezone Correction for HEARTBEAT",
+      "content": "Fixed HEARTBEAT.md to use America/Chicago (CDT/UTC-5) timezone explicitly.\n\nChanged:\n- Schedule table now shows both CDT and UTC times\n- 8:00 AM CDT = 13:00 UTC\n- 9:00 PM CDT = 02:00 UTC\n- 11:00 PM CDT = 04:00 UTC\n\nThis ensures heartbeat checks fire at the correct local time for Alexandria, MN.",
+      "category": "infrastructure",
+      "tags": [
+        "timezone",
+        "heartbeat",
+        "config"
+      ],
+      "references": [],
+      "createdAt": "2026-03-12T01:16:19.841Z",
+      "updatedAt": "2026-03-12T01:16:19.841Z"
+    },
+    {
+      "id": "1773275064136-23y9fyd9t",
+      "date": "2026-03-12",
+      "title": "Calendar & Journal Systems Added",
+      "content": "Added two new tracking systems to The Hub:\n\n**Calendar (/calendar):**\n- Goals with deadlines and priorities\n- Project milestones\n- Visual calendar view\n- Auto-overdue detection\n- Categories: trading, strategy, agent, infrastructure, research\n\n**Journal (/journal):**\n- Date-based entries for changes, decisions, learnings\n- Categories: trading, strategy, agent, infrastructure, research, general\n- Tags for searchability\n- References to bots, strategies, files\n\n**API Endpoints:**\n- GET/POST/PATCH/DELETE /api/calendar\n- GET/POST/PATCH/DELETE /api/journal\n\n**Integration:**\n- Added to The Hub sidebar\n- Quick-add from chat: \"goal:\" and \"journal:\" prefixes",
+      "category": "infrastructure",
+      "tags": [
+        "calendar",
+        "journal",
+        "hub",
+        "tracking"
+      ],
+      "references": [],
+      "createdAt": "2026-03-12T00:24:24.136Z",
+      "updatedAt": "2026-03-12T00:24:24.136Z"
+    },
+    {
+      "id": "1773275064122-3klny2wxi",
+      "date": "2026-03-12",
+      "title": "Norse Pantheon Agent Architecture Deployed",
+      "content": "Created 7-agent Norse-themed architecture for trading operations:\n\n**Agents:**\n- 📯 Heimdall: Coordinator, spawns subagents, monitors all\n- 🦅 Huginn: Scout, market research, opportunity discovery\n- ⚔️ Tyr: Strategist, strategy development, backtesting\n- 🔨 Sindri: Smith, bot implementation from specs\n- 🌊 Njord: Treasurer, read-only fund tracking\n- ⚡ Thor: Executor, live trading within circuit breakers\n- 🌳 Mimir: Operator, infrastructure and The Hub\n\n**Communication Walls:**\n- Treasury (Njord) isolated from code agents\n- Execution (Thor) cannot change strategy\n- Each agent has specific allowed communication partners\n\n**Files Created:**\n- /storage/workspace/agents/{heimdall,huginn,tyr,sindri,njord,thor,mimir}/SKILL.md\n- /storage/workspace/yggdrasil/INDEX.md\n- /storage/workspace/treasury/{allocations,balances,circuit_breakers,daily_pnl}.json\n\n**The Hub Updated:**\n- Agent Activity panel shows real-time status\n- Norse naming throughout",
+      "category": "infrastructure",
+      "tags": [
+        "agents",
+        "architecture",
+        "norse",
+        "trading"
+      ],
+      "references": [],
+      "createdAt": "2026-03-12T00:24:24.122Z",
+      "updatedAt": "2026-03-12T00:24:24.122Z"
+    },
+    {
+      "id": "1773275064109-1ig91is5b",
+      "date": "2026-03-12",
+      "title": "XRP Bot v2.1 — Stop-Loss & Take-Profit",
+      "content": "Upgraded bot_mc.py to bot_mc_v2_1.py with comprehensive risk management:\n\n**New Features:**\n- Stop-loss: 2% default (configurable via --stop-loss)\n- Take-profit: 4% default (2:1 R:R)\n- Trailing stop: 1.5% after 2% profit activation\n- Daily loss limit: 5% pause\n- Consecutive loss limit: 5 trades pause\n\n**Implementation:**\n- RiskConfig class for all risk parameters\n- check_stop_loss(), check_take_profit(), check_trailing_stop() methods\n- Position state tracking (highest_price_since_entry for trailing)\n- Auto-status updates between not-started → in-progress → completed → overdue\n\n**Files Changed:**\n- /storage/workspace/projects/trading/pionex/xrp/bot_mc_v2_1.py (new)\n- /storage/workspace/projects/trading/strategies/xrp-market-cipher-v2.md (updated)\n\n**Testing:**\n- Stop-loss triggers at 2% loss: ✓\n- Take-profit triggers at 4% gain: ✓\n- Trailing stop activates after 2% profit and trails at 1.5%: ✓",
+      "category": "trading",
+      "tags": [
+        "xrp",
+        "bot",
+        "risk-management",
+        "stop-loss",
+        "take-profit"
+      ],
+      "references": [],
+      "createdAt": "2026-03-12T00:24:24.109Z",
+      "updatedAt": "2026-03-12T00:24:24.109Z"
+    },
+    {
+      "id": "1773274485770-s2fd4thhi",
+      "date": "2026-03-12",
+      "title": "Updated XRP bot",
+      "content": "Added stop-loss and take-profit functionality",
+      "category": "trading",
+      "tags": [
+        "xrp",
+        "bot",
+        "risk"
+      ],
+      "references": [],
+      "createdAt": "2026-03-12T00:14:45.770Z",
+      "updatedAt": "2026-03-12T00:14:45.770Z"
+    }
+  ]
+}

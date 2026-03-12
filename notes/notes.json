@@ -5,14 +5,15 @@
       "content": "Add stop-loss and take-profit to XRP bot #trading #improvement",
       "category": "improvement",
       "priority": "low",
-      "status": "queued",
+      "status": "completed",
       "source": "chat",
       "createdAt": "2026-03-11T23:24:37.496Z",
-      "updatedAt": "2026-03-11T23:24:37.496Z",
+      "updatedAt": "2026-03-12T00:02:35.602Z",
       "tags": [
         "trading",
         "improvement"
-      ]
+      ],
+      "completedAt": "2026-03-12T00:02:35.602Z"
     }
   ]
 }

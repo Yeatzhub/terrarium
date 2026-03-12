@@ -1,0 +1,16 @@
+{
+  "goals": [
+    {
+      "id": "1773274485747-y8t4ip1zp",
+      "title": "Test goal",
+      "description": "",
+      "deadline": "2026-03-15",
+      "status": "not-started",
+      "priority": "high",
+      "category": "trading",
+      "subtasks": [],
+      "createdAt": "2026-03-12T00:14:45.747Z",
+      "updatedAt": "2026-03-12T00:14:45.747Z"
+    }
+  ]
+}
