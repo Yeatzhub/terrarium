@@ -1,8 +1,24 @@
 {
-  "agents": {},
+  "agents": {
+    "thor_xrp_mc_v2": {
+      "strategy": "xrp-market-cipher-v2",
+      "strategy_file": "/storage/workspace/projects/trading/strategies/xrp-market-cipher-v2.md",
+      "daily_loss_limit": 0.05,
+      "daily_loss_current": 0.00,
+      "max_drawdown": 0.15,
+      "drawdown_current": 0.00,
+      "consecutive_loss_limit": 5,
+      "consecutive_losses": 0,
+      "api_failure_limit": 0.10,
+      "paper_trade_duration_days": 7,
+      "paper_trade_start": "2026-03-11",
+      "status": "active",
+      "last_check": "2026-03-11T23:00:00Z"
+    }
+  },
   "metadata": {
-    "created": "2026-03-11T21:12:00Z",
-    "updated": "2026-03-11T21:12:00Z",
+    "created": "2026-03-11T23:06:00Z",
+    "updated": "2026-03-11T23:06:00Z",
     "note": "Njord tracks circuit breaker status per trading agent. Status: active | paused | stopped"
   }
 }
