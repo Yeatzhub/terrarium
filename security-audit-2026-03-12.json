@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-03-12T11:00:00Z",
+  "hostname": "yeatzai",
+  "findings": [
+    {
+      "category": "OPEN_PORTS",
+      "severity": "HIGH",
+      "item": "ComfyUI port 8188",
+      "status": "EXPOSED",
+      "details": "Listening on 0.0.0.0:8188 - no authentication, world-accessible",
+      "recommendation": "Bind to 127.0.0.1 or use TailscaleFunnel"
+    },
+    {
+      "category": "OPEN_PORTS",
+      "severity": "HIGH",
+      "item": "SearXNG port 8082",
+      "status": "EXPOSED",
+      "details": "Docker container mapped to 0.0.0.0:8082 - world-accessible search engine",
+      "recommendation": "Bind to 127.0.0.1 or protect with auth"
+    },
+    {
+      "category": "OPEN_PORTS",
+      "severity": "MEDIUM",
+      "item": "SSH port 22",
+      "status": "EXPOSED",
+      "details": "Listening on 0.0.0.0:22 but key-only auth configured",
+      "recommendation": "Consider Tailscale SSH only or fail2ban"
+    },
+    {
+      "category": "OPEN_PORTS",
+      "severity": "OK",
+      "item": "OpenClaw Gateway 18789",
+      "status": "SECURE",
+      "details": "Bound to 127.0.0.1 with token auth - not world-exposed",
+      "recommendation": null
+    },
+    {
+      "category": "OPEN_PORTS",
+      "severity": "OK",
+      "item": "HTTPS port 443",
+      "status": "SECURE",
+      "details": "Bound to Tailscale IP only (100.112.56.61)",
+      "recommendation": null
+    },
+    {
+      "category": "GATEWAY_AUTH",
+      "severity": "OK",
+      "item": "OpenClaw Gateway",
+      "status": "SECURE",
+      "details": "bind: loopback, auth: token mode",
+      "recommendation": null
+    },
+    {
+      "category": "SSH_CONFIG",
+      "severity": "OK",
+      "item": "PermitRootLogin",
+      "status": "SECURE",
+      "details": "PermitRootLogin no",
+      "recommendation": null
+    },
+    {
+      "category": "SSH_CONFIG",
+      "severity": "OK",
+      "item": "PasswordAuthentication",
+      "status": "SECURE",
+      "details": "PasswordAuthentication no (key-only)",
+      "recommendation": null
+    },
+    {
+      "category": "FIREWALL",
+      "severity": "MEDIUM",
+      "item": "UFW Firewall",
+      "status": "NOT_ACTIVE",
+      "details": "UFW not available/configured",
+      "recommendation": "Enable UFW or configure iptables/nftables"
+    },
+    {
+      "category": "DOCKER_PORTS",
+      "severity": "HIGH",
+      "item": "SearXNG container",
+      "status": "EXPOSED",
+      "details": "0.0.0.0:8082->8080/tcp - bypasses potential host firewall",
+      "recommendation": "Use --network host or bind to 127.0.0.1"
+    }
+  ],
+  "summary": {
+    "total_checks": 10,
+    "secure": 5,
+    "warnings": 2,
+    "critical": 3
+  },
+  "risk_level": "MEDIUM",
+  "immediate_actions": [
+    "Bind ComfyUI to 127.0.0.1:8188 or protect with auth",
+    "Bind SearXNG to 127.0.0.1:8082",
+    "Enable UFW: sudo ufw allow 22 && sudo ufw enable"
+  ]
+}
