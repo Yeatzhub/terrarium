@@ -1,0 +1,74 @@
+{
+  "timestamp": "2026-03-13T12:30:00Z",
+  "hostname": "yeatzai",
+  "overall_status": "WARNING",
+  "cron_daemon": {
+    "status": "active",
+    "running": true,
+    "pid": 1391
+  },
+  "user_crontab": {
+    "jobs": [
+      {"schedule": "0 * * * *", "command": "polymarket/scan.sh", "script_exists": true},
+      {"schedule": "*/5 * * * *", "command": "pionex/xrp/monitor.sh", "script_exists": true, "last_log": "2026-03-13T04:00:01Z"},
+      {"schedule": "* * * * *", "command": "gpu_temp_alert.sh", "script_exists": true},
+      {"schedule": "0 8 * * *", "command": "api-audit.sh", "script_exists": true},
+      {"schedule": "5 * * * *", "command": "huginn/scanner.py", "last_run": "2026-03-13T12:05:00Z"},
+      {"schedule": "10 * * * *", "command": "balance_tracker.py", "last_run": "2026-03-13T12:10:00Z"},
+      {"schedule": "0 */2 * * *", "command": "backup-to-github.sh", "script_exists": true},
+      {"schedule": "0 9 * * *", "command": "cron-monitor.sh", "script_exists": true}
+    ],
+    "status": "healthy"
+  },
+  "system_cron_d": {
+    "files": [
+      "openclaw-api",
+      "openclaw-backup",
+      "openclaw-briefing",
+      "openclaw-monitor",
+      "openclaw-security",
+      "openclaw-security-fix",
+      "openclaw-update"
+    ],
+    "status": "healthy"
+  },
+  "systemd_timers": {
+    "pionex-bot-monitor": {
+      "status": "inactive",
+      "loaded": true,
+      "enabled": false,
+      "note": "Timer exists but is DISABLED - using cron instead"
+    },
+    "user_timers": [
+      {"name": "launchpadlib-cache-clean.timer", "next": "2026-03-14T04:04:39Z", "status": "healthy"}
+    ]
+  },
+  "scripts_status": {
+    "/storage/workspace/projects/trading/polymarket/scan.sh": "exists",
+    "/storage/workspace/projects/trading/pionex/xrp/monitor.sh": "exists",
+    "/storage/workspace/scripts/gpu_temp_alert.sh": "exists",
+    "/home/spectre/.openclaw/scripts/api-audit.sh": "exists",
+    "/home/spectre/.openclaw/scripts/backup-to-github.sh": "exists",
+    "/home/spectre/.openclaw/scripts/cron-monitor.sh": "exists",
+    "/home/spectre/.openclaw/scripts/security-audit.sh": "exists",
+    "/home/spectre/.openclaw/scripts/security-fix.sh": "exists",
+    "/home/spectre/.openclaw/scripts/openclaw-update-check.sh": "exists"
+  },
+  "trading_bots": {
+    "xrp_bot": {
+      "running": true,
+      "pid": 3014,
+      "started": "2026-03-13T04:00:01Z",
+      "mode": "paper",
+      "uptime_hours": 8.5
+    }
+  },
+  "warnings": [
+    "pionex-bot-monitor.timer is disabled (using cron instead - this is OK)",
+    "XRP bot monitor log not updated since 04:00 (script only logs on crash/restart)"
+  ],
+  "critical": [],
+  "recommendations": [
+    "Heartbeat checks should monitor Python process directly, not pm2/docker"
+  ]
+}

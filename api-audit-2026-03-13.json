@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-03-13T12:00:00Z",
+  "hostname": "yeatzai",
+  "keys": [
+    {
+      "name": "Tavily API",
+      "source": "environment",
+      "env_var": "TAVILY_API_KEY",
+      "status": "valid",
+      "validation": "API call returned search results",
+      "usage_available": false,
+      "note": "No /account or /credits endpoint accessible"
+    },
+    {
+      "name": "Ollama Local",
+      "source": "openclaw.json",
+      "key_type": "apiKey",
+      "value": "ollama-local",
+      "status": "valid",
+      "validation": "ollama list returned 4 models",
+      "note": "Local instance, no usage limits"
+    },
+    {
+      "name": "Ollama Cloud",
+      "source": "openclaw.json",
+      "key_type": "apiKey",
+      "status": "valid",
+      "validation": "API call returned 33 models",
+      "models_available": 33,
+      "usage_available": false,
+      "note": "No /usage or /account endpoints exposed"
+    },
+    {
+      "name": "Telegram Bot",
+      "source": "openclaw.json",
+      "key_type": "botToken",
+      "status": "valid",
+      "validation": "getMe returned AISpectre_bot",
+      "bot_username": "AISpectre_bot",
+      "usage_available": false,
+      "note": "Telegram bots have rate limits but no usage API"
+    },
+    {
+      "name": "OpenClaw Gateway Auth",
+      "source": "openclaw.json",
+      "key_type": "token",
+      "status": "valid",
+      "note": "Internal auth token for gateway control"
+    }
+  ],
+  "warnings": [],
+  "usage_limits": {
+    "tavily": "Unknown - API does not expose usage",
+    "ollama_cloud": "Unknown - API does not expose usage"
+  },
+  "recommendations": [
+    "Check Tavily dashboard manually for usage: https://tavily.com/dashboard",
+    "Check Ollama Cloud dashboard for billing: https://ollama.com/dashboard",
+    "Set up usage monitoring alerts if paid tier"
+  ],
+  "overall_status": "all_keys_valid"
+}
