@@ -1,6 +1,49 @@
 {
-    "timestamp": "2026-03-13T08:00:02+00:00",
-    "type": "api-audit",
-    "status": "WARNING",
-    "findings": "All checks passed - no security issues found"
+  "timestamp": "2026-03-13T11:00:00Z",
+  "hostname": "yeatzai",
+  "findings": {
+    "open_ports": {
+      "exposed": [
+        {"port": 22, "service": "SSH", "bind": "0.0.0.0", "risk": "low", "note": "SSH hardening in place"},
+        {"port": 3000, "service": "TheHub", "bind": "0.0.0.0", "risk": "medium", "note": "Next.js dashboard"},
+        {"port": 8082, "service": "SearXNG", "bind": "0.0.0.0", "risk": "medium", "note": "Docker container"},
+        {"port": 8188, "service": "ComfyUI", "bind": "0.0.0.0", "risk": "medium", "note": "Stable Diffusion UI"}
+      ],
+      "loopback_only": [
+        {"port": 18789, "service": "OpenClaw Gateway"},
+        {"port": 18791, "service": "OpenClaw Gateway"},
+        {"port": 18792, "service": "OpenClaw Gateway"},
+        {"port": 11434, "service": "Ollama"},
+        {"port": 53, "service": "systemd-resolve"}
+      ],
+      "tailscale_only": [
+        {"port": 443, "ip": "100.112.56.61"},
+        {"port": 49576, "ip": "100.112.56.61"}
+      ]
+    },
+    "gateway_auth": {
+      "token_auth": true,
+      "bind": "loopback",
+      "status": "secure"
+    },
+    "ssh_config": {
+      "PermitRootLogin": "no",
+      "PasswordAuthentication": "no",
+      "PubkeyAuthentication": "yes",
+      "status": "secure"
+    },
+    "firewall": {
+      "ufw_enabled": true,
+      "note": "UFW config shows ENABLED=yes"
+    },
+    "docker_ports": {
+      "searxng": {"host": "0.0.0.0", "port": 8082, "container_port": 8080}
+    }
+  },
+  "recommendations": [
+    "Consider binding TheHub (3000) to Tailscale IP only",
+    "Consider binding SearXNG (8082) to loopback or Tailscale",
+    "ComfyUI (8188) exposed on 0.0.0.0 - consider firewall rule or Tailscale bind"
+  ],
+  "overall_status": "acceptable"
 }
