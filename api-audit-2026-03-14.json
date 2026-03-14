@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-03-14T12:00:00Z",
+  "audit_type": "scheduled",
+  "keys_inventory": [
+    {
+      "name": "Tavily API",
+      "source": "environment",
+      "key_prefix": "tvly-...",
+      "validation": "valid",
+      "usage": {
+        "used": 112,
+        "limit": 1000,
+        "percentage": 11.2,
+        "plan": "Researcher"
+      },
+      "status": "healthy",
+      "flagged": false
+    },
+    {
+      "name": "OpenRouter API",
+      "source": "openclaw.json",
+      "key_prefix": "sk-or-v1-297...481",
+      "validation": "valid",
+      "usage": {
+        "used_daily": 0,
+        "limit_daily": 2,
+        "percentage": 0,
+        "limit_type": "daily"
+      },
+      "status": "healthy",
+      "flagged": false
+    },
+    {
+      "name": "Ollama Cloud",
+      "source": "openclaw.json",
+      "key_prefix": "4df2...5q1e",
+      "validation": "valid",
+      "usage": {
+        "available": "no usage endpoint",
+        "note": "Usage data not exposed by provider"
+      },
+      "status": "unknown_usage",
+      "flagged": false
+    },
+    {
+      "name": "OpenClaw Gateway Token",
+      "source": "openclaw.json",
+      "validation": "internal",
+      "usage": {
+        "note": "Internal auth token for gateway connections"
+      },
+      "status": "internal",
+      "flagged": false
+    }
+  ],
+  "summary": {
+    "total_keys": 4,
+    "valid": 4,
+    "invalid": 0,
+    "flagged_over_80_percent": 0,
+    "recommendations": []
+  }
+}

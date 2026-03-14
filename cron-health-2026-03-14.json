@@ -1,0 +1,99 @@
+{
+  "timestamp": "2026-03-14T12:30:00Z",
+  "status": "WARNING",
+  "user_crontab": {
+    "total_jobs": 9,
+    "scripts_found": 5,
+    "scripts_missing": 4,
+    "jobs": [
+      {
+        "schedule": "0 * * * *",
+        "script": "/storage/workspace/projects/trading/polymarket/scan.sh",
+        "status": "healthy",
+        "exists": true
+      },
+      {
+        "schedule": "*/5 * * * *",
+        "script": "/storage/workspace/projects/trading/pionex/xrp/monitor.sh",
+        "status": "healthy",
+        "exists": true
+      },
+      {
+        "schedule": "* * * * *",
+        "script": "/storage/workspace/scripts/gpu_temp_alert.sh",
+        "status": "healthy",
+        "exists": true
+      },
+      {
+        "schedule": "0 8 * * *",
+        "script": "/home/yeatz/.openclaw/scripts/api-audit.sh",
+        "status": "broken",
+        "exists": false,
+        "note": "Path references yeatz but scripts are under spectre"
+      },
+      {
+        "schedule": "5 * * * *",
+        "script": "/storage/workspace/projects/trading/scanner/market_scanner.py",
+        "status": "healthy",
+        "exists": true
+      },
+      {
+        "schedule": "10 * * * *",
+        "script": "/storage/workspace/projects/trading/pionex/balance_tracker.py",
+        "status": "healthy",
+        "exists": true
+      },
+      {
+        "schedule": "0 */2 * * *",
+        "script": "/home/yeatz/.openclaw/scripts/backup-to-github.sh",
+        "status": "broken",
+        "exists": false,
+        "note": "Path references yeatz but scripts are under spectre"
+      },
+      {
+        "schedule": "0 9 * * *",
+        "script": "/home/yeatz/.openclaw/scripts/cron-monitor.sh",
+        "status": "broken",
+        "exists": false,
+        "note": "Path references yeatz but scripts are under spectre"
+      },
+      {
+        "schedule": "30 7 * * *",
+        "script": "/home/yeatz/.openclaw/scripts/security-fix.sh",
+        "status": "broken",
+        "exists": false,
+        "note": "Path references yeatz but scripts are under spectre"
+      }
+    ]
+  },
+  "system_cron": {
+    "/etc/cron.d/openclaw-api": "exists",
+    "/etc/cron.d/openclaw-backup": "exists",
+    "/etc/cron.d/openclaw-briefing": "exists",
+    "/etc/cron.d/openclaw-monitor": "exists",
+    "/etc/cron.d/openclaw-security": "exists",
+    "/etc/cron.d/openclaw-security-fix": "exists",
+    "/etc/cron.d/openclaw-update": "exists"
+  },
+  "systemd_timers": {
+    "total": 17,
+    "next_run": "sysstat-collect in 9min"
+  },
+  "issues": [
+    {
+      "severity": "warning",
+      "message": "4 cron jobs reference /home/yeatz but scripts are located at /home/spectre",
+      "affected_jobs": [
+        "api-audit.sh",
+        "backup-to-github.sh",
+        "cron-monitor.sh",
+        "security-fix.sh"
+      ],
+      "fix": "Update crontab paths from /home/yeatz to /home/spectre, or create symlinks"
+    }
+  ],
+  "recommendations": [
+    "Run: crontab -e and update paths from /home/yeatz/.openclaw/scripts/ to /home/spectre/.openclaw/scripts/",
+    "Verify spectre user crontab is correctly configured for current user"
+  ]
+}
