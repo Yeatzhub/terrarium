@@ -1,6 +1,57 @@
 {
-    "timestamp": "2026-03-14T08:00:01+00:00",
-    "type": "api-audit",
-    "status": "WARNING",
-    "findings": "All checks passed - no security issues found"
+  "timestamp": "2026-03-14T11:00:00Z",
+  "audit_type": "scheduled",
+  "findings": {
+    "open_ports": {
+      "status": "WARNING",
+      "description": "Several ports listening on 0.0.0.0 (public-facing)",
+      "ports": [
+        {"port": 8188, "service": "ComfyUI", "binding": "0.0.0.0", "risk": "medium"},
+        {"port": 8082, "service": "SearXNG", "binding": "0.0.0.0", "risk": "medium"},
+        {"port": 22, "service": "SSH", "binding": "0.0.0.0", "risk": "high"},
+        {"port": 3000, "service": "TheHub/Next.js", "binding": "0.0.0.0", "risk": "medium"}
+      ],
+      "loopback_only": [
+        {"port": 18789, "service": "OpenClaw Gateway"},
+        {"port": 18791, "service": "OpenClaw Gateway"},
+        {"port": 18792, "service": "OpenClaw Gateway"},
+        {"port": 11434, "service": "Ollama"}
+      ]
+    },
+    "gateway_auth": {
+      "status": "SECURE",
+      "bind": "loopback",
+      "auth_mode": "token",
+      "description": "Gateway properly bound to loopback with token authentication"
+    },
+    "ssh_config": {
+      "status": "SECURE",
+      "PermitRootLogin": "no",
+      "PasswordAuthentication": "no",
+      "description": "SSH properly configured - key-only auth, root login disabled"
+    },
+    "firewall": {
+      "status": "UNKNOWN",
+      "description": "UFW not available/installed",
+      "recommendation": "Consider installing ufw for additional security layer"
+    },
+    "docker_services": {
+      "status": "INFO",
+      "containers": [
+        {"name": "searxng", "ports": "0.0.0.0:8082->8080/tcp"},
+        {"name": "openclaw-sbx-*", "ports": "none (sandboxed)"}
+      ]
+    }
+  },
+  "summary": {
+    "critical": 0,
+    "high": 1,
+    "medium": 3,
+    "low": 0,
+    "recommendations": [
+      "SSH on 0.0.0.0:22 - Consider binding to Tailscale IP only or adding fail2ban",
+      "Exposed services (8188, 8082, 3000) - Review if public access needed",
+      "Install UFW for defense-in-depth firewall layer"
+    ]
+  }
 }

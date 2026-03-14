@@ -1,7 +1,7 @@
 # OpenClaw Update Available
 
 **Current:**   
-**Latest:** 2026.3.12
+**Latest:** 2026.3.13
 
 Run  to update, or ask Spectre to apply it.
 
