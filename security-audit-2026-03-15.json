@@ -1,6 +1,86 @@
 {
-    "timestamp": "2026-03-15T08:00:03+00:00",
-    "type": "api-audit",
-    "status": "WARNING",
-    "findings": "All checks passed - no security issues found"
+  "timestamp": "2026-03-15T11:00:00Z",
+  "audit_type": "SECURITY_AUDIT",
+  "findings": [
+    {
+      "category": "OPEN_PORTS",
+      "severity": "HIGH",
+      "item": "SSH on 0.0.0.0:22",
+      "status": "WARNING",
+      "details": "SSH listening on all interfaces. Key-only auth is configured correctly.",
+      "recommendation": "Consider restricting SSH to Tailscale/VPN only via UFW"
+    },
+    {
+      "category": "OPEN_PORTS",
+      "severity": "HIGH",
+      "item": "ComfyUI on 0.0.0.0:8188",
+      "status": "RISK",
+      "details": "ComfyUI exposed to all interfaces without authentication",
+      "recommendation": "Bind to 127.0.0.1 or add authentication"
+    },
+    {
+      "category": "OPEN_PORTS",
+      "severity": "MEDIUM",
+      "item": "SearXNG on 0.0.0.0:8082",
+      "status": "RISK",
+      "details": "SearXNG container exposed to all interfaces",
+      "recommendation": "Configure UFW to restrict access or bind to localhost"
+    },
+    {
+      "category": "GATEWAY_AUTH",
+      "severity": "INFO",
+      "item": "OpenClaw Gateway",
+      "status": "SECURE",
+      "details": "Gateway bound to 127.0.0.1:18789 with token authentication enabled",
+      "recommendation": null
+    },
+    {
+      "category": "SSH_CONFIG",
+      "severity": "INFO",
+      "item": "SSH Hardening",
+      "status": "SECURE",
+      "details": "PermitRootLogin=no, PasswordAuthentication=no, PubkeyAuthentication=yes",
+      "recommendation": null
+    },
+    {
+      "category": "FIREWALL",
+      "severity": "HIGH",
+      "item": "UFW Firewall",
+      "status": "NOT_INSTALLED",
+      "details": "No firewall configured. All ports are accessible from network.",
+      "recommendation": "Install and configure UFW: sudo apt install ufw && sudo ufw allow 22 && sudo ufw enable"
+    },
+    {
+      "category": "DOCKER",
+      "severity": "MEDIUM",
+      "item": "Docker container exposures",
+      "status": "RISK",
+      "details": "SearXNG publishes port 8082 to 0.0.0.0",
+      "recommendation": "Use Docker network bindings to limit exposure"
+    }
+  ],
+  "summary": {
+    "secure": 2,
+    "warnings": 1,
+    "risks": 3,
+    "critical": 0
+  },
+  "ports": {
+    "127.0.0.1:53": { "service": "systemd-resolved", "exposed": false },
+    "127.0.0.1:18789": { "service": "openclaw-gateway", "exposed": false },
+    "127.0.0.1:18791": { "service": "openclaw-gateway", "exposed": false },
+    "127.0.0.1:18792": { "service": "openclaw-gateway", "exposed": false },
+    "127.0.0.1:11434": { "service": "ollama", "exposed": false },
+    "100.112.56.61:443": { "service": "tailscale", "exposed": false },
+    "100.112.56.61:49576": { "service": "tailscale", "exposed": false },
+    "0.0.0.0:22": { "service": "ssh", "exposed": true, "severity": "MEDIUM" },
+    "0.0.0.0:8188": { "service": "comfyui", "exposed": true, "severity": "HIGH" },
+    "0.0.0.0:8082": { "service": "searxng", "exposed": true, "severity": "MEDIUM" }
+  },
+  "recommendations": [
+    "Install UFW firewall",
+    "Run: sudo apt install ufw && sudo ufw default deny incoming && sudo ufw allow from 100.0.0.0/8 to any port 22 && sudo ufw allow 3000 && sudo ufw enable",
+    "Bind ComfyUI to 127.0.0.1 instead of 0.0.0.0",
+    "Configure SearXNG to bind to localhost or protect with UFW"
+  ]
 }
