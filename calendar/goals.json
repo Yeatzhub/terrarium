@@ -1,16 +1,29 @@
 {
   "goals": [
     {
+      "id": "1773593304687-1rik29b8e",
+      "title": "Review Subagents Architecture",
+      "description": "Go over Norse pantheon agents: Heimdall, Huginn, Tyr, Sindri, Njord, Thor, Mimir. Decide on agent separation vs single-bot setup.",
+      "deadline": "2026-03-16T00:00:00Z",
+      "status": "not-started",
+      "priority": "medium",
+      "category": "agents",
+      "subtasks": [],
+      "createdAt": "2026-03-15T16:48:24.687Z",
+      "updatedAt": "2026-03-15T16:48:24.687Z"
+    },
+    {
       "id": "1773274485747-y8t4ip1zp",
       "title": "Test goal",
       "description": "",
       "deadline": "2026-03-15",
-      "status": "not-started",
+      "status": "completed",
       "priority": "high",
       "category": "trading",
       "subtasks": [],
       "createdAt": "2026-03-12T00:14:45.747Z",
-      "updatedAt": "2026-03-12T00:14:45.747Z"
+      "updatedAt": "2026-03-15T16:02:54.562Z",
+      "completedAt": "2026-03-15T16:02:54.562Z"
     }
   ]
 }
