@@ -1,0 +1,164 @@
+{
+  "timestamp": "2026-03-15T12:30:00Z",
+  "audit_type": "CRON_HEALTH_MONITOR",
+  "status": "HEALTHY",
+  "user_crontab": {
+    "total_jobs": 9,
+    "jobs": [
+      {
+        "schedule": "0 * * * *",
+        "command": "/storage/workspace/projects/trading/polymarket/scan.sh",
+        "frequency": "hourly",
+        "script_exists": true,
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "*/5 * * * *",
+        "command": "/storage/workspace/projects/trading/pionex/xrp/monitor.sh",
+        "frequency": "every 5 minutes",
+        "script_exists": true,
+        "last_log": "2026-03-15 05:10:01",
+        "last_action": "Bot restarted successfully (PID: 3818)",
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "* * * * *",
+        "command": "/storage/workspace/scripts/gpu_temp_alert.sh",
+        "frequency": "every minute",
+        "script_exists": true,
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "0 8 * * *",
+        "command": "/home/spectre/.openclaw/scripts/api-audit.sh",
+        "frequency": "daily 8:00 UTC",
+        "script_exists": true,
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "5 * * * *",
+        "command": "/storage/workspace/projects/trading/scanner/market_scanner.py",
+        "frequency": "hourly at :05",
+        "script_exists": true,
+        "last_log": "2026-03-15T12:05:02",
+        "last_action": "Market scan saved, 2/3 coins updated",
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "10 * * * *",
+        "command": "/storage/workspace/projects/trading/pionex/balance_tracker.py",
+        "frequency": "hourly at :10",
+        "script_exists": true,
+        "last_log": "2026-03-15T12:10:01",
+        "last_action": "Balance snapshot saved: $283.66 total",
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "0 */2 * * *",
+        "command": "/home/spectre/.openclaw/scripts/backup-to-github.sh",
+        "frequency": "every 2 hours",
+        "script_exists": true,
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "0 9 * * *",
+        "command": "/home/spectre/.openclaw/scripts/cron-monitor.sh",
+        "frequency": "daily 9:00 UTC",
+        "script_exists": true,
+        "status": "HEALTHY"
+      },
+      {
+        "schedule": "30 7 * * *",
+        "command": "/home/spectre/.openclaw/scripts/security-fix.sh",
+        "frequency": "daily 7:30 UTC",
+        "script_exists": true,
+        "status": "HEALTHY"
+      }
+    ]
+  },
+  "system_cron": {
+    "total_jobs": 8,
+    "jobs": [
+      {
+        "name": "openclaw-api",
+        "schedule": "0 8 * * *",
+        "frequency": "daily 8:00 UTC",
+        "status": "HEALTHY"
+      },
+      {
+        "name": "openclaw-backup",
+        "schedule": "0 */2 * * *",
+        "frequency": "every 2 hours",
+        "status": "HEALTHY"
+      },
+      {
+        "name": "openclaw-briefing",
+        "schedule": "0 8 * * *",
+        "frequency": "daily 8:00 UTC",
+        "status": "HEALTHY"
+      },
+      {
+        "name": "openclaw-monitor",
+        "schedule": "0 9 * * *",
+        "frequency": "daily 9:00 UTC",
+        "status": "HEALTHY"
+      },
+      {
+        "name": "openclaw-security",
+        "schedule": "0 7 * * *",
+        "frequency": "daily 7:00 UTC",
+        "status": "HEALTHY"
+      },
+      {
+        "name": "openclaw-security-fix",
+        "schedule": "30 7 * * *",
+        "frequency": "daily 7:30 UTC",
+        "status": "HEALTHY"
+      },
+      {
+        "name": "openclaw-update",
+        "schedule": "0 11 * * *",
+        "frequency": "daily 11:00 UTC",
+        "status": "HEALTHY"
+      },
+      {
+        "name": "sysstat",
+        "schedule": "5-55/10 * * * *",
+        "frequency": "every 10 minutes",
+        "status": "HEALTHY"
+      }
+    ]
+  },
+  "system_timers": {
+    "active": 17,
+    "status": "HEALTHY"
+  },
+  "openclaw_gateway": {
+    "status": "running",
+    "service": "systemd (enabled)",
+    "port": 18789
+  },
+  "summary": {
+    "healthy": 17,
+    "warning": 0,
+    "critical": 0,
+    "total": 17
+  },
+  "recent_executions": [
+    {
+      "job": "market_scanner (Huginn)",
+      "last_run": "2026-03-15T12:05:02",
+      "status": "success"
+    },
+    {
+      "job": "balance_tracker (Njord)",
+      "last_run": "2026-03-15T12:10:01",
+      "status": "success"
+    },
+    {
+      "job": "xrp_monitor",
+      "last_run": "2026-03-15T05:10:01",
+      "status": "success"
+    }
+  ]
+}

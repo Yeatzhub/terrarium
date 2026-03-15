@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-03-15T12:00:00Z",
+  "audit_type": "API_KEY_AUDIT",
+  "keys": [
+    {
+      "name": "Tavily API",
+      "source": "environment",
+      "env_var": "TAVILY_API_KEY",
+      "key_prefix": "***HIDDEN***",
+      "status": "VALID",
+      "validation": "Search API responded successfully",
+      "usage": {
+        "current": null,
+        "limit": null,
+        "remaining": null,
+        "percentage": null
+      },
+      "flag": false,
+      "notes": "No usage API endpoint available"
+    },
+    {
+      "name": "Ollama Cloud",
+      "source": "openclaw.json",
+      "config_path": "models.providers.ollama-cloud.apiKey",
+      "key_prefix": "4df2070d...5q1e",
+      "status": "VALID",
+      "validation": "Models endpoint accessible",
+      "models_available": ["glm-4.7", "qwen3-next:80b", "minimax-m2"],
+      "usage": {
+        "current": null,
+        "limit": null,
+        "remaining": null,
+        "percentage": null
+      },
+      "flag": false,
+      "notes": "No usage API endpoint available"
+    },
+    {
+      "name": "OpenRouter",
+      "source": "openclaw.json",
+      "config_path": "models.providers.openrouter.apiKey",
+      "key_prefix": "sk-or-v1-297...481",
+      "status": "VALID",
+      "validation": "Chat completion successful",
+      "usage": {
+        "current": 0,
+        "limit": 2,
+        "limit_reset": "daily",
+        "remaining": 2,
+        "percentage": 0
+      },
+      "flag": false,
+      "notes": "Free tier: 2 requests/day, 0 used"
+    },
+    {
+      "name": "Telegram Bot",
+      "source": "openclaw.json",
+      "config_path": "channels.telegram.botToken",
+      "key_prefix": "8621394908:***",
+      "status": "VALID",
+      "validation": "Bot username: @AISpectre_bot",
+      "usage": {
+        "current": null,
+        "limit": null,
+        "remaining": null,
+        "percentage": null
+      },
+      "flag": false,
+      "notes": "Bot API has no strict rate limits for standard use"
+    },
+    {
+      "name": "OpenClaw Gateway Token",
+      "source": "openclaw.json",
+      "config_path": "gateway.auth.token",
+      "key_prefix": "5644296...4b02",
+      "status": "INTERNAL",
+      "validation": "Gateway running with token auth",
+      "usage": null,
+      "flag": false,
+      "notes": "Internal authentication token, not an external API"
+    }
+  ],
+  "summary": {
+    "total_keys": 5,
+    "valid": 4,
+    "invalid": 0,
+    "internal": 1,
+    "flagged": 0,
+    "flag_threshold": "80% of usage limit"
+  },
+  "recommendations": [
+    "All API keys are valid and functional",
+    "OpenRouter at 0% usage - within limits",
+    "Consider monitoring Tavily usage if available in account dashboard",
+    "Ollama Cloud usage monitoring not available via API"
+  ]
+}
