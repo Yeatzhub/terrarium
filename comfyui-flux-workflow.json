@@ -164,7 +164,7 @@
       "properties": {
         "Node name for S&R": "KSampler"
       },
-      "widgets_values": [1, "fixed", 20, 3.5, "simple", "normal", 1]
+      "widgets_values": [1, "fixed", 20, 3.5, "euler", "simple", 1]
     },
     {
       "id": 9,
