@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-03-16T12:00:00Z",
+  "audit_type": "scheduled_api_key_audit",
+  "keys_found": {
+    "gateway_token": {
+      "source": "openclaw.json",
+      "type": "auth_token",
+      "valid": true,
+      "usage": {
+        "status": "unknown",
+        "limit": "N/A - local gateway token"
+      },
+      "mask": "5644***b02"
+    },
+    "nvidia_api_key": {
+      "source": "auth-profiles.json",
+      "profile": "moonshot:default",
+      "type": "api_key",
+      "valid": true,
+      "last_used": "2026-03-10",
+      "usage": {
+        "status": "active",
+        "models_available": "100+ (see nvidia_models.json)",
+        "limit": "varies by model - check NVIDIA console"
+      },
+      "mask": "nvapi-vF***NRH"
+    },
+    "openrouter_api_key": {
+      "source": "auth-profiles.json",
+      "profile": "openrouter:default",
+      "type": "api_key",
+      "valid": false,
+      "error": "User not found (401)",
+      "last_used": "2026-03-15",
+      "usage": {
+        "status": "INVALID - key may be expired or revoked",
+        "recommendation": "Regenerate OpenRouter API key"
+      },
+      "mask": "sk-or-v1-***2d1"
+    },
+    "tavily_api_key": {
+      "source": "environment",
+      "type": "api_key",
+      "valid": "unknown",
+      "usage": {
+        "status": "not_verifiable via simple API call",
+        "limit": "check tavily.com dashboard"
+      },
+      "mask": "***HIDDEN***"
+    }
+  },
+  "providers_from_config": {
+    "ollama_cloud": {
+      "type": "proxy",
+      "model_primary": "glm-5:cloud",
+      "auth": "via ollama-cloud config"
+    },
+    "ollama_local": {
+      "type": "local",
+      "models": ["qwen3-coder:30b", "qwen3.5:35b", "qwen3.5:27b"],
+      "auth": "none required"
+    }
+  },
+  "summary": {
+    "total_keys": 4,
+    "valid_keys": 2,
+    "invalid_keys": 1,
+    "unknown_status": 1,
+    "needs_attention": [
+      "OpenRouter API key is INVALID - regenerate required"
+    ]
+  },
+  "recommendations": [
+    "Regenerate OpenRouter API key at https://openrouter.ai/keys",
+    "Verify Tavily API key status via tavily.com dashboard",
+    "Review NVIDIA API usage limits in NVIDIA NGC console"
+  ]
+}

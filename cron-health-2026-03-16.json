@@ -1,0 +1,116 @@
+{
+  "timestamp": "2026-03-16T12:30:00Z",
+  "audit_type": "scheduled_cron_health",
+  "cron_jobs": [
+    {
+      "name": "polymarket-scan",
+      "schedule": "0 * * * *",
+      "script": "/storage/workspace/projects/trading/polymarket/scan.sh",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "No log file found"
+    },
+    {
+      "name": "xrp-monitor",
+      "schedule": "*/5 * * * *",
+      "script": "/storage/workspace/projects/trading/pionex/xrp/monitor.sh",
+      "status": "healthy",
+      "last_run": "2026-03-15 05:10:01",
+      "last_status": "Bot restarted successfully",
+      "log": "/storage/workspace/projects/trading/pionex/xrp/logs/monitor.log",
+      "note": "XRP bot running (PID 396675)"
+    },
+    {
+      "name": "gpu-temp-alert",
+      "schedule": "* * * * *",
+      "script": "/storage/workspace/scripts/gpu_temp_alert.sh",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "No log file found"
+    },
+    {
+      "name": "api-audit",
+      "schedule": "0 8 * * *",
+      "script": "/home/spectre/.openclaw/scripts/api-audit.sh",
+      "status": "healthy",
+      "last_run": "2026-03-16 12:00:00",
+      "note": "Just ran via scheduled reminder"
+    },
+    {
+      "name": "market-scanner",
+      "schedule": "5 * * * *",
+      "script": "/storage/workspace/projects/trading/scanner/market_scanner.py",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "No log file found"
+    },
+    {
+      "name": "balance-tracker",
+      "schedule": "10 * * * *",
+      "script": "/storage/workspace/projects/trading/pionex/balance_tracker.py",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "No log file found"
+    },
+    {
+      "name": "backup-to-github",
+      "schedule": "0 */2 * * *",
+      "script": "/home/spectre/.openclaw/scripts/backup-to-github.sh",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "No log file found"
+    },
+    {
+      "name": "cron-monitor",
+      "schedule": "0 9 * * *",
+      "script": "/home/spectre/.openclaw/scripts/cron-monitor.sh",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "Should log to .openclaw/logs/"
+    },
+    {
+      "name": "security-fix",
+      "schedule": "30 7 * * *",
+      "script": "/home/spectre/.openclaw/scripts/security-fix.sh",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "Runs at 7:30 AM daily"
+    },
+    {
+      "name": "context-audit",
+      "schedule": "0 10 * * 0",
+      "script": "/home/spectre/.openclaw/scripts/context-audit.sh",
+      "status": "healthy",
+      "last_run": "2026-03-16 04:52:13",
+      "log": "/storage/workspace/context-audit.log",
+      "note": "Runs weekly on Sunday 10 AM"
+    },
+    {
+      "name": "security-audit",
+      "schedule": "0 7 * * *",
+      "script": "/home/spectre/.openclaw/scripts/security-audit.sh",
+      "status": "unknown",
+      "last_run": "no log",
+      "note": "Runs at 7 AM daily"
+    }
+  ],
+  "running_processes": {
+    "xrp_bot": {
+      "running": true,
+      "pid": 396675,
+      "uptime": "4h 41m"
+    }
+  },
+  "summary": {
+    "total_jobs": 11,
+    "healthy": 2,
+    "unknown": 9,
+    "critical": 0,
+    "warning": 0
+  },
+  "recommendations": [
+    "Add logging to all cron scripts for monitoring",
+    "Create log directories for scripts that don't log",
+    "Consider logrotate for XRP bot logs (currently 2.5MB)"
+  ]
+}
