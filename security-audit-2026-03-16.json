@@ -1,6 +1,65 @@
 {
-    "timestamp": "2026-03-16T08:00:06+00:00",
-    "type": "api-audit",
-    "status": "WARNING",
-    "findings": "All checks passed - no security issues found"
+  "timestamp": "2026-03-16T11:00:00Z",
+  "audit_type": "scheduled_security_audit",
+  "findings": {
+    "open_ports": {
+      "status": "WARNING",
+      "exposed_on_all_interfaces": [
+        {"port": 22, "service": "SSH", "risk": "medium"},
+        {"port": 3000, "service": "TheHub (Next.js)", "risk": "medium"},
+        {"port": 8080, "service": "HTTP Server (temp)", "risk": "low"},
+        {"port": 8081, "service": "HTTP Server (temp)", "risk": "low"},
+        {"port": 8082, "service": "SearXNG (Docker)", "risk": "medium"},
+        {"port": 8083, "service": "HTTP Server (temp)", "risk": "low"},
+        {"port": 8188, "service": "ComfyUI", "risk": "medium"}
+      ],
+      "loopback_only": [
+        {"port": 11434, "service": "Ollama"},
+        {"port": 18789, "service": "OpenClaw Gateway"},
+        {"port": 18791, "service": "OpenClaw Gateway"},
+        {"port": 18792, "service": "OpenClaw Gateway"}
+      ],
+      "tailscale_only": [
+        {"port": 443, "bind": "100.112.56.61"},
+        {"port": 49576, "bind": "100.112.56.61"}
+      ]
+    },
+    "gateway_auth": {
+      "status": "PASS",
+      "bind": "loopback",
+      "port": 18789,
+      "auth_mode": "token",
+      "note": "Gateway bound to 127.0.0.1, token auth enabled"
+    },
+    "ssh_config": {
+      "status": "UNKNOWN",
+      "note": "Could not read /etc/ssh/sshd_config (permission denied)",
+      "recommendation": "Manually verify: PermitRootLogin no, PasswordAuthentication no"
+    },
+    "firewall": {
+      "status": "NOT_CONFIGURED",
+      "note": "UFW not available/configured",
+      "recommendation": "Consider enabling UFW with default deny incoming"
+    },
+    "docker_services": {
+      "status": "WARNING",
+      "containers": [
+        {"name": "searxng", "ports": "0.0.0.0:8082->8080", "risk": "exposed"}
+      ],
+      "note": "SearXNG container exposes port 8082 on all interfaces"
+    }
+  },
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 3,
+    "low": 4,
+    "info": 0
+  },
+  "recommendations": [
+    "Enable UFW firewall with default deny incoming",
+    "Verify SSH config: PermitRootLogin no, PasswordAuthentication no",
+    "Consider binding ComfyUI (8188) and TheHub (3000) to loopback only",
+    "Clean up temporary HTTP servers on ports 8080-8083"
+  ]
 }
