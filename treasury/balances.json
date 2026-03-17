@@ -3569,6 +3569,58 @@
         }
       ],
       "totalUSD": 219.1728
+    },
+    {
+      "lastUpdate": "2026-03-17T20:10:01.832166Z",
+      "exchange": "pionex",
+      "source": "paper_trading_state",
+      "assets": [
+        {
+          "symbol": "XRP",
+          "amount": 142.32,
+          "priceUSD": 1.53,
+          "usdValue": 217.7496
+        },
+        {
+          "symbol": "BTC",
+          "amount": 0.0,
+          "priceUSD": 74452,
+          "usdValue": 0.0
+        },
+        {
+          "symbol": "SOL",
+          "amount": 0.0,
+          "priceUSD": 94.63,
+          "usdValue": 0.0
+        }
+      ],
+      "totalUSD": 217.7496
+    },
+    {
+      "lastUpdate": "2026-03-17T21:10:01.865478Z",
+      "exchange": "pionex",
+      "source": "paper_trading_state",
+      "assets": [
+        {
+          "symbol": "XRP",
+          "amount": 142.32,
+          "priceUSD": 1.53,
+          "usdValue": 217.7496
+        },
+        {
+          "symbol": "BTC",
+          "amount": 0.0,
+          "priceUSD": 74536,
+          "usdValue": 0.0
+        },
+        {
+          "symbol": "SOL",
+          "amount": 0.0,
+          "priceUSD": 94.94,
+          "usdValue": 0.0
+        }
+      ],
+      "totalUSD": 217.7496
     }
   ]
 }
