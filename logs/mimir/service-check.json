@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-03-17T15:30:00Z",
+  "timestamp": "2026-03-17T17:20:00Z",
   "services": {
     "xrp_bot": {
       "status": "running",
-      "pids": [751369, 756421, 756424, 756434, 756447, 756452]
+      "pids": [751369, 774781, 774783, 774793]
     },
     "the_hub": {
       "status": "running"
@@ -12,5 +12,6 @@
       "status": "running"
     }
   },
-  "summary": "All services are running normally."
+  "restart_attempts": 0,
+  "alerts_sent": false
 }
