@@ -33,6 +33,10 @@ node_modules/
 *.AppImage
 squashfs-root/
 ClawX.AppImage
+*.apk
+
+# Repo clones (not for backup)
+openclaw-repo/
 
 # Logs and temp
 *.log
