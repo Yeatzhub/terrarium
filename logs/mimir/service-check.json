@@ -1,1 +1,16 @@
-{"timestamp":"2026-03-17T11:55:00Z","services":{"XRP Bot":"running","The Hub":"running","OpenClaw Gateway":"running"}}
+{
+  "timestamp": "2026-03-17T15:30:00Z",
+  "services": {
+    "xrp_bot": {
+      "status": "running",
+      "pids": [751369, 756421, 756424, 756434, 756447, 756452]
+    },
+    "the_hub": {
+      "status": "running"
+    },
+    "openclaw_gateway": {
+      "status": "running"
+    }
+  },
+  "summary": "All services are running normally."
+}
