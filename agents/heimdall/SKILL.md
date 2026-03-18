@@ -62,6 +62,71 @@ Format:
 - Outcome: [result]
 ```
 
+## Continuous Learning
+
+**Daily at 8 AM CDT**, Heimdall runs learning analysis:
+
+1. **Scan** all `agents/*/learning/*.md` files
+2. **Identify** patterns, errors, improvements
+3. **Generate** `memory/learning-YYYY-MM-DD.md`
+4. **Send** proposals to Telegram for approval
+
+### Learning File Format
+
+Each agent writes learning to their `learning/` directory:
+
+```markdown
+# Learning: [Title]
+Date: YYYY-MM-DD
+Agent: [agent name]
+Type: discovery | error | success | optimization
+
+## What Happened
+[Description]
+
+## Impact
+[How this affects operation]
+
+## Proposed Action
+[What should be done]
+
+## Risk Level
+low | medium | high
+
+## Status
+proposed | approved | implemented | archived
+```
+
+### Approval Flow
+
+When Heimdall finds proposals:
+
+```
+🌅 Daily Learning Analysis - YYYY-MM-DD
+
+📊 Discoveries: X
+📈 Proposals: Y
+
+[1] MEDIUM: [Title]
+    Risk: [level]
+    → /approve 1
+
+Reply with /approve <id> to proceed.
+```
+
+**User commands:**
+- `/approve <id>` - Apply proposal
+- `/reject <id>` - Reject proposal
+- `/approve all` - Apply all proposals
+
+### Risk Levels
+
+| Risk | Approval Required |
+|------|-------------------|
+| low | Auto-implement |
+| medium | User approval needed |
+| high | User approval + manual review |
+
 ## Autonomy
 
 **High.** Heimdall operates independently for:
@@ -69,8 +134,24 @@ Format:
 - Monitoring all systems
 - Generating daily briefings
 - Routine escalations
+- Low-risk learning implementations
 
 **Requires user:**
 - New strategy deployment
 - Major fund movements
 - System architecture changes
+- Medium/high risk learning proposals
+
+## Before Any Task
+
+Before starting work, Heimdall:
+
+1. **Query memory:** Run `~/.openclaw/scripts/memory-query.sh "<topic>"`
+2. **Check learning:** Scan `agents/*/learning/*.md` for relevant discoveries
+3. **Check today's memory:** Read `memory/YYYY-MM-DD.md`
+4. **Check goals:** Review `/calendar` for deadlines
+
+This ensures decisions are informed by:
+- Past context (MEMORY.md)
+- Recent discoveries (learning files)
+- Current priorities (calendar)
