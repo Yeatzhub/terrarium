@@ -1,0 +1,19 @@
+{
+  "entries": [
+    {
+      "id": "1773811682836-nqbvj32xd",
+      "date": "2026-03-17",
+      "title": "Daily Summary - 2026-03-17",
+      "content": "## Accomplishments\n- Setup Dubai VPN (Surfshark WireGuard in Docker) for Pionex geo-unblock\n- Created SOCKS5 proxy (gost) for Pionex API access\n- XRP bot now routes through Dubai successfully\n- Configured all 7 Norse agents with qwen3.5:27b local model\n- Upgraded Mimir to qwen3-coder:30b for complex code tasks\n- Fixed TheHub services page (localhost → API proxy)\n- Created /api/ollama-status endpoint for service monitoring\n\n## Key Decisions\n- All routine Norse agents use qwen3.5:27b (shared GPU model)\n- Only complex research tasks need cloud models (huginn/tyr)\n- VPN is required for Pionex (geo-blocked in US)\n\n## Bot Activity\n- XRP bot running with paper trading mode\n- VPN routing established via run-with-vpn.sh wrapper\n- 14 git commits (automated backups)\n\n## Agent Work\n- Huginn: Daily market scan completed\n- All 7 agents configured with local/free models for autonomy\n\n## Technical Notes\n- WireGuard container: surfshark-dubai\n- SOCKS proxy: 127.0.0.1:1080\n- Bot wrapper: /storage/workspace/projects/trading/pionex/xrp/run-with-vpn.sh\n\n## Next Steps\n- Test Thor agent spawning\n- Configure Telegram routing for Norse agents\n- Setup weekly review cron",
+      "category": "general",
+      "tags": [
+        "daily",
+        "automated",
+        "test"
+      ],
+      "references": [],
+      "createdAt": "2026-03-18T05:28:02.836Z",
+      "updatedAt": "2026-03-18T05:28:02.836Z"
+    }
+  ]
+}
