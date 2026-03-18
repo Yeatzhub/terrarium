@@ -1,0 +1,21 @@
+{
+  "entries": [
+    {
+      "id": "1773817600362-gncqrz6at",
+      "date": "2026-03-18",
+      "title": "Session Summary - Norse Agents & Android OTA Updates",
+      "content": "## Accomplishments\n\n### Thor Agent\n- Created comprehensive SOUL.md for Thor (trading executor agent)\n- Defined trading workflow, risk management, circuit breakers\n- Added Tyr strategy wall and Njord treasury wall isolation\n- Created SKILL.md with invocation commands\n\n### Android OTA Updates\n- Built complete OTA update system for OpenClaw Android app\n- Created /api/app-version endpoint with changelog and version tracking\n- Added UpdateChecker.kt with fallback URLs (gateway → Tailscale → local)\n- Integrated update check into SettingsSheet with progress UI\n- Created /download page on The Hub for APK downloads\n\n### Android App Improvements\n- Fixed update checker connection issues (localhost → multi-URL fallback)\n- Changed app icon to Spectre avatar with Norse dark theme background\n- Added OpenClaw Updates section in Settings\n- Version tracking via android-version.json\n\n### Cron Jobs\n- Created daily-journal-entry cron (midnight CDT)\n- Created android-build-check cron (3 AM CDT)\n- Updated morning-briefing to include journal scan\n- Updated cron-health-monitor to check all 13 crons\n\n### The Hub Enhancements\n- Added Tailscale IP to all external links\n- Added Download link to sidebar navigation\n- Created server-config.ts for centralized URL management\n\n## Key Decisions\n- Thor cannot change strategy (Tyr domain)\n- Thor cannot access fund tracking (Njord domain)\n- Update checker tries gateway → Tailscale → local IPs in order\n- Version tracking moved to JSON file for accuracy\n\n## Bot Activity\n- XRP bot running (paper mode)\n- All systems healthy\n\n## Git Changes\n- agents/thor/SOUL.md (created)\n- agents/thor/SKILL.md (updated)\n- openclaw-repo/apps/android/app/.../update/UpdateChecker.kt (created)\n- openclaw-repo/apps/android/app/.../MainViewModel.kt (updated)\n- openclaw-repo/apps/android/app/.../ui/SettingsSheet.kt (updated)\n- openclaw-repo/apps/android/app/.../res/values/colors.xml (updated icons)\n- thehub/src/app/api/app-version/route.ts (created)\n- thehub/src/app/download/page.tsx (created)\n- thehub/src/components/Sidebar.tsx (updated)\n- thehub/src/lib/server-config.ts (created)\n\n## Next Steps\n- Test OTA update flow on device\n- Configure other Norse agents (Huginn, Tyr, Sindri, Njord, Mimir)\n- Wire Heimdall coordinator for agent orchestration",
+      "category": "general",
+      "tags": [
+        "daily",
+        "agents",
+        "android",
+        "ota-updates",
+        "norse"
+      ],
+      "references": [],
+      "createdAt": "2026-03-18T07:06:40.363Z",
+      "updatedAt": "2026-03-18T07:06:40.363Z"
+    }
+  ]
+}
