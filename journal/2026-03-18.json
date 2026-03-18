@@ -1,6 +1,21 @@
 {
   "entries": [
     {
+      "id": "1773857788868-jz7omlqd4",
+      "date": "2026-03-18",
+      "title": "Health Check - Service Monitor",
+      "content": "## Service Status (2026-03-18 18:15 UTC)\n\n### Gateway\n- Status: ⚠️ WARNING\n- Uptime: 1h 59min\n- Memory: 649.6M\n- Issue: Bonjour mDNS advertisements failing repeatedly\n\n### XRP Bot\n- Status: ✅ OK\n- Uptime: 59min\n- Mode: Paper\n- Balance: 142.32 XRP\n- Trades: 0\n- PnL: $0.00\n\n### The Hub\n- Status: ✅ OK\n- Uptime: 2h\n- Memory: 84.7M\n- HTTP: 200\n- API: healthy\n- Version: 2.0.0",
+      "category": "health-check",
+      "tags": [
+        "monitoring",
+        "mimir",
+        "automated"
+      ],
+      "references": [],
+      "createdAt": "2026-03-18T18:16:28.868Z",
+      "updatedAt": "2026-03-18T18:16:28.868Z"
+    },
+    {
       "id": "1773817600362-gncqrz6at",
       "date": "2026-03-18",
       "title": "Session Summary - Norse Agents & Android OTA Updates",
