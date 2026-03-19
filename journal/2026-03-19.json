@@ -1,0 +1,20 @@
+{
+  "entries": [
+    {
+      "id": "1773897270072-ag6ej95ak",
+      "date": "2026-03-19",
+      "title": "Android App Auto-Update Implementation",
+      "content": " Implemented in-app auto-update feature for OpenClaw Android app.\n\n## Changes Made\n- Created UpdateChecker.kt - checks The Hub API for new versions, downloads APK with progress tracking, triggers install prompt\n- Added auto-update UI in SettingsSheet.kt - shows update status, download progress bar, changelog preview, and install button\n- Integrated with MainViewModel.kt - StateFlow observables for updateAvailable, updateChecking, updateDownloading, downloadProgress, updateError\n\n## Technical Details\n- Version endpoint: GET /api/app-version?current=X.Y.Z\n- External URL for Tailscale: http://100.112.56.61:3000/openclaw.apk\n- Fallback URLs tried in order: Tailscale IP, local LAN IP, localhost\n- FileProvider used for APK installation on Android 7+\n\n## Issues Fixed\n1. Missing REQUEST_INSTALL_PACKAGES permission - required for Android 8+\n2. FileProvider path mismatch - cache directory needed to be accessible\n3. Install intent flags - added FLAG_ACTIVITY_CLEAR_TOP and FLAG_GRANT_READ_URI_PERMISSION\n\n## Versions Released\n- v2026.3.19.1 - Initial implementation\n- v2026.3.19.2 - Fixed install permission and FileProvider paths",
+      "category": "infrastructure",
+      "tags": [
+        "android",
+        "auto-update",
+        "thehub",
+        "apk"
+      ],
+      "references": [],
+      "createdAt": "2026-03-19T05:14:30.072Z",
+      "updatedAt": "2026-03-19T05:14:30.072Z"
+    }
+  ]
+}
