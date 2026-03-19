@@ -1,6 +1,39 @@
 {
   "entries": [
     {
+      "id": "1773938463646-zn1r5t3t4",
+      "date": "2026-03-19",
+      "title": "Fixed gateway spawn loop",
+      "content": "Disabled duplicate system-level systemd service (/etc/systemd/system/openclaw-gateway.service) that was conflicting with user-level service. Root cause: Two systemd services both managing openclaw-gateway with Restart=always, causing ~12 second spawn/fail cycle (~4,500+ errors/day). Fix: Ran /tmp/fix-gateway-spawn.sh to stop, disable, and remove system-level service. Verified only user-level service (~/.config/systemd/user/openclaw-gateway.service) remains active.",
+      "category": "general",
+      "tags": [
+        "gateway",
+        "systemd",
+        "bugfix"
+      ],
+      "references": [],
+      "createdAt": "2026-03-19T16:41:03.646Z",
+      "updatedAt": "2026-03-19T16:41:03.646Z"
+    },
+    {
+      "id": "1773936835727-l443txcs0",
+      "date": "2026-03-19",
+      "title": "System Health Check - All Services OK",
+      "content": "Health check completed at 16:13 UTC\n\n**Gateway**: ✅ Running (PID 3679, port 18789, health check OK)\n\n**XRP Bot**: ✅ Running (PID 47599, paper mode, actively trading)\n- Status: Paper trading with 142.32 XRP balance\n- Last activity: 16:12 UTC (fetching price data from Pionex)\n- Note: Running as manual process, systemd service disabled\n\n**The Hub**: ✅ Running (Next.js on port 3000, HTTP 200 OK)\n\n**VPN Note**: Monitor reports \"VPN not connected to UAE\" but Surfshark Dubai container is active (IP: 146.70.102.206). Bot is successfully fetching data from Pionex.\n\nAll services healthy. No action required.",
+      "category": "infrastructure",
+      "tags": [
+        "healthcheck",
+        "monitoring",
+        "cron",
+        "gateway",
+        "xrp-bot",
+        "thehub"
+      ],
+      "references": [],
+      "createdAt": "2026-03-19T16:13:55.727Z",
+      "updatedAt": "2026-03-19T16:13:55.727Z"
+    },
+    {
       "id": "1773929579583-43ok33prh",
       "date": "2026-03-19",
       "title": "System Health Check - All Services OK",
