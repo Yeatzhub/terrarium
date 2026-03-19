@@ -1,6 +1,22 @@
 {
   "entries": [
     {
+      "id": "1773955478427-khb7iborm",
+      "date": "2026-03-19",
+      "title": "Adjusted XRP bot strategy parameters",
+      "content": "Lowered ATR threshold from 1.5% to 0.4% for XRP typical volatility. Simplified MFI thresholds from 55/45 to 50/50. Updated The Hub dashboard to display strategy config in Live Market panel. Changes allow bot to trigger trades in normal XRP market conditions.",
+      "category": "general",
+      "tags": [
+        "trading",
+        "xrp",
+        "strategy",
+        "bot"
+      ],
+      "references": [],
+      "createdAt": "2026-03-19T21:24:38.427Z",
+      "updatedAt": "2026-03-19T21:24:38.427Z"
+    },
+    {
       "id": "1773938463646-zn1r5t3t4",
       "date": "2026-03-19",
       "title": "Fixed gateway spawn loop",
