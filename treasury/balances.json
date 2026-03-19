@@ -1,14 +1,6 @@
 {
   "snapshots": [
     {
-      "exchanges": {},
-      "metadata": {
-        "created": "2026-03-11T21:12:00Z",
-        "updated": "2026-03-11T21:12:00Z",
-        "note": "Njord queries exchange APIs and updates this file. Read-only for all other agents."
-      }
-    },
-    {
       "lastUpdate": "2026-03-11T23:09:26.214289Z",
       "exchange": "pionex",
       "source": "paper_trading_state",
@@ -4319,6 +4311,58 @@
           "symbol": "SOL",
           "amount": 0.0,
           "priceUSD": 90.14,
+          "usdValue": 0.0
+        }
+      ],
+      "totalUSD": 207.78719999999998
+    },
+    {
+      "lastUpdate": "2026-03-19T02:10:01.397787Z",
+      "exchange": "pionex",
+      "source": "paper_trading_state",
+      "assets": [
+        {
+          "symbol": "XRP",
+          "amount": 142.32,
+          "priceUSD": 1.46,
+          "usdValue": 207.78719999999998
+        },
+        {
+          "symbol": "BTC",
+          "amount": 0.0,
+          "priceUSD": 71129,
+          "usdValue": 0.0
+        },
+        {
+          "symbol": "SOL",
+          "amount": 0.0,
+          "priceUSD": 90.15,
+          "usdValue": 0.0
+        }
+      ],
+      "totalUSD": 207.78719999999998
+    },
+    {
+      "lastUpdate": "2026-03-19T03:10:02.175892Z",
+      "exchange": "pionex",
+      "source": "paper_trading_state",
+      "assets": [
+        {
+          "symbol": "XRP",
+          "amount": 142.32,
+          "priceUSD": 1.46,
+          "usdValue": 207.78719999999998
+        },
+        {
+          "symbol": "BTC",
+          "amount": 0.0,
+          "priceUSD": 71136,
+          "usdValue": 0.0
+        },
+        {
+          "symbol": "SOL",
+          "amount": 0.0,
+          "priceUSD": 90.02,
           "usdValue": 0.0
         }
       ],
