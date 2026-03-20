@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-03-20T00:11:00Z",
+  "type": "service-monitor",
+  "checks": [
+    {
+      "service": "XRP Bot",
+      "status": "WARNING",
+      "details": {
+        "systemdService": "inactive (dead)",
+        "manualProcesses": [243632, 243674],
+        "botRunning": true,
+        "lastLog": "2026-03-20 00:11:17 - Signal: HOLD, Price: $1.4525, Balance: 142.32 XRP",
+        "issue": "Service disabled - won't restart on boot",
+        "recommendation": "Enable xrp-bot.service and start via systemctl"
+      }
+    },
+    {
+      "service": "The Hub",
+      "status": "OK",
+      "details": {
+        "systemdService": "active (running)",
+        "uptime": "2h 47min",
+        "memoryMB": 116.9,
+        "healthCheck": "HTTP 200 OK",
+        "notes": "CoinGecko rate limited, using Kraken fallback (expected)"
+      }
+    },
+    {
+      "service": "Gateway",
+      "status": "OK",
+      "details": {
+        "systemdService": "active (running)",
+        "uptime": "1d 2h",
+        "memoryGB": 2.8,
+        "version": "v2026.3.11",
+        "warnings": ["Bonjour watchdog re-advertising (minor)"]
+      }
+    }
+  ],
+  "summary": {
+    "healthy": 2,
+    "warning": 1,
+    "critical": 0
+  },
+  "telegramSent": true,
+  "telegramChatId": "8464154608",
+  "telegramMessageId": 1693
+}
