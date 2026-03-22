@@ -1,34 +1,34 @@
-# Market Scan — 2026-03-22 03:05 UTC
+# Market Scan — 2026-03-22 05:05 UTC
 
 ## Market Overview
 
 ### 🔴 BTC
 
-- **Price**: $69,175.88
-- **24h**: -7.14%
-- **7d**: -3.18%
-- **Volume**: $26,478,468,702 (0.7x avg)
-- **Market Cap**: $1,385,332,916,419 (Rank #1)
+- **Price**: $69,272.33
+- **24h**: -6.32%
+- **7d**: -3.17%
+- **Volume**: $27,696,534,349 (0.7x avg)
+- **Market Cap**: $1,385,860,043,672 (Rank #1)
 - **24h Range**: $68,413.0000 - $70,978.0000
 - **7d Range**: $68,412.6750 - $75,632.4102
-- **Alerts**: 📉 7.1% 24h movement
+- **Alerts**: 📉 6.3% 24h movement
 
 ### 🔴 XRP
 
-- **Price**: $1.4153
-- **24h**: -7.97%
-- **7d**: -0.05%
-- **Volume**: $1,475,773,061 (0.5x avg)
-- **Market Cap**: $86,874,504,355 (Rank #4)
+- **Price**: $1.4162
+- **24h**: -7.05%
+- **7d**: -0.04%
+- **Volume**: $1,532,791,245 (0.6x avg)
+- **Market Cap**: $86,892,268,328 (Rank #4)
 - **24h Range**: $1.4000 - $1.4500
 - **7d Range**: $1.4075 - $1.5961
-- **Alerts**: 📉 8.0% 24h movement
+- **Alerts**: 📉 7.1% 24h movement
 
 ## Opportunities
 
-- 📉 **BTC**: Oversold dip candidate (-7.1% 24h)
+- 📉 **BTC**: Oversold dip candidate (-6.3% 24h)
 - 🟢 **BTC**: Near 7d support ($68,412.6750)
-- 📉 **XRP**: Oversold dip candidate (-8.0% 24h)
+- 📉 **XRP**: Oversold dip candidate (-7.1% 24h)
 - 🟢 **XRP**: Near 7d support ($1.4075)
 
 ---
