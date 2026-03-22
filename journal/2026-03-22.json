@@ -1,0 +1,19 @@
+{
+  "entries": [
+    {
+      "id": "1774138318685-cztkemdgq",
+      "date": "2026-03-22",
+      "title": "System Health Check",
+      "content": "## Status Overview\n\n- **Gateway**: ✅ Running (PID 447601)\n- **The Hub**: ✅ Healthy (v2.0.0)\n- **XRP Bot**: ⚠️ Paper trading via cron (no dedicated process)\n\n## Details\n\n### Gateway\n- Port: 18789 (loopback)\n- Auth: Token-based\n- Status: OK\n\n### Yggdrasil Hub\n- Port: 3000\n- Health: OK\n- Version: 2.0.0\n\n### XRP Trading Bot\n- Strategy: thor_xrp_mc_v2 (paper trading)\n- Exchange: Pionex\n- Last Balance: $199.07 (142.19 XRP @ $1.40)\n- Circuit Breaker: Active\n- Note: No dedicated process found - appears to run via scheduled tasks",
+      "category": "system",
+      "tags": [
+        "health",
+        "monitor",
+        "cron"
+      ],
+      "references": [],
+      "createdAt": "2026-03-22T00:11:58.685Z",
+      "updatedAt": "2026-03-22T00:11:58.685Z"
+    }
+  ]
+}

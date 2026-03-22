@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-03-22T00:12:00Z",
+  "check": "mimir-service-monitor",
+  "services": {
+    "gateway": {
+      "status": "ok",
+      "pid": 447601,
+      "ports": [18789, 18791, 18792],
+      "bind": "loopback",
+      "auth": "token"
+    },
+    "the-hub": {
+      "status": "ok",
+      "port": 3000,
+      "version": "2.0.0",
+      "health": {"status": "ok", "timestamp": "2026-03-22T00:11:17.826Z"}
+    },
+    "xrp-bot": {
+      "status": "warning",
+      "type": "paper-trading",
+      "strategy": "thor_xrp_mc_v2",
+      "exchange": "pionex",
+      "lastBalance": {
+        "XRP": {"amount": 142.19, "priceUSD": 1.40, "valueUSD": 199.07},
+        "totalUSD": 199.07,
+        "lastUpdate": "2026-03-22T00:10:01.717941Z"
+      },
+      "circuitBreaker": {
+        "status": "active",
+        "dailyLossCurrent": 0.0,
+        "consecutiveLosses": 0
+      },
+      "note": "No dedicated process running - paper trading runs via scheduled tasks"
+    }
+  },
+  "overallStatus": "ok",
+  "issues": [
+    {
+      "service": "xrp-bot",
+      "severity": "warning",
+      "message": "No dedicated XRP bot process found. Paper trading state tracked in files but may not be actively executing trades."
+    }
+  ]
+}
