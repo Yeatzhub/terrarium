@@ -1,6 +1,14 @@
 {
-  "versionCode": 2026031902,
-  "versionName": "2026.3.19.2",
-  "buildDate": "2026-03-19",
-  "apkPath": "/openclaw.apk"
+  "versionCode": 2026032200,
+  "versionName": "2026.3.22",
+  "buildDate": "2026-03-22",
+  "apkPath": "/openclaw.apk",
+  "size": 85240270,
+  "changelog": [
+    "fix: make Android current-location callback cancellation-safe",
+    "fix: serialize TalkModeManager player cleanup",
+    "fix: use scheme default port for gateway setup",
+    "fix: Bitmap memory leaks in PhotosHandler and CanvasController",
+    "fix: temp file leak in CameraHandler"
+  ]
 }
