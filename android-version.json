@@ -1,14 +1,14 @@
 {
-  "versionCode": 2026032200,
-  "versionName": "2026.3.22",
+  "versionCode": 2026032201,
+  "versionName": "2026.3.22.1",
   "buildDate": "2026-03-22",
   "apkPath": "/openclaw.apk",
-  "size": 85240270,
+  "size": 86405489,
   "changelog": [
-    "fix: make Android current-location callback cancellation-safe",
-    "fix: serialize TalkModeManager player cleanup",
-    "fix: use scheme default port for gateway setup",
-    "fix: Bitmap memory leaks in PhotosHandler and CanvasController",
-    "fix: temp file leak in CameraHandler"
+    "c86de678 feat(android): support android node sms.search (#48299)",
+    "64e412e5 fix(android): lazy-init node runtime after onboarding",
+    "3e360ec8 fix(android): shrink chat image attachments",
+    "a41be258 fix(android): preserve chat message identity on refresh",
+    "56e23a88 fix(android): reduce chat recomposition churn"
   ]
 }
