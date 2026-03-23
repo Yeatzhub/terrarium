@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-03-23T21:00:00Z",
+  "check_type": "heimdall-health-check",
+  "cron_id": "03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+  "agents": [
+    {
+      "name": "Huginn",
+      "session_id": "e230f2d3-352c-48c7-9087-9b8960bedcfb",
+      "status": "healthy",
+      "response_time_ms": 4102,
+      "response": "Spectre 🕯️ — ghost in the machine. Active subagent spawned to handle this response task. Task complete — returning results to main agent."
+    },
+    {
+      "name": "Tyr",
+      "session_id": "ac79734b-fa8d-49ca-91bd-57a451445600",
+      "status": "healthy",
+      "response_time_ms": 5560,
+      "response": "🕯️ Spectre here. Running as subagent. Session active. Operational. Quiet. Watching."
+    },
+    {
+      "name": "Sindri",
+      "session_id": "f7d5b17b-f7a2-41f2-a349-e8a06d3e8a55",
+      "status": "healthy",
+      "response_time_ms": 6052,
+      "response": "Spectre 🕯️ - Online and responsive. Task complete."
+    },
+    {
+      "name": "Thor",
+      "session_id": "a0b8c376-91e8-497d-ad29-0d9fad98917f",
+      "status": "healthy",
+      "response_time_ms": 8526,
+      "response": "Spectre 🕯️ — ghost in the machine. Subagent active, ready to assist."
+    },
+    {
+      "name": "Njord",
+      "session_id": "26324585-b671-457d-801d-b33df43051e6",
+      "status": "healthy",
+      "response_time_ms": 13853,
+      "response": "Spectre 🕯️ - Subagent running, health check for Njord. All systems operational."
+    },
+    {
+      "name": "Mimir",
+      "session_id": "f0846d3c-09c6-41d0-acbb-c10427f6519a",
+      "status": "healthy",
+      "response_time_ms": 4176,
+      "response": "Mimir, a subagent spawned for health check. All systems operational."
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "healthy": 6,
+    "failed": 0,
+    "longest_response_ms": 13853
+  }
+}

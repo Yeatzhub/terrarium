@@ -31,6 +31,26 @@
 | read | ✓ — treasury files, positions |
 | write | Only in `/storage/workspace/treasury/` |
 | message | Only for alerting Heimdall |
+| obsidian | Log P&L reports to `memory/trading/` |
+
+## Obsidian Logging
+
+Njord logs financial reports to Obsidian:
+
+```bash
+# Daily P&L report
+obsidian write memory/trading/pnl-daily.md \
+  --content "# Daily P&L\n\n## 2026-03-23\n- Balance: \$142.19\n- Change: +\$2.34 (+1.67%)\n- Trades: 3\n- Win Rate: 66.7%"
+
+# Append to calendar note
+obsidian append memory/2026-03-23.md \
+  --heading "Trading" \
+  --content "- Njord: Daily P&L +1.67%, balance \$142.19"
+
+# Weekly summary
+obsidian write memory/trading/pnl-weekly.md \
+  --content "# Weekly P&L\n\n## Week 12 (Mar 17-23)\n- Starting: \$138.00\n- Ending: \$142.19\n- Change: +3.04%\n- Total Trades: 15\n- Win Rate: 60%"
+```
 
 ## Workspace
 

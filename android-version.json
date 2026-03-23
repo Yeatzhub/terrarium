@@ -1,9 +1,9 @@
 {
-  "versionCode": 2026032301,
-  "versionName": "2026.3.23.1",
+  "versionCode": 2026032302,
+  "versionName": "2026.3.23.2",
   "buildDate": "2026-03-23",
   "apkPath": "/openclaw.apk",
-  "size": 86372721,
+  "size": 86372717,
   "buildType": "thirdParty-debug",
   "changelog": [
     "Security: gate canvas bridge to trusted pages",

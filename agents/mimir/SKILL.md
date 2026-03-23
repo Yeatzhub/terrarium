@@ -32,6 +32,27 @@
 | cron | ✓ — schedule monitoring jobs |
 | browser | ✓ — Hub testing |
 | process | ✓ — manage background processes |
+| obsidian | Log system status to `memory/agents/mimir/` |
+
+## Obsidian Logging
+
+Mimir logs system status to Obsidian:
+
+```bash
+# Log daily status
+obsidian write memory/agents/mimir/status.md \
+  --content "# System Status\n\n## 2026-03-23\n- Gateway: OK\n- TheHub: OK\n- XRP Bot: RUNNING\n- Disk: 9%\n- GPU: 62°C"
+
+# Append alert
+obsidian append memory/2026-03-23.md \
+  --heading "System Status" \
+  --content "- Mimir: XRP bot restarted at 21:45 UTC"
+
+# Update status frontmatter
+obsidian patch memory/agents/mimir/status.md \
+  --field last_check \
+  --value "2026-03-23T21:45:00Z"
+```
 
 ## Workspace
 

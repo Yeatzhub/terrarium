@@ -38,6 +38,36 @@
 | message | ✓ — Telegram alerts |
 | read/write | ✓ — all workspaces (read), yggdrasil/ (write) |
 | exec | Limited — system status only |
+| obsidian | Write daily briefings, consolidate agent reports |
+
+## Obsidian Integration
+
+Heimdall consolidates all agent reports into Obsidian:
+
+```bash
+# Write daily briefing
+obsidian write memory/YYYY-MM-DD.md \
+  --content "# Memory - YYYY-MM-DD
+
+## Morning Briefing
+- Weather: [from weather skill]
+- Bot Status: [from Mimir]
+- Goals: [from calendar]
+
+## Agent Reports
+- Huginn: [market scan]
+- Thor: [trade status]
+- Njord: [P&L summary]
+
+## Priorities
+1. [Today's priority 1]
+2. [Today's priority 2]"
+
+# Append agent status
+obsidian append memory/YYYY-MM-DD.md \
+  --heading "Agent Reports" \
+  --content "- Heimdall: All systems operational"
+```
 
 ## Workspace
 

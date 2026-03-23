@@ -1,0 +1,10 @@
+{
+  "renderNullAs": "\\-",
+  "warnOnEmptyResult": false,
+  "refreshEnabled": true,
+  "refreshInterval": 2500,
+  "defaultRender": "table",
+  "inlineQueryPrefix": "=",
+  "inlineJsQueryPrefix": "$=",
+  "inlineQueriesInCodeblocks": true
+}

@@ -1,0 +1,17 @@
+{
+  "legacyEditor": false,
+  "livePreview": true,
+  "readableLineLength": false,
+  "showLineNumber": true,
+  "spellcheck": false,
+  "tabSize": 2,
+  "useTab": false,
+  "autoPairBrackets": true,
+  "autoPairMarkdown": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "defaultViewMode": "preview",
+  "vimMode": false,
+  "promptDelete": false,
+  "communityPlugins": true
+}

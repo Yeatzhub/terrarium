@@ -45,6 +45,28 @@
 | write | Execution logs, state updates |
 | message | Telegram alerts (via Heimdall relay) |
 | sessions_spawn | Spawn monitoring subagents |
+| obsidian | Log trades to `memory/trading/`, update session notes |
+
+## Obsidian Logging
+
+Thor logs all trades to Obsidian for persistent memory:
+
+```bash
+# Log a trade entry
+obsidian append memory/trading/2026-03-23.md \
+  --heading "Trades" \
+  --content "- **ENTRY** XRP @ \$0.5234 | Size: 1000 | Stop: \$0.513 | Target: \$0.544"
+
+# Log a trade exit
+obsidian append memory/trading/2026-03-23.md \
+  --heading "Trades" \
+  --content "- **EXIT** XRP @ \$0.5480 | P&L: +\$24.60 (+2.33%)"
+
+# Update session note
+obsidian append memory/2026-03-23.md \
+  --heading "Trading" \
+  --content "- Thor: Paper trading active, 3 trades today, +1.2%"
+```
 
 ---
 

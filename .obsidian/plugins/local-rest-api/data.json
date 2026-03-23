@@ -1,0 +1,6 @@
+{
+  "apiKey": "openclaw-spectre-2026",
+  "port": 27124,
+  "host": "127.0.0.1",
+  "https": true
+}

@@ -1,0 +1,20 @@
+{
+  "daily": {
+    "format": "YYYY-MM-DD",
+    "folder": "memory",
+    "template": "",
+    "openOnStartup": true
+  },
+  "weekly": {
+    "format": "YYYY-[W]ww",
+    "folder": "memory",
+    "template": "",
+    "openOnStartup": false
+  },
+  "monthly": {
+    "format": "YYYY-MM",
+    "folder": "memory",
+    "template": "",
+    "openOnStartup": false
+  }
+}
