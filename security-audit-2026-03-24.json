@@ -1,6 +1,49 @@
 {
-    "timestamp": "2026-03-24T08:00:02+00:00",
-    "type": "api-audit",
-    "status": "WARNING",
-    "findings": "\nWARNING: Potential secrets in git history"
+  "timestamp": "2026-03-24T11:00:00Z",
+  "status": "FAILED",
+  "error": "Sandbox restrictions prevent security audit",
+  "checks": {
+    "open_ports": {
+      "status": "UNABLE_TO_CHECK",
+      "error": "Sandbox blocks 'ss' command - requires elevated permissions",
+      "concern": "Cannot verify if ports are exposed to public internet"
+    },
+    "gateway_auth": {
+      "status": "UNABLE_TO_CHECK", 
+      "error": "Sandbox blocks access to ~/.openclaw/openclaw.json - path outside workspace",
+      "concern": "Cannot verify token auth or bind settings"
+    },
+    "ssh_config": {
+      "status": "UNABLE_TO_CHECK",
+      "error": "Sandbox blocks access to /etc/ssh/sshd_config",
+      "concern": "Cannot check if root login and password auth are disabled"
+    },
+    "firewall": {
+      "status": "UNABLE_TO_CHECK",
+      "error": "Sandbox blocks 'ufw' command - requires elevated permissions",
+      "concern": "Cannot verify firewall is active"
+    },
+    "docker_ports": {
+      "status": "UNABLE_TO_CHECK",
+      "error": "Sandbox blocks 'docker' command",
+      "concern": "Cannot check container port mappings for public exposure"
+    }
+  },
+  "summary": "Security audit BLOCKED by sandbox restrictions. The subagent cannot execute elevated commands or access host files. This prevents checking all five security items.",
+  "recommendations": [
+    "Enable elevated permissions for security audit subagents by setting:",
+    "  tools.elevated.enabled = true",
+    "  tools.elevated.allowFrom.telegram = true",
+    "  agents.list[security-audit].tools.elevated.enabled = true",
+    "  agents.list[security-audit].tools.elevated.allowFrom.telegram = true",
+    "Alternative: Run security checks from main agent with elevated access",
+    "Alternative: Use healthcheck skill which may have different permissions"
+  ],
+  "required_fixes": {
+    "config_path": "~/.openclaw/openclaw.json or equivalent",
+    "settings": {
+      "tools.elevated.enabled": true,
+      "tools.elevated.allowFrom.telegram": true
+    }
+  }
 }
