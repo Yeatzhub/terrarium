@@ -3,17 +3,26 @@
 ## Exchange
 - **Platform:** Pionex
 - **Pair:** XRP/USDT
-- **Type:** Spot (can be COIN-M futures)
+- **Type:** USDT-M Futures (preferred) or COIN-M
+- **Candle timeframe:** 15m
 
 ## Mode
 - **Default:** Paper trading
 - **To enable live:** Add `--mode live` flag
 
+## Execution
+- **Check interval:** 30 seconds
+- **Spawn:** Agent (via `sessions_spawn` or Telegram command)
+- **Notifications:** Telegram
+
 ## API Credentials
+**Status:** ⚠️ Currently READ-ONLY (needs write permissions for live trading)
+
 See: `/storage/workspace/projects/trading/pionex/api_config.py`
 
 ## Starting Capital
-- **Paper:** $142.19 (simulated)
+- **Allocated:** 100 XRP
+- **Paper:** Simulated balance
 - **Live:** Uses actual Pionex balance
 
 ## Risk Parameters

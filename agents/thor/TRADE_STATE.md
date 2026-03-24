@@ -45,4 +45,15 @@
 
 ---
 
-*Last updated: 2026-03-24 05:11 UTC*
+*Last updated: 2026-03-24 06:12 UTC*
+
+---
+
+## Last Analysis
+- **Time:** 2026-03-24 06:12 UTC
+- **Price:** $1.41 USDT
+- **Market Status:** BEARISH (EMA9 < EMA21, price below both EMAs)
+- **RSI:** ~0 (oversold - no momentum)
+- **MACD:** Negative (-0.0024)
+- **Setup:** No valid entry (Short 4/5, Long 0/5)
+- **Action:** HOLD - No position

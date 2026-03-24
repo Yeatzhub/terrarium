@@ -109,8 +109,11 @@ Market Cipher v2 is a trend-following strategy with dynamic risk management. It 
 
 ## Implementation Notes
 
-- Pull price data every 15 seconds
-- Re-evaluate position every 1 minute
+- **Candle timeframe:** 15m
+- **Check interval:** Every 30 seconds
+- **Price data:** Pionex API
+- **Execution:** Spawned as agent (see SKILL.md)
+- **Notifications:** Telegram via Heimdall relay
 - Log all entries/exits to `memory/trading/YYYY-MM-DD.md`
 - Report status to Heimdall every trade
 

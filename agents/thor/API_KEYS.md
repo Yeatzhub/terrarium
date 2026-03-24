@@ -7,21 +7,25 @@
 ```
 API_KEY: 9pHT15WJ...RJ3f
 API_SECRET: pcehCTdp...sc9b
+ACCOUNT_TYPE: spot
 ```
 
-**Permissions needed:**
+**⚠️ Current Status:** READ-ONLY
 - ✅ Read account balance
 - ✅ Read order history
-- ✅ Place orders (for live mode)
-- ✅ Cancel orders
+- ❌ Place orders (needs write permission)
+- ❌ Cancel orders (needs write permission)
 
-## Security
+**For Live Trading:**
+1. Create new API key with "Trade" permission in Pionex
+2. Update `api_config.py` with new credentials
 
-- Keys are stored locally on server only
-- File permissions: 600 (owner-only)
-- Never commit to git
-- Rotate keys periodically
+## Telegram Notifications
+
+Thor sends trade alerts via Telegram through Heimdall relay.
+
+**Channel:** Configured in OpenClaw (`openclaw.json`)
 
 ---
 
-*Loaded from: `/storage/workspace/projects/trading/pionex/api_config.py`*
+*Last updated: 2026-03-24*
