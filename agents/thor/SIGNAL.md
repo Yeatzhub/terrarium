@@ -1,6 +1,6 @@
 # Signal - TradingView Alert
 
-**Received:** 2026-03-24T18:24:34.530Z
+**Received:** 2026-03-24T20:03:59.758Z
 
 ## Alert Data
 
@@ -8,9 +8,9 @@
 |-------|-------|
 | Symbol | XRPUSDT |
 | Action | long |
-| Price | 1.45 |
-| Strategy | cse |
-| Timeframe | 15m |
+| Price | 1.49 |
+| Strategy | funnel-test |
+| Timeframe | N/A |
 
 ## Raw Payload
 
@@ -18,10 +18,8 @@
 {
   "symbol": "XRPUSDT",
   "action": "long",
-  "price": 1.45,
-  "strategy": "cse",
-  "timeframe": "15m",
-  "signal": "green-dot"
+  "price": 1.49,
+  "strategy": "funnel-test"
 }
 ```
 

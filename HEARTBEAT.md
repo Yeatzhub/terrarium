@@ -12,11 +12,10 @@
 
 **Run these directly — do not spawn subagents (sandbox network issues).**
 
-### Trading Bots
-- [ ] Check if XRP bot is running
-- [ ] Restart if crashed
-- [ ] Alert if repeated crashes
-- [ ] Monitor win rate and profitability
+### Trading (Thor)
+- [ ] Check Thor Docker container status
+- [ ] Check TradingView webhook is receiving signals
+- [ ] Monitor position and P&L
 
 ### System Health
 - [ ] Check disk space (alert if >90%)
