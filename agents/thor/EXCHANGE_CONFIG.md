@@ -3,7 +3,7 @@
 ## Exchange
 - **Platform:** Pionex
 - **Pair:** XRP/USDT
-- **Type:** USDT-M Futures (preferred) or COIN-M
+- **Type:** USDT-M Futures
 - **Candle timeframe:** 15m
 
 ## Mode
@@ -16,7 +16,7 @@
 - **Notifications:** Telegram
 
 ## API Credentials
-**Status:** ⚠️ Currently READ-ONLY (needs write permissions for live trading)
+**Status:** ✅ Trading enabled (USDT-M Futures)
 
 See: `/storage/workspace/projects/trading/pionex/api_config.py`
 

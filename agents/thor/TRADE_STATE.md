@@ -6,7 +6,7 @@
 ---
 
 ## Balance
-- **Account:** 100 XRP (allocated 2026-03-24)
+- **Account:** 100 USDT (allocated 2026-03-24)
 - **Paper Mode:** Enabled
 - **Status:** Ready to trade
 

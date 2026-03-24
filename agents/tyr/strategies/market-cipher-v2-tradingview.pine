@@ -1,0 +1,104 @@
+//@version=6
+strategy("Market Cipher v2 - Thor", overlay=true, initial_capital=100, default_qty_type=strategy.percent_of_equity, default_qty_value=20)
+
+// ============================================
+// INDICATORS
+// ============================================
+ema9 = ta.ema(close, 9)
+ema21 = ta.ema(close, 21)
+ema50 = ta.ema(close, 50)
+rsi = ta.rsi(close, 14)
+[macdLine, signalLine, hist] = ta.macd(close, 12, 26, 9)
+
+// ADX calculation
+len = 14
+up = ta.rma(math.abs(ta.highest(high, len)[1] - high), len)
+down = ta.rma(math.abs(ta.lowest(low, len)[1] - low), len)
+plusDM_raw = na(high[1]) ? na : high - high[1]
+minusDM_raw = na(low[1]) ? na : low[1] - low
+plusDM = math.max(plusDM_raw, 0)
+minusDM = math.max(minusDM_raw, 0)
+trur = ta.rma(ta.tr, len)
+plus = fixnan(100 * ta.rma(plusDM, len) / trur)
+minus = fixnan(100 * ta.rma(minusDM, len) / trur)
+adx = ta.rma(math.abs(plus - minus) / (plus + minus) * 100, len)
+
+volSMA = ta.sma(volume, 20)
+
+// ============================================
+// ENTRY CONDITIONS
+// ============================================
+
+// LONG: Price above EMA9/21, bullish crossover, RSI 50-70, MACD+, ADX>20, Vol>
+longCondition = close > ema9 and close > ema21 and ema9 > ema21 
+  and rsi > 50 and rsi < 70 
+  and hist > 0 
+  and adx > 20 
+  and volume > volSMA
+
+// SHORT: Price below EMA9/21, bearish crossover, RSI 30-50, MACD-, ADX>20, Vol>
+shortCondition = close < ema9 and close < ema21 and ema9 < ema21 
+  and rsi < 50 and rsi > 30 
+  and hist < 0 
+  and adx > 20 
+  and volume > volSMA
+
+// ============================================
+// STRATEGY LOGIC
+// ============================================
+
+if longCondition and strategy.position_size == 0
+    strategy.entry("Long", strategy.long)
+    alert('{"symbol":"XRPUSDT","action":"long","price":' + str.tostring(close) + ',"strategy":"market-cipher-v2"}', alert.freq_once_per_bar_close)
+
+if shortCondition and strategy.position_size == 0
+    strategy.entry("Short", strategy.short)
+    alert('{"symbol":"XRPUSDT","action":"short","price":' + str.tostring(close) + ',"strategy":"market-cipher-v2"}', alert.freq_once_per_bar_close)
+
+// ============================================
+// EXIT CONDITIONS
+// ============================================
+
+avgPrice = strategy.position_avg_price
+
+// Long exits
+if strategy.position_size > 0
+    // Stop Loss (2%)
+    if close < avgPrice * 0.98
+        strategy.close("Long")
+        alert('{"symbol":"XRPUSDT","action":"close","price":' + str.tostring(close) + ',"reason":"stop_loss","side":"long"}', alert.freq_once_per_bar_close)
+    // Take Profit (4%)
+    else if close > avgPrice * 1.04
+        strategy.close("Long")
+        alert('{"symbol":"XRPUSDT","action":"close","price":' + str.tostring(close) + ',"reason":"take_profit","side":"long"}', alert.freq_once_per_bar_close)
+    // EMA Reversal (EMA9 crosses below EMA21)
+    else if ema9 < ema21
+        strategy.close("Long")
+        alert('{"symbol":"XRPUSDT","action":"close","price":' + str.tostring(close) + ',"reason":"ema_reversal","side":"long"}', alert.freq_once_per_bar_close)
+
+// Short exits
+if strategy.position_size < 0
+    // Stop Loss (2%)
+    if close > avgPrice * 1.02
+        strategy.close("Short")
+        alert('{"symbol":"XRPUSDT","action":"close","price":' + str.tostring(close) + ',"reason":"stop_loss","side":"short"}', alert.freq_once_per_bar_close)
+    // Take Profit (4%)
+    else if close < avgPrice * 0.96
+        strategy.close("Short")
+        alert('{"symbol":"XRPUSDT","action":"close","price":' + str.tostring(close) + ',"reason":"take_profit","side":"short"}', alert.freq_once_per_bar_close)
+    // EMA Reversal (EMA9 crosses above EMA21)
+    else if ema9 > ema21
+        strategy.close("Short")
+        alert('{"symbol":"XRPUSDT","action":"close","price":' + str.tostring(close) + ',"reason":"ema_reversal","side":"short"}', alert.freq_once_per_bar_close)
+
+// ============================================
+// VISUAL PLOTTING
+// ============================================
+
+plot(ema9, "EMA 9", color=color.yellow)
+plot(ema21, "EMA 21", color=color.blue)
+plot(ema50, "EMA 50", color=color.gray)
+plot(adx, "ADX", color=color.purple)
+plot(longCondition ? low * 0.995 : na, "Long Signal", style=plot.style_circles, color=color.green, linewidth=3)
+plot(shortCondition ? high * 1.005 : na, "Short Signal", style=plot.style_circles, color=color.red, linewidth=3)
+bgcolor(strategy.position_size > 0 ? color.new(color.green, 90) : strategy.position_size < 0 ? color.new(color.red, 90) : na)
