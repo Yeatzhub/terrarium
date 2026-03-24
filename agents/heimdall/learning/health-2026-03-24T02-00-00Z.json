@@ -1,0 +1,76 @@
+{
+  "timestamp": "2026-03-24T02:00:00Z",
+  "checkType": "heimdall-health-check",
+  "cronId": "03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+  "agents": [
+    {
+      "name": "Huginn",
+      "status": "healthy",
+      "responseTime": "7.82s",
+      "sessionId": "agent:huginn:subagent:5420f54b-0291-4e35-8a9a-18a92d63dbef",
+      "spawnResult": "accepted",
+      "completedAt": "2026-03-24T02:00:40Z"
+    },
+    {
+      "name": "Thor",
+      "status": "healthy",
+      "responseTime": "7.91s",
+      "sessionId": "agent:thor:subagent:2337226c-9a13-4468-a7cb-c4a050ab3a8c",
+      "spawnResult": "accepted",
+      "completedAt": "2026-03-24T02:00:41Z"
+    },
+    {
+      "name": "Tyr",
+      "status": "unhealthy",
+      "error": "Sandbox restriction: Cannot spawn unsandboxed subagent from sandboxed session",
+      "spawnResult": "forbidden",
+      "sessionId": null,
+      "notes": "Agent skill exists at /workspace/agents/tyr/, but agent configuration requires unsandboxed runtime"
+    },
+    {
+      "name": "Sindri",
+      "status": "unhealthy",
+      "error": "Sandbox restriction: Cannot spawn unsandboxed subagent from sandboxed session",
+      "spawnResult": "forbidden",
+      "sessionId": null,
+      "notes": "Agent skill exists at /workspace/agents/sindri/, but agent configuration requires unsandboxed runtime"
+    },
+    {
+      "name": "Njord",
+      "status": "unhealthy",
+      "error": "Sandbox restriction: Cannot spawn unsandboxed subagent from sandboxed session",
+      "spawnResult": "forbidden",
+      "sessionId": null,
+      "notes": "Agent skill exists at /workspace/agents/njord/, but agent configuration requires unsandboxed runtime"
+    },
+    {
+      "name": "Mimir",
+      "status": "unhealthy",
+      "error": "Sandbox restriction: Cannot spawn unsandboxed subagent from sandboxed session",
+      "spawnResult": "forbidden",
+      "sessionId": null,
+      "notes": "Agent skill exists at /workspace/agents/mimir/, but agent configuration requires unsandboxed runtime"
+    }
+  ],
+  "summary": {
+    "total": 6,
+    "healthy": 2,
+    "unhealthy": 4,
+    "healthyAgents": ["Huginn", "Thor"],
+    "unhealthyAgents": ["Tyr", "Sindri", "Njord", "Mimir"],
+    "failureReason": "Sandbox isolation prevents spawning unsandboxed agents. Heimdall cron runs in sandboxed mode which restricts access to agents configured with unsandboxed runtime."
+  },
+  "recommendation": "Health check should run from unsandboxed context (non-cron or gateway-hosted cron) to properly test all Norse agents. Alternatively, configure all agents to support sandboxed runtime.",
+  "previousSuccessfulChecks": {
+    "note": "Prior health checks from non-sandboxed context show all 6 agents completed successfully",
+    "lastCheckTime": "2026-03-24T00:00Z",
+    "sessions": [
+      {"name": "Huginn", "status": "done", "runtimeMs": 2956},
+      {"name": "Tyr", "status": "done", "runtimeMs": 2449},
+      {"name": "Sindri", "status": "done", "runtimeMs": 3931},
+      {"name": "Njord", "status": "done", "runtimeMs": 2934},
+      {"name": "Thor", "status": "done", "runtimeMs": 2108},
+      {"name": "Mimir", "status": "done", "runtimeMs": 4358}
+    ]
+  }
+}
