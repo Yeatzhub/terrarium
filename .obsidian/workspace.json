@@ -11,10 +11,14 @@
             "id": "main-view",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "COMMANDS.md",
+                "mode": "preview",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "COMMANDS"
             }
           }
         ]
@@ -177,6 +181,13 @@
   },
   "active": "main-view",
   "lastOpenFiles": [
+    "IDENTITY.md",
+    "SOUL.md",
+    "USER.md",
+    "agents/thor/API_KEYS.md",
+    "agents/thor/STRATEGY.md",
+    "agents/thor/EXCHANGE_CONFIG.md",
+    "thehub/logs/health.log",
     "agents/heimdall/learning/health-2026-03-24T13:01:00Z.json",
     "cron-health-2026-03-24.json",
     "agents/heimdall/learning/health-2026-03-24T12-03-59Z.json",
@@ -187,12 +198,7 @@
     "agents/thor/TRADE_LOG.md",
     "thehub/src/app/trading/thor/page.tsx",
     "thehub/src/app/api/thor/route.ts",
-    "thehub/src/app/api/thor",
-    "thehub/src/app/trading/thor",
-    "agents/thor/API_KEYS.md",
     "agents/thor/TRADE_STATE.md",
-    "agents/thor/EXCHANGE_CONFIG.md",
-    "agents/thor/STRATEGY.md",
     "agents/huginn/learning/2026-03-24-market-scan.md",
     "memory/test-obsidian.md"
   ]
