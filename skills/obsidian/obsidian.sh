@@ -4,7 +4,7 @@
 
 set -e
 
-OBSIDIAN_HOST="https://127.0.0.1:27124"
+OBSIDIAN_HOST="https://100.112.56.61:27125"
 VAULT_ROOT="/storage/workspace"
 DATA_FILE="$VAULT_ROOT/.obsidian/plugins/local-rest-api/data.json"
 

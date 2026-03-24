@@ -1,4 +1,5 @@
 {
+  "communityPlugins": true,
   "legacyEditor": false,
   "livePreview": true,
   "readableLineLength": false,
@@ -12,6 +13,5 @@
   "foldIndent": true,
   "defaultViewMode": "preview",
   "vimMode": false,
-  "promptDelete": false,
-  "communityPlugins": true
+  "promptDelete": false
 }

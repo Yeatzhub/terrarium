@@ -1,5 +1,6 @@
 [
   "local-rest-api",
   "dataview",
-  "periodic-notes"
+  "periodic-notes",
+  "obsidian-local-rest-api"
 ]

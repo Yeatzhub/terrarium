@@ -24,5 +24,11 @@
   "workspaces": false,
   "file-recovery": true,
   "publish": false,
-  "sync": false
+  "sync": false,
+  "footnotes": false,
+  "properties": true,
+  "bookmarks": true,
+  "zk-prefixer": false,
+  "bases": true,
+  "webviewer": false
 }

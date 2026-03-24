@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-03-23T22:00:00Z",
+  "cron_id": "03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+  "check_type": "heimdall-health-check",
+  "healthy_count": 6,
+  "total_count": 6,
+  "status": "all_healthy",
+  "agents": {
+    "huginn": {
+      "label": "Health check: Huginn",
+      "session_key": "agent:main:subagent:e230f2d3-352c-48c7-9087-9b8960bedcfb",
+      "session_id": "c4fcbd73-9808-46fc-9669-c97e20bc8ec8",
+      "status": "done",
+      "runtime_ms": 4102,
+      "response_summary": "Spectre 🕯️ — ghost in the machine, active subagent spawned to handle this response task.",
+      "error": null
+    },
+    "tyr": {
+      "label": "Health check: Tyr",
+      "session_key": "agent:main:subagent:ac79734b-fa8d-49ca-91bd-57a451445600",
+      "session_id": "9b733bde-08c1-482c-8327-b7067fd0ea3a",
+      "status": "done",
+      "runtime_ms": 5560,
+      "response_summary": "Spectre 🕯️ — Running as subagent (depth 1/1), task: Health check, operational.",
+      "error": null
+    },
+    "sindri": {
+      "label": "Health check: Sindri",
+      "session_key": "agent:main:subagent:f7d5b17b-f7a2-41f2-a349-e8a06d3e8a55",
+      "session_id": "63665356-f5ae-4b8c-9f6c-e7f19c1be60d",
+      "status": "done",
+      "runtime_ms": 6052,
+      "response_summary": "Spectre 🕯️ — Running as subagent (depth 1/1), Online and responsive.",
+      "error": null
+    },
+    "njord": {
+      "label": "Health check: Njord",
+      "session_key": "agent:main:subagent:26324585-b671-457d-801d-b33df43051e6",
+      "session_id": "18d80c52-d162-43cc-8f27-1ad9ad2ad60a",
+      "status": "done",
+      "runtime_ms": 13853,
+      "response_summary": "Spectre 🕯️ — Subagent running — health check for Njord, ready for health check tasks or other instructions.",
+      "error": null
+    },
+    "thor": {
+      "label": "Health check: Thor",
+      "session_key": "agent:main:subagent:a0b8c376-91e8-497d-ad29-0d9fad98917f",
+      "session_id": "ab1f8d4f-121c-40d4-a1bd-593cccdc3aad",
+      "status": "done",
+      "runtime_ms": 8526,
+      "response_summary": "Spectre 🕯️ — Ghost in the machine, Subagent active, ready to assist.",
+      "error": null
+    },
+    "mimir": {
+      "label": "Health check: Mimir",
+      "session_key": "agent:main:subagent:f0846d3c-09c6-41d0-acbb-c10427f6519a",
+      "session_id": "e3e0bb45-fa97-4857-91c5-e8510e7c9a16",
+      "status": "done",
+      "runtime_ms": 4176,
+      "response_summary": "Mimir — Subagent active, all systems operational, ready for task assignment.",
+      "error": null
+    }
+  }
+}
