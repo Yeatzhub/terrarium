@@ -177,6 +177,7 @@
   },
   "active": "main-view",
   "lastOpenFiles": [
+    "security-audit-2026-03-24.json",
     "journal/2026-03-23-comprehensive.json",
     "thehub/logs/next.log",
     "agents/thor/TRADE_LOG.md",
@@ -192,7 +193,6 @@
     "treasury/exports",
     "projects/trading/pionex/__pycache__/api_config.cpython-312.pyc",
     "projects/trading/pionex/__pycache__",
-    "projects/trading/pionex/export_trades.py",
     "agents/huginn/learning/2026-03-24-market-scan.md",
     "memory/test-obsidian.md"
   ]

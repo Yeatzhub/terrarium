@@ -1,0 +1,6 @@
+{
+    "timestamp": "2026-03-24T08:00:02+00:00",
+    "type": "api-audit",
+    "status": "WARNING",
+    "findings": "\nWARNING: Potential secrets in git history"
+}
