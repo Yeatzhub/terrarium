@@ -1,0 +1,173 @@
+{
+  "timestamp": "2026-03-24T12:30:00Z",
+  "check_type": "cron-health-monitor",
+  "executor": "cron:e3ccc33e-8467-4af6-9a75-2a6444f7f7d9",
+  "jobs": [
+    {
+      "name": "heimdall-health-check",
+      "schedule": "hourly",
+      "last_run": "2026-03-24T12:03:59Z",
+      "last_status": "PARTIAL",
+      "status_detail": "2/6 agents healthy - 4 agents failed due to sandbox restrictions (Tyr, Sindri, Njord, Mimir require unsandboxed access)",
+      "consecutive_errors": 0,
+      "next_run": "2026-03-24T13:00:00Z",
+      "health": "⚠️ WARNING"
+    },
+    {
+      "name": "mimir-service-monitor",
+      "schedule": "hourly",
+      "last_run": "2026-03-18T07:11:45Z",
+      "last_status": "UNKNOWN",
+      "status_detail": "No recent logs found - last log 6 days ago",
+      "consecutive_errors": 6,
+      "next_run": "OVERDUE",
+      "health": "🚨 CRITICAL"
+    },
+    {
+      "name": "security-audit",
+      "schedule": "daily 06:00 CDT (11:00 UTC)",
+      "last_run": "2026-03-24T11:01:00Z",
+      "last_status": "FAILED",
+      "status_detail": "Sandbox restrictions prevent security audit - cannot check ports, gateway auth, SSH config, firewall, or Docker ports",
+      "consecutive_errors": 1,
+      "next_run": "2026-03-25T11:00:00Z",
+      "health": "🚨 CRITICAL"
+    },
+    {
+      "name": "security-fix",
+      "schedule": "daily 06:30 CDT (11:30 UTC)",
+      "last_run": "unknown",
+      "last_status": "UNKNOWN",
+      "status_detail": "No log file or output found",
+      "consecutive_errors": 1,
+      "next_run": "2026-03-25T11:30:00Z",
+      "health": "⚠️ WARNING"
+    },
+    {
+      "name": "api-key-audit",
+      "schedule": "daily 07:00 CDT (12:00 UTC)",
+      "last_run": "2026-03-16T12:02:00Z",
+      "last_status": "OK",
+      "status_detail": "Last successful audit 8 days ago - no recent audit files (Mar 17-24)",
+      "consecutive_errors": 8,
+      "next_run": "2026-03-25T12:00:00Z",
+      "health": "🚨 CRITICAL"
+    },
+    {
+      "name": "cron-health-monitor",
+      "schedule": "daily 07:30 CDT (12:30 UTC)",
+      "last_run": "2026-03-24T12:30:00Z",
+      "last_status": "RUNNING",
+      "status_detail": "Currently executing this check",
+      "consecutive_errors": 0,
+      "next_run": "2026-03-25T12:30:00Z",
+      "health": "✅ HEALTHY"
+    },
+    {
+      "name": "learning-analysis",
+      "schedule": "daily 08:00 CDT (13:00 UTC)",
+      "last_run": "unknown",
+      "last_status": "UNKNOWN",
+      "status_detail": "No learning output found in agents/*/learning/ or related paths",
+      "consecutive_errors": 1,
+      "next_run": "2026-03-24T13:00:00Z",
+      "health": "⚠️ WARNING"
+    },
+    {
+      "name": "morning-briefing",
+      "schedule": "daily 08:00 CDT (13:00 UTC)",
+      "last_run": "unknown",
+      "last_status": "UNKNOWN",
+      "status_detail": "Briefing folder exists but no dated output found for today",
+      "consecutive_errors": 1,
+      "next_run": "2026-03-24T13:00:00Z",
+      "health": "⚠️ WARNING"
+    },
+    {
+      "name": "daily-checkin",
+      "schedule": "daily 21:00 CDT (02:00 UTC next day)",
+      "last_run": "unknown",
+      "last_status": "UNKNOWN",
+      "status_detail": "No checkin output found",
+      "consecutive_errors": 1,
+      "next_run": "2026-03-25T02:00:00Z",
+      "health": "⚠️ WARNING"
+    },
+    {
+      "name": "end-of-day",
+      "schedule": "daily 23:00 CDT (04:00 UTC next day)",
+      "last_run": "unknown",
+      "last_status": "UNKNOWN",
+      "status_detail": "No EOD output found",
+      "consecutive_errors": 1,
+      "next_run": "2026-03-25T04:00:00Z",
+      "health": "⚠️ WARNING"
+    },
+    {
+      "name": "daily-journal-entry",
+      "schedule": "daily 00:00 CDT (05:00 UTC)",
+      "last_run": "2026-03-24T05:00:00Z",
+      "last_status": "OK",
+      "status_detail": "Journal entry created: 2026-03-23-comprehensive.json",
+      "consecutive_errors": 0,
+      "next_run": "2026-03-25T05:00:00Z",
+      "health": "✅ HEALTHY"
+    },
+    {
+      "name": "weekly-review",
+      "schedule": "Sunday 10:00 CDT (15:00 UTC)",
+      "last_run": "unknown",
+      "last_status": "UNKNOWN",
+      "status_detail": "No weekly review output found - last Sunday was March 22",
+      "consecutive_errors": 1,
+      "next_run": "2026-03-29T15:00:00Z",
+      "health": "⚠️ WARNING"
+    }
+  ],
+  "summary": {
+    "total_jobs": 12,
+    "healthy": 2,
+    "warning": 6,
+    "critical": 3,
+    "running": 1
+  },
+  "issues": [
+    {
+      "severity": "CRITICAL",
+      "job": "mimir-service-monitor",
+      "issue": "No logs for 6 days - hourly job not running",
+      "action": "Check cron scheduler or restart service monitor"
+    },
+    {
+      "severity": "CRITICAL",
+      "job": "security-audit",
+      "issue": "Cannot run in sandboxed environment - needs elevated permissions",
+      "action": "Configure tools.elevated.enabled = true for security-audit agent"
+    },
+    {
+      "severity": "CRITICAL",
+      "job": "api-key-audit",
+      "issue": "No audit files since March 16 (8 days)",
+      "action": "Verify cron schedule and check for errors"
+    },
+    {
+      "severity": "WARNING",
+      "job": "heimdall-health-check",
+      "issue": "4/6 agents fail due to sandbox restrictions",
+      "action": "Configure agents (Tyr, Sindri, Njord, Mimir) for sandboxed access or run from unsandboxed session"
+    },
+    {
+      "severity": "WARNING",
+      "job": "multiple",
+      "issue": "6 jobs have unknown status - no output/logging",
+      "action": "Ensure all cron jobs write status to /workspace/logs/ or create output files"
+    }
+  ],
+  "recommendations": [
+    "Fix mimir-service-monitor immediately - 6 days of missed checks",
+    "Enable elevated permissions for security-audit agent or run from main session",
+    "Verify api-key-audit cron is scheduled correctly (missing Mar 17-24)",
+    "Add logging output to all cron jobs for monitoring",
+    "Consider consolidating health checks to run from unsandboxed main agent"
+  ]
+}

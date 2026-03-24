@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-03-24T13:01:00Z",
+  "checkType": "heimdall-health-check",
+  "summary": {
+    "total": 6,
+    "healthy": 6,
+    "degraded": 0,
+    "unavailable": 0,
+    "failed": 0
+  },
+  "agents": [
+    {
+      "name": "Huginn",
+      "status": "healthy",
+      "responseTimeMs": 17023,
+      "sessionId": "agent:huginn:subagent:28fc8ead-4d3c-4eeb-88f4-5fd3b5bd309c",
+      "model": "ollama-cloud/glm-5:cloud",
+      "notes": "Responded within timeout. Market surveillance agent operational."
+    },
+    {
+      "name": "Thor",
+      "status": "healthy",
+      "responseTimeMs": 16772,
+      "sessionId": "agent:thor:subagent:b71b1057-0909-4517-88f2-b5a0ec71eefe",
+      "model": "ollama-cloud/glm-5:cloud",
+      "notes": "Responded within timeout. Trade execution agent operational."
+    },
+    {
+      "name": "Sindri",
+      "status": "healthy",
+      "responseTimeMs": 4149,
+      "sessionId": "agent:main:subagent:8ac73cf0-a4ac-4259-8f86-0844877a20a4",
+      "model": "ollama-cloud/glm-5:cloud",
+      "response": "I am Sindri. Status: healthy. Current focus: Standing by for execution orders. Pending Orders: None. Execution Tasks: None active. Ready for deployment.",
+      "notes": "Fastest response. Execution agent standing by for orders."
+    },
+    {
+      "name": "Mimir",
+      "status": "healthy",
+      "responseTimeMs": 13113,
+      "sessionId": "agent:main:subagent:8294cf00-27d6-4b8b-93d8-d4104f07bce7",
+      "model": "ollama-cloud/glm-5:cloud",
+      "response": "I am Mimir. Status: healthy. Current focus: Health check for Heimdall coordination. Disk Space: OK (9% used). Memory file missing for 2026-03-24. Gateway: Unknown from sandbox. Trading op: XRP bot on Pionex. 7-agent Norse pantheon active.",
+      "notes": "Infrastructure agent reporting healthy. Noted memory file missing."
+    },
+    {
+      "name": "Njord",
+      "status": "healthy",
+      "responseTimeMs": 24212,
+      "sessionId": "agent:main:subagent:269249af-a898-4ddd-8de0-99bff421a227",
+      "model": "ollama-cloud/glm-5:cloud",
+      "response": "I am Njord. Status: healthy. Current focus: Treasury monitoring and P&L reporting. Treasury: 114.8 XRP at $1.42 = $163.02 USD. Paper trading mode on Pionex. 7-day change: -24% from $215 peak.",
+      "notes": "Financial agent operational. Portfolio value: $163.02 USD. Paper trading active."
+    },
+    {
+      "name": "Tyr",
+      "status": "healthy",
+      "responseTimeMs": 27085,
+      "sessionId": "agent:main:subagent:a81a655a-84d1-4710-ab25-42cdfd825e9d",
+      "model": "ollama-cloud/glm-5:cloud",
+      "response": "I am Tyr. Status: healthy. Current focus: Strategy development and validation. Active Strategy: XRP Market Cipher v2.1 (paper trading on Pionex). 2 additional strategies pending: orderbook-imbalance-scalp, rsi-momentum-reversal.",
+      "notes": "Strategy agent operational. XRP Market Cipher v2.1 active. Circuit breakers configured."
+    }
+  ],
+  "alerts": [
+    {
+      "level": "info",
+      "source": "Mimir",
+      "message": "Memory file missing for 2026-03-24"
+    },
+    {
+      "level": "info",
+      "source": "Njord",
+      "message": "Portfolio down 24% from $215 peak (7-day), currently at $163.02"
+    }
+  ],
+  "environment": {
+    "host": "yeatzai",
+    "model": "ollama-cloud/glm-5:cloud",
+    "sandbox": true,
+    "channel": "telegram"
+  }
+}

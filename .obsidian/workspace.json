@@ -177,6 +177,9 @@
   },
   "active": "main-view",
   "lastOpenFiles": [
+    "agents/heimdall/learning/health-2026-03-24T13:01:00Z.json",
+    "cron-health-2026-03-24.json",
+    "agents/heimdall/learning/health-2026-03-24T12-03-59Z.json",
     "logs/openclaw-update-2026-03-24.log",
     "security-audit-2026-03-24.json",
     "journal/2026-03-23-comprehensive.json",
@@ -186,13 +189,10 @@
     "thehub/src/app/api/thor/route.ts",
     "thehub/src/app/api/thor",
     "thehub/src/app/trading/thor",
-    "projects/trading/pionex/xrp/logs/bot_mc_v2_20260324_035458.log",
     "agents/thor/API_KEYS.md",
     "agents/thor/TRADE_STATE.md",
     "agents/thor/EXCHANGE_CONFIG.md",
     "agents/thor/STRATEGY.md",
-    "treasury/exports",
-    "projects/trading/pionex/__pycache__/api_config.cpython-312.pyc",
     "agents/huginn/learning/2026-03-24-market-scan.md",
     "memory/test-obsidian.md"
   ]
