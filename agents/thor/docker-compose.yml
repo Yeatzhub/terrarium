@@ -1,0 +1,18 @@
+services:
+  thor-trader:
+    image: python:3.12-slim
+    container_name: thor-trader
+    network_mode: container:surfshark-dubai
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PIONEX_API_KEY=9Mw4c8j6KdQe9HBhbywd66RtSUjWC6wKPzsSLzheHsm1o91wWy7To5B3JNHJaCgdVq
+      - PIONEX_SECRET=5u0CEp5pprKxxtaUTay5igLpXQqYdXPhVN9Dg5e4e4ELnfnC3RKm6qq0Ln3imURf
+      - PAPER_MODE=true
+      - BALANCE=100
+    command:
+      - python3
+      - trade.py
+    restart: unless-stopped

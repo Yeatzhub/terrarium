@@ -1,0 +1,134 @@
+//@version=6
+strategy("Market Cipher B - CSE Strategy", overlay=true, initial_capital=100, default_qty_type=strategy.percent_of_equity, default_qty_value=20)
+
+// ============================================
+// WAVE TREND CALCULATION
+// ============================================
+wtLen1 = 10
+wtLen2 = 21
+wtLen3 = 4
+
+// Use typical price instead of hl2
+typicalPrice = (high + low + close) / 3
+esa = ta.ema(typicalPrice, wtLen1)
+d = ta.ema(math.abs(typicalPrice - esa), wtLen1)
+ci = (typicalPrice - esa) / (0.015 * d)
+tci = ta.ema(ci, wtLen2)
+wt1 = tci
+wt2 = ta.sma(wt1, wtLen3)
+
+wtOversold = -60
+wtOverbought = 60
+wtExtremeLow = -75
+wtExtremeHigh = 75
+
+// ============================================
+// MONEY FLOW INDEX
+// ============================================
+mfiLen = 60
+mfiVal = ta.mfi(typicalPrice, mfiLen)
+mfiRising = ta.rising(mfiVal, 2)
+mfiFalling = ta.falling(mfiVal, 2)
+mfiUp = mfiRising and mfiVal > 45
+mfiDown = mfiFalling and mfiVal < 55
+
+// ============================================
+// GREEN/RED DOT DETECTION
+// ============================================
+// Pre-calculate crossover/crossunder for consistency
+wtCrossUp = ta.crossover(wt1, wt2)
+wtCrossDown = ta.crossunder(wt1, wt2)
+
+// Green dot when Wave Trend is oversold and crossing up
+greenDot = (wt1 < wtOversold and wtCrossUp) or (wt1 < wtExtremeLow and wt1 > wt1[1] and wt2 > wt2[1])
+
+// Red dot when Wave Trend is overbought and crossing down
+redDot = (wt1 > wtOverbought and wtCrossDown) or (wt1 > wtExtremeHigh and wt1 < wt1[1] and wt2 < wt2[1])
+
+// ============================================
+// DIVERGENCE DETECTION
+// ============================================
+bullDiv = low < low[1] and wt1 > wt1[1] and wt1 < wtOversold
+bearDiv = high > high[1] and wt1 < wt1[1] and wt1 > wtOverbought
+
+// ============================================
+// MULTI-TIMEFRAME TREND (1H)
+// ============================================
+wt1_htf = request.security(syminfo.tickerid, "60", wt1)
+wt2_htf = request.security(syminfo.tickerid, "60", wt2)
+
+trendBullish = wt1_htf > wt2_htf and wt1_htf > wtOversold
+trendBearish = wt1_htf < wt2_htf and wt1_htf < wtOverbought
+
+// ============================================
+// CSE ENTRY CONDITIONS
+// ============================================
+
+// LONG: WT oversold + Green Dot + MFI Green + 1H Bullish trend
+longCondition = wt1 < wtOversold and greenDot and mfiUp and trendBullish
+longQuality = longCondition and bullDiv
+
+// SHORT: WT overbought + Red Dot + MFI Red + 1H Bearish trend
+shortCondition = wt1 > wtOverbought and redDot and mfiDown and trendBearish
+shortQuality = shortCondition and bearDiv
+
+// ============================================
+// RISK MANAGEMENT
+// ============================================
+stopLossPct = 0.02
+takeProfitPct = 0.04
+avgPrice = strategy.position_avg_price
+
+// ============================================
+// STRATEGY LOGIC
+// ============================================
+
+if longQuality or longCondition
+    strategy.entry("Long", strategy.long)
+    alert('{"symbol":"' + syminfo.ticker + '","action":"long","price":' + str.tostring(close) + ',"strategy":"cse"}', alert.freq_once_per_bar_close)
+
+if shortQuality or shortCondition
+    strategy.entry("Short", strategy.short)
+    alert('{"symbol":"' + syminfo.ticker + '","action":"short","price":' + str.tostring(close) + ',"strategy":"cse"}', alert.freq_once_per_bar_close)
+
+// ============================================
+// EXIT CONDITIONS
+// ============================================
+
+// Long exits
+if strategy.position_size > 0
+    stopLossHit = close < avgPrice * (1 - stopLossPct)
+    takeProfitHit = close > avgPrice * (1 + takeProfitPct)
+    wtReversal = wtCrossDown and wt1 > wtOverbought
+    if stopLossHit or takeProfitHit or wtReversal
+        strategy.close("Long")
+        alert('{"symbol":"' + syminfo.ticker + '","action":"close","price":' + str.tostring(close) + ',"reason":"exit","side":"long"}', alert.freq_once_per_bar_close)
+
+// Short exits
+if strategy.position_size < 0
+    stopLossHit = close > avgPrice * (1 + stopLossPct)
+    takeProfitHit = close < avgPrice * (1 - takeProfitPct)
+    wtReversal = wtCrossUp and wt1 < wtOversold
+    if stopLossHit or takeProfitHit or wtReversal
+        strategy.close("Short")
+        alert('{"symbol":"' + syminfo.ticker + '","action":"close","price":' + str.tostring(close) + ',"reason":"exit","side":"short"}', alert.freq_once_per_bar_close)
+
+// ============================================
+// VISUAL PLOTTING
+// ============================================
+plot(wt1, "WT1", color=color.blue)
+plot(wt2, "WT2", color=color.orange)
+hline(wtOversold, "Oversold", color=color.green, linestyle=hline.style_dashed)
+hline(wtOverbought, "Overbought", color=color.red, linestyle=hline.style_dashed)
+
+// Signal markers
+plotshape(longQuality ? low * 0.995 : na, "Long_Q", shape.triangleup, location.belowbar, color.lime, size=size.small)
+plotshape(longCondition and not longQuality ? low * 0.995 : na, "Long", shape.circle, location.belowbar, color.green, size=size.tiny)
+plotshape(shortQuality ? high * 1.005 : na, "Short_Q", shape.triangledown, location.abovebar, color.red, size=size.small)
+plotshape(shortCondition and not shortQuality ? high * 1.005 : na, "Short", shape.circle, location.abovebar, color.maroon, size=size.tiny)
+
+// Trend background
+bgcolor(trendBullish ? color.new(color.green, 90) : trendBearish ? color.new(color.red, 90) : na)
+
+// Position background
+bgcolor(strategy.position_size > 0 ? color.new(color.green, 80) : strategy.position_size < 0 ? color.new(color.red, 80) : na)

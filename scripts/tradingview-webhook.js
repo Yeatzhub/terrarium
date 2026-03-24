@@ -13,9 +13,10 @@ const THOR_SIGNAL_PATH = '/storage/workspace/agents/thor/SIGNAL.md';
 
 const AGENTS = {
   thor: {
-    symbol: 'XRPUSDT',
+    symbols: ['XRPUSDT', 'BTCUSDT', 'ETHUSDT'],  // Supported symbols
     signalPath: '/storage/workspace/agents/thor/SIGNAL.md',
-    enabled: true
+    enabled: true,
+    strategies: ['market-cipher-v2', 'cse', 'cse-quality']  // Supported strategies
   }
 };
 
@@ -111,9 +112,13 @@ const server = http.createServer(async (req, res) => {
 function findAgentForSymbol(symbol) {
   const normalized = symbol.toUpperCase().replace(/[^A-Z]/g, '');
   for (const [name, config] of Object.entries(AGENTS)) {
-    const agentSymbol = config.symbol.toUpperCase().replace(/[^A-Z]/g, '');
-    if (normalized === agentSymbol || normalized.includes(agentSymbol)) {
-      return name;
+    if (!config.enabled) continue;
+    const symbols = config.symbols || [config.symbol];
+    for (const s of symbols) {
+      const agentSymbol = s.toUpperCase().replace(/[^A-Z]/g, '');
+      if (normalized === agentSymbol || normalized.includes(agentSymbol)) {
+        return name;
+      }
     }
   }
   return null;
