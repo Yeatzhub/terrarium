@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-03-25T03:01:00Z",
+  "checkType": "heimdall-health-check",
+  "initiatedBy": "cron:03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+  "summary": {
+    "totalAgents": 7,
+    "healthy": 2,
+    "failed": 5,
+    "healthyRatio": "2/7"
+  },
+  "results": {
+    "huginn": {
+      "status": "healthy",
+      "responseTimeMs": 12543,
+      "sessionId": "agent:huginn:subagent:2efaf045-8ed6-45e1-b5d9-62caf17be325",
+      "model": "ollama-cloud/glm-5:cloud",
+      "notes": "Spawn accepted, task completed successfully"
+    },
+    "thor": {
+      "status": "healthy",
+      "responseTimeMs": 8024,
+      "sessionId": "agent:thor:subagent:1d70ca4b-88b5-43c2-8e1f-fe2fb3d20892",
+      "model": "ollama-cloud/glm-5:cloud",
+      "notes": "Spawn accepted, task completed successfully"
+    },
+    "tyr": {
+      "status": "failed",
+      "error": "forbidden",
+      "errorDetail": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "notes": "Agent is unsandboxed - cannot be contacted from sandboxed cron session"
+    },
+    "sindri": {
+      "status": "failed",
+      "error": "forbidden",
+      "errorDetail": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "notes": "Agent is unsandboxed - cannot be contacted from sandboxed cron session"
+    },
+    "njord": {
+      "status": "failed",
+      "error": "forbidden",
+      "errorDetail": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "notes": "Agent is unsandboxed - cannot be contacted from sandboxed cron session"
+    },
+    "mimir": {
+      "status": "failed",
+      "error": "forbidden",
+      "errorDetail": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "notes": "Agent is unsandboxed - cannot be contacted from sandboxed cron session"
+    },
+    "brokkr": {
+      "status": "failed",
+      "error": "forbidden",
+      "errorDetail": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "notes": "Agent is unsandboxed - cannot be contacted from sandboxed cron session"
+    }
+  },
+  "alertRequired": true,
+  "alertMessage": "5/7 Norse agents unreachable due to sandbox policy - cannot spawn unsandboxed subagents from sandboxed cron session",
+  "recommendations": [
+    "Option 1: Configure Tyr, Sindri, Njord, Mimir, and Brokkr as sandboxed agents",
+    "Option 2: Run Heimdall health check from an unsandboxed session",
+    "Option 3: Add sandbox exemption for Heimdall cron job"
+  ]
+}
