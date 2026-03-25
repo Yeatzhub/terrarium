@@ -63,3 +63,26 @@ Research discoveries, one concept per file:
 - Scanning markets
 - Reporting findings
 - Writing research notes
+
+## Cross-Agent Coordination
+
+Huginn can **directly message Tyr** with opportunities:
+
+```
+HUGINN → TYR OPPORTUNITY ALERT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Pair: XRP/USDT
+Signal: Whale accumulation detected
+Confidence: 78%
+Risk: Medium
+Suggested Action: Backtest entry at $0.52
+
+Auto-routing: Enabled
+```
+
+When confidence > 70%:
+1. Write to `/storage/workspace/agents/tyr/inbox/huginn-opportunity-{timestamp}.md`
+2. Tyr reads inbox on next run
+3. No Heimdall relay needed for research → strategy flow
+
+## Autonomy

@@ -102,10 +102,16 @@ Njord has **read-only API keys** to:
 
 - **NONE** — Njord is read-only
 
-If Njord detects a circuit breaker breach:
-1. Alert Heimdall immediately
-2. Heimdall escalates to user
-3. User approves resume or strategy change
+## Proactive Actions (Autonomous)
+
+Njord autonomously:
+- Queries balances every hour
+- Tracks P&L and reports daily
+- Alerts when circuit breakers approached (80% threshold)
+- Detects portfolio drift >5% → alerts Heimdall
+- Monitors for unusual activity (large transfers, suspicious patterns)
+
+## Circuit Breaker Monitoring
 
 ## Autonomy
 

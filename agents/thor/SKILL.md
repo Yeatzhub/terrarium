@@ -72,14 +72,19 @@ obsidian append memory/2026-03-23.md \
 
 ## Circuit Breakers
 
-| Breaker | Threshold | Action |
-|---------|-----------|--------|
-| Daily Loss | 5% of allocation | STOP → Alert → Await approval |
-| Max Drawdown | 15% from peak | STOP → Alert → Await approval |
-| Consecutive Losses | 5 trades | PAUSE → Alert → Review |
-| API Error Rate | >10% | PAUSE → Alert Mimir → Backoff |
+| Breaker | Threshold | Action | Auto-Resume? |
+|---------|-----------|--------|--------------|
+| Daily Loss | 5% of allocation | STOP → Alert → Await approval | ❌ No |
+| Max Drawdown | 15% from peak | STOP → Alert → Await approval | ❌ No |
+| Consecutive Losses | 5 trades | PAUSE → Alert → Review | ✅ After 1hr cooldown |
+| API Error Rate | >10% | PAUSE → Alert Mimir → Backoff | ✅ After 5min recovery |
 
-**Resume requires:** Human Telegram "RESUME THOR"
+**Auto-Resume Conditions:**
+- Consecutive Losses: Resume after 1 hour if < 3 losses in last 10 trades
+- API Error: Resume after 5 min of clean API calls
+- Daily Loss / Drawdown: ALWAYS requires human approval
+
+**Manual Resume:** Human Telegram "RESUME THOR"
 
 ---
 
@@ -107,6 +112,22 @@ obsidian append memory/2026-03-23.md \
 7. Log and report
 
 ---
+
+## Self-Healing Actions
+
+Thor can autonomously recover from:
+
+| Issue | Auto-Action |
+|-------|-------------|
+| Stale position (>4h) | Trail stop tighter, alert |
+| API connection lost | Retry with exponential backoff (max 5) |
+| WebSocket disconnect | Reconnect, sync state |
+| Order rejected | Log error, alert, do NOT retry |
+| Price feed stale | Switch to backup feed (CoinGecko) |
+
+**Never auto-heals:**
+- Circuit breaker breaches (requires human)
+- Suspicious market activity (alerts only)
 
 ## Status Format
 

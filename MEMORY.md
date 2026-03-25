@@ -19,7 +19,7 @@
 
 ## Norse Pantheon Agents
 
-Seven-agent architecture for autonomous trading operations:
+Eight-agent architecture for autonomous trading operations:
 
 | Agent | Role | Purpose |
 |-------|------|---------|
@@ -27,6 +27,7 @@ Seven-agent architecture for autonomous trading operations:
 | 🦅 Huginn | Scout | Market research, opportunity discovery |
 | ⚔️ Tyr | Strategist | Strategy development, backtesting, risk parameters |
 | 🔨 Sindri | Smith | Bot implementation from Tyr's specs |
+| 🔨 Brokkr | Builder | Android APK builds, deployment to Hub |
 | 🌊 Njord | Treasurer | Read-only fund tracking, P&L reports |
 | ⚡ Thor | Executor | Live trading within circuit breakers |
 | 🌳 Mimir | Operator | Infrastructure, The Hub, system monitoring |

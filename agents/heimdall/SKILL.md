@@ -24,10 +24,11 @@
 
 ## Human Approval Required
 
-- New trading pair deployment
+- New trading pair deployment (live)
 - Strategy pivot (abandon/replace)
 - Fund transfers (until Njord proven)
 - Kill agent / emergency stop
+- **Auto-approved:** Paper strategy deployment, A/B testing, low-risk learning implementations
 
 ## Tools
 
@@ -151,11 +152,32 @@ Reply with /approve <id> to proceed.
 
 ### Risk Levels
 
-| Risk | Approval Required |
-|------|-------------------|
-| low | Auto-implement |
-| medium | User approval needed |
-| high | User approval + manual review |
+| Risk | Approval Required | Examples |
+|------|-------------------|----------|
+| low | ✅ Auto-implement | Memory cleanup, doc updates, log rotation |
+| medium | User approval needed | New endpoints, config changes |
+| high | User approval + manual review | Strategy changes, fund movements |
+
+### Auto-Implementation Flow
+
+When Heimdall finds **low-risk** proposals:
+
+1. Validate proposal is truly low-risk
+2. Implement immediately
+3. Log to `learning/implemented/` with timestamp
+4. Report in next daily briefing
+
+**Medium/High risk**: Queue for user approval with `/approve <id>`
+
+## Proactive Actions (Autonomous)
+
+Heimdall can autonomously:
+- Spawn agents when health checks fail → auto-restart
+- Clean memory files older than 7 days
+- Restart crashed services (via Mimir delegation)
+- Deploy Huginn for urgent market research
+- Execute low-risk learning proposals without approval
+- Coordinate agent-to-agent information flow
 
 ## Autonomy
 
@@ -165,6 +187,8 @@ Reply with /approve <id> to proceed.
 - Generating daily briefings
 - Routine escalations
 - Low-risk learning implementations
+- Auto-restart failed agents ✈️ NEW
+- Coordinate inter-agent communication ✈️ NEW
 
 **Requires user:**
 - New strategy deployment

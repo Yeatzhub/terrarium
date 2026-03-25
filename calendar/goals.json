@@ -29,14 +29,16 @@
     {
       "id": "android-nightly-build",
       "title": "Fix Android nightly build to run on host",
-      "description": "Cron runs in sandbox but needs git/Android SDK on host",
+      "description": "Cron runs in sandbox but needs git/Android SDK on host - Created Brokkr agent, configured host=gateway",
       "deadline": "2026-03-26T00:00:00Z",
-      "status": "not-started",
+      "status": "completed",
       "priority": "medium",
       "category": "system",
       "subtasks": [],
       "createdAt": "2026-03-24T20:45:00Z",
-      "updatedAt": "2026-03-24T20:45:00Z"
+      "updatedAt": "2026-03-24T23:50:00Z",
+      "completedAt": "2026-03-24T23:50:00Z",
+      "notes": "Created Brokkr agent (Android builder), set tools.exec.host=gateway, updated cron job agentId"
     },
     {
       "id": "thor-live-trading",

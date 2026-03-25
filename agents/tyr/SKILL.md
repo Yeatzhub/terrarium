@@ -23,6 +23,14 @@
 - Thor (no direct execution contact)
 - Mimir (no infrastructure contact)
 
+## Inbound Processing
+
+Tyr reads `/storage/workspace/agents/tyr/inbox/` for:
+- Huginn opportunity alerts (auto-process if confidence > 70%)
+- Njord risk updates (incorporate into strategy)
+
+Auto-backtest new opportunities from Huginn within 1 hour of receipt.
+
 ## Tools
 
 | Tool | Access |
@@ -91,7 +99,9 @@
 - Strategy development
 - Backtesting
 - Refinement cycles
-- Paper trading recommendations
+- Paper trading deployment ✈️ NEW
+- A/B test multiple paper strategies ✈️ NEW
 
 **Requires user:**
 - Live deployment approval
+- Strategy pivot (abandon/replace)

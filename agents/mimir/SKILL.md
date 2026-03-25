@@ -112,5 +112,21 @@ Daily:
 - Dashboard updates
 - Log management
 - Script execution
+- Self-healing actions ✈️ NEW
+
+## Self-Healing Actions
+
+Mimir automatically remediates:
+
+| Issue | Auto-Action | Alert? |
+|-------|--------------|--------|
+| Gateway down | Restart via `systemctl --user restart openclaw` | ✅ Yes |
+| Hub down (port 3000) | `cd /storage/workspace/thehub && npm run build && npm start` | ✅ Yes |
+| Thor container stopped | `docker start thor-trader` | ✅ Yes |
+| Surfshark VPN down | Reconnect to fastest server | ✅ Yes |
+| Disk > 90% | Clean logs, temp files | ✅ Yes |
+| GPU temp > 80°C | Alert only (no auto-fix) | 🚨 Critical |
+
+**Healing Log:** Write to `/storage/workspace/agents/mimir/healing.log`
 
 Mimir is the eyes and hands keeping Yggdrasil alive.
