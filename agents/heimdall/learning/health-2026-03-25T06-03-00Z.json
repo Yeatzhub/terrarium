@@ -1,0 +1,73 @@
+{
+  "checkId": "03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+  "timestamp": "2026-03-25T06:03:00Z",
+  "checkType": "HEIMDALL_HEALTH_CHECK",
+  "summary": {
+    "healthy": 6,
+    "unhealthy": 1,
+    "total": 7
+  },
+  "agents": {
+    "huginn": {
+      "status": "healthy",
+      "model": "ollama-local/qwen3.5:35b",
+      "fallbackModel": "ollama-cloud/glm-5:cloud",
+      "responseTimeMs": 17113,
+      "responsePreview": "Bootstrap conversation initiated - agent is operational"
+    },
+    "tyr": {
+      "status": "healthy",
+      "model": "ollama-local/qwen3.5:35b",
+      "fallbackModel": "ollama-cloud/glm-5:cloud",
+      "responseTimeMs": 23833,
+      "responsePreview": "Bootstrap conversation initiated - agent is operational"
+    },
+    "sindri": {
+      "status": "healthy",
+      "model": "ollama-local/qwen3-coder:30b",
+      "fallbackModel": "ollama-cloud/glm-5:cloud",
+      "responseTimeMs": 19250,
+      "responsePreview": "Bootstrap conversation initiated - agent is operational"
+    },
+    "njord": {
+      "status": "healthy",
+      "model": "ollama-local/qwen3.5:35b",
+      "fallbackModel": "ollama-cloud/glm-5:cloud",
+      "responseTimeMs": 15470,
+      "responsePreview": "Agent acknowledged fresh start - operational"
+    },
+    "thor": {
+      "status": "healthy",
+      "model": "openrouter/anthropic/claude-haiku-4.5",
+      "fallbackModel": "ollama-cloud/glm-5:cloud",
+      "responseTimeMs": 10062,
+      "responsePreview": "I'm Thor — and I'm just coming online"
+    },
+    "mimir": {
+      "status": "unhealthy",
+      "model": "ollama-local/qwen3.5:35b",
+      "error": "All models failed (3): ollama-local/qwen3.5:35b: No API key found; ollama-cloud/glm-5:cloud: session file locked; openrouter/openrouter/free: HTTP 401",
+      "errors": [
+        "No API key found for provider 'ollama-local'",
+        "Gateway timeout after 60000ms",
+        "Session file locked (timeout 10000ms)",
+        "HTTP 401: User not found (OpenRouter)"
+      ],
+      "requiresAction": "Auth profiles need configuration for mimir agent - copy from main agentDir or run: openclaw agents add mimir"
+    },
+    "brokkr": {
+      "status": "healthy",
+      "model": "ollama-local/qwen3-coder:30b",
+      "fallbackModel": "ollama-cloud/glm-5:cloud",
+      "responseTimeMs": 30827,
+      "responsePreview": "Bootstrap conversation initiated - agent is operational"
+    }
+  },
+  "failures": [
+    {
+      "agent": "mimir",
+      "error": "Authentication failure - no API key for ollama-local provider, session lock conflict, OpenRouter 401",
+      "recommendation": "Requires human approval: Fix auth profiles for mimir agent (copy auth-profiles.json from main agentDir or run openclaw configure)"
+    }
+  ]
+}

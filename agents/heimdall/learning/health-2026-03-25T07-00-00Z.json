@@ -1,0 +1,72 @@
+{
+  "checkTime": "2026-03-25T07:00:00Z",
+  "checkType": "heimdall-health-check",
+  "agents": [
+    {
+      "name": "Huginn",
+      "role": "scout",
+      "status": "healthy",
+      "response": "Huginn: healthy",
+      "responseTimeMs": 93,
+      "sessionKey": "agent:main:subagent:97620c3f-46be-43a9-beac-713a6abc55ad"
+    },
+    {
+      "name": "Tyr",
+      "role": "strategist",
+      "status": "healthy",
+      "response": "Tyr: healthy",
+      "responseTimeMs": 83,
+      "sessionKey": "agent:main:subagent:9f4b7ce1-845c-458a-bd2e-a2e488b4e615"
+    },
+    {
+      "name": "Mimir",
+      "role": "operator",
+      "status": "healthy",
+      "response": "Mimir: healthy",
+      "responseTimeMs": 78,
+      "sessionKey": "agent:main:subagent:12669db1-89dc-4029-a981-2302662c21aa"
+    },
+    {
+      "name": "Sindri",
+      "role": "smith",
+      "status": "healthy",
+      "response": "Sindri: healthy",
+      "responseTimeMs": 80,
+      "sessionKey": "agent:main:subagent:96d4c06c-c445-4f66-acc4-355e12e80116"
+    },
+    {
+      "name": "Thor",
+      "role": "execution",
+      "status": "healthy",
+      "response": "Thor: healthy",
+      "responseTimeMs": 79,
+      "sessionKey": "agent:main:subagent:9d4ebab7-f46e-4153-b371-120ea802dd3e"
+    },
+    {
+      "name": "Njord",
+      "role": "navigator",
+      "status": "healthy",
+      "response": "Njord: healthy",
+      "responseTimeMs": 77,
+      "retries": 1,
+      "sessionKey": "agent:main:subagent:ff2a1b11-651c-4532-9235-2b7424083b2a"
+    },
+    {
+      "name": "Brokkr",
+      "role": "forge",
+      "status": "timeout",
+      "error": "Request was aborted - timeout",
+      "retries": 1,
+      "sessionKey": "agent:main:subagent:8130c033-4340-41e5-99c4-326def1a4542"
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "healthy": 6,
+    "degraded": 0,
+    "unavailable": 0,
+    "timeout": 1
+  },
+  "alertRequired": true,
+  "failedAgents": ["Brokkr"]
+}
