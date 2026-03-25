@@ -41,7 +41,7 @@ data class User(
     /**
      * Get list of unlocked jar types.
      */
-    fun getUnlockedJarTypes(): List<JarType> {
+    fun getUnlockedJarTypeList(): List<JarType> {
         return if (unlockedJarTypes.isEmpty()) {
             listOf(JarType.SMALL)
         } else {
@@ -55,14 +55,14 @@ data class User(
      * Check if a jar type is unlocked.
      */
     fun hasJarUnlocked(jarType: JarType): Boolean {
-        return getUnlockedJarTypes().contains(jarType)
+        return getUnlockedJarTypeList().contains(jarType)
     }
     
     /**
      * Get jars that unlock at specific levels.
      */
     fun getNewlyUnlockedJars(): List<JarType> {
-        val unlocked = getUnlockedJarTypes().toMutableList()
+        val unlocked = getUnlockedJarTypeList().toMutableList()
         val newJars = mutableListOf<JarType>()
         
         // Level 3 unlocks Medium jar

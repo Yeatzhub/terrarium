@@ -50,7 +50,7 @@ class UserRepository @Inject constructor(
             xp = newXp,
             level = newLevel,
             unlockedJarTypes = if (unlockedJars.isNotEmpty()) {
-                val existing = user.getUnlockedJarTypes().toMutableList()
+                val existing = user.getUnlockedJarTypeList().toMutableList()
                 existing.addAll(unlockedJars)
                 existing.joinToString(",") { it.name }
             } else {
@@ -112,7 +112,7 @@ class UserRepository @Inject constructor(
     
     suspend fun getUnlockedJarTypes(userId: Long): List<JarType> {
         val user = userDao.getUserById(userId) ?: return listOf(JarType.SMALL)
-        return user.getUnlockedJarTypes()
+        return user.getUnlockedJarTypeList()
     }
     
     suspend fun hasSufficientCoins(userId: Long, amount: Int): Boolean {
