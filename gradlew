@@ -42,7 +42,7 @@ cd "$APP_HOME" || exit
 
 APP_HOME=$( pwd -P )
 APP_BASE_NAME=${0##*/}
-APP_HOME=$( cd "${APP_HOME:-./}.." && pwd -P ) || exit
+APP_HOME=$( cd "${APP_HOME:-./}/.." && pwd -P ) || exit
 
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
