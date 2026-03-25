@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+    
+    - name: Build APK
+      run: |
+        chmod +x gradlew
+        cd app && ./gradlew assembleDebug
+    
+    - name: Get version from tag
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: Terrarium ${{ steps.get_version.outputs.VERSION }}
+        body: |
+          ## What's New
+          
+          Download the APK below to install on your Android device.
+          
+          **Installation:**
+          1. Download the APK file
+          2. Enable "Install from unknown sources" in your device settings
+          3. Open the downloaded APK to install
+          
+          **Version:** ${{ steps.get_version.outputs.VERSION }}
+        files: app/app/build/outputs/apk/debug/app-debug.apk
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

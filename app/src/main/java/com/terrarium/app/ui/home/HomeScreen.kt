@@ -34,7 +34,8 @@ import com.terrarium.app.viewmodel.HomeViewModel
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     onNavigateToShop: () -> Unit = {},
-    onNavigateToInventory: () -> Unit = {}
+    onNavigateToInventory: () -> Unit = {},
+    onNavigateToSettings: () -> Unit = {}
 ) {
     val user by viewModel.user.collectAsState()
     val terrariums by viewModel.terrariums.collectAsState()
@@ -96,6 +97,9 @@ fun HomeScreen(
                         ) {
                             Icon(Icons.Default.Notifications, "Notifications")
                         }
+                    }
+                    IconButton(onClick = onNavigateToSettings) {
+                        Icon(Icons.Default.Settings, "Settings")
                     }
                 }
             )
