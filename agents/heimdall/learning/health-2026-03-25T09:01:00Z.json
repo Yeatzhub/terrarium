@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-03-25T09:01:00Z",
+  "check_type": "norse_agent_health_check",
+  "agents": {
+    "huginn": {
+      "status": "healthy",
+      "session_id": "93e1aeff-8d13-4508-a498-256a44356954",
+      "response_ms": 11017,
+      "model": "glm-5:cloud",
+      "response": "Agent: Spectre, Status: healthy",
+      "note": "Subagent loaded main IDENTITY.md (Spectre) instead of Norse agent identity"
+    },
+    "tyr": {
+      "status": "healthy",
+      "session_id": "62140e32-9bfe-4679-b055-f5c5764f84ba",
+      "response_ms": 24983,
+      "model": "glm-5:cloud",
+      "response": "Agent: Spectre, Status: healthy",
+      "note": "Required v2 retry - initial spawn failed with gateway timeout"
+    },
+    "sindri": {
+      "status": "healthy",
+      "session_id": "2b2133b2-1b1c-4a5b-b411-64bec009535d",
+      "response_ms": 9581,
+      "model": "openrouter/free",
+      "response": "Agent: Spectre, Status:healthy",
+      "note": "Required v2 retry - initial spawn failed with gateway timeout"
+    },
+    "njord": {
+      "status": "healthy",
+      "session_id": "fbce7fc6-2a53-40ef-bbb7-3b9f546ad9ee",
+      "response_ms": 6159,
+      "model": "glm-5:cloud",
+      "response": "Agent: Spectre, Status: healthy",
+      "note": "Required v2 retry - initial spawn failed with gateway timeout"
+    },
+    "thor": {
+      "status": "failed",
+      "session_id": "80530559-f4ae-4021-bbbc-5f097de81232",
+      "response_ms": 0,
+      "model": "glm-5:cloud",
+      "response": null,
+      "error": "Session timeout - aborted during file read, failed to complete within 30s",
+      "note": "Both initial spawn and v2 retry failed with timeout/abort"
+    },
+    "mimir": {
+      "status": "healthy",
+      "session_id": "e544fb58-69c4-4ab5-8a60-8b55107fa823",
+      "response_ms": 4472,
+      "model": "glm-5:cloud",
+      "response": "Agent: Spectre, Status: healthy",
+      "note": "Required v2 retry - initial spawn failed with gateway timeout"
+    },
+    "brokkr": {
+      "status": "healthy",
+      "session_id": "1a56c949-dbda-46fc-8a68-b3989d6d811d",
+      "response_ms": 8855,
+      "model": "glm-5:cloud",
+      "response": "Agent: Spectre, Status: healthy",
+      "note": "Required v4 retry - spawns v1-v3 all failed with gateway timeout"
+    }
+  },
+  "summary": {
+    "total_agents": 7,
+    "healthy": 6,
+    "failed": 1,
+    "health_ratio": "6/7"
+  },
+  "issues": [
+    {
+      "agent": "thor",
+      "severity": "high",
+      "issue": "Session timeout - abort during health check",
+      "action_required": "User approval needed for agent restart/recovery"
+    }
+  ],
+  "infrastructure_notes": {
+    "gateway_load": "High - parallel spawns caused gateway timeout errors",
+    "file_lock_contention": "/home/spectre/.openclaw/sandbox/containers.json.lock blocked spawns",
+    "model_failover": "Multiple models attempted due to timeouts (glm-5:cloud -> openrouter/free)"
+  },
+  "design_issue": {
+    "severity": "medium",
+    "issue": "Subagents load main IDENTITY.md instead of Norse agent SKILL.md",
+    "impact": "All agents respond as 'Spectre' instead of their Norse names",
+    "recommendation": "Health checks should either: (1) spawn subagents with agent-specific SKILL.md loaded, or (2) verify spawn capability only without identity check"
+  }
+}
