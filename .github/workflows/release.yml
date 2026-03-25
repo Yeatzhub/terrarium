@@ -23,7 +23,7 @@ jobs:
     - name: Build APK
       run: |
         chmod +x gradlew
-        cd app && ./gradlew assembleDebug
+        ./gradlew assembleDebug
     
     - name: Get version from tag
       id: get_version
@@ -44,7 +44,7 @@ jobs:
           3. Open the downloaded APK to install
           
           **Version:** ${{ steps.get_version.outputs.VERSION }}
-        files: app/app/build/outputs/apk/debug/app-debug.apk
+        files: app/build/outputs/apk/debug/app-debug.apk
         draft: false
         prerelease: false
       env:
