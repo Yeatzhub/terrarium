@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.terrarium.app.data.model.JarType
+import kotlinx.coroutines.launch
 
 /**
  * Onboarding tutorial screen with 5 steps.
@@ -99,6 +100,7 @@ fun OnboardingScreen(
 ) {
     val pagerState = rememberPagerState(pageCount = { onboardingPages.size })
     val currentPage = pagerState.currentPage
+    val scope = rememberCoroutineScope()
     
     Column(
         modifier = Modifier
@@ -120,7 +122,11 @@ fun OnboardingScreen(
                 .padding(16.dp),
             horizontalArrangement = Arrangement.End
         ) {
-            TextButton(onClick = onComplete) {
+            TextButton(
+                onClick = {
+                    scope.launch { onComplete() }
+                }
+            ) {
                 Text("Skip", color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f))
             }
         }
@@ -148,7 +154,9 @@ fun OnboardingScreen(
                 PageIndicator(
                     isSelected = currentPage == index,
                     onClick = {
-                        // Could animate to page programmatically
+                        scope.launch {
+                            pagerState.animateScrollToPage(index)
+                        }
                     }
                 )
             }
@@ -166,7 +174,9 @@ fun OnboardingScreen(
             if (currentPage > 0) {
                 OutlinedButton(
                     onClick = {
-                        // Navigate back would need coroutine scope
+                        scope.launch {
+                            pagerState.animateScrollToPage(currentPage - 1)
+                        }
                     },
                     enabled = currentPage > 0
                 ) {
@@ -182,7 +192,15 @@ fun OnboardingScreen(
             val isLastPage = currentPage == onboardingPages.lastIndex
             
             Button(
-                onClick = onComplete,
+                onClick = {
+                    scope.launch {
+                        if (isLastPage) {
+                            onComplete()
+                        } else {
+                            pagerState.animateScrollToPage(currentPage + 1)
+                        }
+                    }
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primary
                 )

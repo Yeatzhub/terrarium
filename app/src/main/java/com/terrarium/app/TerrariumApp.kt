@@ -29,7 +29,8 @@ sealed class Screen(val route: String, val title: String, val icon: String) {
 @Composable
 fun TerrariumApp(
     navController: NavHostController = rememberNavController(),
-    hasCompletedOnboarding: Boolean = false
+    hasCompletedOnboarding: Boolean = false,
+    onOnboardingComplete: () -> Unit = {}
 ) {
     // Determine start destination based on onboarding status
     val startDestination = if (hasCompletedOnboarding) Screen.Home.route else Screen.Onboarding.route
@@ -46,6 +47,8 @@ fun TerrariumApp(
             composable(Screen.Onboarding.route) {
                 OnboardingScreen(
                     onComplete = {
+                        // Save onboarding completion
+                        onOnboardingComplete()
                         // Navigate to home and clear back stack
                         navController.navigate(Screen.Home.route) {
                             popUpTo(Screen.Onboarding.route) { inclusive = true }

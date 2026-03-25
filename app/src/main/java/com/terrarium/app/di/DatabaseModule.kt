@@ -3,6 +3,7 @@ package com.terrarium.app.di
 import android.content.Context
 import com.terrarium.app.data.database.*
 import com.terrarium.app.data.repository.*
+import com.terrarium.app.data.preferences.UserPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,6 +54,12 @@ object DatabaseModule {
     @Provides
     fun provideCuttingDao(database: TerrariumDatabase): CuttingDao {
         return database.cuttingDao()
+    }
+    
+    @Provides
+    @Singleton
+    fun provideUserPreferences(@ApplicationContext context: Context): UserPreferences {
+        return UserPreferences.getInstance(context)
     }
 }
 
