@@ -1,0 +1,67 @@
+{
+  "check_time": "2026-03-25T21:05:00Z",
+  "check_type": "heimdall_health_check",
+  "results": {
+    "huginn": {
+      "status": "healthy",
+      "spawn_result": "accepted",
+      "task_status": "done",
+      "runtime_ms": 18563,
+      "model": "ollama-cloud/glm-5:cloud",
+      "error": null,
+      "note": "Second attempt succeeded after initial timeout"
+    },
+    "thor": {
+      "status": "healthy",
+      "spawn_result": "accepted",
+      "task_status": "done",
+      "runtime_ms": 22364,
+      "model": "ollama-cloud/glm-5:cloud",
+      "error": null
+    },
+    "tyr": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "sindri": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "njord": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "mimir": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "brokkr": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "bragi": {
+      "status": "not_allowed",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "agentId is not allowed for sessions_spawn (allowed: heimdall, huginn, tyr, sindri, brokkr, njord, thor, mimir)"
+    }
+  },
+  "summary": {
+    "total_agents": 8,
+    "healthy": 2,
+    "blocked": 5,
+    "not_allowed": 1,
+    "failed": 0
+  },
+  "notes": "5 agents (Tyr, Sindri, Njord, Mimir, Brokkr) could not be reached from sandboxed cron context due to unsandboxed agent restrictions. Bragi is not in the allowed agentId list. This is a permission restriction, not necessarily agent failure. Only sandboxed agents (Huginn, Thor) are testable from sandboxed cron."
+}

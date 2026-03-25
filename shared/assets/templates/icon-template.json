@@ -1,0 +1,22 @@
+{
+  "name": "icon-generation",
+  "description": "Generate 512x512 app icons with SDXL",
+  "model": "sd_xl_base_1.0.safetensors",
+  "workflow": {
+    "prompt_prefix": "app icon, minimalist, clean design, professional",
+    "negative_prompt": "text, watermark, blurry, low quality, distorted",
+    "width": 512,
+    "height": 512,
+    "steps": 20,
+    "cfg_scale": 7,
+    "sampler": "euler",
+    "scheduler": "normal"
+  },
+  "output_sizes": [
+    { "name": "mipmap-mdpi", "size": 48 },
+    { "name": "mipmap-hdpi", "size": 72 },
+    { "name": "mipmap-xhdpi", "size": 96 },
+    { "name": "mipmap-xxhdpi", "size": 144 },
+    { "name": "mipmap-xxxhdpi", "size": 192 }
+  ]
+}

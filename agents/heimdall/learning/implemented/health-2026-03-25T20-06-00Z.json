@@ -1,0 +1,59 @@
+{
+  "check_time": "2026-03-25T20:06:00Z",
+  "check_type": "heimdall_health_check",
+  "results": {
+    "huginn": {
+      "status": "healthy",
+      "spawn_result": "accepted",
+      "task_status": "done",
+      "runtime_ms": 29040,
+      "model": "ollama-cloud/glm-5:cloud",
+      "error": null
+    },
+    "thor": {
+      "status": "healthy",
+      "spawn_result": "accepted",
+      "task_status": "done",
+      "runtime_ms": 24002,
+      "model": "ollama-cloud/glm-5:cloud",
+      "error": null
+    },
+    "tyr": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "sindri": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "njord": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "mimir": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    },
+    "brokkr": {
+      "status": "blocked",
+      "spawn_result": "forbidden",
+      "task_status": "not_spawned",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents. Set a sandboxed target agent or use the same agent runtime."
+    }
+  },
+  "summary": {
+    "total_agents": 7,
+    "healthy": 2,
+    "blocked": 5,
+    "failed": 0
+  },
+  "notes": "5 agents (Tyr, Sindri, Njord, Mimir, Brokkr) could not be reached from sandboxed cron context. This is a permission restriction, not necessarily agent failure. These agents may require unsandboxed execution context."
+}
