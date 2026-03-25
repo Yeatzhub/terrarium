@@ -633,7 +633,7 @@ private fun PlantsSection(
                     onPropagate = { onPropagate(plant) }
                 )
                 if (plant != plants.last()) {
-                    HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+                    Divider(modifier = Modifier.padding(vertical = 8.dp))
                 }
             }
         }
@@ -672,7 +672,7 @@ private fun PlantListItem(
                     fontSize = 12.sp
                 )
                 LinearProgressIndicator(
-                    progress = { plant.moisture },
+                    progress = plant.moisture,
                     modifier = Modifier
                         .weight(1f)
                         .height(4.dp)
