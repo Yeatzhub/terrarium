@@ -1,0 +1,215 @@
+{
+  "timestamp": "2026-03-25T12:30:00Z",
+  "audit_type": "CRON_HEALTH_MONITOR",
+  "status": "WARNING",
+  "configured_jobs": {
+    "total": 12,
+    "jobs": [
+      {
+        "name": "xrp-monitor",
+        "schedule": "*/5 * * * *",
+        "command": "/storage/workspace/projects/trading/pionex/xrp/monitor.sh",
+        "status": "CRITICAL",
+        "consecutive_errors": 9,
+        "last_log": "2026-03-25 12:30:01",
+        "error": "Bot restart failed - 9 consecutive failures",
+        "next_run": "2026-03-25 12:35:00 UTC"
+      },
+      {
+        "name": "gpu-temp-alert (heimdall-health-check)",
+        "schedule": "* * * * *",
+        "command": "/storage/workspace/scripts/gpu_temp_alert.sh",
+        "status": "HEALTHY",
+        "last_log": "2026-03-25 12:30:01",
+        "last_action": "OK: GPU temp 50°C",
+        "next_run": "2026-03-25 12:31:00 UTC"
+      },
+      {
+        "name": "market-scanner (huginn-market-scan)",
+        "schedule": "5 * * * *",
+        "command": "/storage/workspace/projects/trading/scanner/market_scanner.py",
+        "status": "WARNING",
+        "last_log": "2026-03-25T12:05:03",
+        "warning": "SOL fetch fails consistently",
+        "last_action": "Scan complete. 2/3 coins updated",
+        "next_run": "2026-03-25 13:05:00 UTC"
+      },
+      {
+        "name": "balance-tracker (njord)",
+        "schedule": "10 * * * *",
+        "command": "/storage/workspace/projects/trading/pionex/balance_tracker.py",
+        "status": "HEALTHY",
+        "last_log": "2026-03-25T12:10:01",
+        "last_action": "Balance snapshot saved: $164.16 total",
+        "next_run": "2026-03-25 13:10:00 UTC"
+      },
+      {
+        "name": "polymarket-scan",
+        "schedule": "0 * * * *",
+        "command": "/storage/workspace/projects/trading/polymarket/scan.sh",
+        "status": "HEALTHY",
+        "last_log": "2026-03-25 12:00:01",
+        "last_action": "Scan complete, no arbitrage found",
+        "next_run": "2026-03-25 13:00:00 UTC"
+      },
+      {
+        "name": "security-audit",
+        "schedule": "0 7 * * *",
+        "command": "/home/spectre/.openclaw/scripts/security-audit.sh",
+        "status": "HEALTHY",
+        "last_log": "2026-03-25 07:00:01",
+        "last_action": "Security score: 9/10",
+        "warning": "27 exposed ports (MEDIUM risk)",
+        "next_run": "2026-03-26 07:00:00 UTC"
+      },
+      {
+        "name": "security-fix",
+        "schedule": "30 7 * * *",
+        "command": "/home/spectre/.openclaw/scripts/security-fix.sh",
+        "status": "HEALTHY",
+        "last_log": "2026-03-25 07:30:01",
+        "last_action": "Security Fix Complete",
+        "next_run": "2026-03-26 07:30:00 UTC"
+      },
+      {
+        "name": "api-audit",
+        "schedule": "0 8 * * *",
+        "command": "/home/spectre/.openclaw/scripts/api-audit.sh",
+        "status": "HEALTHY",
+        "last_log": "2026-03-12 08:00:00",
+        "note": "No recent log entries but script exists",
+        "next_run": "2026-03-26 08:00:00 UTC"
+      },
+      {
+        "name": "learning-analysis",
+        "schedule": "0 8 * * *",
+        "command": "/home/spectre/.openclaw/scripts/learning-analysis.sh",
+        "status": "HEALTHY",
+        "last_log": "2026-03-25 08:00:01",
+        "last_action": "SKIPPED: Quiet hours",
+        "next_run": "2026-03-26 08:00:00 UTC"
+      },
+      {
+        "name": "cron-monitor (mimir-service-monitor)",
+        "schedule": "0 9 * * *",
+        "command": "/home/spectre/.openclaw/scripts/cron-monitor.sh",
+        "status": "HEALTHY",
+        "last_log": "2026-03-25 09:00:02",
+        "last_action": "6/6 jobs healthy",
+        "next_run": "2026-03-26 09:00:00 UTC"
+      },
+      {
+        "name": "backup-to-github",
+        "schedule": "0 */2 * * *",
+        "command": "/home/spectre/.openclaw/scripts/backup-to-github.sh",
+        "status": "HEALTHY",
+        "note": "Running every 2 hours",
+        "next_run": "2026-03-25 14:00:00 UTC"
+      },
+      {
+        "name": "remind-subagents",
+        "schedule": "0 0 * * *",
+        "command": "/storage/workspace/scripts/remind-subagents.sh",
+        "status": "HEALTHY",
+        "note": "Daily at midnight UTC (7 PM CDT)",
+        "next_run": "2026-03-26 00:00:00 UTC"
+      }
+    ]
+  },
+  "missing_from_expected": [
+    {
+      "name": "morning-briefing",
+      "expected_schedule": "0 8 * * *",
+      "note": "Script exists but not in crontab"
+    },
+    {
+      "name": "daily-checkin",
+      "expected_schedule": "0 21 * * *",
+      "note": "Not configured"
+    },
+    {
+      "name": "end-of-day",
+      "expected_schedule": "0 23 * * *",
+      "note": "Not configured"
+    },
+    {
+      "name": "daily-journal-entry",
+      "expected_schedule": "0 0 * * *",
+      "note": "Duplicate slot with remind-subagents"
+    },
+    {
+      "name": "android-nightly-build",
+      "expected_schedule": "0 3 * * *",
+      "note": "Brokkr - not configured"
+    },
+    {
+      "name": "weekly-review",
+      "expected_schedule": "0 10 * * 0",
+      "note": "Not configured"
+    },
+    {
+      "name": "thor-trading-check",
+      "expected_schedule": "*/30 * * * *",
+      "note": "Trading hours check - not configured"
+    },
+    {
+      "name": "heimdall-learning-loop",
+      "expected_schedule": "0 */4 * * *",
+      "note": "Not configured"
+    },
+    {
+      "name": "tyr-strategy-review",
+      "expected_schedule": "0 10 * * 6",
+      "note": "Saturday review - not configured"
+    },
+    {
+      "name": "mimir-self-healing",
+      "expected_schedule": "*/30 * * * *",
+      "note": "Not configured"
+    },
+    {
+      "name": "brokkr-nightly-build",
+      "expected_schedule": "0 3 * * *",
+      "note": "If separate from android - not configured"
+    }
+  ],
+  "system_status": {
+    "systemd_timers": {
+      "active": 17,
+      "status": "HEALTHY"
+    },
+    "openclaw_gateway": {
+      "status": "running",
+      "service": "enabled"
+    }
+  },
+  "summary": {
+    "healthy": 10,
+    "warning": 1,
+    "critical": 1,
+    "missing": 11,
+    "total_configured": 12
+  },
+  "critical_issues": [
+    {
+      "job": "xrp-monitor",
+      "issue": "Bot restart failing consistently",
+      "consecutive_failures": 9,
+      "last_error": "Bot restart failed!",
+      "recommendation": "Check Pionex bot process manually"
+    }
+  ],
+  "warnings": [
+    {
+      "job": "market-scanner",
+      "issue": "SOL price fetch failing",
+      "impact": "Only 2/3 coins tracked"
+    },
+    {
+      "level": "MEDIUM",
+      "issue": "27 exposed ports",
+      "source": "security-audit",
+      "recommendation": "Review firewall rules if unexpected"
+    }
+  ]
+}
