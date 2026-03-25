@@ -1,0 +1,79 @@
+{
+  "timestamp": "2026-03-25T14:09:00Z",
+  "checkType": "heimdall-health-check",
+  "summary": "1/8 agents healthy",
+  "healthy": 1,
+  "failed": 7,
+  "total": 8,
+  "agents": [
+    {
+      "name": "Heimdall",
+      "status": "healthy",
+      "responseTimeMs": 0,
+      "error": null,
+      "note": "Health check initiator - running"
+    },
+    {
+      "name": "Huginn",
+      "status": "failed",
+      "responseTimeMs": 20479,
+      "error": "timeout after 20479ms - subagent timed out",
+      "childSessionKey": "agent:main:subagent:1126a922-5b94-4871-a8e9-0ec3cc4e1810"
+    },
+    {
+      "name": "Tyr",
+      "status": "failed",
+      "responseTimeMs": 20372,
+      "error": "timeout after 20372ms - subagent timed out",
+      "childSessionKey": "agent:main:subagent:bdb3e056-3254-483e-b710-1ef3dd94fef4"
+    },
+    {
+      "name": "Sindri",
+      "status": "failed",
+      "responseTimeMs": 13036,
+      "error": "timeout after 13036ms - subagent timed out",
+      "childSessionKey": "agent:main:subagent:647c0ebf-8a6e-41cd-91cb-dfe5a0c8dbe4"
+    },
+    {
+      "name": "Njord",
+      "status": "failed",
+      "responseTimeMs": 10000,
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789 unreachable",
+      "childSessionKey": "agent:main:subagent:5a0efcbb-c900-4fd8-be5e-9fe7a580930e"
+    },
+    {
+      "name": "Thor",
+      "status": "failed",
+      "responseTimeMs": 10000,
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789 unreachable",
+      "childSessionKey": "agent:main:subagent:deab026a-ccfd-4def-bf65-75e23bc8b507"
+    },
+    {
+      "name": "Mimir",
+      "status": "failed",
+      "responseTimeMs": 10000,
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789 unreachable",
+      "childSessionKey": "agent:main:subagent:c01624f5-ad31-4d8f-b1ce-c1e94b505d64"
+    },
+    {
+      "name": "Brokkr",
+      "status": "failed",
+      "responseTimeMs": 10000,
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789 unreachable",
+      "childSessionKey": "agent:main:subagent:67d0bd6d-b3d5-45ee-b897-e1684251c706"
+    }
+  ],
+  "infrastructure": {
+    "gatewayTarget": "ws://127.0.0.1:18789",
+    "source": "local loopback",
+    "configPath": "/home/spectre/.openclaw/openclaw.json",
+    "errorType": "mixed_timeout_and_gateway_failure",
+    "possibleCauses": [
+      "OpenClaw Gateway daemon not running",
+      "Gateway port 18789 not listening",
+      "Subagent orchestration timing out",
+      "Model inference delays or backlog"
+    ],
+    "recommendation": "Check if OpenClaw Gateway is running: openclaw gateway status"
+  }
+}
