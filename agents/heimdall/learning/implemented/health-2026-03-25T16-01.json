@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-03-25T16:01:00Z",
+  "check_type": "HEIMDALL_HEALTH_CHECK",
+  "summary": {
+    "total_agents": 8,
+    "healthy": 8,
+    "failed": 0,
+    "agents_with_issues": []
+  },
+  "results": [
+    {
+      "agent": "Huginn",
+      "role": "Scout - Market research, opportunity discovery",
+      "session_key": "agent:main:subagent:4a3bcb5c-6f90-4512-ac96-19065a929bc0",
+      "status": "healthy",
+      "response_time_ms": 12665,
+      "completed_at": "2026-03-25T16:03:39Z"
+    },
+    {
+      "agent": "Tyr",
+      "role": "Strategist - Trading strategy development",
+      "session_key": "agent:main:subagent:439e5521-ba6a-4f09-b755-8fc6927187bb",
+      "status": "healthy",
+      "response_time_ms": 9522,
+      "completed_at": "2026-03-25T16:04:24Z"
+    },
+    {
+      "agent": "Sindri",
+      "role": "Smith - Bot implementation, testing",
+      "session_key": "agent:main:subagent:032cde94-38fd-43c8-b448-5472c86b39c0",
+      "status": "healthy",
+      "response_time_ms": 7260,
+      "completed_at": "2026-03-25T16:04:24Z"
+    },
+    {
+      "agent": "Njord",
+      "role": "Treasurer - Financial monitoring, P&L reporting",
+      "session_key": "agent:main:sub39da-bdbc-effc6126d93c",
+      "status": "healthy",
+      "response_time_ms": 4277,
+      "completed_at": "2026-03-25T16:04:26Z"
+    },
+    {
+      "agent": "Thor",
+      "role": "Executor - Live trading execution",
+      "session_key": "agent:main:subagent:58310c06-6bfe-4686-ba0e-ccefd56e0d44",
+      "status": "healthy",
+      "response_time_ms": 6837,
+      "completed_at": "2026-03-25T16:05:07Z"
+    },
+    {
+      "agent": "Mimir",
+      "role": "Operator - Infrastructure, system monitoring",
+      "session_key": "agent:main:subagent:bb4eb396-6823-4ace-819f-12dda36091be",
+      "status": "healthy",
+      "response_time_ms": 35245,
+      "completed_at": "2026-03-25T16:06:14Z"
+    },
+    {
+      "agent": "Brokkr",
+      "role": "Builder - Android APK builds, deployment",
+      "session_key": "agent:main:subagent:ba805e3f-c8e3-4a8e-b5d7-99e387f903ec",
+      "status": "healthy",
+      "response_time_ms": 6108,
+      "completed_at": "2026-03-25T16:05:50Z"
+    },
+    {
+      "agent": "Heimdall",
+      "role": "Coordinator - Guards Bifrost, delegates authority",
+      "session_key": "agent:main:cron:03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+      "status": "healthy",
+      "response_time_ms": 0,
+      "completed_at": "2026-03-25T16:01:00Z"
+    }
+  ],
+  "notes": [
+    "Initial gateway timeouts for some spawns - recovered on retry",
+    "All agents responded within timeout threshold",
+    "Mimir had longest response time (35245ms) but still within bounds"
+  ],
+  "gateway_status": {
+    "status": "running",
+    "pid": 972138,
+    "port": 18789,
+    "rpc_probe": "ok"
+  }
+}
