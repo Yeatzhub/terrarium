@@ -1,4 +1,5 @@
 package com.terrarium.app.util
+import kotlin.math.pow
 
 /**
  * Game constants and configuration values.
@@ -96,7 +97,7 @@ object GameConfig {
     
     // XP Level formula: level * 100^1.5
     fun xpForLevel(level: Int): Long {
-        return (LEVEL_XP_BASE * kotlin.math.pow(level.toDouble(), LEVEL_XP_EXPONENT)).toLong()
+        return (LEVEL_XP_BASE * level.toDouble().pow(LEVEL_XP_EXPONENT)).toLong()
     }
     
     fun getRequiredLevelForTier(tier: com.terrarium.app.data.model.RarityTier): Int {

@@ -1,4 +1,5 @@
 package com.terrarium.app.data.model
+import kotlin.math.pow
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -27,7 +28,7 @@ data class User(
      * Formula: 100 * level^1.5
      */
     fun xpToNextLevel(): Long {
-        return (100 * kotlin.math.pow(level.toDouble(), 1.5)).toLong()
+        return (100 * level.toDouble().pow(1.5)).toLong()
     }
     
     /**

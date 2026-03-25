@@ -40,7 +40,7 @@ fun rememberLottieAnimationState(
         LottieCompositionSpec.Asset(assetPath)
     )
     
-    val progress = animateLottieProgressAsState(
+    val progress = animateLottieCompositionAsState(
         composition = composition,
         iterations = iterations,
         speed = speed
@@ -196,7 +196,7 @@ fun WateringAnimationOverlay(
         LottieCompositionSpec.Asset(AnimationAssets.WATER_DROPLETS)
     )
     
-    val progress by animateLottieProgressAsState(
+    val progress by animateLottieCompositionAsState(
         composition = composition,
         iterations = 1,
         isPlaying = isPlaying,
@@ -230,7 +230,7 @@ fun PlantGrowthAnimation(
         LottieCompositionSpec.Asset(AnimationAssets.PLANT_GROWTH)
     )
     
-    val progress by animateLottieProgressAsState(
+    val progress by animateLottieCompositionAsState(
         composition = composition,
         iterations = 1,
         isPlaying = isPlaying,
@@ -256,7 +256,7 @@ fun SparklesAnimation(
         LottieCompositionSpec.Asset(AnimationAssets.SPARKLES)
     )
     
-    val progress by animateLottieProgressAsState(
+    val progress by animateLottieCompositionAsState(
         composition = composition,
         iterations = 1,
         isPlaying = isPlaying,
@@ -282,7 +282,7 @@ fun CoinFlipAnimation(
         LottieCompositionSpec.Asset(AnimationAssets.COIN_FLIP)
     )
     
-    val progress by animateLottieProgressAsState(
+    val progress by animateLottieCompositionAsState(
         composition = composition,
         iterations = 1,
         isPlaying = isPlaying,
