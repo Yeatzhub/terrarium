@@ -1,0 +1,12 @@
+{
+  "versionCode": 100,
+  "versionName": "v1.0.0",
+  "buildDate": "2026-03-25",
+  "apkPath": "/terrarium.apk",
+  "changelog": [
+    "Initial release",
+    "Core terrarium management",
+    "Plant growth system",
+    "Daily tasks and progression"
+  ]
+}

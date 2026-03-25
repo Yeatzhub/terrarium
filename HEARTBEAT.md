@@ -21,6 +21,8 @@
 - [ ] Check disk space (alert if >90%)
 - [ ] Check OpenClaw gateway status
 - [ ] Check thehub server (port 3000)
+- [ ] Check ComfyUI (port 8188) — Bragi's design engine
+- [ ] Check Hub sync queue (pending updates in updates.json)
 
 ### Calendar & Goals
 - [ ] Check for overdue goals

@@ -65,6 +65,27 @@ if command -v nvidia-smi &> /dev/null; then
     echo "🌡️  GPU (P40): ${GPU_TEMP}°C | ${GPU_UTIL}% util | ${VRAM_USED}/${VRAM_TOTAL} MB VRAM" >> "$LOG"
 fi
 
+# Hub Sync (Mimir)
+if [ -f "/storage/workspace/thehub/api/updates.json" ]; then
+    PENDING=$(jq '.pending | length' /storage/workspace/thehub/api/updates.json 2>/dev/null)
+    if [ "$PENDING" -gt 0 ]; then
+        echo "📤 Hub Sync: $PENDING pending updates" >> "$LOG"
+    else
+        echo "✅ Hub Sync: Queue clear" >> "$LOG"
+    fi
+else
+    echo "⚠️  Hub Sync: updates.json missing" >> "$LOG"
+    ALERTS+=("Hub Sync config missing")
+fi
+
+# ComfyUI (Bragi)
+if curl -s -o /dev/null -w "%{http_code}" http://localhost:8188/system_stats 2>/dev/null | grep -q "200"; then
+    echo "✅ ComfyUI: ONLINE" >> "$LOG"
+else
+    echo "⚠️  ComfyUI: OFFLINE" >> "$LOG"
+    ALERTS+=("ComfyUI OFFLINE")
+fi
+
 # Summary
 echo "" >> "$LOG"
 if [ ${#ALERTS[@]} -gt 0 ]; then

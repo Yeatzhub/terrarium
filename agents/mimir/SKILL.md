@@ -81,6 +81,7 @@ Every 5 minutes:
 - [ ] Check XRP bot (running?)
 - [ ] Check The Hub (port 3000)
 - [ ] Check OpenClaw gateway
+- [ ] Run Hub sync script (processes inter-agent updates)
 
 Every hour:
 - [ ] Check GPU temp (alert if >70°C)
@@ -91,6 +92,27 @@ Daily:
 - [ ] Log rotation
 - [ ] Memory maintenance
 ```
+
+## Hub Sync
+
+Mimir processes pending updates from other agents via the sync script:
+
+```bash
+# Run manually
+/storage/workspace/scripts/sync-hub-updates.sh
+
+# Check sync log
+tail -f /storage/workspace/agents/mimir/hub-sync.log
+```
+
+**Update Types:**
+| Type | Source | Action |
+|------|--------|--------|
+| `apk_update` | Brokkr | Update APK version in Hub |
+| `asset_refresh` | Bragi | Signal asset cache refresh |
+| `status_change` | Mimir | Update service status display |
+
+The sync script reads from `/storage/workspace/thehub/api/updates.json` and clears the queue after processing.
 
 ## Alert Protocol
 

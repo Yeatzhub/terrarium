@@ -19,7 +19,7 @@
 
 ## Norse Pantheon Agents
 
-Eight-agent architecture for autonomous trading operations:
+Nine-agent architecture for autonomous operations:
 
 | Agent | Role | Purpose |
 |-------|------|---------|
@@ -28,6 +28,7 @@ Eight-agent architecture for autonomous trading operations:
 | ⚔️ Tyr | Strategist | Strategy development, backtesting, risk parameters |
 | 🔨 Sindri | Smith | Bot implementation from Tyr's specs |
 | 🔨 Brokkr | Builder | Android APK builds, deployment to Hub |
+| 🎨 Bragi | Designer | App icons, in-app graphics, brand assets |
 | 🌊 Njord | Treasurer | Read-only fund tracking, P&L reports |
 | ⚡ Thor | Executor | Live trading within circuit breakers |
 | 🌳 Mimir | Operator | Infrastructure, The Hub, system monitoring |
@@ -37,7 +38,35 @@ Eight-agent architecture for autonomous trading operations:
 - Execution (Thor) ↔ cannot change strategy (Tyr)
 - Research (Huginn) ↔ cannot deploy or trade
 
-**Location:** `/storage/workspace/agents/{heimdall,huginn,tyr,sindri,njord,thor,mimir}/SKILL.md`
+**Location:** `/storage/workspace/agents/{heimdall,huginn,tyr,sindri,brokkr,bragi,njord,thor,mimir}/SKILL.md`
+
+---
+
+## Hub Sync Protocol
+
+When any agent updates an app or asset, Mimir syncs changes to The Hub:
+
+| Trigger | Agent | Hub Update |
+|---------|-------|------------|
+| APK build complete | Brokkr | Version bump, download link |
+| App asset updated | Bragi | Brand/assets refresh |
+| System status change | Mimir | Dashboard status |
+| Bot status change | Thor | Trading status |
+
+**Sync Flow:**
+```
+Agent completes update
+     ↓
+Agent writes to /storage/workspace/thehub/api/updates.json
+     ↓
+Mimir reads updates.json on heartbeat (every 5 min)
+     ↓
+Mimir applies changes to Hub
+     ↓
+Mimir posts confirmation to #thehub
+```
+
+**Cron Job:** Mimir runs `sync-hub-updates.sh` every 5 minutes to check for pending updates.
 
 ---
 

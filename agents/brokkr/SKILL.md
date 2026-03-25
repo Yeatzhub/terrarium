@@ -72,6 +72,25 @@ echo "Build: $(date -Iseconds)" > /storage/workspace/thehub/public/build.txt
 - **Cron:** `android-nightly-build`
 - **Session:** Uses `host=gateway` for git and Android SDK
 
+## Terrarium APK Sync
+
+Sync latest release APK from GitHub to The Hub every 6 hours.
+
+```bash
+# Fetch latest release APK URL
+APK_URL=$(gh release view -R Yeatzhub/terrarium --json assets -q '.assets[] | select(.name | endswith(".apk")) | .url')
+
+# Download and deploy
+curl -sL "$APK_URL" -o /storage/workspace/thehub/public/terrarium.apk
+
+# Update version info
+gh release view -R Yeatzhub/terrarium --json tagName,publishedAt --template 'Version: {{.tagName}}\nPublished: {{.publishedAt}}' > /storage/workspace/terrarium-version.json
+```
+
+- **Cron:** `terrarium-apk-sync`
+- **Schedule:** Every 6 hours
+- **Fallback:** Downloads page uses GitHub releases API directly
+
 ## Success Criteria
 
 | Check | Requirement |
