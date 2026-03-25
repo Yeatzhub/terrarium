@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-03-25T00:01:00Z",
+  "check_type": "HEIMDALL_HEALTH_CHECK",
+  "agents": {
+    "huginn": {
+      "status": "healthy",
+      "accessible": true,
+      "spawn_accepted": true,
+      "completed": true,
+      "runtime_ms": 11336,
+      "model": "ollama-cloud/glm-5:cloud",
+      "session_key": "agent:huginn:subagent:df5a9054-4a25-4e3b-9067-5105a312e954"
+    },
+    "thor": {
+      "status": "healthy",
+      "accessible": true,
+      "spawn_accepted": true,
+      "completed": true,
+      "runtime_ms": 9737,
+      "model": "ollama-cloud/glm-5:cloud",
+      "session_key": "agent:thor:subagent:86b43548-65b0-4b21-9c6f-77aa2e2f861e"
+    },
+    "tyr": {
+      "status": "unreachable",
+      "accessible": false,
+      "error": "Spawn rejected: Sandboxed sessions cannot spawn unsandboxed subagents",
+      "spawn_accepted": false
+    },
+    "sindri": {
+      "status": "unreachable",
+      "accessible": false,
+      "error": "Spawn rejected: Sandboxed sessions cannot spawn unsandboxed subagents",
+      "spawn_accepted": false
+    },
+    "njord": {
+      "status": "unreachable",
+      "accessible": false,
+      "error": "Spawn rejected: Sandboxed sessions cannot spawn unsandboxed subagents",
+      "spawn_accepted": false
+    },
+    "mimir": {
+      "status": "unreachable",
+      "accessible": false,
+      "error": "Spawn rejected: Sandboxed sessions cannot spawn unsandboxed subagents",
+      "spawn_accepted": false
+    }
+  },
+  "summary": {
+    "total_agents": 6,
+    "healthy": 2,
+    "unhealthy": 0,
+    "unreachable": 4,
+    "healthy_percentage": 33.3
+  }
+}

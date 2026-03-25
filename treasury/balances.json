@@ -1,58 +1,6 @@
 {
   "snapshots": [
     {
-      "lastUpdate": "2026-03-17T23:10:01.612601Z",
-      "exchange": "pionex",
-      "source": "paper_trading_state",
-      "assets": [
-        {
-          "symbol": "XRP",
-          "amount": 142.32,
-          "priceUSD": 1.53,
-          "usdValue": 217.7496
-        },
-        {
-          "symbol": "BTC",
-          "amount": 0.0,
-          "priceUSD": 74332,
-          "usdValue": 0.0
-        },
-        {
-          "symbol": "SOL",
-          "amount": 0.0,
-          "priceUSD": 95.28,
-          "usdValue": 0.0
-        }
-      ],
-      "totalUSD": 217.7496
-    },
-    {
-      "lastUpdate": "2026-03-18T00:10:01.540255Z",
-      "exchange": "pionex",
-      "source": "paper_trading_state",
-      "assets": [
-        {
-          "symbol": "XRP",
-          "amount": 142.32,
-          "priceUSD": 1.52,
-          "usdValue": 216.32639999999998
-        },
-        {
-          "symbol": "BTC",
-          "amount": 0.0,
-          "priceUSD": 74046,
-          "usdValue": 0.0
-        },
-        {
-          "symbol": "SOL",
-          "amount": 0.0,
-          "priceUSD": 94.73,
-          "usdValue": 0.0
-        }
-      ],
-      "totalUSD": 216.32639999999998
-    },
-    {
       "lastUpdate": "2026-03-18T01:10:01.558163Z",
       "exchange": "pionex",
       "source": "paper_trading_state",
@@ -4367,6 +4315,58 @@
         }
       ],
       "totalUSD": 161.868
+    },
+    {
+      "lastUpdate": "2026-03-25T00:10:02.142942Z",
+      "exchange": "pionex",
+      "source": "paper_trading_state",
+      "assets": [
+        {
+          "symbol": "XRP",
+          "amount": 114.8,
+          "priceUSD": 1.42,
+          "usdValue": 163.016
+        },
+        {
+          "symbol": "BTC",
+          "amount": 0.0,
+          "priceUSD": 70619,
+          "usdValue": 0.0
+        },
+        {
+          "symbol": "SOL",
+          "amount": 0.0,
+          "priceUSD": 90.9,
+          "usdValue": 0.0
+        }
+      ],
+      "totalUSD": 163.016
+    },
+    {
+      "lastUpdate": "2026-03-25T01:10:02.164123Z",
+      "exchange": "pionex",
+      "source": "paper_trading_state",
+      "assets": [
+        {
+          "symbol": "XRP",
+          "amount": 114.8,
+          "priceUSD": 1.42,
+          "usdValue": 163.016
+        },
+        {
+          "symbol": "BTC",
+          "amount": 0.0,
+          "priceUSD": 70719,
+          "usdValue": 0.0
+        },
+        {
+          "symbol": "SOL",
+          "amount": 0.0,
+          "priceUSD": 91.21,
+          "usdValue": 0.0
+        }
+      ],
+      "totalUSD": 163.016
     }
   ]
 }
