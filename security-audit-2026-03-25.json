@@ -1,6 +1,97 @@
 {
-    "timestamp": "2026-03-25T08:00:01+00:00",
-    "type": "api-audit",
-    "status": "WARNING",
-    "findings": "\nWARNING: Potential secrets in git history"
+  "timestamp": "2026-03-25T11:00:00Z",
+  "hostname": "yeatzai",
+  "findings": {
+    "openPorts": {
+      "status": "WARNING",
+      "publicFacing": [
+        {"port": 22, "service": "SSH", "address": "0.0.0.0", "risk": "medium", "note": "SSH exposed - ensure fail2ban configured"},
+        {"port": 80, "service": "HTTP", "address": "0.0.0.0", "risk": "medium"},
+        {"port": 1080, "service": "SOCKS Proxy (surfshark-dubai)", "address": "0.0.0.0", "risk": "high", "note": "Proxy exposed to internet"},
+        {"port": 3000, "service": "Next.js Server", "address": "0.0.0.0", "risk": "medium"},
+        {"port": 3389, "service": "RDP", "address": "0.0.0.0", "risk": "CRITICAL", "note": "RDP exposed to internet - major attack surface"},
+        {"port": 8082, "service": "SearXNG", "address": "0.0.0.0", "risk": "medium"},
+        {"port": 8188, "service": "Python/ComfyUI", "address": "0.0.0.0", "risk": "high"},
+        {"port": 9090, "service": "Prometheus/Monitoring", "address": "0.0.0.0", "risk": "high"},
+        {"port": 18790, "service": "Node", "address": "0.0.0.0", "risk": "medium"}
+      ],
+      "loopbackOnly": [
+        {"port": 53, "service": "DNS Stub (systemd-resolved)"},
+        {"port": 11434, "service": "Ollama API"},
+        {"port": 18789, "service": "OpenClaw Gateway"},
+        {"port": 18791, "service": "OpenClaw Gateway"},
+        {"port": 2019, "service": "Caddy Admin"},
+        {"port": 631, "service": "CUPS Print Server"}
+      ],
+      "tailscaleOnly": [
+        {"port": 443, "address": "100.112.56.61", "service": "HTTPS via Tailscale"},
+        {"port": 49576, "address": "100.112.56.61"}
+      ]
+    },
+    "gatewayAuth": {
+      "status": "PASS",
+      "bindMode": "loopback",
+      "authMode": "token",
+      "tokenConfigured": true,
+      "note": "Gateway properly bound to loopback with token authentication"
+    },
+    "sshConfig": {
+      "status": "PASS",
+      "PermitRootLogin": "no",
+      "PasswordAuthentication": "no",
+      "PubkeyAuthentication": "yes",
+      "note": "SSH properly hardened - key-only auth, root login disabled"
+    },
+    "firewall": {
+      "status": "UNKNOWN",
+      "note": "UFW status requires elevated permissions - check manually with: sudo ufw status verbose"
+    },
+    "dockerContainers": {
+      "total": 127,
+      "exposedPorts": [
+        {"container": "searxng", "ports": "8082->8080/tcp", "risk": "medium"},
+        {"container": "surfshark-dubai", "ports": "1080->1080/tcp, 51820/udp", "risk": "high", "note": "SOCKS proxy container exposes 1080"}
+      ],
+      "sandboxContainers": "Many openclaw-sbx-* containers (ephemeral agent sandboxes)"
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "CRITICAL",
+      "issue": "RDP port 3389 exposed on 0.0.0.0",
+      "action": "Restrict RDP to Tailscale or VPN only. Consider firewall rule or bind to specific interface."
+    },
+    {
+      "priority": "HIGH",
+      "issue": "SOCKS proxy port 1080 exposed publicly",
+      "action": "Bind surfshark-dubai to 127.0.0.1 or restrict via firewall."
+    },
+    {
+      "priority": "HIGH",
+      "issue": "Port 8188 (ComfyUI/Python) exposed publicly",
+      "action": "Bind to loopback or protect with auth. AI interfaces are high-value targets."
+    },
+    {
+      "priority": "HIGH",
+      "issue": "Port 9090 (Prometheus) exposed publicly",
+      "action": "Monitoring APIs should never be public. Restrict to internal network."
+    },
+    {
+      "priority": "MEDIUM",
+      "issue": "UFW status unknown",
+      "action": "Run: sudo ufw status verbose to verify firewall rules are active."
+    },
+    {
+      "priority": "MEDIUM",
+      "issue": "SSH port 22 publicly exposed",
+      "action": "Ensure fail2ban is running: sudo systemctl status fail2ban"
+    }
+  ],
+  "summary": {
+    "critical": 1,
+    "high": 3,
+    "medium": 2,
+    "pass": 2,
+    "unknown": 1
+  }
 }
