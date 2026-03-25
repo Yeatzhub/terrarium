@@ -131,7 +131,7 @@ fun OnboardingScreen(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterHorizontally
+            verticalAlignment = Alignment.CenterVertically
         ) { page ->
             OnboardingPageContent(
                 page = onboardingPages[page],

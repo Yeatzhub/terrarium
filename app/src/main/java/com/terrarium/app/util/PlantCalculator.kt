@@ -13,7 +13,7 @@ object PlantCalculator {
     fun getTimeToMaturity(plant: Plant, plantType: PlantType): PlantTimeInfo {
         val hoursSincePlanting = TimeUtils.hoursSince(plant.plantedAt)
         val totalGrowthHours = plantType.growthTimeHours.toFloat()
-        val remainingHours = maxOf(0, totalGrowthHours - hoursSincePlanting).toLong()
+        val remainingHours = maxOf(0f, totalGrowthHours - hoursSincePlanting).toLong()
         
         val progressPercent = ((hoursSincePlanting / totalGrowthHours) * 100).coerceIn(0f, 100f)
         

@@ -42,13 +42,13 @@ enum class TaskType {
  */
 object DailyTaskTemplates {
     val ALL = listOf(
-        { DailyTaskTemplate("Thirsty Plants", "Water 3 plants", TaskType.WATER_PLANTS, 15, 10, 3) },
-        { DailyTaskTemplate("Green Thumb", "Propagate a mature plant", TaskType.PROPAGATE_PLANT, 30, 25, 1) },
-        { DailyTaskTemplate("Terrarium Check", "Check on your terrarium", TaskType.CHECK_TERRARIUM, 10, 5, 1) },
-        { DailyTaskTemplate("Shop Browser", "Visit the shop", TaskType.BUY_ITEM, 10, 5, 1) },
-        { DailyTaskTemplate("New Beginnings", "Plant a seed", TaskType.PLANT_SEED, 20, 15, 1) },
-        { DailyTaskTemplate("Healthy Garden", "Keep all plants healthy above 70%", TaskType.KEEP_PLANTS_HEALTHY, 25, 20, 1) },
-        { DailyTaskTemplate("Daily Login", "Log in today", TaskType.LOGIN, 10, 25, 1) }
+         DailyTaskTemplate("Thirsty Plants", "Water 3 plants", TaskType.WATER_PLANTS, 15, 10, 3) ,
+         DailyTaskTemplate("Green Thumb", "Propagate a mature plant", TaskType.PROPAGATE_PLANT, 30, 25, 1) ,
+         DailyTaskTemplate("Terrarium Check", "Check on your terrarium", TaskType.CHECK_TERRARIUM, 10, 5, 1) ,
+         DailyTaskTemplate("Shop Browser", "Visit the shop", TaskType.BUY_ITEM, 10, 5, 1) ,
+         DailyTaskTemplate("New Beginnings", "Plant a seed", TaskType.PLANT_SEED, 20, 15, 1) ,
+         DailyTaskTemplate("Healthy Garden", "Keep all plants healthy above 70%", TaskType.KEEP_PLANTS_HEALTHY, 25, 20, 1) ,
+         DailyTaskTemplate("Daily Login", "Log in today", TaskType.LOGIN, 10, 25, 1) ,
     )
     
     fun getRandomTasks(count: Int = 4): List<DailyTaskTemplate> {

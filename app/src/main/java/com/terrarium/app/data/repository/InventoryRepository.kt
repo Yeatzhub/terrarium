@@ -76,7 +76,7 @@ class InventoryRepository @Inject constructor(
     /**
      * Get all inventory items with their details.
      */
-    fun getInventoryWithDetails(userId: Long): Flow<List<InventoryItemWithDetails>> {
+    fun getInventoryWithDetails(userId: Long): Flow<List<InventoryItem>> {
         return getInventoryForUser(userId)
     }
 }

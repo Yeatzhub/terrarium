@@ -44,7 +44,7 @@ class HomeViewModel @Inject constructor(
             if (id == null) {
                 flowOf(null)
             } else {
-                flow { emit(terrariumRepository.getTerrariumById(id)) }
+                flow<Terrarium?> { emit(terrariumRepository.getTerrariumById(id)) }
             }
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, null)
