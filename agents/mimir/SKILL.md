@@ -119,8 +119,17 @@ The sync script reads from `/storage/workspace/thehub/api/updates.json` and clea
 | Severity | Action |
 |----------|--------|
 | Info | Log to Hub, no alert |
-| Warning | Log + alert Heimdall |
-| Critical | Alert Heimdall + user immediately |
+| Warning | Log + post to #alerts |
+| Critical | Post to #alerts + escalate to user via Heimdall |
+
+## Discord Alerts
+
+Post alerts to Discord channel `#alerts` (ID: 1486486418363650159):
+
+```bash
+# Post alert to #alerts
+message channel=discord target=1486486418363650159 content="⚠️ Mimir: [alert message]"
+```
 
 ## Human Approval Required
 

@@ -29,6 +29,7 @@
 |------|--------|
 | exec | ✓ — ComfyUI API calls, image processing |
 | read/write | ✓ — project asset folders |
+| message | ✓ — Discord graphics to #graphics, alerts to #alerts (1486486418363650159) |
 | http/curl | ✓ — ComfyUI API (localhost:8188) |
 
 ## ComfyUI Integration
@@ -89,19 +90,21 @@ curl http://localhost:8188/view?filename=output.png
 │   ├── logo.png
 │   ├── palette.json
 │   └── typography.json
-└── templates/
-    ├── icon-template.json
-    └── ...
+├── templates/
+│   ├── icon-template.json
+│   └── ...
+└── GRAPHICS_REQUIREMENTS.md              # Requirements schema reference
 
 /storage/workspace/projects/android/spectre/assets/
 ├── icons/
 │   ├── mipmap-hdpi/
 │   ├── mipmap-mdpi/
 │   └── ...
-└── graphics/
+└── graphics-requirements.json            # Missing graphics (Brokkr generates)
 
 /storage/workspace/projects/android/terrarium/assets/
-└── ...
+├── icons/
+└── graphics-requirements.json
 
 /storage/workspace/thehub/public/
 ├── favicon.ico
@@ -115,6 +118,24 @@ curl http://localhost:8188/view?filename=output.png
 ```
 
 ## Design Protocol
+
+### Requirements-Driven Workflow (from Brokkr)
+
+When Brokkr posts "Bragi needed for {app}: [list]", Bragi:
+
+1. **Read requirements**: Check `{app}/assets/graphics-requirements.json`
+2. **Generate missing assets**: Use ComfyUI with appropriate prompts
+3. **Post previews**: To `#graphics` channel for approval
+4. **On approval**: Save to correct paths, update status to `approved`
+5. **Notify Brokkr**: Post confirmation so build proceeds
+
+```
+Brokkr: "Bragi needed for terrarium: play_store_banner, splash"
+Bragi: Reads requirements.json → generates variations → posts to #graphics
+User: "use 2 for banner, 1 for splash"
+Bragi: Saves assets → updates requirements.json → "Assets approved for terrarium"
+Brokkr: Includes approved assets in next build
+```
 
 ### Icon Generation
 

@@ -31,7 +31,7 @@
 | exec | ✓ — build commands, git, Android SDK |
 | read | ✓ — source code, changelogs |
 | write | ✓ — build artifacts, logs |
-| message | ✓ — build notifications to Telegram |
+| message | ✓ — Discord alerts to #alerts (1486486418363650159) |
 
 ## Workspace
 
@@ -64,6 +64,37 @@ cp app/build/outputs/apk/release/app-release.apk \
 
 # 5. Update version info
 echo "Build: $(date -Iseconds)" > /storage/workspace/thehub/public/build.txt
+```
+
+## Graphics Requirements Check
+
+Before building, Brokkr checks for missing graphics:
+
+```bash
+# Check graphics requirements
+/storage/workspace/scripts/check-graphics.sh {app_name}
+```
+
+If graphics are missing:
+1. Read `{app}/assets/graphics-requirements.json`
+2. Post to `#graphics`: "Bragi needed for {app}: [pending items]"
+3. Wait for Bragi to generate and user approval
+4. Assets move to `approved` status
+5. Proceed with build
+
+**Graphics Workflow:**
+```
+Brokkr checks → finds missing graphics
+      ↓
+Brokkr posts to #graphics: "Bragi needed: X, Y, Z"
+      ↓
+Bragi generates variations → posts to #graphics
+      ↓
+User approves: "use 2"
+      ↓
+Bragi saves assets → updates requirements.json → status: approved
+      ↓
+Brokkr includes assets in next build
 ```
 
 ## Nightly Build Schedule

@@ -36,7 +36,7 @@
 |------|--------|
 | sessions_spawn | ✓ — can spawn any agent |
 | cron | ✓ — schedule briefings, checks |
-| message | ✓ — Telegram alerts |
+| message | ✓ — Discord alerts to #alerts (1486486418363650159), user escalation |
 | read/write | ✓ — all workspaces (read), yggdrasil/ (write) |
 | exec | Limited — system status only |
 | obsidian | Write daily briefings, consolidate agent reports |

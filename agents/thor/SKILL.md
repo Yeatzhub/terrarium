@@ -43,7 +43,7 @@
 | exec | ✓ Exchange API calls, bot management |
 | read | Strategy files, state files, bot logs |
 | write | Execution logs, state updates |
-| message | Telegram alerts (via Heimdall relay) |
+| message | Discord alerts to #alerts (1486486418363650159) |
 | sessions_spawn | Spawn monitoring subagents |
 | obsidian | Log trades to `memory/trading/`, update session notes |
 

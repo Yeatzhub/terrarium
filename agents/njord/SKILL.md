@@ -30,7 +30,7 @@
 | exec | Read-only — API calls to exchanges |
 | read | ✓ — treasury files, positions |
 | write | Only in `/storage/workspace/treasury/` |
-| message | Only for alerting Heimdall |
+| message | Discord alerts to #alerts (1486486418363650159) |
 | obsidian | Log P&L reports to `memory/trading/` |
 
 ## Obsidian Logging
