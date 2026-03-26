@@ -20,12 +20,15 @@ jobs:
       - name: Grant execute permission
         run: chmod +x gradlew
         
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
+      - name: Build Debug APK (signed with debug key)
+        run: ./gradlew assembleDebug
+        
+      - name: List output
+        run: ls -la app/app/build/outputs/apk/debug/ || ls -la app/app/build/outputs/apk/
         
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          files: app/app/build/outputs/apk/release/*.apk
+          files: app/app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
