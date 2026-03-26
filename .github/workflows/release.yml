@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -44,6 +45,8 @@ jobs:
           1. Download the APK file
           2. Enable "Install from unknown sources" in your device settings
           3. Open the downloaded APK to install
+          
+          **Note:** Debug builds use consistent signing for easier updates.
           
           **Version:** ${{ steps.get_version.outputs.VERSION }}
         files: app/build/outputs/apk/debug/app-debug.apk
