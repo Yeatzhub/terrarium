@@ -108,4 +108,18 @@ object RepositoryModule {
     fun provideCuttingRepository(dao: CuttingDao): CuttingRepository {
         return CuttingRepository(dao)
     }
+    
+    @Provides
+    @Singleton
+    fun provideGameInitializer(
+        userDao: UserDao,
+        terrariumDao: TerrariumDao,
+        plantDao: PlantDao,
+        plantTypeDao: PlantTypeDao,
+        inventoryDao: InventoryDao,
+        dailyTaskDao: DailyTaskDao,
+        userPreferences: UserPreferences
+    ): GameInitializer {
+        return GameInitializer(userDao, terrariumDao, plantDao, plantTypeDao, inventoryDao, dailyTaskDao, userPreferences)
+    }
 }

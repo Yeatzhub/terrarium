@@ -44,10 +44,12 @@ fun HomeScreen(
     val plants by viewModel.plants.collectAsState()
     val dailyTasks by viewModel.dailyTasks.collectAsState()
     val plantTypes by viewModel.plantTypes.collectAsState()
+    val inventory by viewModel.inventory.collectAsState()
     val message by viewModel.message.collectAsState()
     
     var showPlantDialog by remember { mutableStateOf(false) }
     var showWaterDialog by remember { mutableStateOf(false) }
+    var showSeedDialog by remember { mutableStateOf(false) }
     var showPropagateDialog by remember { mutableStateOf(false) }
     var selectedPlant by remember { mutableStateOf<Plant?>(null) }
     
@@ -160,7 +162,7 @@ fun HomeScreen(
             item {
                 QuickActions(
                     onWaterAll = { showWaterDialog = true },
-                    onPlant = { showPlantDialog = true },
+                    onPlant = { showSeedDialog = true },
                     onPropagate = { showPropagateDialog = true }
                 )
             }
@@ -223,6 +225,23 @@ fun HomeScreen(
                     Text("Cancel")
                 }
             }
+        )
+    }
+    
+    // Seed Selection Dialog
+    if (showSeedDialog) {
+        SeedSelectionDialog(
+            seeds = inventory.filter { it.itemType == ItemType.SEED },
+            plantTypes = plantTypes.associateBy { it.id },
+            userLevel = user?.level ?: 1,
+            onDismiss = { showSeedDialog = false },
+            onPlantSeed = { plantTypeId ->
+                selectedTerrarium?.let { terrarium ->
+                    viewModel.plantSeed(plantTypeId, terrarium.id, 0.5f, 0.5f)
+                }
+                showSeedDialog = false
+            },
+            onNavigateToShop = onNavigateToShop
         )
     }
 }
@@ -773,4 +792,173 @@ private fun PlantDetailDialog(
             }
         }
     )
+}
+
+@Composable
+private fun SeedSelectionDialog(
+    seeds: List<InventoryItem>,
+    plantTypes: Map<Long, PlantType>,
+    userLevel: Int,
+    onDismiss: () -> Unit,
+    onPlantSeed: (Long) -> Unit,
+    onNavigateToShop: () -> Unit
+) {
+    // Filter seeds by user level
+    val availableSeeds = seeds.filter { item ->
+        val plantType = plantTypes[item.itemId]
+        plantType != null
+    }
+    
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("🌱 Plant a Seed") },
+        text = {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                if (availableSeeds.isEmpty()) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant
+                        )
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(16.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "🪴",
+                                fontSize = 48.sp
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "No seeds in inventory!",
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text(
+                                text = "Visit the shop to buy seeds",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    }
+                } else {
+                    Text(
+                        text = "Select a seed to plant:",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    
+                    LazyColumn(
+                        modifier = Modifier.height(300.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(availableSeeds) { seedItem ->
+                            val plantType = plantTypes[seedItem.itemId]
+                            if (plantType != null) {
+                                SeedItemCard(
+                                    seedItem = seedItem,
+                                    plantType = plantType,
+                                    userLevel = userLevel,
+                                    onPlant = { onPlantSeed(seedItem.itemId) }
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onNavigateToShop) {
+                Text("🛒 Shop")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+private fun SeedItemCard(
+    seedItem: InventoryItem,
+    plantType: PlantType,
+    userLevel: Int,
+    onPlant: () -> Unit
+) {
+    val tierColor = when (plantType.tier) {
+        PlantTier.COMMON -> MaterialTheme.colorScheme.primary
+        PlantTier.UNCOMMON -> MaterialTheme.colorScheme.secondary
+        PlantTier.RARE -> MaterialTheme.colorScheme.tertiary
+        PlantTier.LEGENDARY -> MaterialTheme.colorScheme.error
+    }
+    
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Tier indicator
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(tierColor.copy(alpha = 0.2f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = when (plantType.tier) {
+                        PlantTier.COMMON -> "🌿"
+                        PlantTier.UNCOMMON -> "🌱"
+                        PlantTier.RARE -> "✨"
+                        PlantTier.LEGENDARY -> "⭐"
+                    },
+                    fontSize = 24.sp
+                )
+            }
+            
+            Spacer(modifier = Modifier.width(12.dp))
+            
+            // Plant info
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = plantType.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = plantType.description,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    text = "×${seedItem.quantity}",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = tierColor
+                )
+            }
+            
+            // Plant button
+            Button(
+                onClick = onPlant,
+                enabled = seedItem.quantity > 0,
+                shape = RoundedCornerShape(8.dp)
+            ) {
+                Text("Plant")
+            }
+        }
+    }
 }

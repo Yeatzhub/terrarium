@@ -17,4 +17,10 @@ interface PlantTypeDao {
     
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlantTypes(plantTypes: List<PlantType>)
+    
+    @Query("SELECT COUNT(*) FROM plant_types")
+    suspend fun getPlantTypeCount(): Int
+    
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(plantTypes: List<PlantType>)
 }

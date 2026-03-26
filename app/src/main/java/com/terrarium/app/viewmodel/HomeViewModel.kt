@@ -19,7 +19,8 @@ class HomeViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val inventoryRepository: InventoryRepository,
     private val dailyTaskRepository: DailyTaskRepository,
-    private val cuttingRepository: CuttingRepository
+    private val cuttingRepository: CuttingRepository,
+    private val gameInitializer: GameInitializer
 ) : ViewModel() {
     
     private val _selectedTerrariumId = MutableStateFlow<Long?>(null)
@@ -90,20 +91,18 @@ class HomeViewModel @Inject constructor(
         .stateIn(viewModelScope, SharingStarted.Lazily, 0f)
     
     init {
-        // Initialize data
+        // Initialize game data (creates user if needed)
         viewModelScope.launch {
-            // Get current user
-            userRepository.getCurrentUser()?.let { u ->
-                _userId.value = u.id
+            val userId = gameInitializer.initializeIfNeeded()
+            _userId.value = userId
+            
+            // Check for daily login
+            val loginResult = userRepository.recordDailyLogin(userId)
+            if (loginResult.wasNewLogin) {
+                _message.value = "Daily login bonus: +${loginResult.coinsGained} coins, +${loginResult.xpGained} XP!"
                 
-                // Check for daily login
-                val loginResult = userRepository.recordDailyLogin(u.id)
-                if (loginResult.wasNewLogin) {
-                    _message.value = "Daily login bonus: +${loginResult.coinsGained} coins, +${loginResult.xpGained} XP!"
-                    
-                    // Generate daily tasks if needed
-                    dailyTaskRepository.generateDailyTasks(u.id)
-                }
+                // Generate daily tasks if needed
+                dailyTaskRepository.generateDailyTasks(userId)
             }
             
             // Select the first terrarium by default
