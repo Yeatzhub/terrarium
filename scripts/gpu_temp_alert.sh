@@ -20,9 +20,9 @@ if [ "$TEMP" -ge "$THRESHOLD" ]; then
     # Log the alert
     echo "$TIMESTAMP ALERT: GPU temp is ${TEMP}°C (threshold: ${THRESHOLD}°C)" >> "$LOG_FILE"
 
-    # Send notification via OpenClaw
+    # Send notification via OpenClaw to Discord #alerts
     if command -v openclaw &> /dev/null; then
-        openclaw notify --title "🔥 GPU Temperature Alert" --body "Tesla P40 at ${TEMP}°C (threshold: ${THRESHOLD}°C)" 2>/dev/null
+        openclaw message send --channel discord --target 1486486418363650159 -m "🔥 GPU Temperature Alert: Tesla P40 at ${TEMP}°C (threshold: ${THRESHOLD}°C)" 2>/dev/null
     fi
 
     # Try to send to Discord webhook if configured
