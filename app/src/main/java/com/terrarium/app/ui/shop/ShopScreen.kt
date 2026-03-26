@@ -16,12 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.terrarium.app.data.model.JarType
-import com.terrarium.app.data.model.PlantType
-import com.terrarium.app.data.model.RarityTier
-import com.terrarium.app.data.model.ShopItem
+import com.terrarium.app.data.model.*
+import com.terrarium.app.viewmodel.HomeViewModel
 import com.terrarium.app.viewmodel.ShopViewModel
 import com.terrarium.app.util.GameLogic
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

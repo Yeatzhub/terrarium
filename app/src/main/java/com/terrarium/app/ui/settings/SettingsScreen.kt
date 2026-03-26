@@ -13,10 +13,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.terrarium.app.BuildConfig
 
 /**
  * Settings screen for the Terrarium app.
@@ -150,7 +150,7 @@ fun SettingsScreen(
                     SettingsItem(
                         icon = Icons.Default.Info,
                         title = "About Terrarium",
-                        subtitle = "Version ${BuildConfig.VERSION_NAME}",
+                        subtitle = "Version ${LocalContext.current.getString(R.string.version)}",
                         onClick = { showAboutDialog = true }
                     )
                     
@@ -230,7 +230,7 @@ fun SettingsScreen(
             title = { Text("Terrarium") },
             text = {
                 Column {
-                    Text("Version ${BuildConfig.VERSION_NAME}", fontWeight = FontWeight.Bold)
+                    Text("Version ${LocalContext.current.getString(R.string.version)}", fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(8.dp))
                     Text("A relaxing plant growing game where you nurture virtual plants in beautiful terrarium jars.")
                     Spacer(modifier = Modifier.height(12.dp))

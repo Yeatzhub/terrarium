@@ -360,6 +360,7 @@ private fun DailyTaskItem(
                 TaskType.HARVEST_PLANT -> "🌾"
                 TaskType.LOGIN -> "👋"
                 TaskType.KEEP_PLANTS_HEALTHY -> "❤️"
+                TaskType.VISIT_SHOP -> "🛒"
             },
             fontSize = 24.sp
         )
