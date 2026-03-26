@@ -181,6 +181,7 @@
   },
   "active": "main-view",
   "lastOpenFiles": [
+    "agents/tyr/STRATEGY_UPDATE.md",
     "projects/terrarium/app/app/src/main/java/com/terrarium/app/ui/terrarium/TerrariumView.kt",
     "projects/terrarium/app/app/src/main/java/com/terrarium/app/ui/terrarium/BaseLayerSetupScreen.kt",
     "projects/terrarium/app/app/src/main/java/com/terrarium/app/ui/terrarium",
@@ -199,7 +200,6 @@
     "agents/heimdall/learning/implemented/health-2026-03-26T04-03-00Z.json",
     "agents/heimdall/learning/implemented/health-2026-03-26T01-23-00Z.json",
     "journal/2026-03-25.json",
-    "skills/skills/video-frames/scripts/frame.sh",
     "skills/skills/himalaya/references/message-composition.md",
     "skills/skills/himalaya/references/configuration.md",
     "skills/skills/1password/references/get-started.md",
