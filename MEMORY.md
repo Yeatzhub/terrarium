@@ -120,6 +120,30 @@ Mimir posts confirmation to #thehub
 
 ---
 
+## Discord Channels
+
+| Category | Channel | ID | Purpose |
+|----------|---------|-----|---------|
+| Trading | bot-status | 1486427572916064338 | Bot health/status |
+| Trading | xrp-trading | 1486427574686191750 | XRP bot work |
+| Trading | alerts | 1486427576405852240 | Trading alerts |
+| Trading | thor-trades | 1486430187204644944 | Trade execution |
+| Android | general | 1486427618076000367 | Cross-project |
+| Android | reboot-app | 1486427619737206884 | Reboot app |
+| Android | spectre-app | 1486427621062475959 | Spectre app |
+| Android | dev-log | 1486427622383681628 | Development notes |
+| Android | android-openclaw | 1486430381782732933 | OpenClaw Android |
+| Android | android-terrarium | 1486430382223134750 | Terrarium app |
+| Infrastructure | status | 1486427581942071366 | System status |
+| Infrastructure | deployments | 1486427583376658584 | Deployment activity |
+| Infrastructure | monitoring | 1486427584974819358 | Monitoring alerts |
+| Infrastructure | thehub | 1486435656992292915 | The Hub dashboard |
+| Infrastructure | graphics | 1486462570192699462 | Bragi's design work |
+| None | general | 1486414088086094039 | General discussion |
+| None | alerts | 1486486418363650159 | System/critical alerts |
+
+---
+
 ## Events
 
 See `memory/2026-03-events.md` for recent events.

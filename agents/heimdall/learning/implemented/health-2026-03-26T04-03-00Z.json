@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-03-26T04:03:00Z",
+  "check_type": "heimdall_health_check",
+  "initiated_from": "cron:03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+  "execution_context": "sandboxed",
+  "agents": {
+    "huginn": {
+      "status": "healthy",
+      "response": "success",
+      "subagent_session": "agent:huginn:subagent:d2e6673e-c52f-4eb4-ac12-f6661c90a111",
+      "runtime_ms": 16705,
+      "completed_at": "2026-03-26T04:03:14Z"
+    },
+    "thor": {
+      "status": "healthy",
+      "response": "success",
+      "subagent_session": "agent:thor:subagent:eb2f5311-c2f2-4f3d-a287-e7e7e8a104e2",
+      "runtime_ms": 19926,
+      "completed_at": "2026-03-26T04:03:21Z"
+    },
+    "tyr": {
+      "status": "unreachable",
+      "response": "forbidden",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "resolution": "Agent exists but cannot be reached from sandboxed Heimdall context"
+    },
+    "sindri": {
+      "status": "unreachable",
+      "response": "forbidden",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "resolution": "Agent exists but cannot be reached from sandboxed Heimdall context"
+    },
+    "njord": {
+      "status": "unreachable",
+      "response": "forbidden",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "resolution": "Agent exists but cannot be reached from sandboxed Heimdall context"
+    },
+    "mimir": {
+      "status": "unreachable",
+      "response": "forbidden",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "resolution": "Agent exists but cannot be reached from sandboxed Heimdall context"
+    },
+    "brokkr": {
+      "status": "unreachable",
+      "response": "forbidden",
+      "error": "Sandboxed sessions cannot spawn unsandboxed subagents",
+      "resolution": "Agent exists but cannot be reached from sandboxed Heimdall context"
+    }
+  },
+  "summary": {
+    "total_agents": 7,
+    "healthy": 2,
+    "unreachable": 5,
+    "failed": 0,
+    "note": "5 agents unreachable due to sandbox restrictions, not agent failure"
+  },
+  "recommendations": [
+    "Run Heimdall health check from unsandboxed context for full agent coverage",
+    "Configure Tyr, Sindri, Njord, Mimir, and Brokkr agents to accept sandboxed subagent spawns",
+    "Alternatively, set up a relay mechanism for sandboxed health checks to reach unsandboxed agents"
+  ]
+}

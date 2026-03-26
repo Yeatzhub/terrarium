@@ -1,14 +1,10 @@
 {
-  "versionCode": 2,
-  "versionName": "v1.1.0",
-  "buildDate": "2026-03-26",
-  "apkPath": "/terrarium.apk",
-  "changelog": [
-    "Starter seeds: 5 Moss + 3 Fittonia for new players",
-    "Plant Seed dialog with inventory selection",
-    "Fixed onboarding crash on button presses",
-    "Fixed game initialization for new players",
-    "Default terrarium created on first launch",
-    "Version 1.1.0"
-  ]
+  "version": "v1.1.0",
+  "name": "Terrarium v1.1.0",
+  "tagName": "v1.1.0",
+  "releaseUrl": "https://github.com/Yeatzhub/terrarium/releases/tag/v1.1.0",
+  "downloadUrl": "https://github.com/Yeatzhub/terrarium/releases/download/v1.1.0/app-debug.apk",
+  "createdAt": "2026-03-26T01:33:13Z",
+  "updatedAt": "2026-03-26T05:06:00Z",
+  "size": 18119900
 }
