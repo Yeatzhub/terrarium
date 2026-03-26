@@ -117,9 +117,9 @@ object RepositoryModule {
         plantDao: PlantDao,
         plantTypeDao: PlantTypeDao,
         inventoryDao: InventoryDao,
-        dailyTaskDao: DailyTaskDao,
+        dailyTaskRepository: DailyTaskRepository,
         userPreferences: UserPreferences
     ): GameInitializer {
-        return GameInitializer(userDao, terrariumDao, plantDao, plantTypeDao, inventoryDao, dailyTaskDao, userPreferences)
+        return GameInitializer(userDao, terrariumDao, plantDao, plantTypeDao, inventoryDao, dailyTaskRepository, userPreferences)
     }
 }
