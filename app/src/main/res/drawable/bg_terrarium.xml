@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1080dp"
+    android:height="1920dp"
+    android:viewportWidth="1080"
+    android:viewportHeight="1920">
+    
+    <!-- Soft gradient background using layered shapes -->
+    <!-- Base: warm cream -->
+    <path
+        android:fillColor="#F5F5DC"
+        android:pathData="M0,0H1080V1920H0Z" />
+    
+    <!-- Top: soft sage green wash -->
+    <path
+        android:fillColor="#E8F5E9"
+        android:fillAlpha="0.6"
+        android:pathData="M0,0H1080V800C800,850 200,850 0,800Z" />
+    
+    <!-- Middle: warm earth tones -->
+    <path
+        android:fillColor="#EFEBE9"
+        android:fillAlpha="0.4"
+        android:pathData="M0,600Q540,900 1080,600V1400Q540,1100 0,1400Z" />
+    
+    <!-- Bottom: soft moss green -->
+    <path
+        android:fillColor="#C8E6C9"
+        android:fillAlpha="0.5"
+        android:pathData="M0,1400C200,1350 400,1380 540,1450C700,1380 900,1350 1080,1400V1920H0Z" />
+</vector>

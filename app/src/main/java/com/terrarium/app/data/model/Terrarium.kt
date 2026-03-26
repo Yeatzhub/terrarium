@@ -16,7 +16,15 @@ data class Terrarium(
     val name: String = "My Terrarium",
     val humidity: Float = 0.6f, // Humidity level (0-1)
     val light: Float = 0.5f, // Light level (0-1)
-    val lastVisited: Long = System.currentTimeMillis()
+    val lastVisited: Long = System.currentTimeMillis(),
+    // Base layers
+    val hasGravel: Boolean = false,
+    val hasCharcoal: Boolean = false,
+    val hasSoil: Boolean = false,
+    val hasMoss: Boolean = false,
+    // Stats
+    val totalPlantsGrown: Int = 0,
+    val totalPropagations: Int = 0
 ) {
     /**
      * Get maximum plant capacity for this jar type.
@@ -36,6 +44,39 @@ data class Terrarium(
      */
     fun canAddPlants(plantCount: Int): Boolean {
         return plantCount < getCapacity()
+    }
+    
+    /**
+     * Check if terrarium has base layers set up.
+     */
+    fun hasBaseLayers(): Boolean {
+        return hasSoil // Minimum requirement
+    }
+    
+    /**
+     * Get base layer configuration.
+     */
+    fun getBaseLayerConfig(): BaseLayerConfig {
+        return BaseLayerConfig(
+            hasGravel = hasGravel,
+            hasCharcoal = hasCharcoal,
+            hasSoil = hasSoil,
+            hasMoss = hasMoss
+        )
+    }
+    
+    /**
+     * Get total depth of base layers for rendering.
+     */
+    fun getLayerDepth(): Float {
+        return getBaseLayerConfig().getTotalDepth()
+    }
+    
+    /**
+     * Get XP bonus for complete setup.
+     */
+    fun getSetupBonus(): Int {
+        return getBaseLayerConfig().getSetupBonus()
     }
 }
 
