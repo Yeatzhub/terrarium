@@ -1,6 +1,6 @@
 #!/bin/bash
 # Reminder: Review Subagents at 7 PM CDT (00:00 UTC)
-# Sends Telegram notification
+# Sends Discord notification to #alerts
 
 MESSAGE="⏰ 7 PM CDT Reminder
 
@@ -16,6 +16,5 @@ Review Subagents Architecture:
 Decide: Agent separation vs single-bot setup.
 Reply with 'done' when complete."
 
-curl -s -X POST "https://api.telegram.org/bot8621394908:AAEDXUoihhq48gQ06EG5pzIO2DHZdUaYdn0/sendMessage" \
-  -H "Content-Type: application/json" \
-  -d "{\"chat_id\": \"8464154608\", \"text\": \"$MESSAGE\"}" > /dev/null 2>&1
+# Send via OpenClaw to Discord #alerts
+openclaw message send --channel discord --target 1486486418363650159 -m "$MESSAGE" 2>/dev/null

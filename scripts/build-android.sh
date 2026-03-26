@@ -124,17 +124,20 @@ echo "$NEW_COMMITS" | tee -a "$LOG_FILE"
 # === Step 3: Update Version ===
 log "INFO" "Updating version..."
 
-# Generate version: YYYY.MM.DD.N (N = build number for day)
+# Generate version: YYYY-MM-DD.N (N = build number for day)
 PATCH=1
-while [ -f "$VERSION_FILE" ]; do
+if [ -f "$VERSION_FILE" ]; then
     EXISTING=$(jq -r '.versionName' "$VERSION_FILE" 2>/dev/null || echo "")
-    if [ "${EXISTING%%.*}" = "${TODAY%%-*}" ]; then
-        # Same day, increment patch
-        PATCH=$(( ${EXISTING##*.} + 1 ))
-        break
+    if [ -n "$EXISTING" ]; then
+        # Version format: YYYY-MM-DD.N (date uses dashes, then dot, then patch)
+        EXISTING_DATE=$(echo "$EXISTING" | cut -d'.' -f1)
+        EXISTING_PATCH=$(echo "$EXISTING" | cut -d'.' -f2)
+        if [ "$EXISTING_DATE" = "$TODAY" ]; then
+            # Same day, increment patch
+            PATCH=$((EXISTING_PATCH + 1))
+        fi
     fi
-    break
-done
+fi
 
 VERSION_NAME="$TODAY.$PATCH"
 VERSION_CODE=$(echo "$TODAY" | tr -d '-')$(printf "%02d" $PATCH)

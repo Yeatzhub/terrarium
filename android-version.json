@@ -1,14 +1,11 @@
 {
-  "versionCode": 2026032501,
-  "versionName": "2026.3.25.1",
-  "buildDate": "2026-03-25",
+  "versionCode": 2026032603,
+  "versionName": "2026-03-26.3",
+  "buildDate": "2026-03-26",
   "apkPath": "/openclaw.apk",
-  "size": 86405489,
-  "buildType": "thirdParty-debug",
+  "size": 86405493,
   "changelog": [
-    "Security: gate canvas bridge to trusted pages",
-    "OTA update support for automatic APK updates",
-    "Custom Spectre icons and branding",
-    "Full features: SMS, call log, all permissions"
+    "OTA update support enabled",
+    "Automated build"
   ]
 }

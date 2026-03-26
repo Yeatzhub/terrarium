@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-03-26T01:23:00Z",
+  "check_type": "heimdall_health_check",
+  "cron_id": "03ca58dc-db70-4fb7-89ed-1b5e6d6d4098",
+  "results": [
+    {
+      "agent": "Huginn",
+      "status": "FAILED",
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789",
+      "session_key": "agent:main:subagent:d0e80e3d-d360-4dff-bb44-039613f770d9",
+      "response_time_ms": null
+    },
+    {
+      "agent": "Tyr",
+      "status": "FAILED",
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789",
+      "session_key": "agent:main:subagent:9408d576-a405-44fd-896d-6c5e7d071075",
+      "response_time_ms": null
+    },
+    {
+      "agent": "Sindri",
+      "status": "FAILED",
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789",
+      "session_key": "agent:main:subagent:bf950390-6687-4adf-85d7-694214f5e5a2",
+      "response_time_ms": null
+    },
+    {
+      "agent": "Njord",
+      "status": "FAILED",
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789",
+      "session_key": "agent:main:subagent:032142d4-4dad-4eb7-9d45-46ea5c9d4299",
+      "response_time_ms": null
+    },
+    {
+      "agent": "Thor",
+      "status": "FAILED",
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789",
+      "session_key": "agent:main:subagent:5c996c79-c89f-485e-a323-a4345f930056",
+      "response_time_ms": null
+    },
+    {
+      "agent": "Mimir",
+      "status": "FAILED",
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789",
+      "session_key": "agent:main:subagent:89daa9e9-6cbe-4b80-a07d-0083cfa42abc",
+      "response_time_ms": null
+    },
+    {
+      "agent": "Brokkr",
+      "status": "FAILED",
+      "error": "gateway timeout after 10000ms - Gateway target: ws://127.0.0.1:18789",
+      "session_key": "agent:main:subagent:473e7ce2-8998-4047-8aa8-4217d63d601d",
+      "response_time_ms": null
+    }
+  ],
+  "summary": {
+    "total_agents": 7,
+    "healthy": 0,
+    "failed": 7,
+    "all_operational": false
+  },
+  "gateway_status": {
+    "target": "ws://127.0.0.1:18789",
+    "status": "unreachable",
+    "error": "gateway timeout after 10000ms"
+  }
+}

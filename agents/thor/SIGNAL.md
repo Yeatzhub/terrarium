@@ -1,15 +1,15 @@
 # Signal - TradingView Alert
 
-**Received:** 2026-03-24T20:03:59.758Z
+**Received:** 2026-03-26T01:10:50.695Z
 
 ## Alert Data
 
 | Field | Value |
 |-------|-------|
 | Symbol | XRPUSDT |
-| Action | long |
-| Price | 1.49 |
-| Strategy | funnel-test |
+| Action | test |
+| Price | 1.5 |
+| Strategy | test |
 | Timeframe | N/A |
 
 ## Raw Payload
@@ -17,9 +17,9 @@
 ```json
 {
   "symbol": "XRPUSDT",
-  "action": "long",
-  "price": 1.49,
-  "strategy": "funnel-test"
+  "action": "test",
+  "price": 1.5,
+  "strategy": "test"
 }
 ```
 

@@ -1,6 +1,7 @@
 #!/bin/bash
-# Telegram notification with quiet hours support
+# Discord notification with quiet hours support
 # Only sends during quiet hours if priority is CRITICAL
+# Routes to #alerts channel (1486486418363650159)
 
 # Time constants (America/Chicago = CDT = UTC-5)
 QUIET_START=23  # 11 PM CDT = 04:00 UTC
@@ -35,17 +36,12 @@ if [ $IN_QUIET_HOURS -eq 1 ] && [ "$PRIORITY" != "CRITICAL" ]; then
     exit 0
 fi
 
-# Send via OpenClaw message tool or direct Telegram API
-# This would need to integrate with OpenClaw's message system
-# For now, log to file
+# Log the notification
 LOG_FILE="/storage/workspace/logs/notifications-$(date +%Y-%m-%d).log"
+mkdir -p "$(dirname "$LOG_FILE")"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$PRIORITY] $MESSAGE" >> "$LOG_FILE"
 
-# If we had direct Telegram integration:
-# curl -s "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
-#   -d "chat_id=${CHAT_ID}" \
-#   -d "text=${MESSAGE}" \
-#   -d "parse_mode=HTML" \
-#   > /dev/null
+# Send via OpenClaw to Discord #alerts
+openclaw message send --channel discord --target 1486486418363650159 -m "[$PRIORITY] $MESSAGE" 2>/dev/null
 
 exit 0

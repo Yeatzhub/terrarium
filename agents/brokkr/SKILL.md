@@ -66,35 +66,46 @@ cp app/build/outputs/apk/release/app-release.apk \
 echo "Build: $(date -Iseconds)" > /storage/workspace/thehub/public/build.txt
 ```
 
-## Graphics Requirements Check
+## Graphics & Audio Requirements Check
 
-Before building, Brokkr checks for missing graphics:
+Before building, Brokkr checks for missing assets (graphics and audio):
 
 ```bash
 # Check graphics requirements
 /storage/workspace/scripts/check-graphics.sh {app_name}
+
+# Check audio requirements
+/storage/workspace/scripts/check-audio.sh {app_name}
 ```
 
-If graphics are missing:
+If assets are missing:
+
+**Graphics Workflow:**
 1. Read `{app}/assets/graphics-requirements.json`
-2. Post to `#graphics`: "Bragi needed for {app}: [pending items]"
+2. Post to `#graphics`: "Bragi needed for {app}: [pending graphics items]"
 3. Wait for Bragi to generate and user approval
 4. Assets move to `approved` status
 5. Proceed with build
 
-**Graphics Workflow:**
+**Audio Workflow:**
+1. Read `{app}/assets/audio-requirements.json`
+2. Post to `#graphics`: "Bragi needed for {app}: [pending audio items]"
+3. Wait for Bragi to generate sounds and user approval
+4. Audio moves to `approved` status
+5. Proceed with build
+
 ```
-Brokkr checks → finds missing graphics
+Brokkr checks → finds missing graphics/audio
       ↓
-Brokkr posts to #graphics: "Bragi needed: X, Y, Z"
+Brokkr posts to #graphics: "Bragi needed: graphics: X, Y | audio: Z"
       ↓
 Bragi generates variations → posts to #graphics
       ↓
-User approves: "use 2"
+User approves: "use 2 for icon, 1 for sounds"
       ↓
 Bragi saves assets → updates requirements.json → status: approved
       ↓
-Brokkr includes assets in next build
+Brokkr includes approved assets in next build
 ```
 
 ## Nightly Build Schedule
