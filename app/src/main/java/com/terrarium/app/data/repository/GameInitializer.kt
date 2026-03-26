@@ -82,6 +82,23 @@ class GameInitializer @Inject constructor(
     }
     
     /**
+     * Update the first terrarium with base layers.
+     */
+    suspend fun updateBaseLayers(config: BaseLayerConfig) {
+        val terrarium = terrariumDao.getAllTerrariums().first().firstOrNull()
+        if (terrarium != null) {
+            terrariumDao.updateTerrarium(
+                terrarium.copy(
+                    hasGravel = config.hasGravel,
+                    hasCharcoal = config.hasCharcoal,
+                    hasSoil = config.hasSoil,
+                    hasMoss = config.hasMoss
+                )
+            )
+        }
+    }
+    
+    /**
      * Seed the database with plant type definitions.
      */
     private suspend fun initializePlantTypes() {
