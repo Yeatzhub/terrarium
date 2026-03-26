@@ -93,26 +93,28 @@ fun TerrariumView(
             
             // Soil layer
             if (terrarium?.hasSoil == true) {
+                val soilOffset = (if (terrarium.hasGravel) 28 else 0) + (if (terrarium.hasCharcoal) 14 else 0)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(42.dp)
                         .align(Alignment.BottomCenter)
-                        .offset(y = (if (terrarium.hasGravel) 28 else 0) + (if (terrarium.hasCharcoal) 14 else 0).dp)
+                        .offset(y = soilOffset.dp)
                         .background(Color(0xFF4A3728))
                 )
             }
             
             // Moss layer
             if (terrarium?.hasMoss == true) {
+                val mossOffset = (if (terrarium.hasGravel) 28 else 0) + 
+                                 (if (terrarium.hasCharcoal) 14 else 0) + 
+                                 (if (terrarium.hasSoil) 42 else 0)
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(14.dp)
                         .align(Alignment.BottomCenter)
-                        .offset(y = (if (terrarium.hasGravel) 28 else 0) + 
-                                    (if (terrarium.hasCharcoal) 14 else 0) + 
-                                    (if (terrarium.hasSoil) 42 else 0).dp)
+                        .offset(y = mossOffset.dp)
                         .background(Color(0xFF228B22))
                 )
             }
