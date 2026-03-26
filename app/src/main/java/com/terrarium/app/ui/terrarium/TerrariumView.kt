@@ -2,6 +2,7 @@ package com.terrarium.app.ui.terrarium
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -12,6 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.unit.IntSize
@@ -33,12 +35,11 @@ fun TerrariumView(
     modifier: Modifier = Modifier
 ) {
     var terrariumSize by remember { mutableStateOf(IntSize.Zero) }
-    var tapPosition by remember { mutableStateOf<Offset?>(null) }
     
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(0.75f) // Jar is taller than wide
+            .aspectRatio(0.75f)
             .onGloballyPositioned { coordinates ->
                 terrariumSize = coordinates.size
             }
@@ -46,17 +47,24 @@ fun TerrariumView(
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFFE8F5E9), // Light green glass
-                        Color(0xFFC8E6C9)  // Darker green
+                        Color(0xFFE8F5E9),
+                        Color(0xFFC8E6C9)
                     )
                 )
             )
-            .clickable(enabled = isPlantingMode) { offset ->
-                // Convert tap position to normalized coordinates (0-1)
-                val normalizedX = offset.x / terrariumSize.width.toFloat()
-                val normalizedY = offset.y / terrariumSize.height.toFloat()
-                onTerrariumTap(normalizedX, normalizedY)
-            }
+            .then(
+                if (isPlantingMode) {
+                    Modifier.pointerInput(Unit) {
+                        detectTapGestures { offset ->
+                            val normalizedX = offset.x / terrariumSize.width.toFloat()
+                            val normalizedY = offset.y / terrariumSize.height.toFloat()
+                            onTerrariumTap(normalizedX, normalizedY)
+                        }
+                    }
+                } else {
+                    Modifier
+                }
+            )
     ) {
         // Draw base layers (bottom to top)
         val layerDepth = terrarium?.getLayerDepth() ?: 0f
@@ -132,19 +140,6 @@ fun TerrariumView(
                     .offset(
                         x = ((plant.positionX - 0.5f) * 200).dp,
                         y = ((plant.positionY - 0.5f) * 280).dp
-                    )
-            )
-        }
-        
-        // Show planting indicator
-        if (isPlantingMode && tapPosition != null) {
-            Box(
-                modifier = Modifier
-                    .size(48.dp)
-                    .align(Alignment.Center)
-                    .offset(
-                        x = ((tapPosition!!.x - 0.5f) * 200).dp,
-                        y = ((tapPosition!!.y - 0.5f) * 280).dp
                     )
             )
         }
