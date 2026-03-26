@@ -892,10 +892,10 @@ private fun SeedItemCard(
     onPlant: () -> Unit
 ) {
     val tierColor = when (plantType.tier) {
-        PlantTier.COMMON -> MaterialTheme.colorScheme.primary
-        PlantTier.UNCOMMON -> MaterialTheme.colorScheme.secondary
-        PlantTier.RARE -> MaterialTheme.colorScheme.tertiary
-        PlantTier.LEGENDARY -> MaterialTheme.colorScheme.error
+        RarityTier.COMMON -> MaterialTheme.colorScheme.primary
+        RarityTier.UNCOMMON -> MaterialTheme.colorScheme.secondary
+        RarityTier.RARE -> MaterialTheme.colorScheme.tertiary
+        RarityTier.LEGENDARY -> MaterialTheme.colorScheme.error
     }
     
     Card(
@@ -921,10 +921,10 @@ private fun SeedItemCard(
             ) {
                 Text(
                     text = when (plantType.tier) {
-                        PlantTier.COMMON -> "🌿"
-                        PlantTier.UNCOMMON -> "🌱"
-                        PlantTier.RARE -> "✨"
-                        PlantTier.LEGENDARY -> "⭐"
+                        RarityTier.COMMON -> "🌿"
+                        RarityTier.UNCOMMON -> "🌱"
+                        RarityTier.RARE -> "✨"
+                        RarityTier.LEGENDARY -> "⭐"
                     },
                     fontSize = 24.sp
                 )

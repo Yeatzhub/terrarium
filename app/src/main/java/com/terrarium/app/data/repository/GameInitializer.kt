@@ -18,7 +18,7 @@ class GameInitializer @Inject constructor(
     private val plantDao: PlantDao,
     private val plantTypeDao: PlantTypeDao,
     private val inventoryDao: InventoryDao,
-    private val dailyTaskDao: DailyTaskDao,
+    private val dailyTaskRepository: DailyTaskRepository,
     private val userPreferences: UserPreferences
 ) {
     /**
@@ -53,7 +53,7 @@ class GameInitializer @Inject constructor(
         )
         
         // Give starter seeds (5 Moss Seeds)
-        inventoryDao.insertItem(
+        inventoryDao.insertInventoryItem(
             InventoryItem(
                 userId = userId,
                 itemId = 1, // Moss Seeds
@@ -63,7 +63,7 @@ class GameInitializer @Inject constructor(
         )
         
         // Give additional starter seeds
-        inventoryDao.insertItem(
+        inventoryDao.insertInventoryItem(
             InventoryItem(
                 userId = userId,
                 itemId = 2, // Fittonia Seeds
@@ -76,7 +76,7 @@ class GameInitializer @Inject constructor(
         initializePlantTypes()
         
         // Generate initial daily tasks
-        dailyTaskDao.generateDailyTasks(userId)
+        dailyTaskRepository.generateDailyTasks(userId)
         
         return userId
     }
@@ -90,28 +90,6 @@ class GameInitializer @Inject constructor(
             return
         }
         
-        val plantTypes = listOf(
-            // Common plants
-            PlantType(1, "Moss", "Soft green carpet", PlantTier.COMMON, 4, 0.3f, 0.7f, 0.5f),
-            PlantType(2, "Fittonia", "Nerve plant with colorful veins", PlantTier.COMMON, 6, 0.4f, 0.8f, 0.6f),
-            PlantType(3, "Air Plant", "Tillandsia - no soil needed", PlantTier.COMMON, 5, 0.2f, 0.6f, 0.7f),
-            PlantType(4, "Jade Plant", "Lucky succulent", PlantTier.COMMON, 8, 0.2f, 0.5f, 0.4f),
-            // Uncommon plants
-            PlantType(5, "Fern", "Classic terrarium fern", PlantTier.UNCOMMON, 12, 0.5f, 0.9f, 0.8f),
-            PlantType(6, "Pilea", "Chinese money plant", PlantTier.UNCOMMON, 14, 0.4f, 0.7f, 0.6f),
-            PlantType(7, "Peperomia", "Radiator plant", PlantTier.UNCOMMON, 10, 0.3f, 0.65f, 0.55f),
-            PlantType(8, "String of Pearls", "Cascading succulent", PlantTier.UNCOMMON, 16, 0.2f, 0.4f, 0.3f),
-            // Rare plants
-            PlantType(9, "Variegated Pilea", "Rare variegated variety", PlantTier.RARE, 24, 0.35f, 0.7f, 0.65f),
-            PlantType(10, "Pitcher Plant", "Carnivorous tropical", PlantTier.RARE, 36, 0.6f, 0.85f, 0.9f),
-            PlantType(11, "Venus Flytrap", "Snap! Carnivorous", PlantTier.RARE, 48, 0.5f, 0.75f, 0.8f),
-            // Legendary plants
-            PlantType(12, "Ghost Plant", "Ethereal white beauty", PlantTier.LEGENDARY, 72, 0.4f, 0.6f, 0.7f),
-            PlantType(13, "Living Stones", "Lithops - stone mimicry", PlantTier.LEGENDARY, 96, 0.15f, 0.3f, 0.25f),
-            PlantType(14, "Marimo", "Aquatic moss sphere", PlantTier.LEGENDARY, 120, 0.8f, 1.0f, 0.95f),
-            PlantType(15, "Moon Orchid", "Mythical blue orchid", PlantTier.LEGENDARY, 168, 0.45f, 0.75f, 0.7f)
-        )
-        
-        plantTypeDao.insertAll(plantTypes)
+        plantTypeDao.insertAll(DefaultPlantTypes.ALL)
     }
 }
